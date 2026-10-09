@@ -23,7 +23,9 @@ export function evaluateClassification(
   const tn = predictions.filter((p,i)=>p===0 && labels[i]===0).length;
   const fp = predictions.filter((p,i)=>p===1 && labels[i]===0).length;
   const fn = predictions.filter((p,i)=>p===0 && labels[i]===1).length;
-  return {predictions,correct,total:labels.length,accuracy:correct/labels.length,tp,tn,fp,fn};
+  const precision=tp+fp===0?null:tp/(tp+fp);
+  const recall=tp+fn===0?null:tp/(tp+fn);
+  return {predictions,correct,total:labels.length,accuracy:correct/labels.length,tp,tn,fp,fn,precision,recall};
 }
 export function evaluateRegression(
   xs: readonly number[], targets: readonly number[], slope: number, intercept: number
