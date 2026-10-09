@@ -17,7 +17,7 @@ Source: `docs/LECTURE_TOPIC_INVENTORY.md` (user-supplied summary of seven lectur
 | Lecture 01 slides 13–16: Training loop, weights, loss, optimizer | Neuron and forward pass | Partial | Actual gradient, loss and update cycle |
 | Lecture 01 slides 17–25: DL achievements, chronology, GPU, open-source frameworks | Inventory recorded | Planned | Concise interactive timeline and hardware trade-offs |
 | Machine Learning Foundations slides 3–8: Supervised, unsupervised, reinforcement | Classification/regression task explorer | Partial | Clustering and reward/agent lab |
-| Machine Learning Foundations slides 9–15: Confusion matrix, precision, recall, imbalance | Dynamic accuracy, TP/TN/FP/FN counts | Partial | Matrix UI + precision/recall and trade-offs |
+| Machine Learning Foundations slides 9–15: Confusion matrix, precision, recall, imbalance | Live 2×2 confusion matrix, TP/TN/FP/FN, accuracy, precision and recall driven by threshold | Partial | Class imbalance and explicit precision/recall trade-off study |
 | Machine Learning Foundations slides 16–25: MNIST, Keras Dense, compile, train, evaluate | Inventory recorded | Planned | Pixel-grid 28×28, preprocessing, then training in browser only when genuine |
 | Chapter 2 slides 3–8: First ANN and overfitting | Small fixed-weight forward pass | Partial | Mini dataset training and overfit comparison |
 | Chapter 2 slides 9–15: Rank, shape, dtype, slicing, real-world tensor shapes | Interactive scalar/vector/matrix/batch rank, shape and slicing | Partial | dtype, larger ranks and image crops |
@@ -36,7 +36,7 @@ Source: `docs/LECTURE_TOPIC_INVENTORY.md` (user-supplied summary of seven lectur
 
 ## Lecture-order delivery queues
 
-**Queue A — Exam mathematical intuition:** Confusion matrix and precision/recall; half squared loss; numerical gradient descent; chain-rule backprop and vanishing gradients. Perceptron AND/OR gates are now implemented and verified. These build directly on accepted neuron and forward-pass labs.
+**Queue A — Exam mathematical intuition:** Half squared loss; numerical gradient descent; chain-rule backprop and vanishing gradients. Basic confusion matrix, precision and recall are now interactive, but class-imbalance experiments remain pending. Perceptron AND/OR gates are now implemented and verified. These build directly on accepted neuron and forward-pass labs.
 
 **Queue B — Data and applied ML:** Tensor dtypes / 4D–5D shapes / MNIST preprocessing; classification paradigms; train/test splitting and data leakage; minibatch training; real loss/accuracy plots and generalization checks.
 

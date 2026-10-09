@@ -8,7 +8,7 @@ A visual-first Deep Learning classroom. This project implements six **interactiv
 - Explore tensor rank, shape, samples axis and real NumPy-like slicing on small JavaScript arrays.
 - Follow the full 2 → 2 → 1 dense forward pass with clickable weighted connections, editable parameters, step-by-step arithmetic, and code view.
 - Compare Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax with a live graph, gradients and class probabilities.
-- Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, regression errors, and concept challenge.
+- Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, live confusion matrix, precision/recall, regression errors, and concept challenge.
 - Edit three inputs, three weights (including negative values), and a bias.
 - Choose sigmoid, tanh, ReLU, or linear activation.
 - Watch the exact weighted contributions, sum, preactivation, and output update together.

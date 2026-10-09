@@ -12,7 +12,7 @@
 
 **6 / 8 expanded foundation chunks accepted** (this is not 6/8 of the entire seven-lecture syllabus).
 
-1. **Week 1 foundations:** Nested AI, ML, DL visual; classification threshold experiment; regression/MAE/MSE.
+1. **Week 1 foundations:** Nested AI, ML, DL visual; classification threshold experiment with live confusion matrix, precision, recall, accuracy and defensible undefined-metric handling; regression/MAE/MSE.
 2. **Artificial neuron:** 3D and SVG visualizations, input/weight/bias sliders, activation plot, stage timeline, math/code/challenge.
 3. **Activation functions:** Sigmoid, Tanh, ReLU, Leaky ReLU and stable vector Softmax; curves and derivatives.
 4. **Forward propagation:** Actual 2→2→1 network, clickable and separately selectable weighted connections, editable weights/biases/inputs, neuron-level contribution traces, stage inspector and conceptual check.
@@ -25,13 +25,17 @@ Topics outside these chunks — full model evaluation, real MNIST/Keras training
 
 ## Verification
 
-Successful full-code CI: https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37948019566
+Successful full-code CI (including model evaluation extension): https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37948616297
 
-- **34/34 Node mathematical unit tests passed.**
+- **35/35 Node mathematical unit tests passed.**
 - **13/13 Playwright Chromium browser interaction tests passed.**
 - **TypeScript type check + Vite production build passed.**
 - Checks include narrow mobile layouts for all new labs and existing neuron/foundations/activation regressions.
 - Important limits: physical-device screenshot review, comprehensive accessibility audit, real WebGL performance benchmarks, production deployment, and educational review against original slide decks remain outstanding.
+
+## Additional verified extension
+
+- Week 1 now displays a proper 2×2 confusion matrix and TP, TN, FP, FN plus precision and recall that update with the threshold. Undefined denominators display an em dash, not fabricated zero or 100%. Numerical tests cover threshold tradeoffs and null results.
 
 ## Defect fixes
 
@@ -48,6 +52,4 @@ Successful full-code CI: https://github.com/amarjaleelbanbhan/V9T1/actions/runs/
 
 ## Next executable task
 
-**Course-aligned model evaluation:** Extend Week 1 with an interactive 2×2 confusion matrix, precision = TP/(TP+FP), recall = TP/(TP+FN), and class imbalance examples. Handle undefined metrics correctly when denominators are zero. Test against independently verified examples and browser interactions.
-
-Then implement half squared loss and numerical gradient descent, followed by chain-rule backpropagation, vanishing gradients and actual ANN training experiments. Update coverage matrix only after each lesson's tests pass.
+**Next chunk: Loss and gradient descent (Lecture 04):** Build an interactive half-squared-loss explorer and a numerical gradient-descent timeline with real derivatives, adjustable weight and learning rate, and independently verified mathematical/browser tests. Then chain-rule backpropagation, vanishing gradients, CNN operations, and actual ANN/MNIST/IMDB workflows. Class-imbalance and richer precision/recall trade-offs remain a separate planned extension. Update the matrix only after each verified chunk.
