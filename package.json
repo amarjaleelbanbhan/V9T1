@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "node --experimental-strip-types --test src/engine/*.test.mjs",
     "test:e2e": "playwright test",
-    "check:curriculum": "node scripts/validate-curriculum.mjs"
+    "check:curriculum": "node scripts/validate-curriculum.mjs && node scripts/validate-beginner.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",

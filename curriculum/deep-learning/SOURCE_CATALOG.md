@@ -169,3 +169,7 @@ DeepLearning.AI courses (https://www.deeplearning.ai/courses): search indexed th
 ## SRC-PYTHON — Python 3.12 introduction
 
 Official page: https://docs.python.org/3.12/tutorial/introduction.html. Author: Python documentation contributors. Scope: assignment and numeric expressions. Checked 2026-10-09 with https://docs.python.org/3.12/license.html. Precise language semantics, but not itself a zero-background visual progression. Content is linked; no examples, figures or datasets are imported. Current lesson content is original.
+
+## Beginner implementation checks
+
+Original explanations and numerical examples link to official Python 3.12 control-flow/classes, NumPy broadcasting, pandas introductions, Google classification metrics, scikit-learn leakage guidance, PyTorch optimization and D2L calculus. These pages were retrieved 2026-10-09. Historical dates were checked against Rosenblatt's 1958 paper (PubMed 13602029), the publisher-indexed 1986 backpropagation paper, and the official 2012 NeurIPS AlexNet proceedings. DOI direct access was blocked; PubMed supplied Rosenblatt metadata. No upstream examples, figures, exercise banks or datasets are imported.
