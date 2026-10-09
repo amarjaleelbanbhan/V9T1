@@ -1,9 +1,10 @@
 # NeuralLab
 
-A visual-first Deep Learning classroom. This project implements six **interactive foundations, neuron, perceptron, tensor, forward propagation and activation lessons**, not a fully populated curriculum.
+A visual-first Deep Learning classroom. This project implements seven **interactive foundations, neuron, perceptron, tensor, forward propagation, activation and loss/gradient descent lessons**, not a fully populated curriculum.
 
-## Six interactive learning milestones
+## Seven interactive learning milestones
 
+- Inspect real half-squared loss, gradients and one-dimensional gradient descent on an interactive step timeline.
 - Build AND and OR perceptron decision rules, inspect the live truth table, and test the XOR limitation.
 - Explore tensor rank, shape, samples axis and real NumPy-like slicing on small JavaScript arrays.
 - Follow the full 2 → 2 → 1 dense forward pass with clickable weighted connections, editable parameters, step-by-step arithmetic, and code view.
