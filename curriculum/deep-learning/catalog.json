@@ -232,7 +232,7 @@
         "dl-00-002-variables",
         "dl-00-002-flow"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "A tensor is an indexed collection of numbers; shape lists axis lengths.",
       "formula": "z = sum(x_i * w_i) + b",
       "example": "x=[2,3], w=[4,-1], b=1 gives z=6.",
@@ -266,7 +266,7 @@
         "dl-01-008",
         "dl-01-009"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "A held-out test estimates performance on unseen data from its sampling setting.",
       "formula": "precision = TP/(TP+FP); recall = TP/(TP+FN)",
       "example": "TP=3, FP=1, FN=2: precision=.75, recall=.6, F1=2/3.",
@@ -857,14 +857,16 @@
       "title": "computers and programs",
       "chapter": "CH-00",
       "prerequisites": [],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-001.md"
     },
     {
       "id": "dl-00-002",
@@ -873,14 +875,16 @@
       "prerequisites": [
         "dl-00-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-002.md"
     },
     {
       "id": "dl-00-003",
@@ -889,14 +893,16 @@
       "prerequisites": [
         "dl-00-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-003.md"
     },
     {
       "id": "dl-00-004",
@@ -905,14 +911,16 @@
       "prerequisites": [
         "dl-00-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-004.md"
     },
     {
       "id": "dl-00-005",
@@ -921,14 +929,16 @@
       "prerequisites": [
         "dl-00-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-005.md"
     },
     {
       "id": "dl-00-006",
@@ -937,14 +947,16 @@
       "prerequisites": [
         "dl-00-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-006.md"
     },
     {
       "id": "dl-00-007",
@@ -953,14 +965,16 @@
       "prerequisites": [
         "dl-00-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-007.md"
     },
     {
       "id": "dl-00-008",
@@ -969,14 +983,16 @@
       "prerequisites": [
         "dl-00-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "00-python-and-math/lessons/dl-00-008.md"
     },
     {
       "id": "dl-01-001",
@@ -985,13 +1001,15 @@
       "prerequisites": [
         "CH-00"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-001.md"
     },
     {
       "id": "dl-01-002",
@@ -1000,13 +1018,15 @@
       "prerequisites": [
         "dl-01-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-002.md"
     },
     {
       "id": "dl-01-003",
@@ -1015,13 +1035,15 @@
       "prerequisites": [
         "dl-01-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-003.md"
     },
     {
       "id": "dl-01-004",
@@ -1030,13 +1052,15 @@
       "prerequisites": [
         "dl-01-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-004.md"
     },
     {
       "id": "dl-01-005",
@@ -1045,13 +1069,15 @@
       "prerequisites": [
         "dl-01-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-005.md"
     },
     {
       "id": "dl-01-006",
@@ -1060,13 +1086,15 @@
       "prerequisites": [
         "dl-01-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-006.md"
     },
     {
       "id": "dl-01-007",
@@ -1075,13 +1103,15 @@
       "prerequisites": [
         "dl-01-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-007.md"
     },
     {
       "id": "dl-01-008",
@@ -1090,13 +1120,15 @@
       "prerequisites": [
         "dl-01-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-008.md"
     },
     {
       "id": "dl-01-009",
@@ -1105,13 +1137,15 @@
       "prerequisites": [
         "dl-01-008"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-GOOGLE",
         "SRC-SKLEARN"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "01-ai-ml-dl-foundations/lessons/dl-01-009.md"
     },
     {
       "id": "dl-02-001",

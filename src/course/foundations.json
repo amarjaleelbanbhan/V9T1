@@ -1,0 +1,1027 @@
+[
+  {
+    "id": "dl-00-001",
+    "chapter": "CH-00",
+    "title": "Computers and programs",
+    "terms": [
+      [
+        "Program",
+        "Ordered instructions processed by a computer."
+      ],
+      [
+        "Input",
+        "Values supplied before processing."
+      ],
+      [
+        "Output",
+        "Values produced by those instructions."
+      ]
+    ],
+    "explanation": "A processor follows instructions; it does not infer the meaning you intended. Read x, multiply by a factor, then add an offset. Changing the order generally changes the answer. A browser runs JavaScript; our separate worker can also run Python through a downloaded runtime.",
+    "why": "Tracing one instruction at a time lets you locate where a wrong result began.",
+    "formula": "output = x \u00d7 factor + offset",
+    "model": "program",
+    "labels": [
+      "Input x",
+      "Factor",
+      "Offset"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          1
+        ],
+        "expected": 7
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          4,
+          1
+        ],
+        "expected": -7
+      }
+    ],
+    "target": "final output",
+    "question": "Which operation happens first in this program?",
+    "choices": [
+      "Multiplication, followed by offset addition",
+      "The computer chooses an arbitrary order"
+    ],
+    "correct": 0,
+    "reason": "The program explicitly specifies multiplication before addition. Parentheses and program structure determine order.",
+    "mistake": "Treating a program as a live formula instead of a sequence.",
+    "debug": "Predict the result if the offset is added before multiplication: (2 + 1) \u00d7 3 = 9. Explain the difference.",
+    "project": "Write a three-instruction calculator and test a negative input.",
+    "source": "https://docs.python.org/3.12/tutorial/",
+    "lab": "python-basics"
+  },
+  {
+    "id": "dl-00-002",
+    "chapter": "CH-00",
+    "title": "Variables, loops, functions and objects",
+    "terms": [
+      [
+        "Variable",
+        "A name bound to a value."
+      ],
+      [
+        "Loop",
+        "Instructions repeated for each item."
+      ],
+      [
+        "Function",
+        "A reusable procedure with parameters and a returned value."
+      ],
+      [
+        "Object",
+        "An instance whose attributes retain state."
+      ]
+    ],
+    "explanation": "Assignment stores a result when its line runs. A for loop visits list items in order. An if condition can skip an addition. Functions have call-local names; returning a value does not make a local name global. Methods update the attributes of a particular object. Use the real Python labs to inspect those scopes.",
+    "why": "These operations turn mathematical recipes into reusable programs.",
+    "formula": "total = sum of values greater than zero",
+    "model": "positive-sum",
+    "labels": [
+      "First value",
+      "Second value",
+      "Third value"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          -1,
+          3
+        ],
+        "expected": 5
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          -3,
+          2
+        ],
+        "expected": 3
+      }
+    ],
+    "target": "positive-only total",
+    "question": "Why does the negative value not change this total?",
+    "choices": [
+      "The loop cannot visit negative numbers",
+      "The condition fails, so the addition is skipped"
+    ],
+    "correct": 1,
+    "reason": "The iteration still visits every value. The condition controls only the indented addition.",
+    "mistake": "Resetting total to zero inside the loop.",
+    "debug": "A loop that resets total every iteration returns only the last included item. Move initialization before the loop.",
+    "project": "Run all three control-flow examples on two different lists, then design two independent counters.",
+    "source": "https://docs.python.org/3.12/tutorial/",
+    "lab": "python-flow"
+  },
+  {
+    "id": "dl-00-003",
+    "chapter": "CH-00",
+    "title": "CPU, RAM, GPU and storage",
+    "terms": [
+      [
+        "CPU",
+        "Executes general instructions."
+      ],
+      [
+        "RAM",
+        "Working memory holding active data."
+      ],
+      [
+        "GPU",
+        "A processor suited to many parallel operations."
+      ],
+      [
+        "Storage",
+        "Persistent data such as files and checkpoints."
+      ]
+    ],
+    "explanation": "A saved file lives in storage. Loading it places data in RAM. A CPU or GPU performs computations on accessible data. Moving data to a GPU has a cost; parallel hardware does not automatically accelerate a small operation. The payload of an array is its element count times bytes per element, distinct from object and runtime overhead.",
+    "why": "Memory estimates help you select batch sizes without mistaking disk space for RAM.",
+    "formula": "payload bytes = rows \u00d7 columns \u00d7 bytes per element",
+    "model": "memory",
+    "labels": [
+      "Rows",
+      "Columns",
+      "Bytes per element"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          4
+        ],
+        "expected": 24
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          4,
+          3,
+          8
+        ],
+        "expected": 96
+      }
+    ],
+    "target": "payload bytes",
+    "question": "Does this payload estimate include the entire Python runtime?",
+    "choices": [
+      "No; it counts only numeric element storage",
+      "Yes; every byte used by Python is counted"
+    ],
+    "correct": 0,
+    "reason": "Object metadata, allocator behavior, code, and runtime memory are additional.",
+    "mistake": "Calling 24 payload bytes the total process memory.",
+    "debug": "A float64 array with the same shape uses twice the payload of float32, but process memory need not double.",
+    "project": "Estimate payload for a batch of 32 grayscale 28\u00d728 images in float32; answer 100352 bytes.",
+    "source": "https://d2l.ai/chapter_preliminaries/index.html"
+  },
+  {
+    "id": "dl-00-004",
+    "chapter": "CH-00",
+    "title": "Loading and cleaning data",
+    "terms": [
+      [
+        "Row",
+        "One observation in a table."
+      ],
+      [
+        "Missing value",
+        "A field with no observed value."
+      ],
+      [
+        "Duplicate",
+        "A repeated record under a chosen identity rule."
+      ]
+    ],
+    "explanation": "Inspect a loaded table before modeling: columns, types, missing values and units. In this toy table we drop a missing measurement and one exact duplicate, then calculate the mean. Real cleaning needs domain knowledge: repeated measurements may be legitimate, and removing missing rows can bias a sample. Fit any learned imputation rule using training data only.",
+    "why": "Silent data errors can make a correct learning algorithm solve the wrong problem.",
+    "formula": "cleaned mean = sum of retained unique values / retained count",
+    "model": "clean",
+    "labels": [
+      "First reading",
+      "Second reading"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          4
+        ],
+        "expected": 3
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          5
+        ],
+        "expected": 3
+      }
+    ],
+    "target": "cleaned mean",
+    "question": "Should every repeated value always be deleted?",
+    "choices": [
+      "Yes; equal numeric values always imply duplicated records",
+      "No; duplicate identity and meaning must be checked"
+    ],
+    "correct": 1,
+    "reason": "Two people can have the same measurement. This exercise explicitly assumes an exact repeated record.",
+    "mistake": "Deleting legitimate repeated measurements.",
+    "debug": "Compare the raw rows [2, missing, 4, 4] with cleaned [2,4]. State the identity assumption.",
+    "project": "Create a five-row table with one missing field and one exact duplicate; document each cleaning decision.",
+    "source": "https://pandas.pydata.org/docs/getting_started/intro_tutorials/"
+  },
+  {
+    "id": "dl-00-005",
+    "chapter": "CH-00",
+    "title": "Algebra and graphs",
+    "terms": [
+      [
+        "Slope",
+        "Change in y per unit change in x."
+      ],
+      [
+        "Intercept",
+        "y when x equals zero."
+      ],
+      [
+        "Graph",
+        "Pairs of x and y drawn on axes."
+      ]
+    ],
+    "explanation": "A line y = mx + b combines a scaled input with an offset. With m = 3 and b = 1, x = 2 gives y = 7. Negative x follows exactly the same operations. Raising b shifts the line vertically; changing m alters its steepness. Read the axes rather than assuming every rising line has slope one.",
+    "why": "Linear models and neural layers repeatedly use this operation.",
+    "formula": "y = m \u00d7 x + b",
+    "model": "line",
+    "labels": [
+      "Input x",
+      "Slope m",
+      "Intercept b"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          1
+        ],
+        "expected": 7
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          3,
+          1
+        ],
+        "expected": -5
+      }
+    ],
+    "target": "y",
+    "question": "What changes when only b increases?",
+    "choices": [
+      "The line shifts vertically while slope stays fixed",
+      "The slope increases"
+    ],
+    "correct": 0,
+    "reason": "The added offset changes every y by the same amount.",
+    "mistake": "Confusing slope with the height at one point.",
+    "debug": "Compare y = 3x + 1 and y = 3x + 2 at x = 0 and x = 2. The difference is always one.",
+    "project": "Draw three points on y = 2x - 1, then explain how doubling x affects y.",
+    "source": "https://d2l.ai/chapter_preliminaries/index.html"
+  },
+  {
+    "id": "dl-00-006",
+    "chapter": "CH-00",
+    "title": "Probability, mean and variance",
+    "terms": [
+      [
+        "Mean",
+        "Sum divided by count."
+      ],
+      [
+        "Population variance",
+        "Mean squared distance from the mean."
+      ],
+      [
+        "Probability",
+        "A number from zero to one describing uncertainty."
+      ]
+    ],
+    "explanation": "For equally likely outcomes, probability is favorable outcomes divided by all outcomes. The mean describes a center. Variance measures spread using squared deviations, so negative and positive deviations do not cancel. This lesson computes population variance, dividing by n. Estimating variance from a sample commonly uses n - 1 instead.",
+    "why": "Models reason about uncertainty and normalize data using statistics.",
+    "formula": "\u03bc = \u03a3x/n; variance = \u03a3(x - \u03bc)\u00b2/n",
+    "model": "variance",
+    "labels": [
+      "Value 1",
+      "Value 2",
+      "Value 3"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          2,
+          3
+        ],
+        "expected": 0.6666666666666666
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          2,
+          2
+        ],
+        "expected": 0
+      }
+    ],
+    "target": "population variance",
+    "question": "Why square deviations before averaging?",
+    "choices": [
+      "So the mean becomes zero",
+      "So distances do not cancel and larger deviations weigh more"
+    ],
+    "correct": 1,
+    "reason": "Raw deviations from the mean sum to zero; squaring measures their magnitude.",
+    "mistake": "Dividing by n - 1 while labeling the result population variance.",
+    "debug": "For [1,2,3], mean = 2, squared deviations = [1,0,1], variance = 2/3. For a fair die, P(even) = 3/6.",
+    "project": "Compute mean, population variance and P(value > 1) for [0,1,2,3]; results 1.5, 1.25 and 0.5.",
+    "source": "https://d2l.ai/chapter_preliminaries/index.html"
+  },
+  {
+    "id": "dl-00-007",
+    "chapter": "CH-00",
+    "title": "Vectors, matrices and dot products",
+    "terms": [
+      [
+        "Vector",
+        "An ordered list of coordinates."
+      ],
+      [
+        "Matrix",
+        "Numbers arranged along rows and columns."
+      ],
+      [
+        "Dot product",
+        "Sum of products of corresponding coordinates."
+      ]
+    ],
+    "explanation": "Pair each input with the weight at the same position. Multiply each pair, then sum. For x = [2,3] and w = [4,-1], products are 8 and -3, giving 5. A dot product requires equal lengths. Matrix multiplication repeats compatible dot products; it is different from multiplying elements at matching positions.",
+    "why": "Neurons and dense layers calculate weighted sums with dot products.",
+    "formula": "x \u00b7 w = x\u2081w\u2081 + x\u2082w\u2082",
+    "model": "dot",
+    "labels": [
+      "x\u2081",
+      "w\u2081",
+      "x\u2082",
+      "w\u2082"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          4,
+          3,
+          -1
+        ],
+        "expected": 5
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          4,
+          4,
+          3,
+          -1
+        ],
+        "expected": 13
+      }
+    ],
+    "target": "dot product",
+    "question": "What must match for a vector dot product?",
+    "choices": [
+      "The two vector lengths",
+      "Every pair must have the same numeric value"
+    ],
+    "correct": 0,
+    "reason": "Lengths define how many coordinate pairs exist; values may differ.",
+    "mistake": "Using Python list concatenation instead of numeric addition.",
+    "debug": "[2,3] + [4,-1] concatenates lists in Python. It does not calculate a dot product.",
+    "project": "Compute [1,-2,3] \u00b7 [4,0,2] = 10, and explain each paired product.",
+    "source": "https://d2l.ai/chapter_preliminaries/index.html"
+  },
+  {
+    "id": "dl-00-008",
+    "chapter": "CH-00",
+    "title": "Derivatives and chain rule",
+    "terms": [
+      [
+        "Derivative",
+        "Local rate of change of an output with an input."
+      ],
+      [
+        "Intermediate",
+        "A value between input and final output."
+      ],
+      [
+        "Chain rule",
+        "Multiply derivatives along a composition."
+      ]
+    ],
+    "explanation": "Let u = s \u00d7 x and y = u\u00b2. First find dy/du = 2u, then du/dx = s. Multiply to get dy/dx = 2s\u00b2x. At x = 2 and s = 3, u = 6 and the derivative is 36. The derivative is a sensitivity, not the output y. A small input change \u0394x gives approximately derivative \u00d7 \u0394x change in y.",
+    "why": "Backpropagation applies this rule across many connected operations.",
+    "formula": "dy/dx = (dy/du)(du/dx) = 2s\u00b2x",
+    "model": "chain",
+    "labels": [
+      "Input x",
+      "Scale s"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3
+        ],
+        "expected": 36
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1,
+          2
+        ],
+        "expected": -8
+      }
+    ],
+    "target": "dy/dx",
+    "question": "How do local derivatives combine along this path?",
+    "choices": [
+      "Add them",
+      "Multiply them"
+    ],
+    "correct": 1,
+    "reason": "A small x change first changes u; that u change then changes y. The two scale factors multiply.",
+    "mistake": "Reporting y as though it were dy/dx.",
+    "debug": "At x = 2, s = 3, y = 36 and dy/dx = 36 happen to match. At x = 1 they are 9 and 18.",
+    "project": "Estimate the derivative at x = 1 with s = 2 using symmetric perturbations; compare with 8.",
+    "source": "https://d2l.ai/chapter_preliminaries/index.html",
+    "lab": "backprop"
+  },
+  {
+    "id": "dl-01-001",
+    "chapter": "CH-01",
+    "title": "Symbolic versus learned systems",
+    "terms": [
+      [
+        "Rule",
+        "Behavior explicitly written by a programmer."
+      ],
+      [
+        "Parameter",
+        "An adjustable value in a model."
+      ],
+      [
+        "Learning",
+        "Using data to choose parameters."
+      ]
+    ],
+    "explanation": "A rule-based system applies specified logic. A learned system adjusts parameters from examples. Both can be AI. Fit a line through two observed input-target pairs: slope is target difference divided by input difference. This fitting is a tiny learning example; good training accuracy alone does not prove future accuracy.",
+    "why": "The distinction helps you choose a transparent rule or a data-driven model for a problem.",
+    "formula": "learned slope = (y\u2082 - y\u2081)/(x\u2082 - x\u2081)",
+    "model": "fit-line",
+    "labels": [
+      "x\u2081",
+      "x\u2082",
+      "y\u2081",
+      "y\u2082"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          3,
+          2,
+          6
+        ],
+        "expected": 2
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          3,
+          3,
+          9
+        ],
+        "expected": 3
+      }
+    ],
+    "target": "fitted slope",
+    "question": "What makes this slope learned?",
+    "choices": [
+      "It is calculated from observed examples",
+      "It is necessarily written by hand before seeing data"
+    ],
+    "correct": 0,
+    "reason": "The examples determine the parameter; the fitting algorithm is still programmed.",
+    "mistake": "Assuming ML eliminates human design decisions.",
+    "debug": "Identify which parts are designed: features, model family, objective and split. Which value is fitted?",
+    "project": "Compare a hand-written temperature rule with a fitted temperature trend.",
+    "source": "https://developers.google.com/machine-learning/crash-course"
+  },
+  {
+    "id": "dl-01-002",
+    "chapter": "CH-01",
+    "title": "Supervised, unsupervised and reinforcement learning",
+    "terms": [
+      [
+        "Supervised",
+        "Learn from input-target examples."
+      ],
+      [
+        "Unsupervised",
+        "Find structure without task target labels."
+      ],
+      [
+        "Reinforcement",
+        "Learn behavior using rewards from interactions."
+      ]
+    ],
+    "explanation": "Predicting a labeled price is supervised learning. Grouping similar unlabeled observations is unsupervised. Choosing actions from rewards is reinforcement learning. The sign-group demonstration is a deliberately specified grouping rule, not a trained clustering model. Count the groups present, and distinguish the demonstration from the learning categories.",
+    "why": "The feedback available determines the type of learning problem.",
+    "formula": "number of nonempty sign groups",
+    "model": "groups",
+    "labels": [
+      "Observation 1",
+      "Observation 2",
+      "Observation 3"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          -2,
+          1,
+          3
+        ],
+        "expected": 2
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          2,
+          3
+        ],
+        "expected": 1
+      }
+    ],
+    "target": "nonempty groups",
+    "question": "Which task uses rewards from actions?",
+    "choices": [
+      "Unsupervised grouping",
+      "Reinforcement learning"
+    ],
+    "correct": 1,
+    "reason": "Rewards evaluate behavior over interactions; they are not the same as a target label for every observation.",
+    "mistake": "Calling every grouping rule a trained clustering model.",
+    "debug": "Explain why this visualization groups values without fitting any parameters.",
+    "project": "Write one realistic example of each learning type and name its feedback.",
+    "source": "https://developers.google.com/machine-learning/crash-course"
+  },
+  {
+    "id": "dl-01-003",
+    "chapter": "CH-01",
+    "title": "Features, labels and predictions",
+    "terms": [
+      [
+        "Feature",
+        "Input information available when making a prediction."
+      ],
+      [
+        "Label",
+        "The observed target used to learn or evaluate."
+      ],
+      [
+        "Prediction",
+        "A model output for an input."
+      ]
+    ],
+    "explanation": "If hours studied is a feature and exam score is the label, a toy model might predict score = 10 \u00d7 hours + 20. A prediction can be wrong even if its calculation is correct. Inputs must be available at prediction time; including the final score as an input leaks the answer.",
+    "why": "Keeping these roles separate prevents meaningless evaluations.",
+    "formula": "prediction = weight \u00d7 feature + bias",
+    "model": "line",
+    "labels": [
+      "Feature",
+      "Weight",
+      "Bias"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          10,
+          20
+        ],
+        "expected": 40
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          3,
+          10,
+          20
+        ],
+        "expected": 50
+      }
+    ],
+    "target": "predicted score",
+    "question": "Can the final exam score be an input when predicting that same score before the exam?",
+    "choices": [
+      "No; it is unavailable and leaks the target",
+      "Yes; it guarantees a good model"
+    ],
+    "correct": 0,
+    "reason": "Future or target information cannot support the intended prediction task.",
+    "mistake": "Confusing the observed label with the predicted value.",
+    "debug": "If the label is 45 and prediction is 40, the signed prediction error is -5.",
+    "project": "Create three feature-label pairs and record predictions separately.",
+    "source": "https://developers.google.com/machine-learning/crash-course"
+  },
+  {
+    "id": "dl-01-004",
+    "chapter": "CH-01",
+    "title": "Training, validation and test sets",
+    "terms": [
+      [
+        "Training set",
+        "Examples used to fit parameters."
+      ],
+      [
+        "Validation set",
+        "Examples used to select settings."
+      ],
+      [
+        "Test set",
+        "Held-out examples for final evaluation."
+      ]
+    ],
+    "explanation": "Fit weights on training data. Compare learning rates or thresholds on validation data. After choices are fixed, evaluate the test set. Repeatedly choosing settings on test performance turns the test set into validation data. Split sizes add up, but the roles matter more than a particular percentage.",
+    "why": "Separate evaluation estimates how a chosen model performs on unseen data.",
+    "formula": "total = training count + validation count + test count",
+    "model": "split",
+    "labels": [
+      "Training count",
+      "Validation count",
+      "Test count"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          60,
+          20,
+          20
+        ],
+        "expected": 100
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          70,
+          15,
+          15
+        ],
+        "expected": 100
+      }
+    ],
+    "target": "total examples",
+    "question": "Where should you choose a decision threshold?",
+    "choices": [
+      "By repeatedly maximizing test accuracy",
+      "On validation data before final testing"
+    ],
+    "correct": 1,
+    "reason": "Repeated test-based decisions consume its independence.",
+    "mistake": "Training on all data and reporting the same-data score as held-out performance.",
+    "debug": "A total of 100 rows can have many legitimate split ratios. Explain the roles of all three subsets.",
+    "project": "Assign 10 synthetic rows to train, validation and test; verify disjoint row identities.",
+    "source": "https://scikit-learn.org/stable/common_pitfalls.html"
+  },
+  {
+    "id": "dl-01-005",
+    "chapter": "CH-01",
+    "title": "Leakage and split strategies",
+    "terms": [
+      [
+        "Leakage",
+        "Using information unavailable for the intended prediction."
+      ],
+      [
+        "Group split",
+        "Keep related observations in one subset."
+      ],
+      [
+        "Time split",
+        "Evaluate future observations after earlier training."
+      ]
+    ],
+    "explanation": "Learn transformations using only training data. Apply the same learned transformation to validation and test. For training values 1 and 3, the mean is 2. Centering a held-out value 100 gives 98. Including that test value in the mean changes training decisions. Rows from one person or future observations require appropriate group or time splits.",
+    "why": "Leakage can make a weak model appear strong.",
+    "formula": "centered test = test value - training mean",
+    "model": "leakage",
+    "labels": [
+      "Training value 1",
+      "Training value 2",
+      "Test value"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          3,
+          100
+        ],
+        "expected": 98
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          4,
+          10
+        ],
+        "expected": 7
+      }
+    ],
+    "target": "centered test value",
+    "question": "Which mean is allowed for preprocessing the held-out test?",
+    "choices": [
+      "The mean learned from training data only",
+      "The mean of training and test together"
+    ],
+    "correct": 0,
+    "reason": "Test information must not influence fitting. Transforming test data with a fixed training rule is allowed.",
+    "mistake": "Randomly splitting multiple records from the same person across subsets.",
+    "debug": "Explain why patient identity leakage can survive a disjoint row split.",
+    "project": "Design a group split for two visits per patient and a time split for forecasting.",
+    "source": "https://scikit-learn.org/stable/common_pitfalls.html"
+  },
+  {
+    "id": "dl-01-006",
+    "chapter": "CH-01",
+    "title": "Regression and classification",
+    "terms": [
+      [
+        "Regression",
+        "Predict a numerical quantity."
+      ],
+      [
+        "Classification",
+        "Predict a category."
+      ],
+      [
+        "Threshold",
+        "A boundary converting a score into a decision."
+      ]
+    ],
+    "explanation": "Predicting a price is regression. Predicting whether a message is spam is classification. A binary score becomes class 1 when score \u2265 threshold in this demonstration. Changing the threshold changes decisions, not the underlying score. A probability is between zero and one; an arbitrary raw score need not be.",
+    "why": "The task type determines output interpretation and suitable evaluation.",
+    "formula": "class = 1 if score \u2265 threshold, otherwise 0",
+    "model": "threshold",
+    "labels": [
+      "Score",
+      "Threshold"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.6,
+          0.5
+        ],
+        "expected": 1
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0.4,
+          0.5
+        ],
+        "expected": 0
+      }
+    ],
+    "target": "predicted class",
+    "question": "Does changing the threshold retrain this fixed-score model?",
+    "choices": [
+      "Yes; it always changes every model weight",
+      "No; it changes the decision rule"
+    ],
+    "correct": 1,
+    "reason": "Scores are held fixed here. Threshold selection and parameter fitting are separate.",
+    "mistake": "Using classification accuracy as the only metric for numerical prices.",
+    "debug": "A score equal to the threshold is class 1 under the explicit \u2265 convention.",
+    "project": "Compare three scores at thresholds 0.3, 0.5 and 0.7; count changed decisions.",
+    "source": "https://developers.google.com/machine-learning/crash-course",
+    "lab": "intro"
+  },
+  {
+    "id": "dl-01-007",
+    "chapter": "CH-01",
+    "title": "Confusion matrix, precision, recall and F1",
+    "terms": [
+      [
+        "TP",
+        "A positive case correctly predicted positive."
+      ],
+      [
+        "FP",
+        "A negative case incorrectly predicted positive."
+      ],
+      [
+        "FN",
+        "A positive case incorrectly predicted negative."
+      ],
+      [
+        "F1",
+        "Harmonic balance of precision and recall."
+      ]
+    ],
+    "explanation": "Precision asks how many predicted positives are correct: TP/(TP+FP). Recall asks how many actual positives are found: TP/(TP+FN). F1 = 2TP/(2TP+FP+FN). For TP = 3, FP = 1, FN = 2, precision is 0.75, recall is 0.6 and F1 is 2/3. Undefined zero denominators must be reported explicitly.",
+    "why": "Different errors have different costs; accuracy alone can hide them.",
+    "formula": "F1 = 2TP/(2TP + FP + FN)",
+    "model": "f1",
+    "labels": [
+      "TP",
+      "FP",
+      "FN"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          3,
+          1,
+          2
+        ],
+        "expected": 0.6666666666666666
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          2,
+          0
+        ],
+        "expected": 0.6666666666666666
+      }
+    ],
+    "target": "F1",
+    "question": "What is the denominator of recall?",
+    "choices": [
+      "All actual positives: TP + FN",
+      "All predicted positives: TP + FP"
+    ],
+    "correct": 0,
+    "reason": "False negatives are missed actual positives. False positives belong to precision.",
+    "mistake": "Swapping precision and recall denominators.",
+    "debug": "For TP = 0, FP = 0, FN = 2, precision is undefined while recall is zero.",
+    "project": "Calculate precision, recall and F1 for TP=4, FP=1, FN=3; explain which error to reduce.",
+    "source": "https://developers.google.com/machine-learning/crash-course",
+    "lab": "intro"
+  },
+  {
+    "id": "dl-01-008",
+    "chapter": "CH-01",
+    "title": "Bias, variance and generalization",
+    "terms": [
+      [
+        "Underfitting",
+        "The model fails to capture useful structure."
+      ],
+      [
+        "Overfitting",
+        "The model captures training-specific patterns poorly transferable to new data."
+      ],
+      [
+        "Generalization",
+        "Performance on relevant unseen data."
+      ]
+    ],
+    "explanation": "A high training loss and high validation loss can indicate underfitting. Very low training loss with higher validation loss can indicate overfitting, data shift or other defects. The gap is validation loss minus training loss in this toy view. It is a diagnostic clue, not a proof. Compare datasets, metrics and uncertainty before choosing a fix.",
+    "why": "You need useful future predictions, not only a small training loss.",
+    "formula": "gap = validation loss - training loss",
+    "model": "gap",
+    "labels": [
+      "Training loss",
+      "Validation loss"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.1,
+          0.8
+        ],
+        "expected": 0.7
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0.4,
+          0.5
+        ],
+        "expected": 0.1
+      }
+    ],
+    "target": "loss gap",
+    "question": "Does a large gap prove one specific cause?",
+    "choices": [
+      "Yes; it proves the learning rate is too small",
+      "No; investigate model capacity, split, shift and errors"
+    ],
+    "correct": 1,
+    "reason": "Several causes produce similar curves; a diagnostic observation needs further evidence.",
+    "mistake": "Adding model capacity when training performance is already excellent and validation is poor.",
+    "debug": "Check leakage, sampling and per-class errors before adjusting architecture.",
+    "project": "Sketch underfitting and overfitting curves and propose one test for each.",
+    "source": "https://developers.google.com/machine-learning/crash-course"
+  },
+  {
+    "id": "dl-01-009",
+    "chapter": "CH-01",
+    "title": "Neural-network history",
+    "terms": [
+      [
+        "Perceptron",
+        "An early trainable linear threshold model."
+      ],
+      [
+        "Backpropagation",
+        "Efficient reverse application of local derivatives."
+      ],
+      [
+        "AlexNet",
+        "A 2012 convolutional vision milestone."
+      ]
+    ],
+    "explanation": "Rosenblatt described the perceptron in 1958. Rumelhart, Hinton and Williams popularized training multilayer networks by backpropagation in 1986; related reverse differentiation work predates that paper. AlexNet showed major image-recognition gains in 2012. Data, compute, algorithms and evaluation all contributed; progress is not a story of one invention replacing everything.",
+    "why": "History explains why simple neurons, gradients and practical compute limits are still taught.",
+    "formula": "Select the documented year of the named milestone",
+    "model": "history",
+    "labels": [
+      "Milestone year"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1958
+        ],
+        "expected": 1958
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2012
+        ],
+        "expected": 2012
+      }
+    ],
+    "target": "milestone year (1958 perceptron; 2012 AlexNet)",
+    "question": "Did the 1986 paper invent every aspect of differentiation?",
+    "choices": [
+      "No; it helped popularize multilayer-network learning",
+      "Yes; no related differentiation work existed earlier"
+    ],
+    "correct": 0,
+    "reason": "Historical credit needs precise scope. The paper is important without erasing earlier work.",
+    "mistake": "Assigning all progress to one model or one researcher.",
+    "debug": "Compare the three milestones and identify the contribution of each.",
+    "project": "Write a three-event timeline with a source for each and one limitation of each model.",
+    "source": "https://pubmed.ncbi.nlm.nih.gov/13602029/"
+  }
+]
