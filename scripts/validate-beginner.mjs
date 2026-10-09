@@ -1,5 +1,5 @@
 import fs from 'node:fs';import assert from 'node:assert/strict';
 const chapters=JSON.parse(fs.readFileSync('curriculum/deep-learning/catalog.json','utf8'));
-const files=['src/course/foundations.json','src/course/neural.json'];const lessons=files.flatMap(p=>JSON.parse(fs.readFileSync(p,'utf8')));const ids=new Set();
+const files=['src/course/foundations.json','src/course/neural.json','src/course/training.json'];const lessons=files.flatMap(p=>JSON.parse(fs.readFileSync(p,'utf8')));const ids=new Set();
 for(const l of lessons){assert(!ids.has(l.id));ids.add(l.id);const row=chapters.lessons.find(r=>r.id===l.id);assert(row&&row.status==='implemented'&&row.route==='beginner',l.id);assert(l.terms.length>=2);for(const key of ['explanation','why','formula','question','reason','mistake','debug','project'])assert(l[key]?.length>=10,l.id+' '+key);assert(l.target?.length);assert(l.source.startsWith('https://'));assert(l.cases.length===2&&l.cases.every(c=>c.values.length&&Number.isFinite(c.expected)));assert(l.labels.length===l.cases[0].values.length);assert(l.correct>=0&&l.correct<l.choices.length);assert.notDeepEqual(l.cases[0].values,l.cases[1].values);}
 console.log(`Validated ${lessons.length} authored beginner lessons and catalog routes.`);

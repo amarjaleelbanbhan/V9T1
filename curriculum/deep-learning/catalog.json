@@ -396,7 +396,7 @@
         "dl-05-006",
         "dl-05-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "A loss measures error; an optimizer changes parameters using gradients.",
       "formula": "w_next = w - learning_rate * gradient",
       "example": "L=w^2, w=2, lr=.1: gradient=4; next w=1.6 and loss=2.56.",
@@ -430,7 +430,7 @@
         "dl-06-006",
         "dl-06-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "Backpropagation reuses local derivatives to compute parameter gradients.",
       "formula": "dL/dw = (prediction-target)*input for half squared error",
       "example": "x=2, w=3, target=4: prediction=6, dL/dw=4.",
@@ -466,7 +466,7 @@
         "dl-07-008",
         "dl-07-009"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "Training error alone does not establish generalization.",
       "formula": "mean_loss = sum(sample_losses)/N",
       "example": "Sample losses [1,3,2] have mean 2.",
@@ -1503,13 +1503,15 @@
       "prerequisites": [
         "CH-04"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-001.md"
     },
     {
       "id": "dl-05-002",
@@ -1518,13 +1520,15 @@
       "prerequisites": [
         "dl-05-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-002.md"
     },
     {
       "id": "dl-05-003",
@@ -1533,13 +1537,15 @@
       "prerequisites": [
         "dl-05-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-003.md"
     },
     {
       "id": "dl-05-004",
@@ -1548,13 +1554,15 @@
       "prerequisites": [
         "dl-05-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-004.md"
     },
     {
       "id": "dl-05-005",
@@ -1563,13 +1571,15 @@
       "prerequisites": [
         "dl-05-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-005.md"
     },
     {
       "id": "dl-05-006",
@@ -1578,13 +1588,15 @@
       "prerequisites": [
         "dl-05-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-006.md"
     },
     {
       "id": "dl-05-007",
@@ -1593,13 +1605,15 @@
       "prerequisites": [
         "dl-05-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "05-loss-and-optimization/lessons/dl-05-007.md"
     },
     {
       "id": "dl-06-001",
@@ -1609,14 +1623,16 @@
         "CH-05",
         "CH-03"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-001.md"
     },
     {
       "id": "dl-06-002",
@@ -1625,14 +1641,16 @@
       "prerequisites": [
         "dl-06-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-002.md"
     },
     {
       "id": "dl-06-003",
@@ -1641,14 +1659,16 @@
       "prerequisites": [
         "dl-06-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-003.md"
     },
     {
       "id": "dl-06-004",
@@ -1657,14 +1677,16 @@
       "prerequisites": [
         "dl-06-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-004.md"
     },
     {
       "id": "dl-06-005",
@@ -1673,14 +1695,16 @@
       "prerequisites": [
         "dl-06-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-005.md"
     },
     {
       "id": "dl-06-006",
@@ -1689,14 +1713,16 @@
       "prerequisites": [
         "dl-06-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-006.md"
     },
     {
       "id": "dl-06-007",
@@ -1705,14 +1731,16 @@
       "prerequisites": [
         "dl-06-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-CS231N",
         "SRC-D2L",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "06-backpropagation/lessons/dl-06-007.md"
     },
     {
       "id": "dl-07-001",
@@ -1722,14 +1750,16 @@
         "CH-06",
         "CH-01"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-001.md"
     },
     {
       "id": "dl-07-002",
@@ -1738,14 +1768,16 @@
       "prerequisites": [
         "dl-07-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-002.md"
     },
     {
       "id": "dl-07-003",
@@ -1754,14 +1786,16 @@
       "prerequisites": [
         "dl-07-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-003.md"
     },
     {
       "id": "dl-07-004",
@@ -1770,14 +1804,16 @@
       "prerequisites": [
         "dl-07-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-004.md"
     },
     {
       "id": "dl-07-005",
@@ -1786,14 +1822,16 @@
       "prerequisites": [
         "dl-07-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-005.md"
     },
     {
       "id": "dl-07-006",
@@ -1802,14 +1840,16 @@
       "prerequisites": [
         "dl-07-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-006.md"
     },
     {
       "id": "dl-07-007",
@@ -1818,14 +1858,16 @@
       "prerequisites": [
         "dl-07-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-007.md"
     },
     {
       "id": "dl-07-008",
@@ -1834,14 +1876,16 @@
       "prerequisites": [
         "dl-07-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-008.md"
     },
     {
       "id": "dl-07-009",
@@ -1850,14 +1894,16 @@
       "prerequisites": [
         "dl-07-008"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-SKLEARN",
         "SRC-TORCH"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "07-training-and-generalization/lessons/dl-07-009.md"
     },
     {
       "id": "dl-08-001",
