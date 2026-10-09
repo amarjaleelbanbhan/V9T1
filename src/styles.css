@@ -148,3 +148,23 @@
 .foundation-confusion td{background:#236046;color:#EAFBEC;font-weight:750}
 .foundation-confusion td.mistake{background:#554434;color:#FDE4C1}
 @media(max-width:440px){.foundation-confusion th,.foundation-confusion td{font-size:9px;padding:8px 3px}}
+
+/* Lecture 04 — Loss and gradient descent */
+.loss-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(255px,.7fr);gap:14px}
+.loss-curve{width:100%;height:auto;max-height:385px;display:block}
+.loss-stage-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.loss-stage-row>div{background:#16443A;border:1px solid #376E57;border-radius:11px;padding:10px;display:grid;gap:5px;min-width:0}
+.loss-stage-row span{font-size:11px;color:#A6D0B8}
+.loss-stage-row strong{font-size:25px;color:#DCF7D8;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.loss-transport{display:flex;gap:9px;justify-content:center;margin:15px 0}
+.loss-transport button{background:#17463A;border:1px solid #4C8066;border-radius:10px;padding:10px 13px;font-size:12px;color:#E2F8E8;display:flex;align-items:center;justify-content:center;gap:7px}
+.loss-transport button[aria-pressed=true]{background:#2A835F;color:#F6FFF1}
+.loss-working h2{margin-bottom:15px}
+.loss-explainer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.loss-explainer>div{background:#143F37;border:1px solid #35674E;border-radius:11px;padding:15px;display:grid;gap:9px;min-width:0}
+.loss-explainer span{font-size:11px;color:#A9D3BB}
+.loss-explainer strong{font-size:14px;line-height:1.65;color:#E9FCEB;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.loss-explainer .loss-update-line{grid-column:1/-1;background:#235742}
+.loss-explainer .loss-update-line strong{color:#DFF6AC}
+@media(max-width:1150px){.loss-layout{grid-template-columns:1fr}}
+@media(max-width:670px){.loss-explainer{grid-template-columns:1fr}.loss-stage-row strong{font-size:19px}.loss-transport button{flex:1;font-size:11px;padding:9px 5px}}

@@ -1,55 +1,41 @@
-# NeuralLab — implementation checkpoint
+# NeuralLab implementation checkpoint — 2026-10-09
 
-## Source and branch
+## Repository state
 
-- Source files: `docs/LECTURE_TOPIC_INVENTORY.md` (all seven user-supplied lecture summaries, each numbered topic and slide-range preserved) and `docs/LECTURE_IMPLEMENTATION_MATRIX.md` (verified / partial / pending mapping).
-- The uploaded outline is a topic summary; the original PowerPoint decks have **not** been individually inspected.
-- New work: `feat/lecture-labs` → draft PR #3 against `main`: https://github.com/amarjaleelbanbhan/V9T1/pull/3
-- Previous foundation PRs #1 and #2 were already merged to `main` before this branch started.
-- Approved emerald/teal design and existing React + Three.js stack are preserved.
+- Base `main` contains merged foundation work from PR #1, #2 and #3.
+- Feature branch `feat/loss-gradient-lab` holds the next isolated milestone; draft PR #4: https://github.com/amarjaleelbanbhan/V9T1/pull/4
+- Source inventory for all seven supplied lecture topic summaries: `docs/LECTURE_TOPIC_INVENTORY.md` (do not claim to have inspected original PPT files).
+- Audit of interactive/partial/planned coverage: `docs/LECTURE_IMPLEMENTATION_MATRIX.md`.
+- Preserve approved React/TypeScript/Vite/Three.js application, independent math engine, and emerald/teal palette. No backend or fake model training claims.
 
-## Verified interactive foundation chunks
+## Verified foundation learning labs — 7 implemented
 
-**6 / 8 expanded foundation chunks accepted** (this is not 6/8 of the entire seven-lecture syllabus).
+1. **Foundations**: AI/ML/DL hierarchy; classification/regression, confusion matrix, precision/recall, MAE/MSE.
+2. **Artificial neuron**: inputs, weights, bias, weighted sum, activation, 2D/3D view, inspectable steps and challenges.
+3. **Perceptron**: step activation, AND/OR logic presets, editable weights/bias and truth table, XOR limitation.
+4. **Tensors**: scalar/vector/matrix/stack, rank/shape, sample axis, real tensor indexing and exclusive-stop slicing.
+5. **Forward propagation**: traced 2→2→1 network, editable edge weights/biases, layer-by-layer arithmetic.
+6. **Activation functions**: Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax comparisons.
+7. **Loss & gradient descent — NEW**: half-squared error for a linear one-parameter prediction, Lecture 04's `L(w)=w²`, analytic derivatives, learning rate, inspectable iterations, loss curve and teaching challenge. Changing parameters recomputes the *actual* trace. It is **not** multi-layer training or backpropagation.
 
-1. **Week 1 foundations:** Nested AI, ML, DL visual; classification threshold experiment with live confusion matrix, precision, recall, accuracy and defensible undefined-metric handling; regression/MAE/MSE.
-2. **Artificial neuron:** 3D and SVG visualizations, input/weight/bias sliders, activation plot, stage timeline, math/code/challenge.
-3. **Activation functions:** Sigmoid, Tanh, ReLU, Leaky ReLU and stable vector Softmax; curves and derivatives.
-4. **Forward propagation:** Actual 2→2→1 network, clickable and separately selectable weighted connections, editable weights/biases/inputs, neuron-level contribution traces, stage inspector and conceptual check.
-5. **Tensor representations:** Scalar, vector, matrix, 3D stack; rank, shape, sample indexing and real exclusive-stop slicing with an interactive crop view.
-6. **Binary perceptron:** Step activation, AND/OR presets, all four input combinations, editable weights/biases, live truth table and XOR limitation challenge.
-7. **Pending:** Full loss/backpropagation/gradient descent/optimizer laboratories.
-8. **Pending:** CNN convolutions, padding, stride, kernels and pooling.
+**Foundation scope:** Seven working laboratories, but full coverage of all topics across the supplied seven lectures remains incomplete.
 
-Topics outside these chunks — full model evaluation, real MNIST/Keras training, tensor dtypes/4D–5D, biological anatomy, vanishing gradients, train/validation/test, ANN classification workflows, IMDB review preprocessing and modeling, history/ethics — remain tracked as partially complete or planned in the lecture coverage matrix.
+## Verified code and browser checks
 
-## Verification
+Successful CI for code commit `1755180356968773552f2c107814b9b0ee2be93e`:
+https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37950046641
 
-Successful full-code CI (including model evaluation extension): https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37948616297
+- **42 / 42** Node numerical unit tests passed.
+- **16 / 16** Playwright Chromium browser tests passed, including loss controls, loss timeline and mobile viewport.
+- TypeScript typecheck and Vite production build passed.
+- Numerically checked half squared loss/gradient, negative gradients, `L(w)=w²` updates, oscillation with high learning rate, zero gradient, invalid inputs and overflow.
+- Missing: manual multi-device screenshot-by-screenshot visual QA, full WCAG accessibility audit, detailed WebGL benchmarking and public deployment confirmation.
 
-- **35/35 Node mathematical unit tests passed.**
-- **13/13 Playwright Chromium browser interaction tests passed.**
-- **TypeScript type check + Vite production build passed.**
-- Checks include narrow mobile layouts for all new labs and existing neuron/foundations/activation regressions.
-- Important limits: physical-device screenshot review, comprehensive accessibility audit, real WebGL performance benchmarks, production deployment, and educational review against original slide decks remain outstanding.
+## Scope limitations and next step
 
-## Additional verified extension
+The interactive lecture inventory still includes substantial planned or partial sections: multi-layer backpropagation, vanishing gradients, CNN operations, MNIST/Keras workflow, real ANN training, split/overfit evaluations, 4D/5D tensors, biology analogies, and IMDB sentiment classification.
 
-- Week 1 now displays a proper 2×2 confusion matrix and TP, TN, FP, FN plus precision and recall that update with the threshold. Undefined denominators display an em dash, not fabricated zero or 100%. Numerical tests cover threshold tradeoffs and null results.
+**Next implementation: Lecture 04 chain-rule backpropagation laboratory.**
+Use the already-tested 2→2→1 forward engine as the foundation. Derive gradients through output and hidden activations, return a complete trace of intermediate chain-rule terms, and validate against independently computed analytic values and finite-difference numerical gradients. Make gradient arrows / update steps interactive, with a small learning-rate control and a conceptual challenge. Treat failure to verify math/CI as a blocker, not a reason to mark it complete.
 
-## Defect fixes
-
-- Prior issues: unused TypeScript imports, ambiguous activation test selector, 3D HTML overlay DOM unmount bug, neuron prediction challenge that incorrectly assumed increasing weights always raised output.
-- Current chunk: unused icon import blocked initial forward build; repaired. Intersecting SVG connection labels intercepted clicks; added an explicit keyboard/touch-friendly connection selector and made label overlays noninteractive. An ambiguous tensor quiz test locator was scoped to the exact answer.
-
-## Mathematical architecture
-
-- Pure deterministic TypeScript computation, independent of rendering.
-- **Forward**: validated finite dense weights, inputs/biases, all contributions and layer outputs; independent tests.
-- **Tensor**: rectangular shape validation, explicit axis indexing, exclusive-stop slicing, sample selection; not NumPy.
-- **Perceptron**: threshold at z ≥ 0, real logic table; manually specified weights, not an actual training process.
-- No backend is needed yet. No fake TensorFlow/Keras execution claims. Future modules remain labeled **planned** in sidebar.
-
-## Next executable task
-
-**Next chunk: Loss and gradient descent (Lecture 04):** Build an interactive half-squared-loss explorer and a numerical gradient-descent timeline with real derivatives, adjustable weight and learning rate, and independently verified mathematical/browser tests. Then chain-rule backpropagation, vanishing gradients, CNN operations, and actual ANN/MNIST/IMDB workflows. Class-imbalance and richer precision/recall trade-offs remain a separate planned extension. Update the matrix only after each verified chunk.
+Continue on a **new feature branch from current main after PR #4 is reviewed and merged**; do not rewrite earlier modules, and do not merge PR #4 without review.

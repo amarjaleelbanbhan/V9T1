@@ -7,7 +7,7 @@ export const curriculum = [
   { id:'propagation', title:'Forward Propagation', week:'Weeks 3–4', status:'ready' },
   { id:'backprop', title:'Backpropagation & Chain Rule', week:'Weeks 3–4', status:'planned' },
   { id:'activation', title:'Activation Functions', week:'Week 4', status:'ready' },
-  { id:'loss', title:'Loss Functions', week:'Weeks 5–6', status:'planned' },
+  { id:'loss', title:'Loss & Gradient Descent', week:'Lecture 04 · Slides 4–13', status:'ready' },
   { id:'optimizers', title:'Optimizers', week:'Weeks 6–7', status:'planned' },
   { id:'cnn', title:'CNN Operations', week:'Week 8', status:'planned' },
   { id:'advanced-cnn', title:'CNN Architectures', week:'Week 10', status:'planned' },
