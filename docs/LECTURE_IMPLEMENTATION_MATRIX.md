@@ -25,7 +25,7 @@ Source: `docs/LECTURE_TOPIC_INVENTORY.md` (user-supplied summary of seven lectur
 | Lecture 03 slides 26–37: Artificial neurons, dot product, layers, nonlinear activation | Neuron, activation explorer, dense forward pass | Partial | NumPy-parallel code and deeper layers |
 | Complete Neuron Story slides 2–5: Biological neuron anatomy and analogy | Inventory recorded | Planned | Interactive dendrite/soma/axon/synapse mapped to artificial neuron |
 | Complete Neuron Story slides 6–13: Weights, bias, net input, ReLU | Interactive neuron, all relevant arithmetic | Interactive | Add detailed lecture-specific guided challenges |
-| Complete Neuron Story slides 14–17: Perceptron and AND/OR truth tables | Inventory recorded | Planned | Real step-activation gate and truth-table lab |
+| Complete Neuron Story slides 14–17: Perceptron and AND/OR truth tables | Interactive binary perceptron with AND/OR presets, editable weights/bias, all four truth-table rows and XOR challenge | Interactive | Expand to guided manual calculations |
 | Complete Neuron Story slides 18–24: Neuron→layer→network, forward pass | 2→2→1 network with editable edges and step inspector | Interactive | Additional preset networks |
 | Complete Neuron Story slide 25: Half squared error | Inventory recorded | Planned | Loss explorer |
 | Lecture 04 slides 2–3: Forward propagation | Editable 2→2→1 network and trace | Interactive | More cases and independently reviewed examples |
@@ -36,7 +36,7 @@ Source: `docs/LECTURE_TOPIC_INVENTORY.md` (user-supplied summary of seven lectur
 
 ## Lecture-order delivery queues
 
-**Queue A — Exam mathematical intuition:** Perceptron logic gates; confusion matrix and precision/recall; half squared loss; numerical gradient descent; chain-rule backprop and vanishing gradients. These build directly on accepted neuron and forward-pass labs.
+**Queue A — Exam mathematical intuition:** Confusion matrix and precision/recall; half squared loss; numerical gradient descent; chain-rule backprop and vanishing gradients. Perceptron AND/OR gates are now implemented and verified. These build directly on accepted neuron and forward-pass labs.
 
 **Queue B — Data and applied ML:** Tensor dtypes / 4D–5D shapes / MNIST preprocessing; classification paradigms; train/test splitting and data leakage; minibatch training; real loss/accuracy plots and generalization checks.
 

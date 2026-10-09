@@ -47,3 +47,7 @@ Use the selected green/teal design: `#092328` background, `#12544F` secondary su
 ## Curriculum source
 
 The module list follows the *Deep Learning Course Outline — Sukkur IBA University, Khairpur Campus, Fall 2026*. Other modules are shown as planned and are not represented as completed lessons.
+
+## Lecture coverage
+
+The complete seven-lecture requirements are preserved in [`docs/LECTURE_TOPIC_INVENTORY.md`](docs/LECTURE_TOPIC_INVENTORY.md). Use [`docs/LECTURE_IMPLEMENTATION_MATRIX.md`](docs/LECTURE_IMPLEMENTATION_MATRIX.md) to distinguish implemented interactive material from topics awaiting implementation. Implementation/test checkpoints are in [`docs/IMPLEMENTATION_PROGRESS.md`](docs/IMPLEMENTATION_PROGRESS.md).
