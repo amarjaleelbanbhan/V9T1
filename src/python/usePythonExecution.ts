@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {validateScalarInputs,validateValues,type PythonRequest,type PythonTrace} from './trace';
+import {validateScalarInputs,validateSequence,validateValues,type PythonRequest,type PythonTrace} from './trace';
 export function usePythonExecution(){
  const [trace,setTrace]=useState<PythonTrace|null>(null);const [status,setStatus]=useState('Ready. First run downloads the Python runtime.');const [busy,setBusy]=useState(false);
  const worker=useRef<Worker|null>(null);const timer=useRef<ReturnType<typeof setTimeout>|null>(null);
@@ -10,7 +10,7 @@ export function usePythonExecution(){
  const run=(request:PythonRequest)=>{
   stop();setTrace(null);
   try{
-   if(request.example==='array')validateValues(request.values);else validateScalarInputs(request.values);
+   if(request.example==='array')validateValues(request.values);else if(request.example==='variables')validateScalarInputs(request.values);else validateSequence(request.values);
    setBusy(true);setStatus('Loading pinned Pyodide 0.27.7 and executing Python…');
    const w=new Worker(`${import.meta.env.BASE_URL}python-worker.js`);worker.current=w;
    w.onmessage=({data})=>{if(worker.current!==w)return;stop();setBusy(false);if(data.error){setStatus(data.error);return;}setTrace(data.trace);setStatus('Executed Python. Step through captured line events.');};

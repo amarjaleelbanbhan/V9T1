@@ -229,7 +229,8 @@
         "dl-00-006",
         "dl-00-007",
         "dl-00-008",
-        "dl-00-002-variables"
+        "dl-00-002-variables",
+        "dl-00-002-flow"
       ],
       "status": "specified",
       "definition": "A tensor is an indexed collection of numbers; shape lists axis lengths.",
@@ -3146,6 +3147,23 @@
       "route_id": "python-basics",
       "document": "00-python-and-math/lessons/variables-and-data-flow.md",
       "scope": "Numeric assignment sublesson only; loops/functions/objects are not implemented"
+    },
+    {
+      "id": "dl-00-002-flow",
+      "title": "Python Loops, Functions and Objects",
+      "chapter": "CH-00",
+      "parent_id": "dl-00-002",
+      "prerequisites": [
+        "dl-00-002-variables"
+      ],
+      "status": "implemented",
+      "source_refs": [
+        "SRC-PYTHON"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35,
+      "route": "python-flow",
+      "document": "00-python-and-math/lessons/control-flow.md"
     }
   ],
   "assessments": [

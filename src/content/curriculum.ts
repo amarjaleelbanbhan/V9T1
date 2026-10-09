@@ -1,6 +1,7 @@
 /** Ordered according to the supplied Sukkur IBA Fall 2026 course outline. */
 export const curriculum = [
   { id:'python-basics', title:'Python Variables & Data Flow', week:'Beginner prerequisite · Chapter 00', status:'ready' },
+  { id:'python-flow', title:'Python Loops, Functions & Objects', week:'Beginner prerequisite · Chapter 00', status:'ready' },
   { id:'intro', title:'Deep Learning Foundations', week:'Week 1', status:'ready' },
   { id:'neuron', title:'The Artificial Neuron', week:'Week 2', status:'ready' },
   { id:'perceptron', title:'Perceptron & Logic Gates', week:'Neuron Story · Slides 14–17', status:'ready' },
