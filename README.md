@@ -1,9 +1,10 @@
 # NeuralLab
 
-A visual-first Deep Learning classroom. This project implements one **real interactive neuron lesson**, not a fully populated curriculum.
+A visual-first Deep Learning classroom. This project implements two **interactive foundations and neuron lessons**, not a fully populated curriculum.
 
-## First learning milestone
+## First two learning milestones
 
+- Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, regression errors, and concept challenge.
 - Edit three inputs, three weights (including negative values), and a bias.
 - Choose sigmoid, tanh, ReLU, or linear activation.
 - Watch the exact weighted contributions, sum, preactivation, and output update together.

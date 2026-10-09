@@ -1,6 +1,6 @@
 /** Ordered according to the supplied Sukkur IBA Fall 2026 course outline. */
 export const curriculum = [
-  { id:'intro', title:'Deep Learning Foundations', week:'Week 1', status:'planned' },
+  { id:'intro', title:'Deep Learning Foundations', week:'Week 1', status:'ready' },
   { id:'neuron', title:'The Artificial Neuron', week:'Week 2', status:'ready' },
   { id:'propagation', title:'Forward & Backpropagation', week:'Weeks 3–4', status:'planned' },
   { id:'activation', title:'Activation Functions', week:'Week 4', status:'planned' },
