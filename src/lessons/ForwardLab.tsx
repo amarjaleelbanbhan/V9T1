@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ChevronRight, RotateCcw, Layers3, GitBranch, Code2, CircleHelp } from 'lucide-react';
+import { ChevronRight, RotateCcw, Layers3, GitBranch, CircleHelp } from 'lucide-react';
 import { denseForward, DEFAULT_FORWARD_INPUT, DEFAULT_FORWARD_LAYERS, type DenseLayer } from '../engine/forward';
 
 type Edge={layer:number;neuron:number;source:number};
