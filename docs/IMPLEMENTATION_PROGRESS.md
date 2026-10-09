@@ -1,41 +1,48 @@
 # NeuralLab implementation checkpoint — 2026-10-09
 
-## Repository state
+## GitHub scope
+- Repository: `amarjaleelbanbhan/V9T1`.
+- **PR #4 merged to `main`** as commit `d52a17ea27ddf77d837018c90e9ccc5c8a37f08f` after all checks passed.
+- New branch: `feat/backprop-chain-rule-lab`, draft PR #5: https://github.com/amarjaleelbanbhan/V9T1/pull/5 — **not merged**.
+- The supplied seven-lecture summary is preserved in `docs/LECTURE_TOPIC_INVENTORY.md`; a topic-by-topic coverage matrix is in `docs/LECTURE_IMPLEMENTATION_MATRIX.md`. The actual PPT source decks were not individually inspected.
+- Preserve approved emerald/teal design, Vite/React/TypeScript/Three.js and independent pure math engines.
 
-- Base `main` contains merged foundation work from PR #1, #2 and #3.
-- Feature branch `feat/loss-gradient-lab` holds the next isolated milestone; draft PR #4: https://github.com/amarjaleelbanbhan/V9T1/pull/4
-- Source inventory for all seven supplied lecture topic summaries: `docs/LECTURE_TOPIC_INVENTORY.md` (do not claim to have inspected original PPT files).
-- Audit of interactive/partial/planned coverage: `docs/LECTURE_IMPLEMENTATION_MATRIX.md`.
-- Preserve approved React/TypeScript/Vite/Three.js application, independent math engine, and emerald/teal palette. No backend or fake model training claims.
+## Implemented and tested — eight interactive labs
 
-## Verified foundation learning labs — 7 implemented
+1. AI/ML/DL Foundations: nested family, classification/regression, confusion matrix, precision/recall, MAE/MSE.
+2. Artificial Neuron: 2D/3D, edit inputs/weights/bias, numerical trace and activation/challenges.
+3. Perceptron & Logic Gates: AND/OR truth tables, step output, editable weights, XOR concept check.
+4. Tensor & Slicing: scalar/vector/matrix/3D batch, rank, shapes, indexing and exclusive-end slicing.
+5. Forward Propagation: editable 2→2→1 dense model, weight inspector and layer arithmetic.
+6. Activation Functions: Sigmoid, Tanh, ReLU, Leaky ReLU, stable vector Softmax.
+7. Loss & Gradient Descent: half-squared loss, L(w)=w², real derivative and step timeline.
+8. **NEW Backpropagation & Chain Rule**: reuse exact denseForward trace; half-squared error; output/hidden chain-rule deltas; gradients for every weight and bias; reverse-flow SVG; inspectable selected connections; adjustable input/target/learning rate and parameter sliders; one **real single-example** full-network update with before/after loss.
 
-1. **Foundations**: AI/ML/DL hierarchy; classification/regression, confusion matrix, precision/recall, MAE/MSE.
-2. **Artificial neuron**: inputs, weights, bias, weighted sum, activation, 2D/3D view, inspectable steps and challenges.
-3. **Perceptron**: step activation, AND/OR logic presets, editable weights/bias and truth table, XOR limitation.
-4. **Tensors**: scalar/vector/matrix/stack, rank/shape, sample axis, real tensor indexing and exclusive-stop slicing.
-5. **Forward propagation**: traced 2→2→1 network, editable edge weights/biases, layer-by-layer arithmetic.
-6. **Activation functions**: Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax comparisons.
-7. **Loss & gradient descent — NEW**: half-squared error for a linear one-parameter prediction, Lecture 04's `L(w)=w²`, analytic derivatives, learning rate, inspectable iterations, loss curve and teaching challenge. Changing parameters recomputes the *actual* trace. It is **not** multi-layer training or backpropagation.
+**Important scope:** eight interactive labs does NOT mean the entire seven-lecture program is implemented or validated.
 
-**Foundation scope:** Seven working laboratories, but full coverage of all topics across the supplied seven lectures remains incomplete.
+## Verification
+The fully executed CI run for `68cba7d20c88f363c6d8cb462b6ea1d52a812a9f` is successful:
+https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37955635021
 
-## Verified code and browser checks
+- **49/49** Node numerical tests passed (new backprop tests include independently derived chain-rule examples, central finite differences for every weight and bias, zero ReLU subgradient, a valid training update and invalid cases).
+- **18/18** Chromium browser tests passed, including new gradient selection, training update and 390px mobile viewport.
+- TypeScript checks and production Vite build passed.
+- The first browser run found a test formatting mismatch: graph displays four decimal places (0.5399), while the test expected three (0.54). Test corrected and full re-run passed.
+- Still outstanding: real-device screenshot review, comprehensive WCAG audit, performance benchmarks, full curriculum review against actual teacher PowerPoints, public deployment.
 
-Successful CI for code commit `1755180356968773552f2c107814b9b0ee2be93e`:
-https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37950046641
+## Mathematical conventions
+- A single scalar output and half-squared error: L=½(ŷ−y)².
+- Output delta: δ_out=(ŷ−y) × sigmoid′(z_out).
+- Hidden delta: δ_h=ReLU′(z_h) Σ (output-weight × output-delta).
+- Weight gradient: ∂L/∂w=δ × layer source activation; bias gradient=δ.
+- ReLU at exactly z=0 is non-differentiable; the implementation explicitly chooses zero subgradient.
+- Update: parameter ← parameter − η×gradient. A single example, single step is not a full training pipeline.
+- Analytic gradients verified against central finite differences; default model updates reduce default-sample loss.
+- The computation is pure TypeScript; nothing here claims PyTorch, NumPy, Keras or TensorFlow model training.
 
-- **42 / 42** Node numerical unit tests passed.
-- **16 / 16** Playwright Chromium browser tests passed, including loss controls, loss timeline and mobile viewport.
-- TypeScript typecheck and Vite production build passed.
-- Numerically checked half squared loss/gradient, negative gradients, `L(w)=w²` updates, oscillation with high learning rate, zero gradient, invalid inputs and overflow.
-- Missing: manual multi-device screenshot-by-screenshot visual QA, full WCAG accessibility audit, detailed WebGL benchmarking and public deployment confirmation.
+## Next milestone
+**Vanishing & exploding gradient visualizer (Lecture 05 slides 1–17)**: demonstrate repeated chain-rule products across increasing depths, activation choices and corresponding gradient magnitudes. Use numerical examples that distinguish saturation, zero ReLU gradients and non-saturating behavior; include proper educational limits and automated tests.
 
-## Scope limitations and next step
+**Parallel later syllabus milestone**: CNN convolution/pooling (Week 8); after that a genuinely trained ANN with train/test split, loss/accuracy plots, then MNIST and IMDB workflows. Additional unresolved topics remain in coverage matrix.
 
-The interactive lecture inventory still includes substantial planned or partial sections: multi-layer backpropagation, vanishing gradients, CNN operations, MNIST/Keras workflow, real ANN training, split/overfit evaluations, 4D/5D tensors, biology analogies, and IMDB sentiment classification.
-
-**Next implementation: Lecture 04 chain-rule backpropagation laboratory.**
-Use the already-tested 2→2→1 forward engine as the foundation. Derive gradients through output and hidden activations, return a complete trace of intermediate chain-rule terms, and validate against independently computed analytic values and finite-difference numerical gradients. Make gradient arrows / update steps interactive, with a small learning-rate control and a conceptual challenge. Treat failure to verify math/CI as a blocker, not a reason to mark it complete.
-
-Continue on a **new feature branch from current main after PR #4 is reviewed and merged**; do not rewrite earlier modules, and do not merge PR #4 without review.
+Continue the established inspect → implement → test → fix → verify → checkpoint workflow. Work on new feature branches after review/merge; do not automatically merge new PRs or rewrite stable modules.

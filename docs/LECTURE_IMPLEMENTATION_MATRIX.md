@@ -14,7 +14,7 @@ Source: `docs/LECTURE_TOPIC_INVENTORY.md` (user-supplied summary of seven lectur
 | Lecture 01 slides 4–7: Symbolic AI, expert systems, AI–ML–DL | Nested AI ⊃ ML ⊃ DL visual | Partial | Rule-based vs learned-decision comparison |
 | Lecture 01 slides 8–9: Traditional programs, learned patterns, RGB vs HSV | ML prediction examples | Partial | Rule-to-data pipeline and RGB↔HSV model |
 | Lecture 01 slides 10–12: Layered representations and digit recognition | 2→2→1 forward network | Partial | Hierarchical feature visualizer |
-| Lecture 01 slides 13–16: Training loop, weights, loss, optimizer | Forward pass and one-parameter true gradient descent (not whole-network training) | Partial | Complete trainable network with backward pass |
+| Lecture 01 slides 13–16: Training loop, weights, loss, optimizer | Forward, single-parameter GD and single-example 2→2→1 network update with backward gradients | Partial | Multi-example training loop, validation and optimizer comparisons |
 | Lecture 01 slides 17–25: DL achievements, chronology, GPU, open-source frameworks | Inventory recorded | Planned | Concise interactive timeline and hardware trade-offs |
 | Machine Learning Foundations slides 3–8: Supervised, unsupervised, reinforcement | Classification/regression task explorer | Partial | Clustering and reward/agent lab |
 | Machine Learning Foundations slides 9–15: Confusion matrix, precision, recall, imbalance | Live 2×2 confusion matrix, TP/TN/FP/FN, accuracy, precision and recall driven by threshold | Partial | Class imbalance and explicit precision/recall trade-off study |
@@ -29,14 +29,14 @@ Source: `docs/LECTURE_TOPIC_INVENTORY.md` (user-supplied summary of seven lectur
 | Complete Neuron Story slides 18–24: Neuron→layer→network, forward pass | 2→2→1 network with editable edges and step inspector | Interactive | Additional preset networks |
 | Complete Neuron Story slide 25: Half squared error | Interactive prediction-error, half-squared loss and analytic gradient explorer | Interactive | Add guided hand-calculation questions |
 | Lecture 04 slides 2–3: Forward propagation | Editable 2→2→1 network and trace | Interactive | More cases and independently reviewed examples |
-| Lecture 04 slides 4–20: Error, derivatives, GD, chain rule, backprop | Interactive loss curve, analytic derivative and update timeline for L(w)=w² and half-squared error | Partial | Multi-layer chain-rule backpropagation and trainable network update |
+| Lecture 04 slides 4–20: Error, derivatives, GD, chain rule, backprop | Interactive half-squared loss, 1D gradient descent, traced 2→2→1 chain-rule backpropagation, analytically and numerically verified gradients, single-example network update | Partial | General mini-batch training and additional optimization cases |
 | Lecture 05 slides 1–17: Sigmoid derivatives, vanishing gradients | Scalar activation derivatives | Partial | Multiplicative chain gradient explorer and vanishing-gradient visual |
 | Lecture 05 slides 18–64: ANN train/test, Keras, BCE, epochs, accuracy and loss graphs | Inventory recorded | Planned | Small real trained model, split controls, validation curve |
 | Lecture 05 slides 65–93: IMDB vectors, multi-hot, 10K features, Dense model, overfitting | Inventory recorded | Planned | Review token vectorization, sentiment classification and validation experiment |
 
 ## Lecture-order delivery queues
 
-**Queue A — Exam mathematical intuition:** Half squared loss and numerical one-parameter gradient descent are now interactive. Next: multi-layer chain-rule backpropagation and vanishing gradients. Basic confusion matrix, precision and recall are now interactive, but class-imbalance experiments remain pending. Perceptron AND/OR gates are now implemented and verified. These build directly on accepted neuron and forward-pass labs.
+**Queue A — Exam mathematical intuition:** Half squared loss, single-parameter gradient descent, and 2→2→1 chain-rule backpropagation are now interactive. Next: vanishing/exploding gradients and larger-network training. Basic confusion matrix, precision and recall are now interactive, but class-imbalance experiments remain pending. Perceptron AND/OR gates are now implemented and verified. These build directly on accepted neuron and forward-pass labs.
 
 **Queue B — Data and applied ML:** Tensor dtypes / 4D–5D shapes / MNIST preprocessing; classification paradigms; train/test splitting and data leakage; minibatch training; real loss/accuracy plots and generalization checks.
 
