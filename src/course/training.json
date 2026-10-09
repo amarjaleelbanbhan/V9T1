@@ -1,0 +1,1318 @@
+[
+  {
+    "id": "dl-05-001",
+    "chapter": "CH-05",
+    "title": "MSE and MAE",
+    "terms": [
+      [
+        "Residual",
+        "Prediction minus target."
+      ],
+      [
+        "MAE",
+        "Mean absolute residual."
+      ],
+      [
+        "MSE",
+        "Mean squared residual."
+      ]
+    ],
+    "explanation": "For errors [1,-2], absolute errors are [1,2], giving MAE 1.5. Squared errors are [1,4], giving MSE 2.5. Squaring emphasizes large errors and changes units. State whether your loss uses a sum, a mean, or a half factor; its derivative depends on that convention.",
+    "why": "The objective defines what training tries to improve.",
+    "formula": "MSE = mean(error\u00b2); MAE = mean(abs(error))",
+    "model": "mse",
+    "labels": [
+      "Signed error 1",
+      "Signed error 2"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          -2
+        ],
+        "expected": 2.5
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0,
+          2
+        ],
+        "expected": 2
+      }
+    ],
+    "target": "MSE",
+    "question": "Which objective weighs a large residual more strongly?",
+    "choices": [
+      "MSE through squaring",
+      "MAE through keeping the sign"
+    ],
+    "correct": 0,
+    "reason": "Absolute value removes sign but grows linearly; squared error grows quadratically.",
+    "mistake": "Averaging signed residuals and calling it MAE.",
+    "debug": "Opposite errors can cancel in a signed mean, despite both being wrong.",
+    "project": "Calculate both losses for residuals [0,1,5] and explain outlier sensitivity.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html",
+    "lab": "loss"
+  },
+  {
+    "id": "dl-05-002",
+    "chapter": "CH-05",
+    "title": "Binary and categorical cross entropy",
+    "terms": [
+      [
+        "Target probability",
+        "Probability assigned to the observed class."
+      ],
+      [
+        "Cross entropy",
+        "Negative log probability of the target, averaged as specified."
+      ]
+    ],
+    "explanation": "For a binary target y, BCE = -y log(p) - (1-y) log(1-p). With p = 0.8 and y = 1, loss is -log(0.8). With y = 0 it is -log(0.2), a larger penalty. Categorical cross entropy for a one-hot target is -\u03a3 y\u1d62log(p\u1d62), selecting the true-class probability. Natural logs are used here.",
+    "why": "Confident wrong predictions deserve larger loss than uncertain wrong predictions.",
+    "formula": "BCE = -y log(p) - (1-y) log(1-p)",
+    "model": "bce",
+    "labels": [
+      "Positive probability p",
+      "Binary target y"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.8,
+          1
+        ],
+        "expected": 0.2231435513142097
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0.8,
+          0
+        ],
+        "expected": 1.6094379124341003
+      }
+    ],
+    "target": "binary cross entropy",
+    "question": "For a one-hot categorical target, which probability determines its loss?",
+    "choices": [
+      "Only the largest predicted probability, regardless of label",
+      "The probability of the true class"
+    ],
+    "correct": 1,
+    "reason": "The target selects the observed class; confident prediction of another class increases loss.",
+    "mistake": "Feeding raw logits into a probability-only logarithm.",
+    "debug": "For three-class probabilities [0.1,0.7,0.2] and target class two (zero-based), loss is -log(0.2).",
+    "project": "Compare losses for true-class probabilities 0.9, 0.5 and 0.1.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  },
+  {
+    "id": "dl-05-003",
+    "chapter": "CH-05",
+    "title": "Stable logits losses",
+    "terms": [
+      [
+        "Logit loss",
+        "Cross entropy calculated directly from raw scores."
+      ],
+      [
+        "Log-sum-exp",
+        "A stabilized log of a sum of exponentials."
+      ]
+    ],
+    "explanation": "A sigmoid followed by a naive logarithm can round a probability to zero or one. Compute BCE from logits using max(z,0) - zy + log(1 + exp(-abs(z))). This avoids exponentiating a huge positive z. For z = 1000 and wrong target zero, the loss is about 1000, not a NaN from log(0).",
+    "why": "Stable objectives preserve useful values at confident predictions.",
+    "formula": "BCE(z,y) = max(z,0) - zy + log1p(exp(-abs(z)))",
+    "model": "logit-loss",
+    "labels": [
+      "Logit z",
+      "Target y"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1000,
+          0
+        ],
+        "expected": 1000
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1000,
+          1
+        ],
+        "expected": 1000
+      }
+    ],
+    "target": "stable BCE",
+    "question": "Should a fused logits loss receive an already sigmoid-transformed probability?",
+    "choices": [
+      "No; it expects raw logits",
+      "Yes; sigmoid must always be applied first"
+    ],
+    "correct": 0,
+    "reason": "The fused loss already incorporates the transformation and stabilization.",
+    "mistake": "Applying sigmoid twice before a logits loss.",
+    "debug": "Check the loss at z = 0: log(2) for either binary target.",
+    "project": "Compare naive and stable losses at logits -1000, 0 and 1000.",
+    "source": "https://docs.pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html"
+  },
+  {
+    "id": "dl-05-004",
+    "chapter": "CH-05",
+    "title": "Gradient descent",
+    "terms": [
+      [
+        "Gradient",
+        "Sensitivity of loss to a parameter."
+      ],
+      [
+        "Learning rate",
+        "The multiplier controlling update size."
+      ]
+    ],
+    "explanation": "For L(w) = w\u00b2, the derivative is 2w. The update w_new = w - \u03b7(2w) moves opposite the derivative. Starting at 2 with rate 0.1 gives 1.6, lowering loss from 4 to 2.56. Starting at -2 gives -1.6. A large step can overshoot; a small loss on one step does not prove convergence.",
+    "why": "Training changes parameters to improve the chosen objective.",
+    "formula": "w_new = w - \u03b7 \u00d7 dL/dw",
+    "model": "gd",
+    "labels": [
+      "Weight w",
+      "Learning rate \u03b7"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          0.1
+        ],
+        "expected": 1.6
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          0.1
+        ],
+        "expected": -1.6
+      }
+    ],
+    "target": "updated weight",
+    "question": "Why subtract the derivative in this update?",
+    "choices": [
+      "Because every weight must always become smaller",
+      "To move in the local direction of decreasing loss"
+    ],
+    "correct": 1,
+    "reason": "A negative derivative causes the weight to increase; the direction follows local loss sensitivity.",
+    "mistake": "Adding the gradient and thereby ascending the loss.",
+    "debug": "At w = -2 the update increases w toward zero, while decreasing the loss.",
+    "project": "Try rate 1 for w\u00b2 and explain the oscillation.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html",
+    "lab": "loss"
+  },
+  {
+    "id": "dl-05-005",
+    "chapter": "CH-05",
+    "title": "SGD, momentum and Adam",
+    "terms": [
+      [
+        "SGD",
+        "An update using a sample or mini-batch gradient."
+      ],
+      [
+        "Momentum",
+        "Retains a velocity across updates."
+      ],
+      [
+        "Adam",
+        "Uses first and second gradient moments with bias correction."
+      ]
+    ],
+    "explanation": "Plain SGD uses w - \u03b7g. This momentum convention uses v_new = \u03b2v_old + g, then w - \u03b7v_new. Adam maintains m and v as exponential averages, corrects their early-step bias, then scales m_hat by sqrt(v_hat)+epsilon. The panel compares SGD, momentum and a freshly initialized first Adam step; it does not reuse the momentum velocity as Adam state.",
+    "why": "Optimizer state changes how a sequence of gradients affects weights.",
+    "formula": "momentum: v = \u03b2v_old + g; w_new = w - \u03b7v",
+    "model": "optimizers",
+    "labels": [
+      "Weight",
+      "Gradient",
+      "Rate",
+      "Momentum \u03b2",
+      "Old velocity"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          4,
+          0.1,
+          0.9,
+          1
+        ],
+        "expected": 1.51
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          -4,
+          0.1,
+          0.9,
+          1
+        ],
+        "expected": 2.31
+      }
+    ],
+    "target": "momentum-updated weight",
+    "question": "Can you resume Adam exactly with only saved model weights?",
+    "choices": [
+      "No; its moment state and step count also matter",
+      "Yes; optimizer state has no effect"
+    ],
+    "correct": 0,
+    "reason": "The next update depends on previous moments, bias correction and learning-rate state.",
+    "mistake": "Comparing optimizers while accidentally sharing incompatible state.",
+    "debug": "For the first Adam step with nonzero g, corrected moments are g and g\u00b2; scaling largely normalizes magnitude.",
+    "project": "Apply two gradients [4,-1] using SGD, momentum and Adam, preserving separate state.",
+    "source": "https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html"
+  },
+  {
+    "id": "dl-05-006",
+    "chapter": "CH-05",
+    "title": "Learning-rate schedules",
+    "terms": [
+      [
+        "Schedule",
+        "A rule changing learning rate during training."
+      ],
+      [
+        "Epoch",
+        "One traversal of the training set."
+      ]
+    ],
+    "explanation": "An exponential schedule sets \u03b7_k = \u03b7_0 \u00d7 decay^k. Starting at 0.1 with decay 0.5 gives 0.025 at epoch two. Scheduling can make later updates smaller, but an inappropriate initial rate or fast decay can prevent learning. Keep scheduler timing consistent: stepping per batch differs from stepping per epoch.",
+    "why": "Step size often needs to change as training progresses.",
+    "formula": "\u03b7_k = \u03b7_0 \u00d7 decay^k",
+    "model": "schedule",
+    "labels": [
+      "Initial rate",
+      "Decay factor",
+      "Epoch k"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.1,
+          0.5,
+          2
+        ],
+        "expected": 0.025
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0.2,
+          0.5,
+          3
+        ],
+        "expected": 0.025
+      }
+    ],
+    "target": "scheduled learning rate",
+    "question": "Does stepping the same schedule every batch match stepping every epoch?",
+    "choices": [
+      "Yes; epoch and batch are synonyms",
+      "No; the number of schedule updates differs"
+    ],
+    "correct": 1,
+    "reason": "An epoch can contain many updates; timing changes the effective decay.",
+    "mistake": "Decaying too many times because scheduler timing is unclear.",
+    "debug": "If there are ten batches per epoch, batch-based decay applies ten times as often.",
+    "project": "List rates for epochs zero through four and record the stepping convention.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  },
+  {
+    "id": "dl-05-007",
+    "chapter": "CH-05",
+    "title": "Epochs and mini-batches",
+    "terms": [
+      [
+        "Mini-batch",
+        "A subset used for one optimizer update."
+      ],
+      [
+        "Update",
+        "One parameter adjustment after a gradient calculation."
+      ]
+    ],
+    "explanation": "Five examples with batch size two give batches of sizes two, two and one if the final partial batch is retained. Two epochs produce six updates. Dropping the final partial batch would change the count. Loss averaging over a smaller final batch still needs a deliberate convention.",
+    "why": "Batch and epoch counts determine update frequency and reproducibility.",
+    "formula": "updates = ceil(N / batch size) \u00d7 epochs",
+    "model": "batches",
+    "labels": [
+      "Examples N",
+      "Batch size",
+      "Epochs"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          5,
+          2,
+          2
+        ],
+        "expected": 6
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          5,
+          3,
+          2
+        ],
+        "expected": 4
+      }
+    ],
+    "target": "optimizer updates",
+    "question": "Is one epoch always one optimizer update?",
+    "choices": [
+      "No; it can contain several mini-batch updates",
+      "Yes; there is only one update per dataset traversal"
+    ],
+    "correct": 0,
+    "reason": "Each mini-batch can produce a separate update.",
+    "mistake": "Counting examples as though they were optimizer steps.",
+    "debug": "Show batches [2,2,1] and explain the last batch policy.",
+    "project": "Plan updates for 17 rows, batch size four and three epochs: 15 if the remainder is kept.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  },
+  {
+    "id": "dl-06-001",
+    "chapter": "CH-06",
+    "title": "Local derivatives",
+    "terms": [
+      [
+        "Local derivative",
+        "Sensitivity of one operation to its immediate input."
+      ],
+      [
+        "Upstream derivative",
+        "Sensitivity arriving from later operations."
+      ]
+    ],
+    "explanation": "The operation y = x\u00b2 has local derivative 2x. At x = 2 it is 4; at x = -2 it is -4. A derivative is not necessarily positive and is not the function value. Backpropagation multiplies this local derivative by the derivative arriving from later loss operations.",
+    "why": "Small operation rules assemble into gradients for a whole network.",
+    "formula": "d(x\u00b2)/dx = 2x",
+    "model": "derivative",
+    "labels": [
+      "Input x"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2
+        ],
+        "expected": 4
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2
+        ],
+        "expected": -4
+      }
+    ],
+    "target": "local derivative",
+    "question": "Can a derivative be negative?",
+    "choices": [
+      "No; all rates of change are positive",
+      "Yes; increasing the input can decrease the output locally"
+    ],
+    "correct": 1,
+    "reason": "At a negative x, moving toward zero lowers x\u00b2.",
+    "mistake": "Using the operation output as its derivative.",
+    "debug": "At x = 3, x\u00b2 is 9 but its derivative is 6.",
+    "project": "Write derivatives for addition, multiplication and squaring.",
+    "source": "https://d2l.ai/chapter_preliminaries/calculus.html",
+    "lab": "backprop"
+  },
+  {
+    "id": "dl-06-002",
+    "chapter": "CH-06",
+    "title": "Chain rule",
+    "terms": [
+      [
+        "Composition",
+        "One operation takes the result of another."
+      ],
+      [
+        "Path derivative",
+        "Product of sensitivities along one path."
+      ]
+    ],
+    "explanation": "For u = sx and y = u\u00b2, a small change in x first changes u by s times that change. It then changes y by 2u times the u change. Multiply these factors. This gives 2s\u00b2x, with sign determined by x when s\u00b2 is positive.",
+    "why": "The chain rule transmits loss sensitivity back through layers.",
+    "formula": "dy/dx = (2u) \u00d7 s = 2s\u00b2x",
+    "model": "chain",
+    "labels": [
+      "Input x",
+      "Scale s"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          2
+        ],
+        "expected": 8
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          2
+        ],
+        "expected": -16
+      }
+    ],
+    "target": "dy/dx",
+    "question": "Along one composed path, do sensitivities add or multiply?",
+    "choices": [
+      "Multiply",
+      "Always add"
+    ],
+    "correct": 0,
+    "reason": "One operation scales the change produced by the preceding operation.",
+    "mistake": "Adding local derivatives along a path.",
+    "debug": "If local factors are three and four, the path sensitivity is twelve, not seven.",
+    "project": "Trace y = (2x + 1)\u00b2 at x = 1: derivative 12.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html",
+    "lab": "backprop"
+  },
+  {
+    "id": "dl-06-003",
+    "chapter": "CH-06",
+    "title": "Output and hidden deltas",
+    "terms": [
+      [
+        "Delta",
+        "Loss sensitivity to a layer preactivation."
+      ],
+      [
+        "Hidden delta",
+        "Sensitivity transmitted through downstream weights and the activation derivative."
+      ]
+    ],
+    "explanation": "Use one hidden ReLU and a linear output with half squared loss. Output delta is prediction - target. Hidden delta multiplies output delta by the output weight and the hidden ReLU derivative. At a negative hidden preactivation the derivative is zero, blocking this path. At exactly zero this model uses a zero subgradient.",
+    "why": "Deltas separate error propagation from parameter-gradient calculation.",
+    "formula": "\u03b4_hidden = \u03b4_output \u00d7 w_output \u00d7 ReLU\u2032(z_hidden)",
+    "model": "hidden-delta",
+    "labels": [
+      "x",
+      "Hidden weight",
+      "Hidden bias",
+      "Output weight",
+      "Output bias",
+      "Target"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          1,
+          0,
+          3,
+          1,
+          4
+        ],
+        "expected": 9
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          1,
+          0,
+          3,
+          1,
+          4
+        ],
+        "expected": 0
+      }
+    ],
+    "target": "hidden delta",
+    "question": "What happens to this path when hidden ReLU is inactive?",
+    "choices": [
+      "Its hidden delta must equal the raw output error",
+      "Its hidden delta is zero"
+    ],
+    "correct": 1,
+    "reason": "The activation derivative gates the downstream sensitivity.",
+    "mistake": "Using target minus prediction with an update formula expecting the opposite convention.",
+    "debug": "State both the loss convention and update sign before calculating.",
+    "project": "Find output and hidden deltas for the same model with target 8.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html",
+    "lab": "backprop"
+  },
+  {
+    "id": "dl-06-004",
+    "chapter": "CH-06",
+    "title": "Parameter gradients",
+    "terms": [
+      [
+        "Weight gradient",
+        "Sensitivity to a weight; delta times its input in a dense unit."
+      ],
+      [
+        "Bias gradient",
+        "The delta, since the bias enters additively."
+      ]
+    ],
+    "explanation": "Once a hidden delta is known, multiply it by the input feeding that weight. In the worked case hidden delta is 9 and x is 2, so the first weight gradient is 18. The hidden bias gradient is 9. Batch gradients combine per-example contributions using the chosen sum or mean convention.",
+    "why": "Gradients identify which parameters should change and by how much.",
+    "formula": "dL/dw = delta \u00d7 input; dL/db = delta",
+    "model": "weight-gradient",
+    "labels": [
+      "x",
+      "Hidden weight",
+      "Hidden bias",
+      "Output weight",
+      "Output bias",
+      "Target"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          1,
+          0,
+          3,
+          1,
+          4
+        ],
+        "expected": 18
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          1,
+          0,
+          3,
+          1,
+          2
+        ],
+        "expected": 6
+      }
+    ],
+    "target": "first hidden-weight gradient",
+    "question": "Why does the bias gradient equal delta here?",
+    "choices": [
+      "The derivative of z with respect to its additive bias is one",
+      "Because biases never affect loss"
+    ],
+    "correct": 0,
+    "reason": "The chain rule multiplies delta by dz/db = 1.",
+    "mistake": "Using the output activation instead of the input to that weight.",
+    "debug": "Label each connection with the value entering it before computing its gradient.",
+    "project": "Check one hidden weight and bias with finite differences.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html",
+    "lab": "backprop"
+  },
+  {
+    "id": "dl-06-005",
+    "chapter": "CH-06",
+    "title": "Automatic differentiation",
+    "terms": [
+      [
+        "Forward pass",
+        "Compute values using current parameters."
+      ],
+      [
+        "Reverse pass",
+        "Apply local derivative rules in reverse order."
+      ],
+      [
+        "Accumulation",
+        "Add contributions when variables are reused."
+      ]
+    ],
+    "explanation": "For y = s\u00d7x\u00b2, reverse differentiation starts with dy/dy = 1, passes sensitivity s to x\u00b2, then adds the two x multiplication paths. This is an exact derivative of the executed numerical operations, subject to floating-point effects. Finite differences instead approximate sensitivity by perturbing inputs. Framework gradients may accumulate across backward calls unless explicitly cleared.",
+    "why": "Autodiff makes large computation graphs trainable without deriving every full formula by hand.",
+    "formula": "dy/dx = sx + sx",
+    "model": "autograd",
+    "labels": [
+      "Input x",
+      "Scale s"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3
+        ],
+        "expected": 12
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          3,
+          2
+        ],
+        "expected": 12
+      }
+    ],
+    "target": "computed reverse-mode derivative",
+    "question": "Why clear gradients before a new independent mini-batch update?",
+    "choices": [
+      "To delete the model parameters",
+      "To avoid unintended accumulation from earlier backward calls"
+    ],
+    "correct": 1,
+    "reason": "Gradient buffers and parameter values are separate state.",
+    "mistake": "Calling backward repeatedly and assuming gradient buffers reset automatically.",
+    "debug": "Explain deliberate gradient accumulation versus an accidental doubled gradient.",
+    "project": "Compare reverse-mode and finite-difference results for y = 3x\u00b2 at x = 2.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html"
+  },
+  {
+    "id": "dl-06-006",
+    "chapter": "CH-06",
+    "title": "Finite differences",
+    "terms": [
+      [
+        "Perturbation",
+        "A small input change used to estimate sensitivity."
+      ],
+      [
+        "Central difference",
+        "Uses a positive and negative perturbation."
+      ]
+    ],
+    "explanation": "Estimate the derivative of f(x) = x\u00b2 with (f(x+h)-f(x-h))/(2h). At x = 2 and h = 0.001, the result is about 4. Large h can introduce truncation error for general functions; very small h can cause floating-point cancellation. Avoid nondifferentiable corners when comparing smooth derivatives.",
+    "why": "Gradient checks catch algebraic or implementation errors.",
+    "formula": "central difference = [f(x+h)-f(x-h)]/(2h)",
+    "model": "finite-difference",
+    "labels": [
+      "Input x",
+      "Positive h"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          0.001
+        ],
+        "expected": 4
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1,
+          0.001
+        ],
+        "expected": -2
+      }
+    ],
+    "target": "estimated derivative",
+    "question": "Is the smallest possible h always the most accurate?",
+    "choices": [
+      "No; rounding and cancellation can dominate",
+      "Yes; smaller is always better"
+    ],
+    "correct": 0,
+    "reason": "Finite precision creates a tradeoff between truncation and rounding error.",
+    "mistake": "Checking ReLU at zero as if it had a unique ordinary derivative.",
+    "debug": "Try h = 0.1, 0.001 and extremely small h; compare with 2x.",
+    "project": "Gradient-check all parameters of a small smooth network.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html",
+    "lab": "backprop"
+  },
+  {
+    "id": "dl-06-007",
+    "chapter": "CH-06",
+    "title": "Vanishing and exploding gradients",
+    "terms": [
+      [
+        "Vanishing",
+        "Repeated factors make sensitivity approach zero."
+      ],
+      [
+        "Exploding",
+        "Repeated factors increase sensitivity greatly."
+      ]
+    ],
+    "explanation": "Backpropagation multiplies local factors. Four factors of 0.5 produce 0.0625, while four factors of 2 produce 16. Actual networks have matrix Jacobians and multiple routes, so this scalar path is an illustration. Activation saturation, initialization, normalization and architecture affect gradient behavior; clipping limits magnitude but does not restore a vanished signal.",
+    "why": "Poor sensitivity can prevent earlier layers from learning usefully.",
+    "formula": "path gradient = product of local factors",
+    "model": "depth",
+    "labels": [
+      "Local factor",
+      "Path depth"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.5,
+          4
+        ],
+        "expected": 0.0625
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          4
+        ],
+        "expected": 16
+      }
+    ],
+    "target": "path gradient",
+    "question": "Does clipping an exploding gradient recreate a vanished gradient?",
+    "choices": [
+      "Yes; clipping always fixes both",
+      "No; these are different problems"
+    ],
+    "correct": 1,
+    "reason": "Clipping caps a large magnitude; it does not amplify a near-zero gradient path.",
+    "mistake": "Assuming depth alone guarantees either failure mode.",
+    "debug": "A chain of factors equal to one preserves its sensitivity at any tested depth.",
+    "project": "Use the gradient-depth lab to compare linear and saturated sigmoid paths.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "gradient-depth"
+  },
+  {
+    "id": "dl-07-001",
+    "chapter": "CH-07",
+    "title": "Dataset loaders and training loops",
+    "terms": [
+      [
+        "Dataset",
+        "A collection exposing examples and targets."
+      ],
+      [
+        "Loader",
+        "A mechanism assembling batches."
+      ],
+      [
+        "Training loop",
+        "Repeated forward, loss, gradient and update operations."
+      ]
+    ],
+    "explanation": "For each batch: read features and targets, compute predictions, calculate loss, clear stale gradients, compute current gradients, then update parameters. Evaluation uses held-out data without fitting to it. A loader chooses batching and ordering; it does not automatically perform training. The final partial-batch policy is explicit in this count example.",
+    "why": "A correct loop connects the mathematics to reproducible computation.",
+    "formula": "updates per epoch = ceil(example count / batch size)",
+    "model": "batches",
+    "labels": [
+      "Examples",
+      "Batch size",
+      "Epochs"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          5,
+          2,
+          1
+        ],
+        "expected": 3
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          5,
+          3,
+          2
+        ],
+        "expected": 4
+      }
+    ],
+    "target": "total updates",
+    "question": "Should validation batches update the fitted model?",
+    "choices": [
+      "No; validation evaluates chosen behavior",
+      "Yes; every batch must train"
+    ],
+    "correct": 0,
+    "reason": "Using validation data to fit parameters compromises its intended role.",
+    "mistake": "Calling an optimizer step before calculating the current batch gradient.",
+    "debug": "List every operation in order and identify the state changed by each.",
+    "project": "Run the training project, inspect its updates, then compare held-out loss.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html",
+    "lab": "loss"
+  },
+  {
+    "id": "dl-07-002",
+    "chapter": "CH-07",
+    "title": "Batching and shuffling",
+    "terms": [
+      [
+        "Shuffle",
+        "Reorder examples before forming batches."
+      ],
+      [
+        "Seed",
+        "A control making a pseudorandom order reproducible."
+      ]
+    ],
+    "explanation": "Shuffling changes which examples appear together and in what order, while preserving each example-target pairing. In ordinary epoch-based training, every training example should be visited according to the loader policy. The batch count is unchanged by reordering. Never shuffle inputs independently of their labels. Evaluation usually does not need shuffled order.",
+    "why": "Order can change SGD updates; reproducibility requires recording it.",
+    "formula": "updates = ceil(N/batch) \u00d7 epochs regardless of permutation",
+    "model": "batches",
+    "labels": [
+      "Example count",
+      "Batch size",
+      "Epochs"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          6,
+          2,
+          1
+        ],
+        "expected": 3
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          6,
+          4,
+          1
+        ],
+        "expected": 2
+      }
+    ],
+    "target": "updates",
+    "question": "What must remain paired during shuffling?",
+    "choices": [
+      "Inputs and arbitrary targets with the same array length",
+      "Each input and its own target"
+    ],
+    "correct": 1,
+    "reason": "Breaking alignment changes the learning task into incorrect labels.",
+    "mistake": "Shuffling feature and label arrays independently.",
+    "debug": "Annotate row IDs before shuffling to verify every pair stays together.",
+    "project": "Record a seed and compare two training runs with the same and different batch order.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  },
+  {
+    "id": "dl-07-003",
+    "chapter": "CH-07",
+    "title": "Regularization and weight decay",
+    "terms": [
+      [
+        "Regularization",
+        "A constraint or penalty discouraging undesirable fitting behavior."
+      ],
+      [
+        "L2 penalty",
+        "An objective term proportional to squared weights."
+      ]
+    ],
+    "explanation": "Adding \u03bbw\u00b2/2 gives penalty gradient \u03bbw. An SGD update becomes w_new = w - \u03b7(g_data + \u03bbw). With no data gradient, w shrinks toward zero. Coupled L2 gradient and decoupled weight decay can differ under adaptive optimizers; do not treat every framework option as identical.",
+    "why": "Regularization trades training fit against a preference for simpler parameter values.",
+    "formula": "w_new = w - \u03b7(g_data + \u03bbw)",
+    "model": "weight-decay",
+    "labels": [
+      "Weight",
+      "Rate",
+      "Penalty \u03bb",
+      "Data gradient"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          0.1,
+          0.5,
+          0
+        ],
+        "expected": 1.9
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          0.1,
+          0.5,
+          0
+        ],
+        "expected": -1.9
+      }
+    ],
+    "target": "updated weight",
+    "question": "Are coupled L2 and decoupled AdamW decay always identical?",
+    "choices": [
+      "No; adaptive gradient scaling changes their relationship",
+      "Yes; every optimizer treats both the same"
+    ],
+    "correct": 0,
+    "reason": "The penalty gradient may enter adaptive moment calculations, while decoupled decay is applied separately.",
+    "mistake": "Regularizing the held-out loss by fitting to test data.",
+    "debug": "With zero data gradient, compare shrinking a positive and a negative weight.",
+    "project": "Compare a trained scalar model with \u03bb = 0 and \u03bb = 0.1.",
+    "source": "https://d2l.ai/chapter_linear-regression/weight-decay.html"
+  },
+  {
+    "id": "dl-07-004",
+    "chapter": "CH-07",
+    "title": "Dropout",
+    "terms": [
+      [
+        "Drop rate",
+        "Probability an activation is removed during training."
+      ],
+      [
+        "Inverted scaling",
+        "Divide retained values by the keep probability."
+      ]
+    ],
+    "explanation": "With activation 2 and drop rate 0.5, a kept value becomes 4 and a removed value becomes 0. Their expectation is 2 under the specified Bernoulli mask. At inference, return the unchanged activation. This visualization uses a fixed mask so the arithmetic can be predicted; actual training typically samples masks.",
+    "why": "Dropout changes training behavior and can reduce reliance on particular activations.",
+    "formula": "training output = activation \u00d7 mask/(1-p)",
+    "model": "dropout",
+    "labels": [
+      "Activation",
+      "Drop rate",
+      "Mask: zero or one"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          0.5,
+          1
+        ],
+        "expected": 4
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          0.5,
+          0
+        ],
+        "expected": 0
+      }
+    ],
+    "target": "training output",
+    "question": "Why scale the kept activation?",
+    "choices": [
+      "To make every single realization equal to the input",
+      "To preserve its expected value under the dropout distribution"
+    ],
+    "correct": 1,
+    "reason": "Individual outputs differ; only the expectation is preserved.",
+    "mistake": "Applying random dropout during ordinary inference.",
+    "debug": "For input 2 at p = 0.5, average the two equally likely outputs 0 and 4.",
+    "project": "Compare training and inference outputs for p = 0.25.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/dropout.html"
+  },
+  {
+    "id": "dl-07-005",
+    "chapter": "CH-07",
+    "title": "Batch normalization",
+    "terms": [
+      [
+        "Batch mean",
+        "Mean of activations for one feature in the batch."
+      ],
+      [
+        "Batch variance",
+        "Spread around that mean."
+      ],
+      [
+        "Gamma and beta",
+        "Learned scaling and shifting."
+      ]
+    ],
+    "explanation": "For one feature with batch values 1 and 3, mean is 2 and biased variance is 1. Normalize the first value to -1 when epsilon is zero; gamma two gives -2 with beta zero. A small positive epsilon prevents division by zero. Training uses batch statistics; ordinary evaluation uses running statistics. Framework running-variance conventions need separate care.",
+    "why": "Normalization behavior depends on batch statistics and training mode.",
+    "formula": "output = gamma \u00d7 (x - mean)/sqrt(variance + epsilon) + beta",
+    "model": "batchnorm",
+    "labels": [
+      "Batch value 1",
+      "Batch value 2",
+      "Gamma",
+      "Epsilon"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "expected": -2
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          4,
+          1,
+          0
+        ],
+        "expected": -1
+      }
+    ],
+    "target": "first normalized and scaled value",
+    "question": "Which statistics does ordinary inference typically use?",
+    "choices": [
+      "Saved running statistics",
+      "A newly fitted statistic from the entire test set"
+    ],
+    "correct": 0,
+    "reason": "Recomputing fitted statistics from test data changes evaluation behavior.",
+    "mistake": "Forgetting to switch the model to evaluation mode.",
+    "debug": "This example uses biased batch variance and beta zero. Compare with sample variance explicitly.",
+    "project": "Calculate both normalized batch values and confirm their mean is zero before beta.",
+    "source": "https://docs.pytorch.org/docs/stable/generated/torch.nn.BatchNorm1d.html"
+  },
+  {
+    "id": "dl-07-006",
+    "chapter": "CH-07",
+    "title": "Initialization in training",
+    "terms": [
+      [
+        "Signal scale",
+        "Magnitude propagated across layers."
+      ],
+      [
+        "Gradient scale",
+        "Magnitude of loss sensitivity."
+      ]
+    ],
+    "explanation": "Initializer assumptions interact with activation functions and fan-in. He variance 2/fan-in is commonly paired with ReLU. This scale alone does not guarantee training: data scaling, optimization, depth and normalization also matter. Record initialization and random seeds to reproduce an experiment.",
+    "why": "An unstable initial signal can make training fail before meaningful fitting begins.",
+    "formula": "He standard deviation = sqrt(2/fan-in)",
+    "model": "he",
+    "labels": [
+      "Fan-in"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          4
+        ],
+        "expected": 0.7071067811865476
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          16
+        ],
+        "expected": 0.3535533905932738
+      }
+    ],
+    "target": "initialization scale",
+    "question": "Does a named initializer guarantee convergence?",
+    "choices": [
+      "Yes; every dataset converges with He initialization",
+      "No; data, objective and optimization still matter"
+    ],
+    "correct": 1,
+    "reason": "Initialization addresses one part of the training system.",
+    "mistake": "Using the same constant for every hidden weight and expecting symmetry to break.",
+    "debug": "Inspect activation and gradient magnitudes before and after several updates.",
+    "project": "Compare two recorded initializations while holding data order and rate fixed.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html"
+  },
+  {
+    "id": "dl-07-007",
+    "chapter": "CH-07",
+    "title": "Early stopping",
+    "terms": [
+      [
+        "Patience",
+        "How long to wait without a sufficient validation improvement."
+      ],
+      [
+        "Best checkpoint",
+        "Saved parameters from the best eligible validation result."
+      ]
+    ],
+    "explanation": "Track validation loss after training epochs. If it worsens while training loss keeps falling, stop according to a stated patience policy and restore the best checkpoint. This panel selects the lowest validation-loss epoch, using the earliest epoch for ties; it does not claim to simulate every patience rule. Test data must not choose the stopping point.",
+    "why": "Stopping controls training duration without optimizing directly on the test set.",
+    "formula": "best epoch = argmin validation loss, with earliest tie",
+    "model": "early-stop",
+    "labels": [
+      "Epoch 1 loss",
+      "Epoch 2 loss",
+      "Epoch 3 loss"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.8,
+          0.4,
+          0.6
+        ],
+        "expected": 2
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0.3,
+          0.4,
+          0.5
+        ],
+        "expected": 1
+      }
+    ],
+    "target": "best epoch number",
+    "question": "Which data should choose the early-stopping epoch?",
+    "choices": [
+      "Validation data",
+      "Held-out test data"
+    ],
+    "correct": 0,
+    "reason": "A test-based stopping decision makes test performance part of selection.",
+    "mistake": "Restoring the final epoch instead of the best saved epoch.",
+    "debug": "Distinguish the best epoch from the epoch when patience finally triggers.",
+    "project": "Design patience two and minimum improvement 0.01 for a five-epoch loss sequence.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  },
+  {
+    "id": "dl-07-008",
+    "chapter": "CH-07",
+    "title": "Checkpoints",
+    "terms": [
+      [
+        "Model state",
+        "Parameters and persistent model buffers."
+      ],
+      [
+        "Optimizer state",
+        "Moments, velocities and update count."
+      ],
+      [
+        "Resume metadata",
+        "Epoch, scheduler, data order and random state as needed."
+      ]
+    ],
+    "explanation": "A checkpoint allows restoring an earlier state. For inference, model parameters and required buffers may be sufficient. Exact training continuation also needs optimizer state and relevant scheduler/random/data-loader state. Here a saved scalar weight is restored for a prediction; the changed current weight is deliberately ignored.",
+    "why": "Saving only a screenshot or final loss cannot reproduce a model state.",
+    "formula": "restored prediction = saved weight \u00d7 input",
+    "model": "checkpoint",
+    "labels": [
+      "Saved weight",
+      "Current changed weight",
+      "Prediction input"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          9,
+          3
+        ],
+        "expected": 6
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1,
+          9,
+          3
+        ],
+        "expected": -3
+      }
+    ],
+    "target": "restored prediction",
+    "question": "Is restoring weights alone always enough for exact training continuation?",
+    "choices": [
+      "Yes; all training state is encoded in one weight",
+      "No; optimizer and other relevant state may be required"
+    ],
+    "correct": 1,
+    "reason": "Future updates can depend on state beyond parameters.",
+    "mistake": "Overwriting the only best checkpoint after every later epoch.",
+    "debug": "Compare inference restoration with an exact training-resume checkpoint.",
+    "project": "Record checkpoint metadata, change a parameter, restore it and verify the same prediction.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html"
+  },
+  {
+    "id": "dl-07-009",
+    "chapter": "CH-07",
+    "title": "Training diagnostics",
+    "terms": [
+      [
+        "Diagnostic",
+        "An observation that guides investigation."
+      ],
+      [
+        "Baseline",
+        "A simple comparison model or rule."
+      ],
+      [
+        "Nonfinite value",
+        "NaN or infinity, usually indicating a numerical failure."
+      ]
+    ],
+    "explanation": "Track training/validation losses, prediction distributions, per-class errors, gradient magnitudes and data alignment. A large loss gap is evidence to investigate, not a unique diagnosis. Compare with a simple baseline and inspect examples. If loss becomes nonfinite, stop and locate the first failing operation rather than displaying a success badge.",
+    "why": "Diagnostics connect a failed outcome to a testable cause.",
+    "formula": "observed loss gap = validation loss - training loss",
+    "model": "gap",
+    "labels": [
+      "Training loss",
+      "Validation loss"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0.05,
+          0.9
+        ],
+        "expected": 0.85
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0.4,
+          0.45
+        ],
+        "expected": 0.05
+      }
+    ],
+    "target": "observed gap",
+    "question": "Does one loss curve identify a unique fix?",
+    "choices": [
+      "No; test possible causes with data and intermediate values",
+      "Yes; always add more layers"
+    ],
+    "correct": 0,
+    "reason": "Different failures can produce similar curves; targeted checks distinguish them.",
+    "mistake": "Ignoring a NaN because the previous epoch looked good.",
+    "debug": "Check input types, labels, stable loss, learning rate and gradients in a deliberate order.",
+    "project": "Audit the training project against a baseline and record one diagnosed failure.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+  }
+]
