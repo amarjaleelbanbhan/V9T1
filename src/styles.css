@@ -125,3 +125,17 @@
 .forward-edge-list button{min-width:0;border:1px solid #3B725C;border-radius:9px;background:#153F35;color:#CBEBDA;padding:9px 6px;font-size:10px;font-weight:650;line-height:1.5}
 .forward-edge-list button.picked{background:#8BBB92;border-color:#BFF2B5;color:#092328}
 @media(max-width:450px){.forward-edge-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Binary perceptron and logic gate lab */
+.perceptron-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(245px,.8fr);gap:14px}
+.perceptron-plot{width:100%;height:auto;display:block;max-height:330px}
+.perceptron-pairs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:6px 0 18px}
+.perceptron-pairs button{border:1px solid #397359;background:#153F36;color:#D0EEDA;border-radius:10px;padding:10px 22px;font-size:13px}
+.perceptron-pairs button.picked{background:#8BBB92;color:#082A22;font-weight:800}
+.perceptron-table{overflow:auto;width:100%}
+.perceptron-table table{border-collapse:collapse;width:100%;min-width:490px;color:#D6F2E1;font-size:12px;text-align:left}
+.perceptron-table th,.perceptron-table td{padding:12px;border-bottom:1px solid #315F4F}
+.perceptron-table thead{color:#A9D4C0;background:#15443A}
+.perceptron-table tr.selected{background:#275D47}
+@media(max-width:1100px){.perceptron-grid{grid-template-columns:1fr}}
+@media(max-width:440px){.perceptron-pairs button{padding:8px 14px}}

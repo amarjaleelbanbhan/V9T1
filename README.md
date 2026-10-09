@@ -1,9 +1,10 @@
 # NeuralLab
 
-A visual-first Deep Learning classroom. This project implements five **interactive foundations, neuron, tensor, forward propagation and activation lessons**, not a fully populated curriculum.
+A visual-first Deep Learning classroom. This project implements six **interactive foundations, neuron, perceptron, tensor, forward propagation and activation lessons**, not a fully populated curriculum.
 
-## Five interactive learning milestones
+## Six interactive learning milestones
 
+- Build AND and OR perceptron decision rules, inspect the live truth table, and test the XOR limitation.
 - Explore tensor rank, shape, samples axis and real NumPy-like slicing on small JavaScript arrays.
 - Follow the full 2 → 2 → 1 dense forward pass with clickable weighted connections, editable parameters, step-by-step arithmetic, and code view.
 - Compare Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax with a live graph, gradients and class probabilities.
