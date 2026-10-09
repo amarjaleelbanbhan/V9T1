@@ -99,3 +99,24 @@
 .forward-code{font-size:12px;line-height:1.8;white-space:pre-wrap;color:#D0ECD6;background:#092824;border-radius:12px;padding:14px;overflow:auto}
 @media(max-width:1200px){.forward-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.forward-results{grid-template-columns:1fr}.forward-stages{grid-template-columns:repeat(3,minmax(0,1fr))}.forward-stages button{font-size:10px}.forward-grid .foundation-parameter-card{padding:13px}}
+
+/* Chapter 2 / Lecture 03 interactive tensor rank and slicing lesson */
+.tensor-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr);gap:14px}
+.tensor-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.tensor-metrics>div{background:#134237;border:1px solid #336650;border-radius:12px;padding:10px;display:grid;gap:5px}
+.tensor-metrics span{font-size:10px;color:#A6CFB9}
+.tensor-metrics strong{color:#D5F7D9;font-size:20px;overflow-wrap:anywhere}
+.tensor-visual{min-height:215px;display:grid;place-items:center;padding:20px 4px}
+.tensor-matrix{display:grid;gap:8px}
+.tensor-row{display:flex;flex-wrap:nowrap;gap:8px;justify-content:center}
+.tensor-cell{min-width:64px;min-height:54px;border-radius:12px;background:#174E40;border:1px solid #458265;color:#E9FFEF;font-size:19px;font-weight:750;display:grid;place-items:center;gap:1px;padding:8px;transition:background-color 180ms ease}
+.tensor-cell small{color:#9FC9B3;font-size:10px;font-weight:400}
+.tensor-cell.selected{background:#2A835F;border-color:#B9F2B9}
+.tensor-cell.scalar{min-width:90px;min-height:90px;font-size:33px}
+.tensor-inspect-result{display:grid;gap:7px;padding:14px;background:#174337;border:1px solid #366B55;border-radius:12px;margin:14px 0;overflow-wrap:anywhere}
+.tensor-inspect-result span{color:#BADECA;font-size:12px}
+.tensor-inspect-result strong{font-size:26px;color:#C1F1BE}
+.tensor-inspect-result small{color:#B7DAC8;font-size:11px;line-height:1.6}
+@media(max-width:1150px){.tensor-layout{grid-template-columns:1fr}}
+@media(max-width:520px){.tensor-metrics strong{font-size:16px}.tensor-metrics>div{padding:8px}.tensor-row{gap:5px}.tensor-cell{min-width:45px;min-height:50px;font-size:16px;padding:5px}}
+@media(prefers-reduced-motion:reduce){.tensor-cell{transition:none}}
