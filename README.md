@@ -19,6 +19,7 @@ npm install
 npm run dev
 npm test
 npm run build
+npm run test:e2e
 ```
 
 Node.js 22+ recommended. `npm test` uses the built-in Node test runner and requires no third-party runtime dependencies. Browser visualization and production build require npm dependencies.
