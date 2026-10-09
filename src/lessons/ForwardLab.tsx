@@ -31,8 +31,8 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
       return <g key={s.layer+'-'+s.neuron+'-'+s.source} role="button" tabIndex={0} aria-label={'Connection '+(s.layer===0?'Input '+(s.source+1)+' to Hidden '+(s.neuron+1):'Hidden '+(s.source+1)+' to Output 1')} onClick={()=>onSelect({layer:s.layer,neuron:s.neuron,source:s.source})} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect({layer:s.layer,neuron:s.neuron,source:s.source})}}} style={{cursor:'pointer'}}>
         <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke="transparent" strokeWidth="23" fill="none"/>
         <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke={chosen?'#F7E0A1':s.weight>=0?'#8BBB92':'#F0A66A'} strokeWidth={chosen?5:3} opacity={active?1:.28} markerEnd="url(#forward-arrow)" fill="none"/>
-        <rect x={midX-25} y={midY-12} width="50" height="24" rx="7" fill={chosen?'#3A5743':'#102F2B'} stroke={chosen?'#F7E0A1':'#3A6857'}/>
-        <text x={midX} y={midY+4} fontSize="11" fill="#EFFEF1" textAnchor="middle">{fmt(s.weight)}</text>
+        <rect pointerEvents="none" x={midX-25} y={midY-12} width="50" height="24" rx="7" fill={chosen?'#3A5743':'#102F2B'} stroke={chosen?'#F7E0A1':'#3A6857'}/>
+        <text pointerEvents="none" x={midX} y={midY+4} fontSize="11" fill="#EFFEF1" textAnchor="middle">{fmt(s.weight)}</text>
       </g>;
     })}
     {positions.map((nodes,i)=>nodes.map((pos,j)=>{
@@ -70,6 +70,13 @@ export function ForwardLab(){
       <div className="forward-grid">
         <div className="foundation-chart-card">
           <NetworkDiagram trace={trace} layers={layers} step={step} edge={selected} onSelect={setSelected}/>
+          <div className="forward-edge-list" role="group" aria-label="Select a weighted connection">
+            {layers.flatMap((layer,l)=>layer.weights.flatMap((row,n)=>row.map((_weight,s)=>{
+              const label=l===0?'Input '+(s+1)+' to Hidden '+(n+1):'Hidden '+(s+1)+' to Output 1';
+              const active=selected.layer===l&&selected.neuron===n&&selected.source===s;
+              return <button type="button" key={l+'-'+n+'-'+s} aria-pressed={active} className={active?'picked':''} onClick={()=>setSelected({layer:l,neuron:n,source:s})} aria-label={'Inspect '+label}>{label}</button>;
+            })))}
+          </div>
           <div className="forward-stages" role="group" aria-label="Forward computation stages">{steps.map((label,i)=><button key={label} type="button" className={step===i?'picked':''} aria-pressed={step===i} onClick={()=>setStep(i)}>{i+1}. {label}</button>)}</div>
         </div>
         <div className="foundation-parameter-card">

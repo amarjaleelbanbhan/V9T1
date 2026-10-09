@@ -13,7 +13,7 @@ test('tensor lab rank, shape, sample slicing and answer respond to controls',asy
  await page.getByRole('group',{name:'Choose tensor rank'}).getByRole('button',{name:'1D · Vector'}).click();
  await expect(page.getByTestId('tensor-rank')).toHaveText('1');
  await expect(page.getByTestId('tensor-shape')).toHaveText('(4,)');
- await page.getByRole('button',{name:'Rank 1'}).click();
+ await page.getByRole('button',{name:'Rank 1',exact:true}).click();
  await expect(page.getByRole('status')).toContainText('Correct');
  await page.getByRole('button',{name:/Forward Propagation/}).click();
  await expect(page.getByRole('heading',{name:/Follow every signal/})).toBeVisible();

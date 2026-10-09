@@ -120,3 +120,8 @@
 @media(max-width:1150px){.tensor-layout{grid-template-columns:1fr}}
 @media(max-width:520px){.tensor-metrics strong{font-size:16px}.tensor-metrics>div{padding:8px}.tensor-row{gap:5px}.tensor-cell{min-width:45px;min-height:50px;font-size:16px;padding:5px}}
 @media(prefers-reduced-motion:reduce){.tensor-cell{transition:none}}
+
+.forward-edge-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 12px}
+.forward-edge-list button{min-width:0;border:1px solid #3B725C;border-radius:9px;background:#153F35;color:#CBEBDA;padding:9px 6px;font-size:10px;font-weight:650;line-height:1.5}
+.forward-edge-list button.picked{background:#8BBB92;border-color:#BFF2B5;color:#092328}
+@media(max-width:450px){.forward-edge-list{grid-template-columns:repeat(2,minmax(0,1fr))}}

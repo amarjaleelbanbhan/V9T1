@@ -5,7 +5,7 @@ test('multi-layer forward network shows actual math for selected weighted connec
  await page.getByRole('button',{name:/Forward Propagation/}).click();
  await expect(page.getByRole('heading',{name:/Follow every signal/})).toBeVisible();
  await expect(page.getByTestId('forward-output')).toHaveText('0.54');
- await page.getByRole('button',{name:'Connection Input 2 to Hidden 1'}).click();
+ await page.getByRole('button',{name:'Inspect Input 2 to Hidden 1'}).click();
  await expect(page.getByTestId('selected-edge')).toHaveText('Input 2 → Hidden 1');
  await expect(page.getByTestId('edge-calculation')).toContainText('2 × -0.2 = -0.4');
  const slider=page.getByRole('slider',{name:/Connection weight/});
