@@ -1,55 +1,34 @@
 # NeuralLab
 
-A visual-first Deep Learning classroom. This project implements eight **interactive foundations, neuron, perceptron, tensor, forward propagation, backpropagation, activation, and loss/gradient descent lessons**, not a fully populated curriculum.
+A visual Deep Learning classroom built with React, TypeScript, Vite and Three.js.
 
-## Eight interactive learning milestones
+The beginner path covers chapters 00–07 with **60 authored topic lessons**, **120 worked/transfer calculation cases**, **eight mixed chapter reviews**, actual Python traces, and a small regression-training project. Existing neuron, perceptron, tensor, forward/backpropagation, activation, loss and gradient-depth labs remain available. Advanced chapters 08–18 are specified for later implementation.
 
-- Follow output-to-hidden chain-rule derivatives, inspect each weight gradient and apply a true single-example network update.
-- Inspect real half-squared loss, gradients and one-dimensional gradient descent on an interactive step timeline.
-- Build AND and OR perceptron decision rules, inspect the live truth table, and test the XOR limitation.
-- Explore tensor rank, shape, samples axis and real NumPy-like slicing on small JavaScript arrays.
-- Follow the full 2 → 2 → 1 dense forward pass with clickable weighted connections, editable parameters, step-by-step arithmetic, and code view.
-- Compare Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax with a live graph, gradients and class probabilities.
-- Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, live confusion matrix, precision/recall, regression errors, and concept challenge.
-- Edit three inputs, three weights (including negative values), and a bias.
-- Choose sigmoid, tanh, ReLU, or linear activation.
-- Watch the exact weighted contributions, sum, preactivation, and output update together.
-- Compare a manipulable Three.js scene with an accessible SVG diagram.
-- Play, pause, jump to, and step through six calculation stages at adjustable speed.
-- Inspect a synchronized mathematical expression or equivalent JavaScript code.
-- Predict and test the effect of increasing a weight.
+Start with **Start beginner course** in the navigation. Every topic introduces terms, purpose, formulas, stepwise calculations, explanation checks, debugging and a self-reviewed mini-project. Course evidence distinguishes visited, attempted and passed; it is stored on the current browser. A review becomes due after one day. These bounded checks do not establish retained mastery.
 
-## Local development
+## Runtime and training
+
+- Python labs run fixed trusted code using pinned Pyodide 0.27.7, optionally NumPy. Numeric inputs are editable; arbitrary code editing is not supported. The first runtime load requires network access. Stepping replays completed captures.
+- Other numerical models execute actual JavaScript calculations. The capstone fits a line using SGD, momentum or Adam, paired seeded batches, training/validation separation, optional early stopping and L2 penalty. Test data does not select the checkpoint.
+- Inference checkpoints persist locally with model weights and provenance. Exact optimizer-state resume is not implemented. The app does not run browser PyTorch or TensorFlow.
+- Three.js has a 2D SVG fallback. The navy palette uses blue inputs, violet weights, aqua activations, coral errors and gold gradients.
+
+## Development and validation
 
 ```bash
 npm install
 npm run dev
+npm run check:curriculum
 npm test
 npm run build
+npx playwright install chromium
 npm run test:e2e
 ```
 
-Node.js 22+ recommended. `npm test` uses the built-in Node test runner and requires no third-party runtime dependencies. Browser visualization and production build require npm dependencies.
+Node.js 22+ is recommended. Restricted local environments can set `NEURALLAB_PYODIDE_ASSETS` to authentic downloaded pinned runtime assets for browser tests. This mirrors asset requests; Python execution is not mocked. CI uses the CDN directly.
 
-## Architecture
+## Architecture and scope
 
-- `src/engine/` pure, deterministic math and timeline; testable without a browser
-- `src/store/` Zustand state as single source of truth for controls and renderers
-- `src/visuals/` Three.js scene, 2D SVG diagram, activation curve
-- `src/components/` accessible controls
-- `src/content/` course-aligned modules; future lessons explicitly marked *planned*
-- `docs/IMPLEMENTATION_PROGRESS.md` verified checkpoint and next task
+`src/engine/` contains deterministic math and training engines; `src/course/` contains authored lessons and evidence handling. `curriculum/deep-learning/` holds the canonical catalog and lesson documents. `src/visuals/` preserves the 2D/3D workspaces.
 
-The calculation engine executes JavaScript in the browser. The site does **not** run a pretrained neural network, TensorFlow, or Python. All scene values derive from actual neuron calculations. 3D rendering requires WebGL; an SVG mode is provided when WebGL is unavailable.
-
-## Color system
-
-Use the selected green/teal design: `#092328` background, `#12544F` secondary surfaces, `#2A835F` active objects and `#8BBB92` positive highlights. Negative-weight connections additionally use amber for differentiation and have signed numeric labels.
-
-## Curriculum source
-
-The module list follows the *Deep Learning Course Outline — Sukkur IBA University, Khairpur Campus, Fall 2026*. Other modules are shown as planned and are not represented as completed lessons.
-
-## Lecture coverage
-
-The complete seven-lecture requirements are preserved in [`docs/LECTURE_TOPIC_INVENTORY.md`](docs/LECTURE_TOPIC_INVENTORY.md). Use [`docs/LECTURE_IMPLEMENTATION_MATRIX.md`](docs/LECTURE_IMPLEMENTATION_MATRIX.md) to distinguish implemented interactive material from topics awaiting implementation. Implementation/test checkpoints are in [`docs/IMPLEMENTATION_PROGRESS.md`](docs/IMPLEMENTATION_PROGRESS.md).
+See [beginner completion checkpoint](docs/BEGINNER_COMPLETION.md), [coverage](curriculum/deep-learning/COVERAGE_MATRIX.md), [sources](curriculum/deep-learning/SOURCE_CATALOG.md) and [research gaps](curriculum/deep-learning/RESEARCH_GAPS.md). The course outline and research path set scope; empirical learning effectiveness, independent project grading, low-end physical-device testing, comprehensive accessibility review and offline runtime caching remain future work.

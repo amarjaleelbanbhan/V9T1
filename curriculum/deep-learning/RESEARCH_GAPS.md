@@ -1,6 +1,6 @@
 # Research gaps and next actions
 
-1. Fully author and independently review lesson-level definitions, symbols, questions and answers; chapter specs are not completed teaching content.
+1. Independently review and learner-test the implemented 60 beginner lessons and eight mixed reviews. Advanced chapters 08–18 still need authored topic content, mathematical review and assessed projects.
 2. Add primary papers for attention, residual networks, diffusion, graph learning, contrastive learning, PEFT and safety; the initial broad references are insufficient for advanced claim verification.
 3. Verify individual course licenses and third-party assets. D2L share-alike and OCW noncommercial restrictions require deliberate adaptation decisions. Keep original content until resolved.
 4. Validate the 90% visual design with learners: measure prediction accuracy, transfer and retention, not animation counts. No empirical 90% claim is made.

@@ -2,7 +2,7 @@ export interface Evidence {visited?:number;attempts:number;cases:number[];passed
 export type Progress=Record<string,Evidence>;
 const KEY='neurallab.beginner.v1';
 export function readProgress(storage:Pick<Storage,'getItem'>):Progress{
- try{const parsed=JSON.parse(storage.getItem(KEY)||'{}');if(!parsed||typeof parsed!=='object'||Array.isArray(parsed))return {};const out:Progress={};for(const [id,v] of Object.entries(parsed)){const e=v as Evidence;if(e&&Number.isInteger(e.attempts)&&e.attempts>=0&&Array.isArray(e.cases)&&e.cases.every(x=>x===0||x===1)&&[e.visited,e.passedAt,e.reviewedAt].every(x=>x===undefined||(typeof x==='number'&&Number.isFinite(x)&&x>=0)))out[id]=e;}return out;}catch{return {};}
+ try{const parsed=JSON.parse(storage.getItem(KEY)||'{}');if(!parsed||typeof parsed!=='object'||Array.isArray(parsed))return {};const out:Progress={};for(const [id,v] of Object.entries(parsed)){const e=v as Evidence;if(e&&Number.isInteger(e.attempts)&&e.attempts>=0&&Array.isArray(e.cases)&&e.cases.every(x=>x===0||x===1)&&new Set(e.cases).size===e.cases.length&&e.attempts>=e.cases.length&&(!e.passedAt||(e.cases.includes(0)&&e.cases.includes(1)))&&[e.visited,e.passedAt,e.reviewedAt].every(x=>x===undefined||(typeof x==='number'&&Number.isFinite(x)&&x>=0)))out[id]=e;}return out;}catch{return {};}
 }
 export function writeProgress(storage:Pick<Storage,'setItem'>,progress:Progress){try{storage.setItem(KEY,JSON.stringify(progress));return true;}catch{return false;}}
 export function recordPractice(progress:Progress,id:string,index:number,correct:boolean,now:number):Progress{

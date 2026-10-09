@@ -173,3 +173,12 @@ Official page: https://docs.python.org/3.12/tutorial/introduction.html. Author: 
 ## Beginner implementation checks
 
 Original explanations and numerical examples link to official Python 3.12 control-flow/classes, NumPy broadcasting, pandas introductions, Google classification metrics, scikit-learn leakage guidance, PyTorch optimization and D2L calculus. These pages were retrieved 2026-10-09. Historical dates were checked against Rosenblatt's 1958 paper (PubMed 13602029), the publisher-indexed 1986 backpropagation paper, and the official 2012 NeurIPS AlexNet proceedings. DOI direct access was blocked; PubMed supplied Rosenblatt metadata. No upstream examples, figures, exercise banks or datasets are imported.
+
+## Additional beginner primary references
+
+- Rosenblatt (1958): https://pubmed.ncbi.nlm.nih.gov/13602029/ — metadata retrieved; DOI access blocked.
+- Rumelhart, Hinton and Williams (1986): https://www.nature.com/articles/323533a0 — publisher search evidence retrieved; direct retrieval blocked.
+- Krizhevsky, Sutskever and Hinton (2012): official NeurIPS proceedings retrieved.
+- Official NumPy copies/views and broadcasting pages, PyTorch autograd, optimizer, stable loss, BatchNorm and save/load references were checked. Stable API links redirected to version 2.14; the course teaches explicit numerical conventions rather than claiming to run that framework version.
+
+All use is original synthesis plus links. No external figures, code examples, exercise banks or datasets were copied.
