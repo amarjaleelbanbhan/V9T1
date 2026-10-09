@@ -15,6 +15,7 @@ import { TensorLab } from './lessons/TensorLab';
 import { PerceptronLab } from './lessons/PerceptronLab';
 import { LossGradientLab } from './lessons/LossGradientLab';
 import { BackpropLab } from './lessons/BackpropLab';
+import { GradientDepthLab } from './lessons/GradientDepthLab';
 
 type View='3d'|'2d';
 type InspectorTab='math'|'code'|'challenge';
@@ -47,7 +48,7 @@ export default function App(){
   const [supported]=useState(canUseWebGL);
   const [view,setView]=useState<View>(supported?'3d':'2d');
   const [tab,setTab]=useState<InspectorTab>('math');
-  const [activeLesson,setActiveLesson]=useState<'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'>('neuron');
+  const [activeLesson,setActiveLesson]=useState<'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'>('neuron');
   const [sidebarOpen,setSidebarOpen]=useState(false);
   useEffect(()=>{if(!playing)return;const handle=window.setInterval(()=>{const {step:s,advance:a,pause:p}=useLab.getState();if(s>=LAST_STEP)p();else a();},Math.max(250,1250/speed));return()=>window.clearInterval(handle);},[playing,speed]);
   useEffect(()=>{const mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches&&playing)pause();},[playing,pause]);
@@ -63,12 +64,12 @@ export default function App(){
         <nav aria-label="Course lessons" className="lesson-nav">{curriculum.map((lesson,i)=>{
           const inner=<><span className="lesson-number">{String(i+1).padStart(2,'0')}</span><span className="lesson-name">{lesson.title}<small>{lesson.week}</small></span>{lesson.status==='ready'?<span className="lesson-active" aria-label="Available now"/>:<span className="later">Soon</span>}</>;
           return lesson.status==='ready'
-            ? <button key={lesson.id} type="button" className={'lesson-item lesson-ready '+(activeLesson===lesson.id?'current':'')} aria-current={activeLesson===lesson.id?'page':undefined} onClick={()=>{setActiveLesson(lesson.id as 'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop');setSidebarOpen(false);pause();}}>{inner}</button>
+            ? <button key={lesson.id} type="button" className={'lesson-item lesson-ready '+(activeLesson===lesson.id?'current':'')} aria-current={activeLesson===lesson.id?'page':undefined} onClick={()=>{setActiveLesson(lesson.id as 'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth');setSidebarOpen(false);pause();}}>{inner}</button>
             : <div key={lesson.id} className="lesson-item planned">{inner}</div>;
         })}</nav>
-        <div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>8 interactive lessons available</span></div>
+        <div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>9 interactive lessons available</span></div>
       </aside>
-      <main id="lab" className="workspace">{activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:<>
+      <main id="lab" className="workspace">{activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:activeLesson==='gradient-depth'?<GradientDepthLab/>:<>
         <div className="heading"><div><div className="crumb"><span>MODULE 02</span><ChevronRight size={15}/> <span>ARTIFICIAL NEURONS</span></div><h1>Inside a Neuron<span className="dot">.</span></h1><p className="subtitle">Move the numbers. Follow the signals. Understand the result.</p></div><div className="module-chip"><span className="status-dot"/> LIVE SIMULATION</div></div>
         <div className="workbench">
           <section className="scene-card" aria-label="Neuron visualization"><div className="scene-bar"><div className="scene-label"><Eye size={17}/> LIVE COMPUTATION <span className="badge-muted">STEP {step+1} / 6</span></div><div className="view-switch" role="group" aria-label="Visualization mode"><button className={view==='2d'?'on':''} onClick={()=>setView('2d')} aria-pressed={view==='2d'}>2D</button><button className={view==='3d'?'on':''} onClick={()=>setView('3d')} disabled={!supported} aria-pressed={view==='3d'}>3D</button></div></div>

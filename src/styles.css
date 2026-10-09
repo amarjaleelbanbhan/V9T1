@@ -192,3 +192,16 @@
 .backprop-apply-row p{font-size:12px;color:#DBF1D7;line-height:1.6;flex:1}
 @media(max-width:1170px){.backprop-layout{grid-template-columns:1fr}}
 @media(max-width:650px){.backprop-equations{grid-template-columns:1fr}.backprop-stages button{font-size:10px;padding:9px 4px}.backprop-summary strong{font-size:16px}}
+
+/* Depth-vs-gradient lab */
+.depth-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(265px,.65fr);gap:14px}
+.depth-result{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:14px;border:1px solid #52836D;background:#17483B;border-radius:12px;color:#C9E9D6;font-size:12px}
+.depth-result strong{font-size:22px;color:#F2DFAC;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.depth-inspector{margin-top:13px;border-radius:10px;background:#133C33;border:1px solid #40715B;padding:16px;line-height:1.6;color:#D8EDD9;font-size:12px;overflow-wrap:anywhere}
+.depth-inspector strong{color:#E3F7D4;font-size:15px}
+.depth-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 0}
+.depth-modes button{border-radius:9px;padding:10px 6px;color:#D3E9D4;background:#184338;border:1px solid #477665;text-transform:capitalize}
+.depth-modes button.picked{background:#8BBB92;color:#10352D;font-weight:800;border-color:#B1D5A2}
+.depth-insight{background:#154A3B;padding:12px;border-radius:10px;border:1px solid #528069;color:#CCEDD3;font-size:12px;line-height:1.6;margin-top:16px}
+.depth-insight strong{color:#EFF6D5}
+@media(max-width:1100px){.depth-grid{grid-template-columns:1fr}}
