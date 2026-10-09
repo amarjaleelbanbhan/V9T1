@@ -1,9 +1,10 @@
 # NeuralLab
 
-A visual-first Deep Learning classroom. This project implements three **interactive foundations, neuron, and activation lessons**, not a fully populated curriculum.
+A visual-first Deep Learning classroom. This project implements four **interactive foundations, neuron, forward propagation, and activation lessons**, not a fully populated curriculum.
 
-## First three learning milestones
+## Four interactive learning milestones
 
+- Follow the full 2 → 2 → 1 dense forward pass with clickable weighted connections, editable parameters, step-by-step arithmetic, and code view.
 - Compare Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax with a live graph, gradients and class probabilities.
 - Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, regression errors, and concept challenge.
 - Edit three inputs, three weights (including negative values), and a bias.

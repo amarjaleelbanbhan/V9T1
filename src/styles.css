@@ -79,3 +79,23 @@
 @media(max-width:1120px){.activation-layout{grid-template-columns:1fr}}
 @media(max-width:600px){.activation-kind-buttons button{font-size:11px;padding:9px 10px}.activation-softmax-visual{padding:20px 2px}}
 @media(prefers-reduced-motion:reduce){.softmax-bar-fill{transition:none}}
+
+/* Multi-layer forward propagation lab */
+.forward-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(250px,.65fr);gap:14px}
+.forward-network{width:100%;display:block;max-height:450px}
+.forward-heading{fill:#D9F2E0;font-size:12px;font-weight:750;letter-spacing:.05em}
+.forward-stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:7px}
+.forward-stages button{padding:9px 4px;border-radius:8px;border:1px solid #346B55;background:#11392F;color:#B8DCC4;font-size:10px}
+.forward-stages button.picked{background:#8BBB92;color:#072720;font-weight:750}
+.forward-selected{color:#E8FFE9;font-size:14px;font-weight:750;margin:11px 0}
+.forward-equation{color:#C3E9CD;background:#16463B;padding:11px;border-radius:10px;font-size:13px;line-height:1.6}
+.forward-results{display:grid;grid-template-columns:minmax(175px,.6fr) minmax(0,1.4fr);gap:14px}
+.forward-output{font-size:clamp(40px,5vw,72px);color:#B8F2BA;letter-spacing:-.05em;display:block;margin:18px 0}
+.forward-tabs{display:flex;gap:8px;margin-bottom:14px}
+.forward-tabs button{border:1px solid #366A52;padding:9px 20px;border-radius:9px;background:#164036;color:#CEEBDA;font-size:12px}
+.forward-tabs button.picked{background:#8BBB92;color:#092328}
+.forward-math{color:#DDF6E4;font-size:12px;line-height:1.85}
+.forward-math strong{color:#B9F5BB}
+.forward-code{font-size:12px;line-height:1.8;white-space:pre-wrap;color:#D0ECD6;background:#092824;border-radius:12px;padding:14px;overflow:auto}
+@media(max-width:1200px){.forward-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.forward-results{grid-template-columns:1fr}.forward-stages{grid-template-columns:repeat(3,minmax(0,1fr))}.forward-stages button{font-size:10px}.forward-grid .foundation-parameter-card{padding:13px}}

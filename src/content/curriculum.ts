@@ -2,7 +2,8 @@
 export const curriculum = [
   { id:'intro', title:'Deep Learning Foundations', week:'Week 1', status:'ready' },
   { id:'neuron', title:'The Artificial Neuron', week:'Week 2', status:'ready' },
-  { id:'propagation', title:'Forward & Backpropagation', week:'Weeks 3–4', status:'planned' },
+  { id:'propagation', title:'Forward Propagation', week:'Weeks 3–4', status:'ready' },
+  { id:'backprop', title:'Backpropagation & Chain Rule', week:'Weeks 3–4', status:'planned' },
   { id:'activation', title:'Activation Functions', week:'Week 4', status:'ready' },
   { id:'loss', title:'Loss Functions', week:'Weeks 5–6', status:'planned' },
   { id:'optimizers', title:'Optimizers', week:'Weeks 6–7', status:'planned' },
