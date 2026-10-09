@@ -17,11 +17,11 @@ test('live neuron computation, controls, and 2D diagram', async ({page})=>{
   await page.getByRole('button',{name:'Go to Multiply weights'}).click();
   await expect(page.getByRole('heading',{name:'Multiply weights'})).toBeVisible();
   await page.getByRole('tab',{name:'Code'}).click();
-  await expect(page.getByText('Executable JavaScript equivalent')).toBeVisible();
+  await expect(page.getByText('Executable Python · current inputs')).toBeVisible();
   await page.getByRole('tab',{name:'Challenge'}).click();
   await page.getByRole('button',{name:'Output increases'}).click();
   await page.getByRole('button',{name:'Test prediction'}).click();
-  await expect(page.getByRole('status')).toContainText('Correct');
+  await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
   await expect(output).toHaveText('4.23');
   await page.getByRole('button',{name:'Reset parameters'}).click();
   await expect(output).toHaveText('0.957');
@@ -46,12 +46,13 @@ test('prediction challenge respects negative input and ReLU zero region',async({
  await page.getByRole('tab',{name:'Challenge'}).click();
  await page.getByRole('button',{name:'Output decreases'}).click();
  await page.getByRole('button',{name:'Test prediction'}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
  await page.getByRole('button',{name:'Reset parameters'}).click();
  await page.getByRole('combobox',{name:'Activation function'}).selectOption('relu');
  await input.focus();await input.press('Home');
  await page.getByRole('tab',{name:'Challenge'}).click();
  await page.getByRole('button',{name:'Output unchanged'}).click();
  await page.getByRole('button',{name:'Test prediction'}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
 });
+

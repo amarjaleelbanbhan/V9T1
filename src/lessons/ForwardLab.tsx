@@ -1,3 +1,5 @@
+import {PythonProgram} from '../components/PythonProgram';
+import {forwardPython} from '../python/programs';
 import { useMemo, useState } from 'react';
 import { ChevronRight, RotateCcw, Layers3, GitBranch, CircleHelp } from 'lucide-react';
 import { denseForward, DEFAULT_FORWARD_INPUT, DEFAULT_FORWARD_LAYERS, type DenseLayer } from '../engine/forward';
@@ -96,7 +98,7 @@ export function ForwardLab(){
     <div className="forward-results">
       <section className="foundation-panel"><p className="eyebrow">FINAL PREDICTION</p><strong data-testid="forward-output" className="forward-output">{fmt(trace.output[0])}</strong><p className="foundation-mini">Sigmoid of the final weighted sum. A fixed-weight forward pass is not training.</p></section>
       <section className="foundation-panel"><div className="forward-tabs" role="tablist" aria-label="Forward inspector"><button role="tab" aria-selected={tab==='math'} className={tab==='math'?'picked':''} onClick={()=>setTab('math')}>Math</button><button role="tab" aria-selected={tab==='code'} className={tab==='code'?'picked':''} onClick={()=>setTab('code')}>Code</button></div>
-        {tab==='math'?<div className="forward-math" data-testid="forward-inspector"><strong>{steps[step]}</strong>{inspect?inspect.neurons.map((n,i)=><p key={i}>{step<=2?'Hidden '+(i+1):'Output'}: z = {n.contributions.map(fmt).join(' + ')} + ({fmt(n.bias)}) = <strong>{fmt(n.z)}</strong> → {n.activation}(z) = <strong>{fmt(n.output)}</strong></p>):<p>Current input vector: [{inputs.map(fmt).join(', ')}]</p>}</div>:<pre className="forward-code">{"for each layer:\n  for each neuron:\n    z = dot(inputs, weights) + bias\n    output = activation(z)\n  inputs = layer outputs\n\n# The actual implementation runs TypeScript\n# No model training occurs in this lab."}</pre>}
+        {tab==='math'?<div className="forward-math" data-testid="forward-inspector"><strong>{steps[step]}</strong>{inspect?inspect.neurons.map((n,i)=><p key={i}>{step<=2?'Hidden '+(i+1):'Output'}: z = {n.contributions.map(fmt).join(' + ')} + ({fmt(n.bias)}) = <strong>{fmt(n.z)}</strong> → {n.activation}(z) = <strong>{fmt(n.output)}</strong></p>):<p>Current input vector: [{inputs.map(fmt).join(', ')}]</p>}</div>:<PythonProgram source={forwardPython(inputs,layers)}/>}
       </section>
     </div>
     <section className="foundation-panel foundation-review"><div><p className="eyebrow">CONCEPT CHECK</p><h2><CircleHelp size={18}/> Which direction does the input information move?</h2></div><div className="foundation-review-actions">

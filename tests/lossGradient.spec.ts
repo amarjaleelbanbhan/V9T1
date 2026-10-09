@@ -20,7 +20,7 @@ test('loss and gradient descent calculations follow the visual timeline',async({
  await expect(page.getByTestId('loss-weight')).toHaveText('1.2');
  await expect(page.getByTestId('loss-value')).toHaveText('1.44');
  await page.getByRole('button',{name:'Weight decreases'}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
  await page.getByRole('button',{name:'Reset loss experiment'}).click();
  await expect(page.getByTestId('loss-value')).toHaveText('0.5');
  expect(errors).toEqual([]);
@@ -38,7 +38,7 @@ test('learning rate 1 oscillates for w squared, while zero rate does not update'
  await page.getByRole('button',{name:'Next update'}).click();
  await expect(page.getByTestId('loss-weight')).toHaveText('2');
  await page.getByRole('button',{name:'Weight unchanged'}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
 });
 test('loss lab works on narrow mobile viewport',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.goto('/');
@@ -49,3 +49,4 @@ test('loss lab works on narrow mobile viewport',async({page})=>{
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(1);
 });
+

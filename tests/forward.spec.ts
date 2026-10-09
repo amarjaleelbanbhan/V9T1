@@ -15,11 +15,11 @@ test('multi-layer forward network shows actual math for selected weighted connec
  await page.getByRole('button',{name:/2. Hidden sums/}).click();
  await expect(page.getByTestId('forward-inspector')).toContainText('Hidden 1');
  await page.getByRole('tab',{name:'Code'}).click();
- await expect(page.getByText(/The actual implementation runs TypeScript/)).toBeVisible();
+ await expect(page.getByRole('region',{name:'Executable Python'}).locator('code')).toContainText('for layer in layers:');
  await page.getByRole('button',{name:'Reset forward pass'}).click();
  await expect(page.getByTestId('forward-output')).toHaveText('0.54');
  await page.getByRole('button',{name:/Input → hidden → output/}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
  expect(errors).toEqual([]);
 });
 test('forward-pass graph and sliders fit 390px mobile view',async({page})=>{
@@ -32,3 +32,4 @@ test('forward-pass graph and sliders fit 390px mobile view',async({page})=>{
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(1);
 });
+

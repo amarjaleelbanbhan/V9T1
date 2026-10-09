@@ -17,7 +17,7 @@
         "Values produced by those instructions."
       ]
     ],
-    "explanation": "A processor follows instructions; it does not infer the meaning you intended. Read x, multiply by a factor, then add an offset. Changing the order generally changes the answer. A browser runs JavaScript; our separate worker can also run Python through a downloaded runtime.",
+    "explanation": "A processor follows instructions; it does not infer the meaning you intended. Read x, multiply by a factor, then add an offset. Changing the order generally changes the answer. The lesson executes Python in a downloaded runtime; the browser displays its recorded values.",
     "why": "Tracing one instruction at a time lets you locate where a wrong result began.",
     "formula": "output = x \u00d7 factor + offset",
     "model": "program",

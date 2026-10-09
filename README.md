@@ -9,7 +9,7 @@ Start with **Start beginner course** in the navigation. Every topic introduces t
 ## Runtime and training
 
 - Python labs run fixed trusted code using pinned Pyodide 0.27.7, optionally NumPy. Numeric inputs are editable; arbitrary code editing is not supported. The first runtime load requires network access. Stepping replays completed captures.
-- Other numerical models execute actual JavaScript calculations. The capstone fits a line using SGD, momentum or Adam, paired seeded batches, training/validation separation, optional early stopping and L2 penalty. Test data does not select the checkpoint.
+- Course answers execute authored Python programs in Pyodide, including the intermediate values, grids and curves drawn by the browser. Every interactive lab exposes a runnable Python example. The capstone trains and evaluates in Python and fits a line using SGD, momentum or Adam, paired seeded batches, training/validation separation, optional early stopping and L2 penalty. Test data does not select the checkpoint.
 - Inference checkpoints persist locally with model weights and provenance. Exact optimizer-state resume is not implemented. The app does not run browser PyTorch or TensorFlow.
 - Three.js has a 2D SVG fallback. The navy palette uses blue inputs, violet weights, aqua activations, coral errors and gold gradients.
 

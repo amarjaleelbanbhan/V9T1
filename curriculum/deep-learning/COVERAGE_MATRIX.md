@@ -24,6 +24,6 @@ Implemented means authored topic content plus live guided exercises. It does not
 | CH-17 Deployment and MLOps | 9 | Specified | none | Authored lessons, engines and assessed projects |
 | CH-18 Research and capstones | 9 | Specified | none | Authored lessons, engines and assessed projects |
 
-The beginner course has 60 core topic lessons, 120 fixed worked/transfer calculations, eight mixed chapter reviews, two actual-Python teaching workspaces and a real JavaScript regression-training capstone. Existing neuron/network labs remain available, including actual single-example neural-network gradient updates. Python trace stepping replays captured execution.
+The beginner course has 60 core topic lessons, 120 fixed worked/transfer calculations, eight mixed chapter reviews, two actual-Python teaching workspaces and a real Python regression-training capstone. Existing neuron/network labs remain available, including actual single-example neural-network gradient updates. Python trace stepping replays captured execution.
 
 Evidence is browser-local. Topic practice and chapter reviews persist; Python and capstone transfer evidence lasts for the current visit. Saved inference checkpoints do not include optimizer state for exact training resume. Advanced chapters 08–18 are still specified.

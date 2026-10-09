@@ -605,7 +605,7 @@
         "Another reference to the same underlying object or memory."
       ]
     ],
-    "explanation": "A view can share data, so modifying it can modify the original array. A copy separates storage. Our panel uses a JavaScript alias to illustrate shared mutation of [1,2,3]; it does not claim to implement NumPy strides. In NumPy, basic slicing usually returns views while advanced indexing returns copies. Shape changes alone do not guarantee a copy.",
+    "explanation": "A view can share data, so modifying it can modify the original array. A copy separates storage. Our panel uses a Python list alias to illustrate shared mutation of [1,2,3]; it does not claim to implement NumPy strides. In NumPy, basic slicing usually returns views while advanced indexing returns copies. Shape changes alone do not guarantee a copy.",
     "why": "Unexpected shared mutation can corrupt inputs or cached intermediate values.",
     "formula": "write through alias; then sum original",
     "model": "view",
@@ -662,7 +662,7 @@
         "Magnitudes a format can represent."
       ]
     ],
-    "explanation": "Finite precision means some nearby integers or decimals become the same stored value. This panel rounds to float16, float32 or JavaScript float64, using ties to even. float16 has fewer fraction bits and a smaller range; float32 balances memory and precision; float64 is useful for sensitive numerical checks. More bits increase payload but do not fix every algorithmic error.",
+    "explanation": "Finite precision means some nearby integers or decimals become the same stored value. This panel runs NumPy conversions to float16, float32 or float64 in Python, using ties to even. float16 has fewer fraction bits and a smaller range; float32 balances memory and precision; float64 is useful for sensitive numerical checks. More bits increase payload but do not fix every algorithmic error.",
     "why": "Rounding affects small updates, loss stability and gradient checks.",
     "formula": "represented value = rounding to the selected binary format",
     "model": "precision",

@@ -1,3 +1,5 @@
+import {PythonProgram} from '../components/PythonProgram';
+import {depthPython} from '../python/programs';
 import {useMemo,useState} from 'react';
 import {ChevronRight,Activity,RotateCcw} from 'lucide-react';
 import {gradientChain} from '../engine/gradientDepth';
@@ -54,6 +56,6 @@ export function GradientDepthLab(){
   </section>
   <section className="foundation-panel"><p className="eyebrow">THE CHAIN RULE</p><h2>Every layer multiplies the derivative</h2><p className="foundation-copy">For a scalar chain, hᵢ = activation(w × hᵢ₋₁ + b). The derivative of the final output with respect to the initial input is the product of all local factors: Π(w × activation′(zᵢ)). More layers do not automatically mean smaller gradients: the factors determine the outcome.</p></section>
   <p className="footnote">This is a deterministic scalar chain illustrating activation derivatives, not gradients of an entire trainable ANN or measured real-world training behavior. ReLU uses the zero subgradient at z = 0. The vertical bar scale is log-transformed for legibility.</p>
- </div>;
+ <PythonProgram source={depthPython(depth,kind,weight,input,bias)}/></div>;
 }
 

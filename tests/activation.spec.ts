@@ -16,7 +16,7 @@ test('Week 4 scalar activation and Softmax are synchronized',async({page})=>{
  const slider=page.getByRole('slider',{name:/Logit 1/});await slider.focus();await slider.press('End');
  await expect(page.getByTestId('softmax-sum')).toHaveText('1.000');
  await page.getByRole('button',{name:'Leaky ReLU',exact:true}).last().click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
  await page.getByRole('button',{name:/The Artificial Neuron/}).click();
  await expect(page.getByRole('heading',{name:/Inside a Neuron/})).toBeVisible();
  expect(errors).toEqual([]);
@@ -30,3 +30,4 @@ test('Week 4 fits narrow mobile layout',async({page})=>{
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(1);
 });
+

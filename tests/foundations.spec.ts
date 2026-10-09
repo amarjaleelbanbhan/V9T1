@@ -24,7 +24,7 @@ test('Week 1: concept family, classification, regression, challenge and lesson n
   await slope.focus();await slope.press('ArrowRight');
   await expect(page.getByTestId('regression-mae')).not.toHaveText('0.8');
   await page.getByRole('button',{name:'Regression',exact:true}).click();
-  await expect(page.getByRole('status')).toContainText('Correct');
+  await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
   await page.getByRole('button',{name:/The Artificial Neuron/}).click();
   await expect(page.getByRole('heading',{name:/Inside a Neuron/})).toBeVisible();
   expect(errors).toEqual([]);
@@ -39,3 +39,4 @@ test('Week 1 is reachable and responsive at narrow mobile width',async({page})=>
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });
+

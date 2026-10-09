@@ -1,5 +1,7 @@
+import {PythonProgram} from './components/PythonProgram';
+import {neuronPython} from './python/programs';
 import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
-import { BrainCircuit, BookOpen, Check, ChevronRight, Code2, Compass, Eye, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
+import { BrainCircuit, BookOpen, Check, ChevronRight, Compass, Eye, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
 import { computeNeuron, formatNumber, activationNames } from './engine/neuron';
 import { TIMELINE, LAST_STEP } from './engine/timeline';
 import { useLab } from './store/lab';
@@ -97,7 +99,7 @@ export default function App(){
         <div className="results-row"><section className="result-card result-output"><p className="eyebrow">FINAL OUTPUT · a = f(z)</p><strong data-testid="output">{fmt(trace.output)}</strong><div className="result-foot"><span>Activation: {activation}</span><span className="live-indicator">● Recalculated live</span></div></section>
           <section className="result-card plot-card"><div className="result-title"><div><p className="eyebrow">ACTIVATION CURVE</p><h3>{activation==='relu'?'ReLU':activation.charAt(0).toUpperCase()+activation.slice(1)}</h3></div><span className="badge-muted">z = {fmt(trace.preActivation)}</span></div><ActivationPlot kind={activation} z={trace.preActivation}/></section>
           <section className="result-card trace-card"><div className="tab-row" role="tablist" aria-label="Computation inspector"><button role="tab" aria-selected={tab==='math'} className={tab==='math'?'selected':''} onClick={()=>setTab('math')}>Math</button><button role="tab" aria-selected={tab==='code'} className={tab==='code'?'selected':''} onClick={()=>setTab('code')}>Code</button><button role="tab" aria-selected={tab==='challenge'} className={tab==='challenge'?'selected':''} onClick={()=>setTab('challenge')}>Challenge</button></div>
-            <div className="tab-content">{tab==='math'?<><Equation values={inputs} weights={weights} bias={bias} z={trace.preActivation}/><p className="output-formula">a = {activation}(z) = <strong>{fmt(trace.output)}</strong></p></>:tab==='code'?<div className="code-view"><p><Code2 size={16}/> Executable JavaScript equivalent</p><pre>{`const x = [${inputs.map(fmt).join(', ')}];\nconst w = [${weights.map(fmt).join(', ')}];\nconst b = ${fmt(bias)};\nconst z = x.reduce((s,v,i) => s + v*w[i], b);\n// z = ${fmt(trace.preActivation)}\nconst a = ${activation==='sigmoid'?'1/(1+Math.exp(-z))':activation==='relu'?'Math.max(0,z)':activation==='tanh'?'Math.tanh(z)':'z'};\n// a = ${fmt(trace.output)}`}</pre></div>:<Challenge output={trace.output} inputs={inputs} weights={weights} bias={bias} activation={activation} setWeight={setWeight}/>}</div></section></div>
+            <div className="tab-content">{tab==='math'?<><Equation values={inputs} weights={weights} bias={bias} z={trace.preActivation}/><p className="output-formula">a = {activation}(z) = <strong>{fmt(trace.output)}</strong></p></>:tab==='code'?<PythonProgram source={neuronPython(inputs,weights,bias,activation)}/>:<Challenge output={trace.output} inputs={inputs} weights={weights} bias={bias} activation={activation} setWeight={setWeight}/>}</div></section></div>
       </>}
       </Suspense></main>
     </div>

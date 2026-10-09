@@ -1,7 +1,10 @@
+import {usePythonProgram} from '../python/usePythonProgram';
+import {PythonProgram} from '../components/PythonProgram';
+import {backpropPython} from '../python/programs';
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronRight, GitBranch, RotateCcw, Play, Pause, CircleHelp } from 'lucide-react';
 import { DEFAULT_FORWARD_INPUT, DEFAULT_FORWARD_LAYERS, type DenseLayer } from '../engine/forward';
-import { backpropagate, trainOneStep } from '../engine/backprop';
+import { backpropagate } from '../engine/backprop';
 type Edge={layer:number;neuron:number;source:number};
 const INITIAL_EDGE:Edge={layer:1,neuron:0,source:0};
 const stages=['Forward prediction','Output error','Output delta','Hidden deltas','Parameter gradients','Update weights'] as const;
@@ -42,6 +45,7 @@ function BackwardNetwork({trace,stage,selected}:{trace:ReturnType<typeof backpro
  </svg>;
 }
 export function BackpropLab(){
+ const python=usePythonProgram<{loss:number;updated:DenseLayer[]}>();
  const [inputs,setInputs]=useState<number[]>([...DEFAULT_FORWARD_INPUT]);
  const [layers,setLayers]=useState<DenseLayer[]>(()=>copyLayers(DEFAULT_FORWARD_LAYERS));
  const [target,setTarget]=useState(1);
@@ -59,7 +63,8 @@ export function BackpropLab(){
  const setStep=(v:number)=>{setPlaying(false);setStage(Math.max(0,Math.min(5,v)))};
  const changeWeight=(v:number)=>{setLastUpdate(null);setLayers(old=>old.map((l,i)=>i!==selected.layer?l:{...l,weights:l.weights.map((r,j)=>j!==selected.neuron?r:r.map((w,k)=>k===selected.source?v:w))}))};
  const changeBias=(li:number,j:number,v:number)=>{setLastUpdate(null);setLayers(old=>old.map((l,i)=>i===li?{...l,biases:l.biases.map((b,k)=>k===j?v:b)}:l))};
- const apply=()=>{const result=trainOneStep(inputs,layers,target,learningRate);setLastUpdate({previous:result.before.loss,next:result.after.loss});setLayers(result.updated);setStep(5)};
+ const apply=async()=>{const result=await python.run(backpropPython(inputs,layers,target,learningRate));if(!result)return;setLastUpdate({previous:result.loss,next:backpropagate(inputs,result.updated,target).loss});setLayers(result.updated);setStep(5)};
+ useEffect(()=>{python.reset();},[inputs,layers,target,learningRate]);
  const reset=()=>{setInputs([...DEFAULT_FORWARD_INPUT]);setLayers(copyLayers(DEFAULT_FORWARD_LAYERS));setTarget(1);setLearningRate(.2);setStep(0);setSelected(INITIAL_EDGE);setAnswer(null);setLastUpdate(null)};
  useEffect(()=>{if(!playing)return;if(stage>=5){setPlaying(false);return;}const t=window.setTimeout(()=>setStage(s=>Math.min(5,s+1)),750);return()=>window.clearTimeout(t)},[playing,stage]);
  const activeExplanation=stage===0?'Compute input → hidden ReLU → output Sigmoid. Every displayed neuron value comes from the forward engine.'
@@ -90,9 +95,9 @@ export function BackpropLab(){
       </div>
       <div className="foundation-parameter-card">
         <div className="foundation-parameter-header"><h3>Live controls</h3><button type="button" onClick={reset} aria-label="Reset backpropagation"><RotateCcw size={15}/> Reset</button></div>
-        <label className="foundation-range" htmlFor="backprop-target"><span>Target y <strong>{fmt(target)}</strong></span><input id="backprop-target" type="range" min="0" max="1" step=".1" value={target} onChange={e=>{setTarget(Number(e.target.value));setLastUpdate(null)}}/></label>
-        <label className="foundation-range" htmlFor="backprop-rate"><span>Learning rate η <strong>{fmt(learningRate)}</strong></span><input id="backprop-rate" type="range" min="0" max=".5" step=".05" value={learningRate} onChange={e=>setLearningRate(Number(e.target.value))}/></label>
-        {inputs.map((value,i)=><label className="foundation-range" key={i} htmlFor={'backprop-input-'+i}><span>Input x{i+1}<strong>{fmt(value)}</strong></span><input id={'backprop-input-'+i} type="range" min="-2" max="3" step=".1" value={value} onChange={e=>{setInputs(old=>old.map((n,j)=>i===j?Number(e.target.value):n));setLastUpdate(null)}}/></label>)}
+        <label className="foundation-range" htmlFor="backprop-target"><span>Target y <strong>{fmt(target)}</strong></span><input id="backprop-target" type="range" disabled={python.busy} min="0" max="1" step=".1" value={target} onChange={e=>{setTarget(Number(e.target.value));setLastUpdate(null)}}/></label>
+        <label className="foundation-range" htmlFor="backprop-rate"><span>Learning rate η <strong>{fmt(learningRate)}</strong></span><input id="backprop-rate" type="range" disabled={python.busy} min="0" max=".5" step=".05" value={learningRate} onChange={e=>setLearningRate(Number(e.target.value))}/></label>
+        {inputs.map((value,i)=><label className="foundation-range" key={i} htmlFor={'backprop-input-'+i}><span>Input x{i+1}<strong>{fmt(value)}</strong></span><input id={'backprop-input-'+i} type="range" disabled={python.busy} min="-2" max="3" step=".1" value={value} onChange={e=>{setInputs(old=>old.map((n,j)=>i===j?Number(e.target.value):n));setLastUpdate(null)}}/></label>)}
         <p className="eyebrow">SELECT A WEIGHT TO INSPECT</p>
         <div className="backprop-edge-buttons" role="group" aria-label="Select gradient connection">
           {layers.flatMap((layer,l)=>layer.weights.flatMap((row,n)=>row.map((_,s)=>{
@@ -101,9 +106,9 @@ export function BackpropLab(){
             return <button type="button" key={l+'-'+n+'-'+s} aria-label={'Inspect '+label} aria-pressed={active} className={active?'picked':''} onClick={()=>setSelected({layer:l,neuron:n,source:s})}>{label}</button>
           })))}
         </div>
-        <label className="foundation-range" htmlFor="backprop-weight"><span>Selected weight <strong>{fmt(weight)}</strong></span><input id="backprop-weight" type="range" min="-2" max="2" step=".1" value={weight} onChange={e=>changeWeight(Number(e.target.value))}/></label>
+        <label className="foundation-range" htmlFor="backprop-weight"><span>Selected weight <strong>{fmt(weight)}</strong></span><input id="backprop-weight" type="range" disabled={python.busy} min="-2" max="2" step=".1" value={weight} onChange={e=>changeWeight(Number(e.target.value))}/></label>
         <p className="eyebrow">NEURON BIASES</p>
-        {layers.map((layer,l)=>layer.biases.map((b,n)=><label key={l+'-'+n} className="foundation-range" htmlFor={'backprop-bias-'+l+'-'+n}><span>{l===0?'Hidden '+(n+1):'Output'} bias<strong>{fmt(b)}</strong></span><input id={'backprop-bias-'+l+'-'+n} type="range" min="-2" max="2" step=".1" value={b} onChange={e=>changeBias(l,n,Number(e.target.value))}/></label>))}
+        {layers.map((layer,l)=>layer.biases.map((b,n)=><label key={l+'-'+n} className="foundation-range" htmlFor={'backprop-bias-'+l+'-'+n}><span>{l===0?'Hidden '+(n+1):'Output'} bias<strong>{fmt(b)}</strong></span><input id={'backprop-bias-'+l+'-'+n} type="range" disabled={python.busy} min="-2" max="2" step=".1" value={b} onChange={e=>changeBias(l,n,Number(e.target.value))}/></label>))}
       </div>
     </div>
   </section>
@@ -116,8 +121,8 @@ export function BackpropLab(){
       <div><span>4. Proposed gradient update</span><strong data-testid="backprop-proposed-weight">{fmt(weight)} − {fmt(learningRate)} × ({fmt(gradient)}) = {fmt(weight-learningRate*gradient)}</strong></div>
     </div>
     <p className="foundation-note">{selected.layer===0?'For hidden neurons, the upstream term is a weighted sum of next-layer deltas. ReLU multiplies it by 1 for positive z and 0 for negative z.':'For the final output, the upstream term is (ŷ − target); multiply it by the Sigmoid derivative before computing the weight gradient.'}</p>
-    <div className="backprop-apply-row">
-      <button type="button" className="backprop-apply" onClick={apply}>Apply one training step <ArrowRight size={16}/></button>
+    <p role="status" aria-label="Python training status">{python.status}</p><button disabled={!python.busy} onClick={python.cancel}>Cancel Python update</button><div className="backprop-apply-row">
+      <button type="button" className="backprop-apply" disabled={python.busy} onClick={apply}>Apply one training step <ArrowRight size={16}/></button>
       {lastUpdate&&<p role="status" data-testid="backprop-training-change">Before loss {fmt(lastUpdate.previous)} → After loss {fmt(lastUpdate.next)}. {lastUpdate.next<lastUpdate.previous?'This sample improved.':lastUpdate.next>lastUpdate.previous?'This sample worsened.':'This sample was unchanged.'}</p>}
     </div>
   </section>
@@ -127,6 +132,6 @@ export function BackpropLab(){
     {answer&&<div role="status" className="foundation-answer">{answer==='later'?'Correct. The backward pass starts at the output loss and propagates derivatives toward earlier layers.':'Not quite. Forward values travel from inputs to outputs; backward gradients travel from outputs toward earlier layers.'}</div>}
   </div></section>
   <p className="footnote">Lecture 04: chain rule and backpropagation. Uses half-squared error and the existing 2 → 2 → 1 forward model (hidden ReLU, output Sigmoid). ReLU at exactly zero uses a zero subgradient. This is a single-example gradient update, not batch training or a library-powered model.</p>
- </div>;
+ <PythonProgram source={backpropPython(inputs,layers,target,learningRate)}/></div>;
 }
 

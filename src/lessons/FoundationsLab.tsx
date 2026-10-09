@@ -1,3 +1,4 @@
+import {PythonProgram} from '../components/PythonProgram';
 import { useMemo, useState } from 'react';
 import { BookOpen, BrainCircuit, ChartNoAxesCombined, ChevronRight, CircleHelp, RotateCcw, Target } from 'lucide-react';
 import { CLASSIFICATION_SAMPLES, REGRESSION_SAMPLES, evaluateClassification, evaluateRegression } from '../engine/foundations';
@@ -139,6 +140,6 @@ export function FoundationsLab(){
       </div>
     </section>
     <p className="footnote"><BrainCircuit size={15}/> Based on Week 1 of the Sukkur IBA Deep Learning course outline. Specific examples and metric choices are additional teaching illustrations; the provided outline does not prescribe this dataset.</p>
-  </div>;
+  <PythonProgram source={task==='classification'?`scores = ${JSON.stringify(scores)}\nlabels = ${JSON.stringify(labels)}\nthreshold = ${threshold}\npredictions = [int(score >= threshold) for score in scores]\nresult = sum(prediction == target for prediction,target in zip(predictions, labels))/len(labels)\nprint("predictions:", predictions)\nprint("accuracy:", result)`:`xs = ${JSON.stringify(xs)}\ntargets = ${JSON.stringify(ys)}\npredictions = [${slope}*x+${intercept} for x in xs]\nresult = sum((prediction-target)**2 for prediction,target in zip(predictions,targets))/len(targets)\nprint("predictions:", predictions)\nprint("MSE:", result)`}/></div>;
 }
 
