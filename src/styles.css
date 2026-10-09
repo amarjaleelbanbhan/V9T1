@@ -168,3 +168,27 @@
 .loss-explainer .loss-update-line strong{color:#DFF6AC}
 @media(max-width:1150px){.loss-layout{grid-template-columns:1fr}}
 @media(max-width:670px){.loss-explainer{grid-template-columns:1fr}.loss-stage-row strong{font-size:19px}.loss-transport button{flex:1;font-size:11px;padding:9px 5px}}
+
+/* Backpropagation and chain rule laboratory */
+.backprop-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:14px}
+.backprop-network{display:block;width:100%;height:auto;max-height:420px}
+.backprop-stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
+.backprop-stages button{background:#153D37;border:1px solid #427461;color:#CCEAD5;border-radius:10px;padding:10px 7px;font-size:11px;line-height:1.5}
+.backprop-stages button.picked{background:#8BBB92;color:#08271F;border-color:#B9ECA4;font-weight:800}
+.backprop-stage-note{background:#174539;border:1px solid #36664E;border-radius:10px;padding:12px;color:#C4EAD2;line-height:1.65;font-size:12px}
+.backprop-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0}
+.backprop-summary>div{display:grid;gap:6px;background:#153F36;padding:12px;border:1px solid #396A56;border-radius:10px}
+.backprop-summary span{font-size:10px;color:#ACCFBD}
+.backprop-summary strong{font-size:clamp(16px,2vw,26px);color:#DDF5C6;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.backprop-edge-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 0 18px}
+.backprop-edge-buttons button{background:#174539;border:1px solid #477965;color:#D2EEDF;border-radius:9px;padding:9px 6px;font-size:10px;line-height:1.5}
+.backprop-edge-buttons button.picked{background:#8BBB92;border-color:#CDF6AC;color:#09281F;font-weight:800}
+.backprop-equations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:15px 0}
+.backprop-equations>div{background:#153E35;border:1px solid #396C58;border-radius:11px;padding:14px;display:grid;gap:10px;min-width:0}
+.backprop-equations span{font-size:11px;color:#A8CBBB}
+.backprop-equations strong{font-size:15px;color:#D8F6DE;overflow-wrap:anywhere;line-height:1.55;font-variant-numeric:tabular-nums}
+.backprop-apply-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:18px}
+.backprop-apply{display:inline-flex;align-items:center;gap:9px;border:1px solid #A1D99C;border-radius:10px;background:#2A835F;padding:13px 16px;color:white;font-weight:750}
+.backprop-apply-row p{font-size:12px;color:#DBF1D7;line-height:1.6;flex:1}
+@media(max-width:1170px){.backprop-layout{grid-template-columns:1fr}}
+@media(max-width:650px){.backprop-equations{grid-template-columns:1fr}.backprop-stages button{font-size:10px;padding:9px 4px}.backprop-summary strong{font-size:16px}}
