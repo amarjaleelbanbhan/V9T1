@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { BrainCircuit, BookOpen, Check, ChevronRight, Code2, Compass, Eye, Focus, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
+import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
+import { BrainCircuit, BookOpen, Check, ChevronRight, Code2, Compass, Eye, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
 import { computeNeuron, formatNumber, activationNames } from './engine/neuron';
 import { TIMELINE, LAST_STEP } from './engine/timeline';
 import { useLab } from './store/lab';
@@ -16,6 +16,9 @@ import { PerceptronLab } from './lessons/PerceptronLab';
 import { LossGradientLab } from './lessons/LossGradientLab';
 import { BackpropLab } from './lessons/BackpropLab';
 import { GradientDepthLab } from './lessons/GradientDepthLab';
+
+const CurriculumLibrary = lazy(()=>import('./lessons/CurriculumLibrary').then(m=>({default:m.CurriculumLibrary}))); 
+import { PythonTraceLab } from './lessons/PythonTraceLab';
 
 type View='3d'|'2d';
 type InspectorTab='math'|'code'|'challenge';
@@ -48,14 +51,14 @@ export default function App(){
   const [supported]=useState(canUseWebGL);
   const [view,setView]=useState<View>(supported?'3d':'2d');
   const [tab,setTab]=useState<InspectorTab>('math');
-  const [activeLesson,setActiveLesson]=useState<'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'>('neuron');
+  const [activeLesson,setActiveLesson]=useState<'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'|'library'|'python'>('neuron');
   const [sidebarOpen,setSidebarOpen]=useState(false);
   useEffect(()=>{if(!playing)return;const handle=window.setInterval(()=>{const {step:s,advance:a,pause:p}=useLab.getState();if(s>=LAST_STEP)p();else a();},Math.max(250,1250/speed));return()=>window.clearInterval(handle);},[playing,speed]);
   useEffect(()=>{const mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches&&playing)pause();},[playing,pause]);
   const resetAll=()=>{reset();setTab('math');};
   return <div className="app-shell">
-    <header className="top-bar"><a className="brand" href="#top"><BrainCircuit size={28} strokeWidth={2.4}/><span>Neural<span>Lab</span></span></a>
-      <nav className="global-nav" aria-label="Main navigation"><a className="active" href="#lab">Learn</a><a href="#how-it-works">How it works</a><a href="#curriculum">Curriculum</a></nav>
+    <a className="skip-link" href="#lab">Skip to learning workspace</a><header className="top-bar"><a className="brand" href="#top"><BrainCircuit size={28} strokeWidth={2.4}/><span>Neural<span>Lab</span></span></a>
+      <nav className="global-nav" aria-label="Main navigation"><a className="active" href="#lab" onClick={()=>{setActiveLesson('neuron');pause();}}>Learn</a><a href="#curriculum" onClick={()=>{setActiveLesson('library');pause();}}>Curriculum</a></nav>
       <span className="header-label">VISUAL DEEP LEARNING <span className="status-dot"/></span>
       <button className="mobile-toggle" onClick={()=>setSidebarOpen(v=>!v)} aria-expanded={sidebarOpen} aria-label="Toggle lesson navigation"><BookOpen size={20}/></button>
     </header>
@@ -67,9 +70,9 @@ export default function App(){
             ? <button key={lesson.id} type="button" className={'lesson-item lesson-ready '+(activeLesson===lesson.id?'current':'')} aria-current={activeLesson===lesson.id?'page':undefined} onClick={()=>{setActiveLesson(lesson.id as 'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth');setSidebarOpen(false);pause();}}>{inner}</button>
             : <div key={lesson.id} className="lesson-item planned">{inner}</div>;
         })}</nav>
-        <div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>9 interactive lessons available</span></div>
+        <button className="library-button" onClick={()=>{setActiveLesson('library');setSidebarOpen(false);pause();}}>Browse full curriculum</button><button className="library-button" onClick={()=>{setActiveLesson('python');setSidebarOpen(false);pause();}}>Python execution lab</button><div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>9 interactive lessons available</span></div>
       </aside>
-      <main id="lab" className="workspace">{activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:activeLesson==='gradient-depth'?<GradientDepthLab/>:<>
+      <main id="lab" className="workspace"><Suspense fallback={<p role="status">Loading learning workspace…</p>}> {activeLesson==='library'?<CurriculumLibrary/>:activeLesson==='python'?<PythonTraceLab/>:activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:activeLesson==='gradient-depth'?<GradientDepthLab/>:<>
         <div className="heading"><div><div className="crumb"><span>MODULE 02</span><ChevronRight size={15}/> <span>ARTIFICIAL NEURONS</span></div><h1>Inside a Neuron<span className="dot">.</span></h1><p className="subtitle">Move the numbers. Follow the signals. Understand the result.</p></div><div className="module-chip"><span className="status-dot"/> LIVE SIMULATION</div></div>
         <div className="workbench">
           <section className="scene-card" aria-label="Neuron visualization"><div className="scene-bar"><div className="scene-label"><Eye size={17}/> LIVE COMPUTATION <span className="badge-muted">STEP {step+1} / 6</span></div><div className="view-switch" role="group" aria-label="Visualization mode"><button className={view==='2d'?'on':''} onClick={()=>setView('2d')} aria-pressed={view==='2d'}>2D</button><button className={view==='3d'?'on':''} onClick={()=>setView('3d')} disabled={!supported} aria-pressed={view==='3d'}>3D</button></div></div>
@@ -79,9 +82,9 @@ export default function App(){
               <div className="speed"><label htmlFor="speed-select">Playback speed</label><select id="speed-select" value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={.5}>0.5×</option><option value={1}>1×</option><option value={2}>2×</option></select></div></div>
           </section>
           <aside className="controls"><div className="control-heading"><div><p className="eyebrow">EXPERIMENT</p><h2>Parameters</h2></div><SlidersHorizontal size={18}/></div>
-            <div className="control-content"><h3>Inputs</h3>{inputs.map((value,i)=><ParameterSlider key={i} label={`Input x${i+1}`} value={value} onChange={v=>setInput(i,v)} color="#8BBB92"/>)}
-            <div className="control-divider"/><h3>Weights</h3>{weights.map((value,i)=><ParameterSlider key={i} label={`Weight w${i+1}`} value={value} onChange={v=>setWeight(i,v)}/>)}
-            <div className="control-divider"/><h3>Bias</h3><ParameterSlider label="Bias b" value={bias} onChange={setBias}/>
+            <div className="control-content"><h3>Inputs</h3>{inputs.map((value,i)=><ParameterSlider key={i} label={`Input x${i+1}`} value={value} onChange={v=>setInput(i,v)} color="var(--input)"/>)}
+            <div className="control-divider"/><h3>Weights</h3>{weights.map((value,i)=><ParameterSlider key={i} label={`Weight w${i+1}`} value={value} onChange={v=>setWeight(i,v)} color="var(--weight)"/>)}
+            <div className="control-divider"/><h3>Bias</h3><ParameterSlider label="Bias b" value={bias} onChange={setBias} color="var(--gradient)"/>
             <div className="control-divider"/><label className="activation-select" htmlFor="activation">Activation function</label><select id="activation" value={activation} onChange={e=>setActivation(e.target.value as typeof activation)}>{activationNames.map(a=><option key={a} value={a}>{a==='relu'?'ReLU':a.charAt(0).toUpperCase()+a.slice(1)}</option>)}</select>
             <button className="reset-params" onClick={resetAll}><RotateCcw size={15}/> Reset parameters</button></div>
           </aside>
@@ -90,9 +93,9 @@ export default function App(){
           <section className="result-card plot-card"><div className="result-title"><div><p className="eyebrow">ACTIVATION CURVE</p><h3>{activation==='relu'?'ReLU':activation.charAt(0).toUpperCase()+activation.slice(1)}</h3></div><span className="badge-muted">z = {fmt(trace.preActivation)}</span></div><ActivationPlot kind={activation} z={trace.preActivation}/></section>
           <section className="result-card trace-card"><div className="tab-row" role="tablist" aria-label="Computation inspector"><button role="tab" aria-selected={tab==='math'} className={tab==='math'?'selected':''} onClick={()=>setTab('math')}>Math</button><button role="tab" aria-selected={tab==='code'} className={tab==='code'?'selected':''} onClick={()=>setTab('code')}>Code</button><button role="tab" aria-selected={tab==='challenge'} className={tab==='challenge'?'selected':''} onClick={()=>setTab('challenge')}>Challenge</button></div>
             <div className="tab-content">{tab==='math'?<><Equation values={inputs} weights={weights} bias={bias} z={trace.preActivation}/><p className="output-formula">a = {activation}(z) = <strong>{fmt(trace.output)}</strong></p></>:tab==='code'?<div className="code-view"><p><Code2 size={16}/> Executable JavaScript equivalent</p><pre>{`const x = [${inputs.map(fmt).join(', ')}];\nconst w = [${weights.map(fmt).join(', ')}];\nconst b = ${fmt(bias)};\nconst z = x.reduce((s,v,i) => s + v*w[i], b);\n// z = ${fmt(trace.preActivation)}\nconst a = ${activation==='sigmoid'?'1/(1+Math.exp(-z))':activation==='relu'?'Math.max(0,z)':activation==='tanh'?'Math.tanh(z)':'z'};\n// a = ${fmt(trace.output)}`}</pre></div>:<Challenge output={trace.output} inputs={inputs} weights={weights} bias={bias} activation={activation} setWeight={setWeight}/>}</div></section></div>
-        <footer id="how-it-works" className="footnote"><Focus size={15}/> Every value comes from the same tested mathematical engine. The rendered scene is an interactive simulation, not a trained AI model. <span>Curriculum: Sukkur IBA · Deep Learning · Fall 2026</span></footer>
       </>}
-      </main>
+      </Suspense></main>
     </div>
   </div>;
 }
+

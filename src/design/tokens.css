@@ -1,0 +1,10 @@
+/* Semantic roles: inputs blue; weights violet; activations aqua; errors coral; gradients gold. */
+:root {
+ --background:#0B1020; --surface:#121B30; --panel:#18223B; --line:#354564;
+ --text:#EDF2FF; --muted:#AFBCD5; --input:#638BFF; --weight:#A78BFA;
+ --activation:#37D6C4; --error:#FF9078; --gradient:#F5C978;
+ --mint:var(--input); --emerald:var(--weight); --teal:var(--activation);
+ color:var(--text); background:var(--background);
+ --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px;
+ --radius:16px;
+}

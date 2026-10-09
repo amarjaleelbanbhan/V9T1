@@ -1,0 +1,3773 @@
+{
+  "schema_version": 1,
+  "verified_date": "2026-10-09",
+  "sources": [
+    {
+      "id": "SRC-D2L",
+      "name": "Dive into Deep Learning",
+      "author": "Zhang, Lipton, Li, Smola",
+      "url": "https://d2l.ai/",
+      "topics": "Foundations through architectures; mathematics and code",
+      "level": "intermediate",
+      "reuse": "CC BY-SA 4.0 verified in official repository; adaptations require attribution and share-alike",
+      "comparison": "Broad multi-framework sequence; beginners need a gentler entry",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-CS231N",
+      "name": "CS231n",
+      "author": "Stanford",
+      "url": "https://cs231n.stanford.edu/schedule",
+      "topics": "Optimization, CNN, vision, attention",
+      "level": "intermediate",
+      "reuse": "Reuse not verified; link only",
+      "comparison": "Strong vision and numerical assignments; assumes programming and mathematics",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-CS224N",
+      "name": "CS224n",
+      "author": "Stanford",
+      "url": "https://web.stanford.edu/class/cs224n/",
+      "topics": "Embeddings, derivatives, transformers, evaluation",
+      "level": "advanced",
+      "reuse": "Reuse not verified; link only",
+      "comparison": "NLP depth and projects; not an absolute-beginner route",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-MIT",
+      "name": "MIT 6.S191",
+      "author": "MIT",
+      "url": "https://introtodeeplearning.com/",
+      "topics": "Neural networks and application survey",
+      "level": "intermediate",
+      "reuse": "Material-specific reuse not verified; link only",
+      "comparison": "Compact survey; insufficient practice for independent mastery",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-OCW",
+      "name": "MIT OCW terms",
+      "author": "MIT",
+      "url": "https://ocw.mit.edu/pages/privacy-and-terms-of-use/",
+      "topics": "Licensing policy",
+      "level": "all",
+      "reuse": "CC BY-NC-SA with exceptions; no commercial adaptation assumed",
+      "comparison": "Useful policy evidence; individual third-party items may differ",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-FASTAI",
+      "name": "Practical Deep Learning",
+      "author": "Jeremy Howard / fast.ai",
+      "url": "https://course.fast.ai/",
+      "topics": "Applied models and diffusion",
+      "level": "intermediate",
+      "reuse": "Course reuse not verified; library license does not license videos",
+      "comparison": "Top-down motivation; requires some coding",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-TORCH",
+      "name": "Learn the Basics",
+      "author": "PyTorch contributors",
+      "url": "https://docs.pytorch.org/tutorials/beginner/basics/intro.html",
+      "topics": "Tensors, datasets, autograd, optimization, checkpoints",
+      "level": "beginner",
+      "reuse": "Tutorial reuse not verified; link only",
+      "comparison": "Executable framework workflow; platform/version compatibility must be tested",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-TF",
+      "name": "TensorFlow tutorials",
+      "author": "TensorFlow contributors",
+      "url": "https://www.tensorflow.org/tutorials",
+      "topics": "Keras, vision, text and training",
+      "level": "intermediate",
+      "reuse": "Per-page notices require review before copying; link only",
+      "comparison": "Alternative framework view; API and browser execution differ",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-NUMPY",
+      "name": "NumPy beginner guide",
+      "author": "NumPy contributors",
+      "url": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+      "topics": "Arrays, shapes, dtype, indexing",
+      "level": "beginner",
+      "reuse": "Documentation reuse not separately verified; link only",
+      "comparison": "Precise array reference; no model-training progression",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-PANDAS",
+      "name": "pandas introductory tutorials",
+      "author": "pandas contributors",
+      "url": "https://pandas.pydata.org/docs/getting_started/intro_tutorials/",
+      "topics": "Tables, cleaning and selection",
+      "level": "beginner",
+      "reuse": "Documentation reuse not separately verified; link only",
+      "comparison": "Practical data preparation; leakage needs separate teaching",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-SKLEARN",
+      "name": "Common pitfalls",
+      "author": "scikit-learn contributors",
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "topics": "Preprocessing, leakage, randomness",
+      "level": "intermediate",
+      "reuse": "Documentation reuse not separately verified; link only",
+      "comparison": "Crucial engineering habits; not a neural architecture course",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-GOOGLE",
+      "name": "ML Crash Course",
+      "author": "Google",
+      "url": "https://developers.google.com/machine-learning/crash-course",
+      "topics": "Regression, classification, metrics, generalization",
+      "level": "beginner",
+      "reuse": "Per-page terms require review; link only",
+      "comparison": "Accessible ML bridge; advanced model engineering needs other sources",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-HF",
+      "name": "LLM Course",
+      "author": "Hugging Face",
+      "url": "https://huggingface.co/learn/llm-course/chapter1/1",
+      "topics": "Transformers, tokenization and fine-tuning",
+      "level": "intermediate",
+      "reuse": "Course license not verified; dataset/model licenses are separate",
+      "comparison": "Practical ecosystem; assumes Python and neural foundations",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-PYODIDE",
+      "name": "Worker execution 0.27.7",
+      "author": "Pyodide contributors",
+      "url": "https://pyodide.org/en/0.27.7/usage/webworker.html",
+      "topics": "Browser Python and message passing",
+      "level": "engineering",
+      "reuse": "Documentation license not verified; implementation is original",
+      "comparison": "Worker keeps UI responsive; does not establish a security sandbox",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-RADIX",
+      "name": "Color usage",
+      "author": "Radix contributors",
+      "url": "https://www.radix-ui.com/colors/docs/overview/usage",
+      "topics": "Background, border and text roles",
+      "level": "design",
+      "reuse": "Reference only; no assets copied",
+      "comparison": "Useful role-based scale; our palette still needs measured contrast",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-WCAG",
+      "name": "WCAG 2.2 quick reference",
+      "author": "W3C",
+      "url": "https://www.w3.org/WAI/WCAG22/quickref/",
+      "topics": "Contrast, keyboard, motion and controls",
+      "level": "design",
+      "reuse": "Reference only; no assets copied",
+      "comparison": "Acceptance criteria; automated checks do not prove conformance",
+      "verified_date": "2026-10-09",
+      "verification": "official page retrieved"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "CH-00",
+      "slug": "00-python-and-math",
+      "title": "Python, data and mathematics",
+      "level": 0,
+      "prerequisites": [],
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "lesson_ids": [
+        "dl-00-001",
+        "dl-00-002",
+        "dl-00-003",
+        "dl-00-004",
+        "dl-00-005",
+        "dl-00-006",
+        "dl-00-007",
+        "dl-00-008"
+      ],
+      "status": "specified",
+      "definition": "A tensor is an indexed collection of numbers; shape lists axis lengths.",
+      "formula": "z = sum(x_i * w_i) + b",
+      "example": "x=[2,3], w=[4,-1], b=1 gives z=6.",
+      "python": "x=[2,3]\nw=[4,-1]\nz=sum(a*b for a,b in zip(x,w))+1\nassert z == 6",
+      "visual": "Trace array creation and draw each multiply before summing.",
+      "mistake": "Confusing list concatenation with numerical addition.",
+      "question": "Predict the dot product when the first input doubles.",
+      "answer": "14: (4*4)+(3*-1)+1.",
+      "project": "Compute mean and dot products without a framework."
+    },
+    {
+      "id": "CH-01",
+      "slug": "01-ai-ml-dl-foundations",
+      "title": "AI, ML and evaluation",
+      "level": 1,
+      "prerequisites": [
+        "CH-00"
+      ],
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "lesson_ids": [
+        "dl-01-001",
+        "dl-01-002",
+        "dl-01-003",
+        "dl-01-004",
+        "dl-01-005",
+        "dl-01-006",
+        "dl-01-007",
+        "dl-01-008",
+        "dl-01-009"
+      ],
+      "status": "specified",
+      "definition": "A held-out test estimates performance on unseen data from its sampling setting.",
+      "formula": "precision = TP/(TP+FP); recall = TP/(TP+FN)",
+      "example": "TP=3, FP=1, FN=2: precision=.75, recall=.6, F1=2/3.",
+      "python": "tp,fp,fn=3,1,2\nf1=2*tp/(2*tp+fp+fn)\nassert abs(f1-2/3)<1e-12",
+      "visual": "Move a threshold and see four labeled confusion cells.",
+      "mistake": "Scaling the whole dataset before splitting leaks information.",
+      "question": "What is recall when TP=3 and FN=2?",
+      "answer": "0.6; use actual positives as denominator.",
+      "project": "Compare a baseline and threshold model on a held-out synthetic split."
+    },
+    {
+      "id": "CH-02",
+      "slug": "02-neural-network-basics",
+      "title": "Neurons and activations",
+      "level": 2,
+      "prerequisites": [
+        "CH-00",
+        "CH-01"
+      ],
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "lesson_ids": [
+        "dl-02-001",
+        "dl-02-002",
+        "dl-02-003",
+        "dl-02-004",
+        "dl-02-005",
+        "dl-02-006",
+        "dl-02-007"
+      ],
+      "status": "specified",
+      "definition": "Weights scale inputs; bias shifts the activation threshold.",
+      "formula": "a = max(0, sum(x_i*w_i)+b)",
+      "example": "x=[1,2], w=[2,-3], b=1: z=-3 and ReLU output=0.",
+      "python": "z=1*2+2*(-3)+1\na=max(0,z)\nassert a == 0",
+      "visual": "Separate blue inputs, violet weights and aqua activations; show numeric labels.",
+      "mistake": "Treating softmax as independent scalar sigmoid.",
+      "question": "What does bias=5 produce for the same inputs?",
+      "answer": "z=1, ReLU=1.",
+      "project": "Build AND/OR gates and explain why one perceptron fails XOR."
+    },
+    {
+      "id": "CH-03",
+      "slug": "03-tensors-and-computation",
+      "title": "Tensors and computation",
+      "level": 3,
+      "prerequisites": [
+        "CH-00"
+      ],
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "lesson_ids": [
+        "dl-03-001",
+        "dl-03-002",
+        "dl-03-003",
+        "dl-03-004",
+        "dl-03-005",
+        "dl-03-006",
+        "dl-03-007"
+      ],
+      "status": "specified",
+      "definition": "Rank counts axes; element count is the product of shape dimensions.",
+      "formula": "payload_bytes = product(shape) * itemsize",
+      "example": "A 2 by 3 float32 array has rank 2 and 24 payload bytes.",
+      "python": "import numpy as np\nx=np.array([[1,2,3],[4,5,6]],dtype=np.float32)\nassert x.shape==(2,3) and x.nbytes==24",
+      "visual": "Highlight executed lines and inspect shape, dtype, values and measured nbytes.",
+      "mistake": "Calling payload bytes total process memory.",
+      "question": "How many payload bytes for shape (4,3), float64?",
+      "answer": "96 bytes, excluding Python object and runtime overhead.",
+      "project": "Build a shape inspector and debug incompatible broadcasting."
+    },
+    {
+      "id": "CH-04",
+      "slug": "04-forward-propagation",
+      "title": "Forward propagation",
+      "level": 2,
+      "prerequisites": [
+        "CH-02",
+        "CH-03"
+      ],
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "lesson_ids": [
+        "dl-04-001",
+        "dl-04-002",
+        "dl-04-003",
+        "dl-04-004",
+        "dl-04-005",
+        "dl-04-006"
+      ],
+      "status": "specified",
+      "definition": "A forward pass applies layers to obtain predictions.",
+      "formula": "H = f(XW + b)",
+      "example": "[1,2] dot [3,4] plus 1 produces 12 before activation.",
+      "python": "x=[1,2]\nw=[3,4]\nz=sum(a*b for a,b in zip(x,w))+1\nassert z==12",
+      "visual": "Advance contribution, sum, bias, activation and output stages.",
+      "mistake": "Transposing weights inconsistently between code and diagram.",
+      "question": "What shape does (5,3) @ (3,2) produce?",
+      "answer": "(5,2): shared inner dimension is contracted.",
+      "project": "Verify a 2-to-2-to-1 network by hand and with the existing engine."
+    },
+    {
+      "id": "CH-05",
+      "slug": "05-loss-and-optimization",
+      "title": "Loss and optimization",
+      "level": 2,
+      "prerequisites": [
+        "CH-04"
+      ],
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "lesson_ids": [
+        "dl-05-001",
+        "dl-05-002",
+        "dl-05-003",
+        "dl-05-004",
+        "dl-05-005",
+        "dl-05-006",
+        "dl-05-007"
+      ],
+      "status": "specified",
+      "definition": "A loss measures error; an optimizer changes parameters using gradients.",
+      "formula": "w_next = w - learning_rate * gradient",
+      "example": "L=w^2, w=2, lr=.1: gradient=4; next w=1.6 and loss=2.56.",
+      "python": "w=2.0\nw-=0.1*(2*w)\nassert abs(w-1.6)<1e-12",
+      "visual": "Draw a loss curve with tangent and editable update arrows.",
+      "mistake": "Taking a step in the gradient direction.",
+      "question": "For w=-2 and lr=.1, what is next w?",
+      "answer": "-1.6, because gradient is -4.",
+      "project": "Compare stable, oscillating and divergent step sizes."
+    },
+    {
+      "id": "CH-06",
+      "slug": "06-backpropagation",
+      "title": "Backpropagation",
+      "level": 2,
+      "prerequisites": [
+        "CH-05",
+        "CH-03"
+      ],
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "lesson_ids": [
+        "dl-06-001",
+        "dl-06-002",
+        "dl-06-003",
+        "dl-06-004",
+        "dl-06-005",
+        "dl-06-006",
+        "dl-06-007"
+      ],
+      "status": "specified",
+      "definition": "Backpropagation reuses local derivatives to compute parameter gradients.",
+      "formula": "dL/dw = (prediction-target)*input for half squared error",
+      "example": "x=2, w=3, target=4: prediction=6, dL/dw=4.",
+      "python": "x,w,y=2,3,4\ngrad=(x*w-y)*x\nassert grad==4",
+      "visual": "Follow backward arrows with derivative factors and numerical gradient checks.",
+      "mistake": "Replacing a derivative with its activation value.",
+      "question": "What is dL/dw when x=0?",
+      "answer": "0 for this model; the prediction does not depend on w.",
+      "project": "Independently check every dense-network parameter by central differences."
+    },
+    {
+      "id": "CH-07",
+      "slug": "07-training-and-generalization",
+      "title": "Training and generalization",
+      "level": 2,
+      "prerequisites": [
+        "CH-06",
+        "CH-01"
+      ],
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "lesson_ids": [
+        "dl-07-001",
+        "dl-07-002",
+        "dl-07-003",
+        "dl-07-004",
+        "dl-07-005",
+        "dl-07-006",
+        "dl-07-007",
+        "dl-07-008",
+        "dl-07-009"
+      ],
+      "status": "specified",
+      "definition": "Training error alone does not establish generalization.",
+      "formula": "mean_loss = sum(sample_losses)/N",
+      "example": "Sample losses [1,3,2] have mean 2.",
+      "python": "losses=[1,3,2]\nassert sum(losses)/len(losses)==2",
+      "visual": "Compare training and validation curves and inspect batches.",
+      "mistake": "Leaving dropout active during evaluation.",
+      "question": "Does lower train loss guarantee better test performance?",
+      "answer": "No; overfitting and distribution changes can reduce test performance.",
+      "project": "Train a small model, save its checkpoint and explain a validation gap."
+    },
+    {
+      "id": "CH-08",
+      "slug": "08-convolutional-networks",
+      "title": "Convolution operations",
+      "level": 4,
+      "prerequisites": [
+        "CH-04",
+        "CH-03"
+      ],
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "lesson_ids": [
+        "dl-08-001",
+        "dl-08-002",
+        "dl-08-003",
+        "dl-08-004",
+        "dl-08-005",
+        "dl-08-006",
+        "dl-08-007"
+      ],
+      "status": "specified",
+      "definition": "A convolution layer shares a filter across spatial positions.",
+      "formula": "out = floor((n + 2p - d*(k-1) - 1)/s) + 1",
+      "example": "n=5, k=3, p=0, s=1, d=1 gives output length 3.",
+      "python": "n,k,p,s,d=5,3,0,1,1\nassert (n+2*p-d*(k-1)-1)//s+1==3",
+      "visual": "Drag a kernel and show aligned products and output cells.",
+      "mistake": "Forgetting channel summation or dilation.",
+      "question": "What output length with n=5,k=3,p=1,s=1?",
+      "answer": "5 for dilation 1.",
+      "project": "Implement a tiny 2D cross-correlation and compare a framework result."
+    },
+    {
+      "id": "CH-09",
+      "slug": "09-computer-vision",
+      "title": "Computer vision",
+      "level": 4,
+      "prerequisites": [
+        "CH-08",
+        "CH-07"
+      ],
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "lesson_ids": [
+        "dl-09-001",
+        "dl-09-002",
+        "dl-09-003",
+        "dl-09-004",
+        "dl-09-005",
+        "dl-09-006",
+        "dl-09-007",
+        "dl-09-008"
+      ],
+      "status": "specified",
+      "definition": "Different vision tasks require different labels and metrics.",
+      "formula": "IoU = intersection_area/union_area",
+      "example": "Intersection=4 and union=8 gives IoU=.5.",
+      "python": "intersection,union=4,8\nassert intersection/union==0.5",
+      "visual": "Compare class, bounding box and pixel-mask outputs on one image.",
+      "mistake": "Using training augmentations on test images without a defined protocol.",
+      "question": "Is classification accuracy enough to evaluate segmentation?",
+      "answer": "No; assess pixel/region metrics such as IoU and class-wise performance.",
+      "project": "Compare frozen-feature and fine-tuned models under the same split."
+    },
+    {
+      "id": "CH-10",
+      "slug": "10-sequences-and-rnns",
+      "title": "Sequences and RNNs",
+      "level": 5,
+      "prerequisites": [
+        "CH-07"
+      ],
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "lesson_ids": [
+        "dl-10-001",
+        "dl-10-002",
+        "dl-10-003",
+        "dl-10-004",
+        "dl-10-005",
+        "dl-10-006",
+        "dl-10-007"
+      ],
+      "status": "specified",
+      "definition": "A recurrent state carries information across ordered steps.",
+      "formula": "h_t = tanh(W_x*x_t + W_h*h_previous + b)",
+      "example": "For a linear teaching recurrence h_t=x_t+.5*h_previous, [2,2] gives [2,3].",
+      "python": "h=0\nfor x in [2,2]:\n    h=x+0.5*h\nassert h==3",
+      "visual": "Unroll two timesteps and link shared weights. Label linear simplification.",
+      "mistake": "Randomly splitting future observations into training data.",
+      "question": "Why are chronological forecasting splits useful?",
+      "answer": "They avoid training on future information when predicting the past.",
+      "project": "Forecast a synthetic signal and compare against persistence."
+    },
+    {
+      "id": "CH-11",
+      "slug": "11-natural-language-processing",
+      "title": "Text representations",
+      "level": 5,
+      "prerequisites": [
+        "CH-10"
+      ],
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "lesson_ids": [
+        "dl-11-001",
+        "dl-11-002",
+        "dl-11-003",
+        "dl-11-004",
+        "dl-11-005",
+        "dl-11-006",
+        "dl-11-007"
+      ],
+      "status": "specified",
+      "definition": "A tokenizer maps text pieces to IDs; embeddings map IDs to learned vectors.",
+      "formula": "embedding_table shape = (vocabulary_size, embedding_dim)",
+      "example": "Vocabulary 100, dimension 8: 800 stored scalar parameters.",
+      "python": "vocab,dim=100,8\nassert vocab*dim==800",
+      "visual": "Inspect text, token boundaries, IDs and embedding rows.",
+      "mistake": "Confusing a token ID with a semantic distance.",
+      "question": "Does ID 10 imply similarity to ID 11?",
+      "answer": "No; IDs index vocabulary entries.",
+      "project": "Build a tiny vocabulary and investigate unknown words and padding."
+    },
+    {
+      "id": "CH-12",
+      "slug": "12-attention-and-transformers",
+      "title": "Attention and transformers",
+      "level": 5,
+      "prerequisites": [
+        "CH-11",
+        "CH-03"
+      ],
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "lesson_ids": [
+        "dl-12-001",
+        "dl-12-002",
+        "dl-12-003",
+        "dl-12-004",
+        "dl-12-005",
+        "dl-12-006",
+        "dl-12-007",
+        "dl-12-008",
+        "dl-12-009",
+        "dl-12-010"
+      ],
+      "status": "specified",
+      "definition": "Attention forms weighted combinations of value vectors.",
+      "formula": "attention = softmax(QK_transpose/sqrt(d_k))V",
+      "example": "Equal scores over values [2,6] give weights [.5,.5] and result 4.",
+      "python": "weights=[.5,.5]\nvalues=[2,6]\nassert sum(w*v for w,v in zip(weights,values))==4",
+      "visual": "Edit Q/K scores, mask a cell and inspect normalized rows.",
+      "mistake": "Assuming attention weights alone explain causality.",
+      "question": "What output do equal scores give for values [1,5]?",
+      "answer": "3, the equally weighted average.",
+      "project": "Implement tiny masked attention and a retrieval evaluation with provenance."
+    },
+    {
+      "id": "CH-13",
+      "slug": "13-generative-models",
+      "title": "Generative models",
+      "level": 6,
+      "prerequisites": [
+        "CH-12"
+      ],
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "lesson_ids": [
+        "dl-13-001",
+        "dl-13-002",
+        "dl-13-003",
+        "dl-13-004",
+        "dl-13-005",
+        "dl-13-006"
+      ],
+      "status": "specified",
+      "definition": "A generative model learns a distribution or a process for producing samples.",
+      "formula": "noisy = sqrt(alpha)*clean + sqrt(1-alpha)*noise",
+      "example": "alpha=1 retains clean; alpha=0 retains noise.",
+      "python": "from math import sqrt\nalpha=1\nassert sqrt(alpha)*3+sqrt(1-alpha)*7==3",
+      "visual": "Move a noise slider; distinguish a teaching mixture from trained diffusion.",
+      "mistake": "Judging sample quality from selected examples alone.",
+      "question": "What happens to the clean signal at alpha=0?",
+      "answer": "Its coefficient is zero.",
+      "project": "Compare reconstruction and generation on a small original dataset."
+    },
+    {
+      "id": "CH-14",
+      "slug": "14-advanced-architectures",
+      "title": "Advanced architectures and representation learning",
+      "level": 6,
+      "prerequisites": [
+        "CH-12",
+        "CH-07"
+      ],
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "lesson_ids": [
+        "dl-14-001",
+        "dl-14-002",
+        "dl-14-003",
+        "dl-14-004",
+        "dl-14-005",
+        "dl-14-006"
+      ],
+      "status": "specified",
+      "definition": "Architectures encode assumptions about relations, sequence, space or decisions.",
+      "formula": "mean_neighbor = sum(neighbor_values)/degree",
+      "example": "Neighbors [2,4,6] give mean 4.",
+      "python": "neighbors=[2,4,6]\nassert sum(neighbors)/len(neighbors)==4",
+      "visual": "Animate labeled graph aggregation and contrast positive/negative pairs.",
+      "mistake": "Treating a toy aggregation as a trained GNN.",
+      "question": "What must be specified for a node with zero neighbors?",
+      "answer": "An explicit convention, such as self-features or zero aggregation.",
+      "project": "Reproduce a small graph or contrastive baseline with fixed evaluation."
+    },
+    {
+      "id": "CH-15",
+      "slug": "15-efficient-training",
+      "title": "Efficient training",
+      "level": 6,
+      "prerequisites": [
+        "CH-07",
+        "CH-03"
+      ],
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "lesson_ids": [
+        "dl-15-001",
+        "dl-15-002",
+        "dl-15-003",
+        "dl-15-004",
+        "dl-15-005",
+        "dl-15-006",
+        "dl-15-007",
+        "dl-15-008",
+        "dl-15-009",
+        "dl-15-010"
+      ],
+      "status": "specified",
+      "definition": "Efficiency must be measured against accuracy, hardware and workload.",
+      "formula": "raw_weight_bytes = parameter_count * bytes_per_parameter",
+      "example": "1000 float32 weights need 4000 payload bytes; optimizer and activations are extra.",
+      "python": "parameters=1000\nassert parameters*4==4000",
+      "visual": "Show separate parameter, activation, gradient and optimizer memory budgets.",
+      "mistake": "Claiming twofold end-to-end speed from halving weight precision.",
+      "question": "Does 4000 bytes describe all training memory?",
+      "answer": "No; activations, gradients, optimizer state and runtime overhead also count.",
+      "project": "Profile a baseline and report quality, latency and peak memory tradeoffs."
+    },
+    {
+      "id": "CH-16",
+      "slug": "16-interpretability-and-safety",
+      "title": "Interpretability and responsible AI",
+      "level": 6,
+      "prerequisites": [
+        "CH-01",
+        "CH-07"
+      ],
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "lesson_ids": [
+        "dl-16-001",
+        "dl-16-002",
+        "dl-16-003",
+        "dl-16-004",
+        "dl-16-005",
+        "dl-16-006",
+        "dl-16-007",
+        "dl-16-008"
+      ],
+      "status": "specified",
+      "definition": "An explanation method is evidence about behavior, not proof of correctness.",
+      "formula": "error_rate = errors/examples",
+      "example": "Group A: 2/10 errors=.2; group B: 8/10=.8, aggregate=.5.",
+      "python": "rates=[2/10,8/10]\nassert sum(rates)/2==.5",
+      "visual": "Inspect aggregate and subgroup metrics with sample counts.",
+      "mistake": "Inferring fairness from aggregate accuracy.",
+      "question": "Can aggregate .5 hide unequal group error rates?",
+      "answer": "Yes: .2 and .8 average to .5 for equal sizes.",
+      "project": "Write a model card with failure cases and scoped privacy assumptions."
+    },
+    {
+      "id": "CH-17",
+      "slug": "17-deployment-and-mlops",
+      "title": "Deployment and MLOps",
+      "level": 7,
+      "prerequisites": [
+        "CH-15",
+        "CH-16"
+      ],
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "lesson_ids": [
+        "dl-17-001",
+        "dl-17-002",
+        "dl-17-003",
+        "dl-17-004",
+        "dl-17-005",
+        "dl-17-006",
+        "dl-17-007",
+        "dl-17-008",
+        "dl-17-009"
+      ],
+      "status": "specified",
+      "definition": "Serving must preserve the training-time preprocessing and output contract.",
+      "formula": "latency = preprocessing + model + postprocessing",
+      "example": "10 ms preprocessing +20 model +5 postprocessing=35 ms (without queue/network).",
+      "python": "parts=[10,20,5]\nassert sum(parts)==35",
+      "visual": "Trace the request pipeline and show measured latency percentiles.",
+      "mistake": "Calling a model-only benchmark end-to-end latency.",
+      "question": "What components are missing from a model-only latency?",
+      "answer": "Pre/postprocessing, queue, network and serialization overhead.",
+      "project": "Package a small model with schema checks, monitoring and rollback instructions."
+    },
+    {
+      "id": "CH-18",
+      "slug": "18-research-and-capstones",
+      "title": "Research and capstones",
+      "level": 7,
+      "prerequisites": [
+        "CH-17"
+      ],
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "lesson_ids": [
+        "dl-18-001",
+        "dl-18-002",
+        "dl-18-003",
+        "dl-18-004",
+        "dl-18-005",
+        "dl-18-006",
+        "dl-18-007",
+        "dl-18-008",
+        "dl-18-009"
+      ],
+      "status": "specified",
+      "definition": "A reproduction tests whether a claim survives an explicit experimental protocol.",
+      "formula": "difference = measured_score - baseline_score",
+      "example": "Scores .82 and .80 differ by .02; this alone does not establish statistical significance.",
+      "python": "score,baseline=.82,.80\nassert abs((score-baseline)-.02)<1e-12",
+      "visual": "Compare seeds, confidence intervals, compute budgets and ablations.",
+      "mistake": "Selecting the best test-set run as the reported result.",
+      "question": "Does a .02 gain from one seed establish robustness?",
+      "answer": "No; evaluate variability and confounders under a controlled protocol.",
+      "project": "Reproduce a bounded result and publish code, protocol and negative findings."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "dl-00-001",
+      "title": "computers and programs",
+      "chapter": "CH-00",
+      "prerequisites": [],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-002",
+      "title": "variables, loops, functions, objects",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-003",
+      "title": "CPU, RAM, GPU, storage",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-004",
+      "title": "loading and cleaning data",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-005",
+      "title": "algebra and graphs",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-006",
+      "title": "probability, mean and variance",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-007",
+      "title": "vectors, matrices, dot products",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-008",
+      "title": "derivatives and chain rule",
+      "chapter": "CH-00",
+      "prerequisites": [
+        "dl-00-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-PANDAS",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-001",
+      "title": "symbolic versus learned systems",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "CH-00"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-002",
+      "title": "supervised, unsupervised, reinforcement learning",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-003",
+      "title": "features, labels, predictions",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-004",
+      "title": "train, validation, test",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-005",
+      "title": "leakage and split strategies",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-006",
+      "title": "regression and classification",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-007",
+      "title": "confusion matrix, precision, recall, F1",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-008",
+      "title": "bias, variance and generalization",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-01-009",
+      "title": "neural-network history",
+      "chapter": "CH-01",
+      "prerequisites": [
+        "dl-01-008"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-GOOGLE",
+        "SRC-SKLEARN"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-001",
+      "title": "biological analogy limitations",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "CH-00",
+        "CH-01"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-002",
+      "title": "perceptron and XOR",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "dl-02-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-003",
+      "title": "weights and biases",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "dl-02-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-004",
+      "title": "linear layers",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "dl-02-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-005",
+      "title": "sigmoid, tanh, ReLU, leaky ReLU",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "dl-02-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-006",
+      "title": "stable softmax",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "dl-02-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-02-007",
+      "title": "initialization",
+      "chapter": "CH-02",
+      "prerequisites": [
+        "dl-02-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-001",
+      "title": "shape, rank and dtype",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "CH-00"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-002",
+      "title": "broadcasting",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "dl-03-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-003",
+      "title": "indexing and slicing",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "dl-03-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-004",
+      "title": "memory layout and views",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "dl-03-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-005",
+      "title": "float16, float32, float64",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "dl-03-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-006",
+      "title": "device placement",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "dl-03-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-03-007",
+      "title": "autograd graphs",
+      "chapter": "CH-03",
+      "prerequisites": [
+        "dl-03-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-NUMPY",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-04-001",
+      "title": "dense layer shapes",
+      "chapter": "CH-04",
+      "prerequisites": [
+        "CH-02",
+        "CH-03"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-04-002",
+      "title": "batch axis",
+      "chapter": "CH-04",
+      "prerequisites": [
+        "dl-04-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-04-003",
+      "title": "matrix multiplication",
+      "chapter": "CH-04",
+      "prerequisites": [
+        "dl-04-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-04-004",
+      "title": "layer composition",
+      "chapter": "CH-04",
+      "prerequisites": [
+        "dl-04-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-04-005",
+      "title": "logits versus probabilities",
+      "chapter": "CH-04",
+      "prerequisites": [
+        "dl-04-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-04-006",
+      "title": "training versus inference",
+      "chapter": "CH-04",
+      "prerequisites": [
+        "dl-04-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS231N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-001",
+      "title": "MSE and MAE",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "CH-04"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-002",
+      "title": "binary and categorical cross entropy",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "dl-05-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-003",
+      "title": "stable logits losses",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "dl-05-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-004",
+      "title": "gradient descent",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "dl-05-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-005",
+      "title": "SGD, momentum, Adam",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "dl-05-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-006",
+      "title": "learning-rate schedules",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "dl-05-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-05-007",
+      "title": "epochs and mini-batches",
+      "chapter": "CH-05",
+      "prerequisites": [
+        "dl-05-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-001",
+      "title": "local derivatives",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "CH-05",
+        "CH-03"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-002",
+      "title": "chain rule",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "dl-06-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-003",
+      "title": "output and hidden deltas",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "dl-06-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-004",
+      "title": "parameter gradients",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "dl-06-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-005",
+      "title": "autodiff",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "dl-06-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-006",
+      "title": "finite differences",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "dl-06-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-06-007",
+      "title": "vanishing and exploding gradients",
+      "chapter": "CH-06",
+      "prerequisites": [
+        "dl-06-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-001",
+      "title": "dataset loaders and training loops",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "CH-06",
+        "CH-01"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-002",
+      "title": "batching and shuffling",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-003",
+      "title": "regularization and weight decay",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-004",
+      "title": "dropout",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-005",
+      "title": "batch normalization",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-006",
+      "title": "initialization",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-007",
+      "title": "early stopping",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-008",
+      "title": "checkpoints",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-07-009",
+      "title": "diagnostics",
+      "chapter": "CH-07",
+      "prerequisites": [
+        "dl-07-008"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-SKLEARN",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-001",
+      "title": "image tensor axes",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "CH-04",
+        "CH-03"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-002",
+      "title": "cross-correlation versus convolution",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "dl-08-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-003",
+      "title": "kernels",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "dl-08-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-004",
+      "title": "channels",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "dl-08-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-005",
+      "title": "padding, stride and dilation",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "dl-08-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-006",
+      "title": "pooling",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "dl-08-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-08-007",
+      "title": "receptive fields",
+      "chapter": "CH-08",
+      "prerequisites": [
+        "dl-08-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-001",
+      "title": "color spaces",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "CH-08",
+        "CH-07"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-002",
+      "title": "CNN architectures and residuals",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-003",
+      "title": "augmentation",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-004",
+      "title": "transfer learning",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-005",
+      "title": "classification",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-006",
+      "title": "object detection",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-007",
+      "title": "segmentation",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-09-008",
+      "title": "Vision Transformers",
+      "chapter": "CH-09",
+      "prerequisites": [
+        "dl-09-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-001",
+      "title": "sequence axes",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "CH-07"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-002",
+      "title": "recurrence",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "dl-10-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-003",
+      "title": "RNN, LSTM, GRU",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "dl-10-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-004",
+      "title": "hidden states",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "dl-10-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-005",
+      "title": "BPTT",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "dl-10-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-006",
+      "title": "masking and padding",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "dl-10-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-10-007",
+      "title": "time-series splits and forecasting",
+      "chapter": "CH-10",
+      "prerequisites": [
+        "dl-10-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-CS224N"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-001",
+      "title": "text cleaning",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "CH-10"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-002",
+      "title": "tokenization",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "dl-11-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-003",
+      "title": "subword vocabularies",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "dl-11-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-004",
+      "title": "embeddings",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "dl-11-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-005",
+      "title": "sequence representations",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "dl-11-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-006",
+      "title": "language modeling",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "dl-11-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-11-007",
+      "title": "data leakage and evaluation",
+      "chapter": "CH-11",
+      "prerequisites": [
+        "dl-11-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-001",
+      "title": "Q,K,V",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "CH-11",
+        "CH-03"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-002",
+      "title": "scaled dot-product attention",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-003",
+      "title": "causal and padding masks",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-004",
+      "title": "positional encodings",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-005",
+      "title": "multi-head attention",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-006",
+      "title": "encoder and decoder",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-007",
+      "title": "BERT and GPT styles",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-008",
+      "title": "fine-tuning",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-009",
+      "title": "RAG",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-008"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-12-010",
+      "title": "language-model evaluation",
+      "chapter": "CH-12",
+      "prerequisites": [
+        "dl-12-009"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS224N",
+        "SRC-HF",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-13-001",
+      "title": "autoencoders",
+      "chapter": "CH-13",
+      "prerequisites": [
+        "CH-12"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-13-002",
+      "title": "VAEs and latent variables",
+      "chapter": "CH-13",
+      "prerequisites": [
+        "dl-13-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-13-003",
+      "title": "GAN objectives",
+      "chapter": "CH-13",
+      "prerequisites": [
+        "dl-13-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-13-004",
+      "title": "diffusion noise schedules",
+      "chapter": "CH-13",
+      "prerequisites": [
+        "dl-13-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-13-005",
+      "title": "sampling",
+      "chapter": "CH-13",
+      "prerequisites": [
+        "dl-13-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-13-006",
+      "title": "generative evaluation",
+      "chapter": "CH-13",
+      "prerequisites": [
+        "dl-13-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-FASTAI",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-14-001",
+      "title": "self-supervised and contrastive learning",
+      "chapter": "CH-14",
+      "prerequisites": [
+        "CH-12",
+        "CH-07"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-14-002",
+      "title": "multimodal learning",
+      "chapter": "CH-14",
+      "prerequisites": [
+        "dl-14-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-14-003",
+      "title": "graph neural networks",
+      "chapter": "CH-14",
+      "prerequisites": [
+        "dl-14-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-14-004",
+      "title": "deep reinforcement learning",
+      "chapter": "CH-14",
+      "prerequisites": [
+        "dl-14-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-14-005",
+      "title": "representations",
+      "chapter": "CH-14",
+      "prerequisites": [
+        "dl-14-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-14-006",
+      "title": "time-series architectures",
+      "chapter": "CH-14",
+      "prerequisites": [
+        "dl-14-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-D2L",
+        "SRC-TORCH"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-001",
+      "title": "profiling",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "CH-07",
+        "CH-03"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-002",
+      "title": "distributed training",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-003",
+      "title": "gradient accumulation",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-004",
+      "title": "mixed precision",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-005",
+      "title": "loss scaling",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-006",
+      "title": "quantization",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-007",
+      "title": "PEFT",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-008",
+      "title": "distillation",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-009",
+      "title": "compression",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-008"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-15-010",
+      "title": "memory budgeting",
+      "chapter": "CH-15",
+      "prerequisites": [
+        "dl-15-009"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-HF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-001",
+      "title": "saliency limitations",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "CH-01",
+        "CH-07"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-002",
+      "title": "robustness and adversarial inputs",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-003",
+      "title": "privacy",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-004",
+      "title": "security",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-005",
+      "title": "fairness",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-006",
+      "title": "subgroup metrics",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-007",
+      "title": "uncertainty",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-16-008",
+      "title": "model and dataset cards",
+      "chapter": "CH-16",
+      "prerequisites": [
+        "dl-16-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-GOOGLE"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-001",
+      "title": "serving",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "CH-15",
+        "CH-16"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-002",
+      "title": "batch versus online inference",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-003",
+      "title": "serialization",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-004",
+      "title": "reproducible preprocessing",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-005",
+      "title": "latency budgets",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-006",
+      "title": "monitoring",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-007",
+      "title": "drift",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-008",
+      "title": "rollback",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-17-009",
+      "title": "system design",
+      "chapter": "CH-17",
+      "prerequisites": [
+        "dl-17-008"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-TORCH",
+        "SRC-TF"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-001",
+      "title": "reading and critiquing papers",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "CH-17"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-002",
+      "title": "reproduction",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-001"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-003",
+      "title": "experiment tracking",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-002"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-004",
+      "title": "hyperparameter search",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-003"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-005",
+      "title": "benchmarking",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-004"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-006",
+      "title": "ablations",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-005"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-007",
+      "title": "dataset quality",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-006"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-008",
+      "title": "unstable training debugging",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-007"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    },
+    {
+      "id": "dl-18-009",
+      "title": "capstones",
+      "chapter": "CH-18",
+      "prerequisites": [
+        "dl-18-008"
+      ],
+      "status": "specified",
+      "source_refs": [
+        "SRC-CS231N",
+        "SRC-CS224N",
+        "SRC-D2L"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35
+    }
+  ],
+  "assessments": [
+    {
+      "id": "Q-00-001",
+      "chapter_id": "CH-00",
+      "lesson_id": "dl-00-007",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Predict the dot product when the first input doubles.",
+      "solution": "14: (4*4)+(3*-1)+1.",
+      "explanation": "14: (4*4)+(3*-1)+1.",
+      "prerequisites": [],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-01-001",
+      "chapter_id": "CH-01",
+      "lesson_id": "dl-01-007",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What is recall when TP=3 and FN=2?",
+      "solution": "0.6; use actual positives as denominator.",
+      "explanation": "0.6; use actual positives as denominator.",
+      "prerequisites": [
+        "CH-00"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-02-001",
+      "chapter_id": "CH-02",
+      "lesson_id": "dl-02-005",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What does bias=5 produce for the same inputs?",
+      "solution": "z=1, ReLU=1.",
+      "explanation": "z=1, ReLU=1.",
+      "prerequisites": [
+        "CH-00",
+        "CH-01"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-03-001",
+      "chapter_id": "CH-03",
+      "lesson_id": "dl-03-001",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "How many payload bytes for shape (4,3), float64?",
+      "solution": "96 bytes, excluding Python object and runtime overhead.",
+      "explanation": "96 bytes, excluding Python object and runtime overhead.",
+      "prerequisites": [
+        "CH-00"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-04-001",
+      "chapter_id": "CH-04",
+      "lesson_id": "dl-04-004",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What shape does (5,3) @ (3,2) produce?",
+      "solution": "(5,2): shared inner dimension is contracted.",
+      "explanation": "(5,2): shared inner dimension is contracted.",
+      "prerequisites": [
+        "CH-02",
+        "CH-03"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-05-001",
+      "chapter_id": "CH-05",
+      "lesson_id": "dl-05-004",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "For w=-2 and lr=.1, what is next w?",
+      "solution": "-1.6, because gradient is -4.",
+      "explanation": "-1.6, because gradient is -4.",
+      "prerequisites": [
+        "CH-04"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-06-001",
+      "chapter_id": "CH-06",
+      "lesson_id": "dl-06-001",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What is dL/dw when x=0?",
+      "solution": "0 for this model; the prediction does not depend on w.",
+      "explanation": "0 for this model; the prediction does not depend on w.",
+      "prerequisites": [
+        "CH-05",
+        "CH-03"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-07-001",
+      "chapter_id": "CH-07",
+      "lesson_id": "dl-07-002",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Does lower train loss guarantee better test performance?",
+      "solution": "No; overfitting and distribution changes can reduce test performance.",
+      "explanation": "No; overfitting and distribution changes can reduce test performance.",
+      "prerequisites": [
+        "CH-06",
+        "CH-01"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-08-001",
+      "chapter_id": "CH-08",
+      "lesson_id": "dl-08-004",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What output length with n=5,k=3,p=1,s=1?",
+      "solution": "5 for dilation 1.",
+      "explanation": "5 for dilation 1.",
+      "prerequisites": [
+        "CH-04",
+        "CH-03"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-09-001",
+      "chapter_id": "CH-09",
+      "lesson_id": "dl-09-006",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Is classification accuracy enough to evaluate segmentation?",
+      "solution": "No; assess pixel/region metrics such as IoU and class-wise performance.",
+      "explanation": "No; assess pixel/region metrics such as IoU and class-wise performance.",
+      "prerequisites": [
+        "CH-08",
+        "CH-07"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-10-001",
+      "chapter_id": "CH-10",
+      "lesson_id": "dl-10-001",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Why are chronological forecasting splits useful?",
+      "solution": "They avoid training on future information when predicting the past.",
+      "explanation": "They avoid training on future information when predicting the past.",
+      "prerequisites": [
+        "CH-07"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-11-001",
+      "chapter_id": "CH-11",
+      "lesson_id": "dl-11-003",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Does ID 10 imply similarity to ID 11?",
+      "solution": "No; IDs index vocabulary entries.",
+      "explanation": "No; IDs index vocabulary entries.",
+      "prerequisites": [
+        "CH-10"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-12-001",
+      "chapter_id": "CH-12",
+      "lesson_id": "dl-12-002",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What output do equal scores give for values [1,5]?",
+      "solution": "3, the equally weighted average.",
+      "explanation": "3, the equally weighted average.",
+      "prerequisites": [
+        "CH-11",
+        "CH-03"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-13-001",
+      "chapter_id": "CH-13",
+      "lesson_id": "dl-13-004",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What happens to the clean signal at alpha=0?",
+      "solution": "Its coefficient is zero.",
+      "explanation": "Its coefficient is zero.",
+      "prerequisites": [
+        "CH-12"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-14-001",
+      "chapter_id": "CH-14",
+      "lesson_id": "dl-14-003",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What must be specified for a node with zero neighbors?",
+      "solution": "An explicit convention, such as self-features or zero aggregation.",
+      "explanation": "An explicit convention, such as self-features or zero aggregation.",
+      "prerequisites": [
+        "CH-12",
+        "CH-07"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-15-001",
+      "chapter_id": "CH-15",
+      "lesson_id": "dl-15-004",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Does 4000 bytes describe all training memory?",
+      "solution": "No; activations, gradients, optimizer state and runtime overhead also count.",
+      "explanation": "No; activations, gradients, optimizer state and runtime overhead also count.",
+      "prerequisites": [
+        "CH-07",
+        "CH-03"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-16-001",
+      "chapter_id": "CH-16",
+      "lesson_id": "dl-16-005",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Can aggregate .5 hide unequal group error rates?",
+      "solution": "Yes: .2 and .8 average to .5 for equal sizes.",
+      "explanation": "Yes: .2 and .8 average to .5 for equal sizes.",
+      "prerequisites": [
+        "CH-01",
+        "CH-07"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-17-001",
+      "chapter_id": "CH-17",
+      "lesson_id": "dl-17-003",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "What components are missing from a model-only latency?",
+      "solution": "Pre/postprocessing, queue, network and serialization overhead.",
+      "explanation": "Pre/postprocessing, queue, network and serialization overhead.",
+      "prerequisites": [
+        "CH-15",
+        "CH-16"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-18-001",
+      "chapter_id": "CH-18",
+      "lesson_id": "dl-18-002",
+      "kind": "conceptual-or-numerical",
+      "difficulty": "introductory-seed",
+      "prompt": "Does a .02 gain from one seed establish robustness?",
+      "solution": "No; evaluate variability and confounders under a controlled protocol.",
+      "explanation": "No; evaluate variability and confounders under a controlled protocol.",
+      "prerequisites": [
+        "CH-17"
+      ],
+      "status": "draft-needs-second-review",
+      "provenance": "original",
+      "license": "project licensing decision pending"
+    }
+  ],
+  "visualizations": [
+    {
+      "id": "VIS-00",
+      "chapter_id": "CH-00",
+      "lesson_ids": [
+        "dl-00-001",
+        "dl-00-002",
+        "dl-00-003",
+        "dl-00-004",
+        "dl-00-005",
+        "dl-00-006",
+        "dl-00-007",
+        "dl-00-008"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Trace array creation and draw each multiply before summing.",
+      "numeric_reference": "x=[2,3], w=[4,-1], b=1 gives z=6."
+    },
+    {
+      "id": "VIS-01",
+      "chapter_id": "CH-01",
+      "lesson_ids": [
+        "dl-01-001",
+        "dl-01-002",
+        "dl-01-003",
+        "dl-01-004",
+        "dl-01-005",
+        "dl-01-006",
+        "dl-01-007",
+        "dl-01-008",
+        "dl-01-009"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Move a threshold and see four labeled confusion cells.",
+      "numeric_reference": "TP=3, FP=1, FN=2: precision=.75, recall=.6, F1=2/3."
+    },
+    {
+      "id": "VIS-02",
+      "chapter_id": "CH-02",
+      "lesson_ids": [
+        "dl-02-001",
+        "dl-02-002",
+        "dl-02-003",
+        "dl-02-004",
+        "dl-02-005",
+        "dl-02-006",
+        "dl-02-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Separate blue inputs, violet weights and aqua activations; show numeric labels.",
+      "numeric_reference": "x=[1,2], w=[2,-3], b=1: z=-3 and ReLU output=0."
+    },
+    {
+      "id": "VIS-03",
+      "chapter_id": "CH-03",
+      "lesson_ids": [
+        "dl-03-001",
+        "dl-03-002",
+        "dl-03-003",
+        "dl-03-004",
+        "dl-03-005",
+        "dl-03-006",
+        "dl-03-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Highlight executed lines and inspect shape, dtype, values and measured nbytes.",
+      "numeric_reference": "A 2 by 3 float32 array has rank 2 and 24 payload bytes."
+    },
+    {
+      "id": "VIS-04",
+      "chapter_id": "CH-04",
+      "lesson_ids": [
+        "dl-04-001",
+        "dl-04-002",
+        "dl-04-003",
+        "dl-04-004",
+        "dl-04-005",
+        "dl-04-006"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Advance contribution, sum, bias, activation and output stages.",
+      "numeric_reference": "[1,2] dot [3,4] plus 1 produces 12 before activation."
+    },
+    {
+      "id": "VIS-05",
+      "chapter_id": "CH-05",
+      "lesson_ids": [
+        "dl-05-001",
+        "dl-05-002",
+        "dl-05-003",
+        "dl-05-004",
+        "dl-05-005",
+        "dl-05-006",
+        "dl-05-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Draw a loss curve with tangent and editable update arrows.",
+      "numeric_reference": "L=w^2, w=2, lr=.1: gradient=4; next w=1.6 and loss=2.56."
+    },
+    {
+      "id": "VIS-06",
+      "chapter_id": "CH-06",
+      "lesson_ids": [
+        "dl-06-001",
+        "dl-06-002",
+        "dl-06-003",
+        "dl-06-004",
+        "dl-06-005",
+        "dl-06-006",
+        "dl-06-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Follow backward arrows with derivative factors and numerical gradient checks.",
+      "numeric_reference": "x=2, w=3, target=4: prediction=6, dL/dw=4."
+    },
+    {
+      "id": "VIS-07",
+      "chapter_id": "CH-07",
+      "lesson_ids": [
+        "dl-07-001",
+        "dl-07-002",
+        "dl-07-003",
+        "dl-07-004",
+        "dl-07-005",
+        "dl-07-006",
+        "dl-07-007",
+        "dl-07-008",
+        "dl-07-009"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Compare training and validation curves and inspect batches.",
+      "numeric_reference": "Sample losses [1,3,2] have mean 2."
+    },
+    {
+      "id": "VIS-08",
+      "chapter_id": "CH-08",
+      "lesson_ids": [
+        "dl-08-001",
+        "dl-08-002",
+        "dl-08-003",
+        "dl-08-004",
+        "dl-08-005",
+        "dl-08-006",
+        "dl-08-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Drag a kernel and show aligned products and output cells.",
+      "numeric_reference": "n=5, k=3, p=0, s=1, d=1 gives output length 3."
+    },
+    {
+      "id": "VIS-09",
+      "chapter_id": "CH-09",
+      "lesson_ids": [
+        "dl-09-001",
+        "dl-09-002",
+        "dl-09-003",
+        "dl-09-004",
+        "dl-09-005",
+        "dl-09-006",
+        "dl-09-007",
+        "dl-09-008"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Compare class, bounding box and pixel-mask outputs on one image.",
+      "numeric_reference": "Intersection=4 and union=8 gives IoU=.5."
+    },
+    {
+      "id": "VIS-10",
+      "chapter_id": "CH-10",
+      "lesson_ids": [
+        "dl-10-001",
+        "dl-10-002",
+        "dl-10-003",
+        "dl-10-004",
+        "dl-10-005",
+        "dl-10-006",
+        "dl-10-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Unroll two timesteps and link shared weights. Label linear simplification.",
+      "numeric_reference": "For a linear teaching recurrence h_t=x_t+.5*h_previous, [2,2] gives [2,3]."
+    },
+    {
+      "id": "VIS-11",
+      "chapter_id": "CH-11",
+      "lesson_ids": [
+        "dl-11-001",
+        "dl-11-002",
+        "dl-11-003",
+        "dl-11-004",
+        "dl-11-005",
+        "dl-11-006",
+        "dl-11-007"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Inspect text, token boundaries, IDs and embedding rows.",
+      "numeric_reference": "Vocabulary 100, dimension 8: 800 stored scalar parameters."
+    },
+    {
+      "id": "VIS-12",
+      "chapter_id": "CH-12",
+      "lesson_ids": [
+        "dl-12-001",
+        "dl-12-002",
+        "dl-12-003",
+        "dl-12-004",
+        "dl-12-005",
+        "dl-12-006",
+        "dl-12-007",
+        "dl-12-008",
+        "dl-12-009",
+        "dl-12-010"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Edit Q/K scores, mask a cell and inspect normalized rows.",
+      "numeric_reference": "Equal scores over values [2,6] give weights [.5,.5] and result 4."
+    },
+    {
+      "id": "VIS-13",
+      "chapter_id": "CH-13",
+      "lesson_ids": [
+        "dl-13-001",
+        "dl-13-002",
+        "dl-13-003",
+        "dl-13-004",
+        "dl-13-005",
+        "dl-13-006"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Move a noise slider; distinguish a teaching mixture from trained diffusion.",
+      "numeric_reference": "alpha=1 retains clean; alpha=0 retains noise."
+    },
+    {
+      "id": "VIS-14",
+      "chapter_id": "CH-14",
+      "lesson_ids": [
+        "dl-14-001",
+        "dl-14-002",
+        "dl-14-003",
+        "dl-14-004",
+        "dl-14-005",
+        "dl-14-006"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Animate labeled graph aggregation and contrast positive/negative pairs.",
+      "numeric_reference": "Neighbors [2,4,6] give mean 4."
+    },
+    {
+      "id": "VIS-15",
+      "chapter_id": "CH-15",
+      "lesson_ids": [
+        "dl-15-001",
+        "dl-15-002",
+        "dl-15-003",
+        "dl-15-004",
+        "dl-15-005",
+        "dl-15-006",
+        "dl-15-007",
+        "dl-15-008",
+        "dl-15-009",
+        "dl-15-010"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Show separate parameter, activation, gradient and optimizer memory budgets.",
+      "numeric_reference": "1000 float32 weights need 4000 payload bytes; optimizer and activations are extra."
+    },
+    {
+      "id": "VIS-16",
+      "chapter_id": "CH-16",
+      "lesson_ids": [
+        "dl-16-001",
+        "dl-16-002",
+        "dl-16-003",
+        "dl-16-004",
+        "dl-16-005",
+        "dl-16-006",
+        "dl-16-007",
+        "dl-16-008"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Inspect aggregate and subgroup metrics with sample counts.",
+      "numeric_reference": "Group A: 2/10 errors=.2; group B: 8/10=.8, aggregate=.5."
+    },
+    {
+      "id": "VIS-17",
+      "chapter_id": "CH-17",
+      "lesson_ids": [
+        "dl-17-001",
+        "dl-17-002",
+        "dl-17-003",
+        "dl-17-004",
+        "dl-17-005",
+        "dl-17-006",
+        "dl-17-007",
+        "dl-17-008",
+        "dl-17-009"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Trace the request pipeline and show measured latency percentiles.",
+      "numeric_reference": "10 ms preprocessing +20 model +5 postprocessing=35 ms (without queue/network)."
+    },
+    {
+      "id": "VIS-18",
+      "chapter_id": "CH-18",
+      "lesson_ids": [
+        "dl-18-001",
+        "dl-18-002",
+        "dl-18-003",
+        "dl-18-004",
+        "dl-18-005",
+        "dl-18-006",
+        "dl-18-007",
+        "dl-18-008",
+        "dl-18-009"
+      ],
+      "status": "specified",
+      "mode": "educational-simulation",
+      "specification": "Compare seeds, confidence intervals, compute budgets and ablations.",
+      "numeric_reference": "Scores .82 and .80 differ by .02; this alone does not establish statistical significance."
+    }
+  ]
+}
