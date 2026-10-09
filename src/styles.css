@@ -79,3 +79,72 @@
 @media(max-width:1120px){.activation-layout{grid-template-columns:1fr}}
 @media(max-width:600px){.activation-kind-buttons button{font-size:11px;padding:9px 10px}.activation-softmax-visual{padding:20px 2px}}
 @media(prefers-reduced-motion:reduce){.softmax-bar-fill{transition:none}}
+
+/* Multi-layer forward propagation lab */
+.forward-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(250px,.65fr);gap:14px}
+.forward-network{width:100%;display:block;max-height:450px}
+.forward-heading{fill:#D9F2E0;font-size:12px;font-weight:750;letter-spacing:.05em}
+.forward-stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:7px}
+.forward-stages button{padding:9px 4px;border-radius:8px;border:1px solid #346B55;background:#11392F;color:#B8DCC4;font-size:10px}
+.forward-stages button.picked{background:#8BBB92;color:#072720;font-weight:750}
+.forward-selected{color:#E8FFE9;font-size:14px;font-weight:750;margin:11px 0}
+.forward-equation{color:#C3E9CD;background:#16463B;padding:11px;border-radius:10px;font-size:13px;line-height:1.6}
+.forward-results{display:grid;grid-template-columns:minmax(175px,.6fr) minmax(0,1.4fr);gap:14px}
+.forward-output{font-size:clamp(40px,5vw,72px);color:#B8F2BA;letter-spacing:-.05em;display:block;margin:18px 0}
+.forward-tabs{display:flex;gap:8px;margin-bottom:14px}
+.forward-tabs button{border:1px solid #366A52;padding:9px 20px;border-radius:9px;background:#164036;color:#CEEBDA;font-size:12px}
+.forward-tabs button.picked{background:#8BBB92;color:#092328}
+.forward-math{color:#DDF6E4;font-size:12px;line-height:1.85}
+.forward-math strong{color:#B9F5BB}
+.forward-code{font-size:12px;line-height:1.8;white-space:pre-wrap;color:#D0ECD6;background:#092824;border-radius:12px;padding:14px;overflow:auto}
+@media(max-width:1200px){.forward-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.forward-results{grid-template-columns:1fr}.forward-stages{grid-template-columns:repeat(3,minmax(0,1fr))}.forward-stages button{font-size:10px}.forward-grid .foundation-parameter-card{padding:13px}}
+
+/* Chapter 2 / Lecture 03 interactive tensor rank and slicing lesson */
+.tensor-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr);gap:14px}
+.tensor-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.tensor-metrics>div{background:#134237;border:1px solid #336650;border-radius:12px;padding:10px;display:grid;gap:5px}
+.tensor-metrics span{font-size:10px;color:#A6CFB9}
+.tensor-metrics strong{color:#D5F7D9;font-size:20px;overflow-wrap:anywhere}
+.tensor-visual{min-height:215px;display:grid;place-items:center;padding:20px 4px}
+.tensor-matrix{display:grid;gap:8px}
+.tensor-row{display:flex;flex-wrap:nowrap;gap:8px;justify-content:center}
+.tensor-cell{min-width:64px;min-height:54px;border-radius:12px;background:#174E40;border:1px solid #458265;color:#E9FFEF;font-size:19px;font-weight:750;display:grid;place-items:center;gap:1px;padding:8px;transition:background-color 180ms ease}
+.tensor-cell small{color:#9FC9B3;font-size:10px;font-weight:400}
+.tensor-cell.selected{background:#2A835F;border-color:#B9F2B9}
+.tensor-cell.scalar{min-width:90px;min-height:90px;font-size:33px}
+.tensor-inspect-result{display:grid;gap:7px;padding:14px;background:#174337;border:1px solid #366B55;border-radius:12px;margin:14px 0;overflow-wrap:anywhere}
+.tensor-inspect-result span{color:#BADECA;font-size:12px}
+.tensor-inspect-result strong{font-size:26px;color:#C1F1BE}
+.tensor-inspect-result small{color:#B7DAC8;font-size:11px;line-height:1.6}
+@media(max-width:1150px){.tensor-layout{grid-template-columns:1fr}}
+@media(max-width:520px){.tensor-metrics strong{font-size:16px}.tensor-metrics>div{padding:8px}.tensor-row{gap:5px}.tensor-cell{min-width:45px;min-height:50px;font-size:16px;padding:5px}}
+@media(prefers-reduced-motion:reduce){.tensor-cell{transition:none}}
+
+.forward-edge-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:10px 0 12px}
+.forward-edge-list button{min-width:0;border:1px solid #3B725C;border-radius:9px;background:#153F35;color:#CBEBDA;padding:9px 6px;font-size:10px;font-weight:650;line-height:1.5}
+.forward-edge-list button.picked{background:#8BBB92;border-color:#BFF2B5;color:#092328}
+@media(max-width:450px){.forward-edge-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Binary perceptron and logic gate lab */
+.perceptron-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(245px,.8fr);gap:14px}
+.perceptron-plot{width:100%;height:auto;display:block;max-height:330px}
+.perceptron-pairs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:6px 0 18px}
+.perceptron-pairs button{border:1px solid #397359;background:#153F36;color:#D0EEDA;border-radius:10px;padding:10px 22px;font-size:13px}
+.perceptron-pairs button.picked{background:#8BBB92;color:#082A22;font-weight:800}
+.perceptron-table{overflow:auto;width:100%}
+.perceptron-table table{border-collapse:collapse;width:100%;min-width:490px;color:#D6F2E1;font-size:12px;text-align:left}
+.perceptron-table th,.perceptron-table td{padding:12px;border-bottom:1px solid #315F4F}
+.perceptron-table thead{color:#A9D4C0;background:#15443A}
+.perceptron-table tr.selected{background:#275D47}
+@media(max-width:1100px){.perceptron-grid{grid-template-columns:1fr}}
+@media(max-width:440px){.perceptron-pairs button{padding:8px 14px}}
+
+.foundation-confusion{margin:16px 0 4px;border:1px solid #3B705B;border-radius:12px;overflow:hidden}
+.foundation-confusion>p{padding:12px 10px;margin:0;background:#143E35}
+.foundation-confusion table{border-collapse:collapse;width:100%;font-size:11px;color:#DDF4E3}
+.foundation-confusion th,.foundation-confusion td{padding:10px 7px;text-align:center;border-top:1px solid #376653;border-right:1px solid #376653}
+.foundation-confusion th{background:#173D34;font-size:10px}
+.foundation-confusion td{background:#236046;color:#EAFBEC;font-weight:750}
+.foundation-confusion td.mistake{background:#554434;color:#FDE4C1}
+@media(max-width:440px){.foundation-confusion th,.foundation-confusion td{font-size:9px;padding:8px 3px}}

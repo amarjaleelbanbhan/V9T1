@@ -111,6 +111,14 @@ export function FoundationsLab(){
             <label className="foundation-range" htmlFor="foundation-threshold"><span>Decision threshold <strong>{show(threshold)}</strong></span><input id="foundation-threshold" type="range" min="0.1" max="0.9" step="0.05" value={threshold} onChange={e=>setThreshold(Number(e.target.value))}/></label>
             <div className="foundation-metric"><span>Accuracy <small>Correct predictions ÷ total</small></span><strong data-testid="classification-accuracy">{Math.round(classification.accuracy*100)}%</strong></div>
             <p className="foundation-detail-line" data-testid="classification-correct">{classification.correct} / {classification.total} correct · False positives {classification.fp} · False negatives {classification.fn}</p>
+            <div className="foundation-metric"><span>Precision <small>TP / (TP + FP)</small></span><strong data-testid="classification-precision">{classification.precision===null?'—':Math.round(classification.precision*100)+'%'}</strong></div>
+            <div className="foundation-metric"><span>Recall <small>TP / (TP + FN)</small></span><strong data-testid="classification-recall">{classification.recall===null?'—':Math.round(classification.recall*100)+'%'}</strong></div>
+            <div className="foundation-confusion"><p className="eyebrow">CONFUSION MATRIX · ACTUAL VS PREDICTED</p>
+              <table aria-label="Confusion matrix"><thead><tr><th>Actual ↓</th><th>Predicted 0</th><th>Predicted 1</th></tr></thead>
+                <tbody><tr><th>Actual 0</th><td data-testid="classification-tn">TN {classification.tn}</td><td className="mistake" data-testid="classification-fp">FP {classification.fp}</td></tr>
+                <tr><th>Actual 1</th><td className="mistake" data-testid="classification-fn">FN {classification.fn}</td><td data-testid="classification-tp">TP {classification.tp}</td></tr></tbody>
+              </table>
+            </div>
           </>:<>
             <label className="foundation-range" htmlFor="foundation-slope"><span>Slope (m) <strong>{show(slope)}</strong></span><input id="foundation-slope" type="range" min="0" max="1.6" step="0.1" value={slope} onChange={e=>setSlope(Number(e.target.value))}/></label>
             <label className="foundation-range" htmlFor="foundation-intercept"><span>Intercept (b) <strong>{show(intercept)}</strong></span><input id="foundation-intercept" type="range" min="0" max="2" step="0.1" value={intercept} onChange={e=>setIntercept(Number(e.target.value))}/></label>

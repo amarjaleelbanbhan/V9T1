@@ -1,11 +1,14 @@
 # NeuralLab
 
-A visual-first Deep Learning classroom. This project implements three **interactive foundations, neuron, and activation lessons**, not a fully populated curriculum.
+A visual-first Deep Learning classroom. This project implements six **interactive foundations, neuron, perceptron, tensor, forward propagation and activation lessons**, not a fully populated curriculum.
 
-## First three learning milestones
+## Six interactive learning milestones
 
+- Build AND and OR perceptron decision rules, inspect the live truth table, and test the XOR limitation.
+- Explore tensor rank, shape, samples axis and real NumPy-like slicing on small JavaScript arrays.
+- Follow the full 2 → 2 → 1 dense forward pass with clickable weighted connections, editable parameters, step-by-step arithmetic, and code view.
 - Compare Sigmoid, Tanh, ReLU, Leaky ReLU and vector Softmax with a live graph, gradients and class probabilities.
-- Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, regression errors, and concept challenge.
+- Explore the Week 1 AI/ML/Deep Learning hierarchy, classification thresholds, live confusion matrix, precision/recall, regression errors, and concept challenge.
 - Edit three inputs, three weights (including negative values), and a bias.
 - Choose sigmoid, tanh, ReLU, or linear activation.
 - Watch the exact weighted contributions, sum, preactivation, and output update together.
@@ -44,3 +47,7 @@ Use the selected green/teal design: `#092328` background, `#12544F` secondary su
 ## Curriculum source
 
 The module list follows the *Deep Learning Course Outline — Sukkur IBA University, Khairpur Campus, Fall 2026*. Other modules are shown as planned and are not represented as completed lessons.
+
+## Lecture coverage
+
+The complete seven-lecture requirements are preserved in [`docs/LECTURE_TOPIC_INVENTORY.md`](docs/LECTURE_TOPIC_INVENTORY.md). Use [`docs/LECTURE_IMPLEMENTATION_MATRIX.md`](docs/LECTURE_IMPLEMENTATION_MATRIX.md) to distinguish implemented interactive material from topics awaiting implementation. Implementation/test checkpoints are in [`docs/IMPLEMENTATION_PROGRESS.md`](docs/IMPLEMENTATION_PROGRESS.md).

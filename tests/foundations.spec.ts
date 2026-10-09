@@ -8,9 +8,15 @@ test('Week 1: concept family, classification, regression, challenge and lesson n
   await page.getByRole('button',{name:'ML',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Machine Learning',exact:true})).toBeVisible();
   await expect(page.getByTestId('classification-accuracy')).toHaveText('100%');
+  await expect(page.getByTestId('classification-precision')).toHaveText('100%');
+  await expect(page.getByTestId('classification-recall')).toHaveText('100%');
+  await expect(page.getByTestId('classification-tp')).toHaveText('TP 3');
   const threshold=page.getByRole('slider',{name:/Decision threshold/});
   await threshold.focus();await threshold.press('End');
   await expect(page.getByTestId('classification-correct')).toContainText('4 / 6 correct');
+  await expect(page.getByTestId('classification-precision')).toHaveText('100%');
+  await expect(page.getByTestId('classification-recall')).toHaveText('33%');
+  await expect(page.getByTestId('classification-fn')).toHaveText('FN 2');
   await page.getByRole('button',{name:/Regression · number/}).click();
   await expect(page.getByTestId('regression-mae')).toHaveText('0.8');
   await expect(page.getByTestId('regression-mse')).toHaveText('0.72');

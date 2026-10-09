@@ -1,0 +1,34 @@
+import {test,expect} from '@playwright/test';
+test('multi-layer forward network shows actual math for selected weighted connection',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/');
+ await page.getByRole('button',{name:/Forward Propagation/}).click();
+ await expect(page.getByRole('heading',{name:/Follow every signal/})).toBeVisible();
+ await expect(page.getByTestId('forward-output')).toHaveText('0.54');
+ await page.getByRole('button',{name:'Inspect Input 2 to Hidden 1'}).click();
+ await expect(page.getByTestId('selected-edge')).toHaveText('Input 2 → Hidden 1');
+ await expect(page.getByTestId('edge-calculation')).toContainText('2 × -0.2 = -0.4');
+ const slider=page.getByRole('slider',{name:/Connection weight/});
+ await slider.focus();await slider.press('ArrowRight');
+ await expect(page.getByTestId('edge-calculation')).toContainText('2 × -0.1 = -0.2');
+ await expect(page.getByTestId('forward-output')).toHaveText('0.599');
+ await page.getByRole('button',{name:/2. Hidden sums/}).click();
+ await expect(page.getByTestId('forward-inspector')).toContainText('Hidden 1');
+ await page.getByRole('tab',{name:'Code'}).click();
+ await expect(page.getByText(/The actual implementation runs TypeScript/)).toBeVisible();
+ await page.getByRole('button',{name:'Reset forward pass'}).click();
+ await expect(page.getByTestId('forward-output')).toHaveText('0.54');
+ await page.getByRole('button',{name:/Input → hidden → output/}).click();
+ await expect(page.getByRole('status')).toContainText('Correct');
+ expect(errors).toEqual([]);
+});
+test('forward-pass graph and sliders fit 390px mobile view',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto('/');
+ await page.getByRole('button',{name:'Toggle lesson navigation'}).click();
+ await page.getByRole('button',{name:/Forward Propagation/}).click();
+ await expect(page.getByRole('heading',{name:/Follow every signal/})).toBeVisible();
+ await expect(page.getByRole('slider',{name:/Input x1/})).toBeVisible();
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+ expect(overflow).toBeLessThanOrEqual(1);
+});

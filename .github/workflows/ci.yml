@@ -1,7 +1,7 @@
 name: NeuralLab CI
 on:
   push:
-    branches: [main, feat/neurallab-foundation]
+    branches: ['**']
   pull_request:
   workflow_dispatch:
 jobs:
