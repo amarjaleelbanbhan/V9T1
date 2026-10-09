@@ -1,25 +1,39 @@
-/* Fixed trusted NumPy program only. A Worker is not an arbitrary-code security sandbox. */
+/* Executes two fixed trusted examples. Worker isolation is not a general Python sandbox. */
 self.onmessage=async ({data})=>{
  try {
   const values=data.values;
-  if(!Array.isArray(values)||values.length!==2||values.some(row=>!Array.isArray(row)||row.length!==3||row.some(n=>typeof n!=='number'||!Number.isFinite(n)||Math.abs(n)>1e6)))throw Error('Invalid matrix');
+  const example=data.example??'array';
+  const bounded=n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=1e6;
+  if(example==='array'){
+   if(!Array.isArray(values)||values.length!==2||values.some(row=>!Array.isArray(row)||row.length!==3||row.some(n=>!bounded(n))))throw Error('Invalid matrix');
+  }else if(example==='variables'){
+   if(!Array.isArray(values)||values.length!==2||values.some(n=>!bounded(n)))throw Error('Invalid scalar inputs');
+  }else throw Error('Unknown example');
+  const source=example==='array'
+   ? 'import numpy as np\nx = np.array(values, dtype=np.float32)\nprint(x.shape)\nprint(x.dtype)\nprint(x.nbytes)'
+   : [`x = ${JSON.stringify(values[0])}`,`factor = ${JSON.stringify(values[1])}`,'product = x * factor','x = x + 1','print(product)','print(x)'].join('\n');
   importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js');
   const py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});
-  await py.loadPackage('numpy');
+  if(example==='array')await py.loadPackage('numpy');
   py.globals.set('values_json',JSON.stringify(values));
+  py.globals.set('trusted_source',source);
   const result=await py.runPythonAsync(`
 import json, sys, io
 values = json.loads(values_json)
-source = 'import numpy as np\\nx = np.array(values, dtype=np.float32)\\nprint(x.shape)\\nprint(x.dtype)\\nprint(x.nbytes)'
+source = trusted_source
 frames = []
 namespace = {'values': values}
 output = io.StringIO()
-def snapshot():
+def tensor_snapshot():
     x = namespace.get('x')
-    return None if x is None else {'shape': list(x.shape), 'rank': x.ndim, 'dtype': str(x.dtype), 'values': x.tolist(), 'payload_bytes': x.nbytes}
+    return None if not hasattr(x, 'shape') else {'shape': list(x.shape), 'rank': x.ndim, 'dtype': str(x.dtype), 'values': x.tolist(), 'payload_bytes': x.nbytes}
+def scalar_snapshot():
+    return {name: {'value': value, 'type': type(value).__name__} for name, value in namespace.items() if name in ('x', 'factor', 'product') and type(value) in (int, float)}
+def capture(line, phase):
+    frames.append({'line': line, 'phase': phase, 'tensor': tensor_snapshot(), 'variables': scalar_snapshot(), 'stdout': output.getvalue()})
 def trace(frame, event, arg):
     if frame.f_code.co_filename == '<neurallab>' and event == 'line':
-        frames.append({'line': frame.f_lineno, 'phase': 'before-line', 'tensor': snapshot(), 'stdout': output.getvalue()})
+        capture(frame.f_lineno, 'before-line')
     return trace
 old_stdout = sys.stdout
 old_trace = sys.gettrace()
@@ -30,7 +44,7 @@ try:
 finally:
     sys.settrace(old_trace)
     sys.stdout = old_stdout
-frames.append({'line': 5, 'phase': 'complete', 'tensor': snapshot(), 'stdout': output.getvalue()})
+capture(len(source.splitlines()), 'complete')
 json.dumps({'version': 1, 'mode': 'executed-python', 'source': source, 'frames': frames})
 `);
   self.postMessage({trace:JSON.parse(result)});

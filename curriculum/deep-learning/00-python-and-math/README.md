@@ -67,3 +67,7 @@ Correct numerical answer with reasoning; independently solve a changed-input pro
 
 ## Sources and reuse
 SRC-NUMPY, SRC-PANDAS, SRC-D2L. See [source catalog](../SOURCE_CATALOG.md). Content and toy examples here are original. No course figures, datasets or question banks are republished. Advanced topics need lesson-level source review before shipping.
+
+## Implemented sublesson
+
+[Python Variables and Data Flow](lessons/variables-and-data-flow.md) (`dl-00-002-variables`, route `python-basics`) is available. It covers ordered numeric assignments and bounded transfer practice; the remaining chapter is still specified.

@@ -193,6 +193,18 @@
       "comparison": "Acceptance criteria; automated checks do not prove conformance",
       "verified_date": "2026-10-09",
       "verification": "official page retrieved"
+    },
+    {
+      "id": "SRC-PYTHON",
+      "name": "Python 3.12 introduction",
+      "author": "Python documentation contributors",
+      "url": "https://docs.python.org/3.12/tutorial/introduction.html",
+      "topics": "Assignment, numbers, expressions and printed output",
+      "level": "beginner",
+      "reuse": "License page inspected; no excerpts/assets imported; original lesson with reference link",
+      "comparison": "Precise language behavior; the tutorial alone is not a zero-background visual course",
+      "verified_date": "2026-10-09",
+      "verification": "official version-specific page and license retrieved"
     }
   ],
   "chapters": [
@@ -205,7 +217,8 @@
       "source_refs": [
         "SRC-NUMPY",
         "SRC-PANDAS",
-        "SRC-D2L"
+        "SRC-D2L",
+        "SRC-PYTHON"
       ],
       "lesson_ids": [
         "dl-00-001",
@@ -215,7 +228,8 @@
         "dl-00-005",
         "dl-00-006",
         "dl-00-007",
-        "dl-00-008"
+        "dl-00-008",
+        "dl-00-002-variables"
       ],
       "status": "specified",
       "definition": "A tensor is an indexed collection of numbers; shape lists axis lengths.",
@@ -3114,6 +3128,24 @@
       ],
       "visual_priority": "high",
       "estimated_minutes": 35
+    },
+    {
+      "id": "dl-00-002-variables",
+      "title": "Python Variables and Data Flow",
+      "chapter": "CH-00",
+      "parent_id": "dl-00-002",
+      "prerequisites": [
+        "dl-00-001"
+      ],
+      "status": "implemented",
+      "source_refs": [
+        "SRC-PYTHON"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 25,
+      "route_id": "python-basics",
+      "document": "00-python-and-math/lessons/variables-and-data-flow.md",
+      "scope": "Numeric assignment sublesson only; loops/functions/objects are not implemented"
     }
   ],
   "assessments": [
@@ -3429,6 +3461,23 @@
       "status": "draft-needs-second-review",
       "provenance": "original",
       "license": "project licensing decision pending"
+    },
+    {
+      "id": "Q-00-VARIABLES-001",
+      "chapter_id": "CH-00",
+      "lesson_id": "dl-00-002-variables",
+      "kind": "prediction-and-transfer",
+      "difficulty": "beginner",
+      "prompt": "Predict product for x=2, factor=3; then x=-2, factor=4. Explain why changing x later does not recalculate product.",
+      "solution": "6 then -8; assignments store the earlier evaluated result.",
+      "explanation": "The multiplication runs before x is reassigned. Future assignment does not rerun earlier instructions.",
+      "prerequisites": [
+        "dl-00-001"
+      ],
+      "status": "implemented-bounded",
+      "provenance": "original",
+      "license": "project licensing decision pending",
+      "grading": "Actual captured Python result; positive and negative transfer runs plus final-step concept answer; session only"
     }
   ],
   "visualizations": [
