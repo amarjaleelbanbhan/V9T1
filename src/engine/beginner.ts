@@ -1,4 +1,5 @@
 import type {Calculation,Stage} from '../course/types';
+function halfRound(x:number){if(x===0)return x;const sign=Math.sign(x),v=Math.abs(x);if(v>65504)throw Error('Value exceeds finite float16 range.');const exp=Math.floor(Math.log2(v));const unit=2**Math.max(-24,exp-10);const q=v/unit;const low=Math.floor(q),fraction=q-low;const rounded=fraction>.5?low+1:fraction<.5?low:low%2===0?low:low+1;return sign*rounded*unit;}
 const sum=(v:number[])=>v.reduce((a,b)=>a+b,0);const mean=(v:number[])=>sum(v)/v.length;
 export function calculate(model:string,p:readonly number[]):Calculation{
  if(!p.length||p.some(v=>!Number.isFinite(v)||Math.abs(v)>1e6))throw Error('Use finite inputs within ±1,000,000.');
@@ -7,7 +8,7 @@ export function calculate(model:string,p:readonly number[]):Calculation{
  switch(model){
  case 'program':step('Read x',a);step('Multiply by factor',a*b);result=a*b+c;step('Add offset',result);break;
  case 'positive-sum':for(const v of p)step(v>0?'Include positive item':'Skip nonpositive item',v);result=sum(p.filter(v=>v>0));break;
- case 'memory':step('Elements',a*b);step('Bytes per element',c);result=a*b*c;step('Payload bytes; overhead excluded',result);cells=Array.from({length:Math.min(8,a)},()=>Array.from({length:Math.min(8,b)},()=>c));break;
+ case 'memory':if(![a,b].every(v=>Number.isInteger(v)&&v>0&&v<=64)||![1,2,4,8].includes(c))throw Error('Use dimensions 1–64 and 1, 2, 4 or 8 bytes per element.');step('Elements',a*b);step('Bytes per element',c);result=a*b*c;step('Payload bytes; overhead excluded',result);cells=Array.from({length:Math.min(8,a)},()=>Array.from({length:Math.min(8,b)},()=>c));break;
  case 'clean':step('Raw rows',`${a}, missing, ${b}, ${b}`);step('Drop missing and exact duplicate',`${a}, ${b}`);result=a===b?a:(a+b)/2;step('Mean of cleaned rows',result);break;
  case 'line':step('Slope × input',a*b);step('Intercept',c);result=a*b+c;curve=Array.from({length:21},(_,i)=>{const x=i/2-5;return [x,b*x+c];});break;
  case 'mean':step('Sum',sum([...p]));step('Count',p.length);result=mean([...p]);break;
@@ -23,6 +24,22 @@ export function calculate(model:string,p:readonly number[]):Calculation{
  case 'f1':if(p.some(v=>v<0)||2*a+b+c===0)throw Error('Nonnegative counts with nonzero F1 denominator required.');step('TP',a);step('FP',b);step('FN',c);step('Precision',a+b?a/(a+b):'undefined');step('Recall',a+c?a/(a+c):'undefined');result=2*a/(2*a+b+c);cells=[[a,b],[c,0]];break;
  case 'gap':step('Training loss',a);step('Validation loss',b);result=b-a;step('Generalization gap on these samples',result);break;
  case 'history':step('1958', 'Perceptron: a trainable linear threshold unit');step('1986','Backpropagation popularized for multilayer networks');step('2012','AlexNet demonstrated large-scale vision success');result=a;break;
+
+ case 'perceptron':{const inputs=[[0,0],[0,1],[1,0],[1,1]],targets=[0,1,1,0];const outputs=inputs.map(([x,y])=>Number(a*x+b*y+c>=0));cells=inputs.map((v,i)=>[...v,outputs[i],targets[i]]);outputs.forEach((v,i)=>step(`(${inputs[i]}) → predicted / XOR`,`${v} / ${targets[i]}`));result=outputs.filter((v,i)=>v===targets[i]).length;break;}
+ case 'dense':step('Input 1 contribution',a*b);step('Input 2 contribution',c*d);step('Bias',p[4]);result=a*b+c*d+p[4];break;
+ case 'activations':if(b<0||b>1)throw Error('Use a negative slope between zero and one.');step('Sigmoid',a>=0?1/(1+Math.exp(-a)):Math.exp(a)/(1+Math.exp(a)));step('Tanh',Math.tanh(a));step('ReLU',Math.max(0,a));result=a>=0?a:b*a;step('Leaky ReLU',result);break;
+ case 'softmax':{const m=Math.max(a,b),e1=Math.exp(a-m),e2=Math.exp(b-m);step('Subtract maximum from both logits',`${a-m}, ${b-m}`);step('Exponentials',`${e1}, ${e2}`);step('Normalizer',e1+e2);result=e1/(e1+e2);cells=[[result,1-result]];break;}
+ case 'he':if(a<=0)throw Error('Fan-in must be positive.');step('Fan-in',a);step('He variance',2/a);result=Math.sqrt(2/a);break;
+ case 'broadcast':cells=[[a+c,b+c],[a+d,b+d]];step('Matrix shape','(2, 2)');step('Column shape','(2, 1), expands across columns');cells.forEach((r,i)=>step(`Output row ${i}`,r.join(', ')));result=b+d;break;
+ case 'slice':{const v=[10,20,30,40];if(!Number.isInteger(a)||!Number.isInteger(b)||a<0||b>4||a>b)throw Error('Use integer slice bounds 0 ≤ start ≤ stop ≤ 4.');const chosen=v.slice(a,b);step('Original',v.join(', '));step('Selected; stop excluded',chosen.join(', ')||'empty');result=sum(chosen);cells=[chosen];break;}
+ case 'view':{if(!Number.isInteger(a)||a<0||a>2)throw Error('Use an index from 0 to 2.');const original=[1,2,3];const alias=original;alias[a]=b;step('Before','1, 2, 3');step('Write through alias',`index ${a} = ${b}`);step('Original after write',original.join(', '));cells=[original];result=sum(original);break;}
+ case 'precision':if(![16,32,64].includes(b))throw Error('Choose 16, 32 or 64 bits.');step('Requested number',a);step('Format bits',b);result=b===16?halfRound(a):b===32?Math.fround(a):a;step('Rounded represented number',result);step('Rounding error',result-a);break;
+ case 'device':if(![a,b].every(v=>v===0||v===1))throw Error('Use zero for CPU or one for GPU.');step('CPU tensor device',a===0?'CPU':'GPU');step('Other tensor device',b===0?'CPU':'GPU');result=Number(a===b);step('Operation allowed without device transfer',result);break;
+ case 'autograd':step('u = x × x',a*a);step('dy/du',b);step('du/dx',2*a);result=2*a*b;step('Gradient paths add; y = scale × x²',result);break;
+ case 'dense-shape':if(p.some(v=>v<1||!Number.isInteger(v)||v>64))throw Error('Use integer dimensions from 1 to 64.');step('X shape',`(${a}, ${b})`);step('W shape',`(${b}, ${c})`);step('Y shape',`(${a}, ${c})`);result=a*c;cells=Array.from({length:Math.min(a,8)},()=>Array(Math.min(c,8)).fill(0));break;
+ case 'matmul':{const A=[[a,b],[c,d]],B=[[1,2],[3,4]];cells=A.map(r=>B[0].map((_,j)=>sum(r.map((v,k)=>v*B[k][j]))));step('First row dot first column',cells[0][0]);step('First row dot second column',cells[0][1]);step('Second row dot first column',cells[1][0]);result=cells[1][1];break;}
+ case 'compose':{const hidden=Math.max(0,a*b+c);step('Hidden preactivation',a*b+c);step('Hidden ReLU',hidden);result=hidden*d+p[4];step('Output affine transformation',result);break;}
+ case 'dropout':if(b<0||b>=1||![0,1].includes(c))throw Error('Drop probability must be [0,1), mask zero or one.');step('Input activation',a);step('Keep probability',1-b);step('Fixed teaching mask',c);result=a*c/(1-b);step('Training output; inference returns input',result);break;
  default:throw Error('Unknown calculation model: '+model);
  }
  if(!Number.isFinite(result))throw Error('Calculation overflow.');step('Result',result);return {result,stages,cells,curve};

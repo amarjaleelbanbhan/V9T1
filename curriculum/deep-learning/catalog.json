@@ -299,7 +299,7 @@
         "dl-02-006",
         "dl-02-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "Weights scale inputs; bias shifts the activation threshold.",
       "formula": "a = max(0, sum(x_i*w_i)+b)",
       "example": "x=[1,2], w=[2,-3], b=1: z=-3 and ReLU output=0.",
@@ -332,7 +332,7 @@
         "dl-03-006",
         "dl-03-007"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "Rank counts axes; element count is the product of shape dimensions.",
       "formula": "payload_bytes = product(shape) * itemsize",
       "example": "A 2 by 3 float32 array has rank 2 and 24 payload bytes.",
@@ -364,7 +364,7 @@
         "dl-04-005",
         "dl-04-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "definition": "A forward pass applies layers to obtain predictions.",
       "formula": "H = f(XW + b)",
       "example": "[1,2] dot [3,4] plus 1 produces 12 before activation.",
@@ -1155,13 +1155,15 @@
         "CH-00",
         "CH-01"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-001.md"
     },
     {
       "id": "dl-02-002",
@@ -1170,13 +1172,15 @@
       "prerequisites": [
         "dl-02-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-002.md"
     },
     {
       "id": "dl-02-003",
@@ -1185,13 +1189,15 @@
       "prerequisites": [
         "dl-02-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-003.md"
     },
     {
       "id": "dl-02-004",
@@ -1200,13 +1206,15 @@
       "prerequisites": [
         "dl-02-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-004.md"
     },
     {
       "id": "dl-02-005",
@@ -1215,13 +1223,15 @@
       "prerequisites": [
         "dl-02-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-005.md"
     },
     {
       "id": "dl-02-006",
@@ -1230,13 +1240,15 @@
       "prerequisites": [
         "dl-02-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-006.md"
     },
     {
       "id": "dl-02-007",
@@ -1245,13 +1257,15 @@
       "prerequisites": [
         "dl-02-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "02-neural-network-basics/lessons/dl-02-007.md"
     },
     {
       "id": "dl-03-001",
@@ -1260,14 +1274,16 @@
       "prerequisites": [
         "CH-00"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-001.md"
     },
     {
       "id": "dl-03-002",
@@ -1276,14 +1292,16 @@
       "prerequisites": [
         "dl-03-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-002.md"
     },
     {
       "id": "dl-03-003",
@@ -1292,14 +1310,16 @@
       "prerequisites": [
         "dl-03-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-003.md"
     },
     {
       "id": "dl-03-004",
@@ -1308,14 +1328,16 @@
       "prerequisites": [
         "dl-03-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-004.md"
     },
     {
       "id": "dl-03-005",
@@ -1324,14 +1346,16 @@
       "prerequisites": [
         "dl-03-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-005.md"
     },
     {
       "id": "dl-03-006",
@@ -1340,14 +1364,16 @@
       "prerequisites": [
         "dl-03-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-006.md"
     },
     {
       "id": "dl-03-007",
@@ -1356,14 +1382,16 @@
       "prerequisites": [
         "dl-03-006"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-NUMPY",
         "SRC-TORCH",
         "SRC-TF"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "03-tensors-and-computation/lessons/dl-03-007.md"
     },
     {
       "id": "dl-04-001",
@@ -1373,13 +1401,15 @@
         "CH-02",
         "CH-03"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "04-forward-propagation/lessons/dl-04-001.md"
     },
     {
       "id": "dl-04-002",
@@ -1388,13 +1418,15 @@
       "prerequisites": [
         "dl-04-001"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "04-forward-propagation/lessons/dl-04-002.md"
     },
     {
       "id": "dl-04-003",
@@ -1403,13 +1435,15 @@
       "prerequisites": [
         "dl-04-002"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "04-forward-propagation/lessons/dl-04-003.md"
     },
     {
       "id": "dl-04-004",
@@ -1418,13 +1452,15 @@
       "prerequisites": [
         "dl-04-003"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "04-forward-propagation/lessons/dl-04-004.md"
     },
     {
       "id": "dl-04-005",
@@ -1433,13 +1469,15 @@
       "prerequisites": [
         "dl-04-004"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "04-forward-propagation/lessons/dl-04-005.md"
     },
     {
       "id": "dl-04-006",
@@ -1448,13 +1486,15 @@
       "prerequisites": [
         "dl-04-005"
       ],
-      "status": "specified",
+      "status": "implemented",
       "source_refs": [
         "SRC-D2L",
         "SRC-CS231N"
       ],
       "visual_priority": "high",
-      "estimated_minutes": 35
+      "estimated_minutes": 35,
+      "route": "beginner",
+      "document": "04-forward-propagation/lessons/dl-04-006.md"
     },
     {
       "id": "dl-05-001",
