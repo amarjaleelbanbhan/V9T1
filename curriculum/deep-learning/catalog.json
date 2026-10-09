@@ -205,6 +205,42 @@
       "comparison": "Precise language behavior; the tutorial alone is not a zero-background visual course",
       "verified_date": "2026-10-09",
       "verification": "official version-specific page and license retrieved"
+    },
+    {
+      "id": "SRC-ROSENBLATT",
+      "name": "Perceptron paper (1958)",
+      "author": "Frank Rosenblatt",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/13602029/",
+      "topics": "Perceptron history",
+      "level": "beginner",
+      "reuse": "Link and original historical synthesis only; no figures or paper text copied",
+      "comparison": "Primary milestone evidence; not a beginner teaching sequence",
+      "verified_date": "2026-10-09",
+      "verification": "PubMed metadata retrieved; DOI access blocked"
+    },
+    {
+      "id": "SRC-BACKPROP",
+      "name": "Backpropagation paper (1986)",
+      "author": "Rumelhart, Hinton, Williams",
+      "url": "https://www.nature.com/articles/323533a0",
+      "topics": "Multilayer learning history",
+      "level": "beginner",
+      "reuse": "Link and original historical synthesis only; no figures or paper text copied",
+      "comparison": "Primary milestone evidence; not a beginner teaching sequence",
+      "verified_date": "2026-10-09",
+      "verification": "Publisher search entry retrieved; direct page access blocked"
+    },
+    {
+      "id": "SRC-ALEXNET",
+      "name": "AlexNet paper (2012)",
+      "author": "Krizhevsky, Sutskever, Hinton",
+      "url": "https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html",
+      "topics": "Image recognition history",
+      "level": "beginner",
+      "reuse": "Link and original historical synthesis only; no figures or paper text copied",
+      "comparison": "Primary milestone evidence; not a beginner teaching sequence",
+      "verified_date": "2026-10-09",
+      "verification": "Official NeurIPS proceedings retrieved"
     }
   ],
   "chapters": [
@@ -233,7 +269,7 @@
         "dl-00-002-flow"
       ],
       "status": "implemented",
-      "definition": "A tensor is an indexed collection of numbers; shape lists axis lengths.",
+      "definition": "Programs transform inputs; data, algebra, statistics and derivatives support later model training.",
       "formula": "z = sum(x_i * w_i) + b",
       "example": "x=[2,3], w=[4,-1], b=1 gives z=6.",
       "python": "x=[2,3]\nw=[4,-1]\nz=sum(a*b for a,b in zip(x,w))+1\nassert z == 6",
@@ -253,7 +289,10 @@
       ],
       "source_refs": [
         "SRC-GOOGLE",
-        "SRC-SKLEARN"
+        "SRC-SKLEARN",
+        "SRC-ROSENBLATT",
+        "SRC-BACKPROP",
+        "SRC-ALEXNET"
       ],
       "lesson_ids": [
         "dl-01-001",
@@ -1139,8 +1178,9 @@
       ],
       "status": "implemented",
       "source_refs": [
-        "SRC-GOOGLE",
-        "SRC-SKLEARN"
+        "SRC-ROSENBLATT",
+        "SRC-BACKPROP",
+        "SRC-ALEXNET"
       ],
       "visual_priority": "high",
       "estimated_minutes": 35,

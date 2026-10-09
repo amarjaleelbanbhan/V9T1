@@ -1,3 +1,11 @@
+# Current implementation checkpoint
+
+See [BEGINNER_COMPLETION.md](BEGINNER_COMPLETION.md) for the current 60-topic beginner path, verification and boundaries. PRs #8–12 supersede the historical implementation counts and green palette below.
+
+---
+
+## Historical checkpoint (preserved for provenance)
+
 # NeuralLab implementation checkpoint — 2026-10-09
 
 ## GitHub scope
@@ -46,3 +54,4 @@ https://github.com/amarjaleelbanbhan/V9T1/actions/runs/37955635021
 **Parallel later syllabus milestone**: CNN convolution/pooling (Week 8); after that a genuinely trained ANN with train/test split, loss/accuracy plots, then MNIST and IMDB workflows. Additional unresolved topics remain in coverage matrix.
 
 Continue the established inspect → implement → test → fix → verify → checkpoint workflow. Work on new feature branches after review/merge; do not automatically merge new PRs or rewrite stable modules.
+
