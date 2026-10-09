@@ -1,0 +1,1165 @@
+[
+  {
+    "id": "dl-02-001",
+    "chapter": "CH-02",
+    "title": "Biological analogy limitations",
+    "terms": [
+      [
+        "Artificial neuron",
+        "A numerical weighted sum and activation."
+      ],
+      [
+        "Biological neuron",
+        "A living cell with much richer dynamics."
+      ]
+    ],
+    "explanation": "The neuron analogy motivates connected units but does not make a network a literal brain. Our unit calculates z = wx + b. Real biological neurons involve temporal signals, chemistry and many mechanisms absent here. Name the numerical operation precisely instead of claiming human-like understanding from a diagram.",
+    "why": "A precise model is easier to reason about than an exaggerated analogy.",
+    "formula": "z = w \u00d7 x + b",
+    "model": "line",
+    "labels": [
+      "Input",
+      "Weight",
+      "Bias"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          1
+        ],
+        "expected": 7
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1,
+          3,
+          1
+        ],
+        "expected": -2
+      }
+    ],
+    "target": "preactivation z",
+    "question": "Does this calculation reproduce a complete biological neuron?",
+    "choices": [
+      "No; it is a simplified mathematical unit",
+      "Yes; the weighted sum models all biological mechanisms"
+    ],
+    "correct": 0,
+    "reason": "The chosen equation defines only a small computational model.",
+    "mistake": "Treating biological vocabulary as proof of intelligence.",
+    "debug": "Identify three biological mechanisms absent from this equation.",
+    "project": "Explain a numerical neuron to someone without using the word brain.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "neuron"
+  },
+  {
+    "id": "dl-02-002",
+    "chapter": "CH-02",
+    "title": "Perceptron and XOR",
+    "terms": [
+      [
+        "Perceptron",
+        "A weighted sum followed by a threshold."
+      ],
+      [
+        "Linear boundary",
+        "A straight separating line in two dimensions."
+      ],
+      [
+        "XOR",
+        "One if exactly one binary input is one."
+      ]
+    ],
+    "explanation": "For XOR, targets for (0,0),(0,1),(1,0),(1,1) are 0,1,1,0. A single linear threshold cannot separate the two positive corners from both negatives. Inspect all four predictions. Changing bias can improve one corner while worsening another; hidden nonlinear units can solve the problem.",
+    "why": "This limitation motivates multilayer networks.",
+    "formula": "prediction = 1 if w\u2081x\u2081 + w\u2082x\u2082 + b \u2265 0",
+    "model": "perceptron",
+    "labels": [
+      "Weight 1",
+      "Weight 2",
+      "Bias"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          1,
+          -0.5
+        ],
+        "expected": 3
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          1,
+          -1.5
+        ],
+        "expected": 1
+      }
+    ],
+    "target": "number of correct XOR predictions",
+    "question": "Can any single linear threshold classify all four XOR corners?",
+    "choices": [
+      "Yes; simply increase the bias enough",
+      "No; they are not linearly separable"
+    ],
+    "correct": 1,
+    "reason": "The positive and negative corners are interleaved; one straight boundary cannot separate them.",
+    "mistake": "Checking only two of the four truth-table rows.",
+    "debug": "The OR preset gets three XOR cases right, but still fails (1,1).",
+    "project": "Construct AND and OR gates, then combine hidden gates to represent XOR.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "perceptron"
+  },
+  {
+    "id": "dl-02-003",
+    "chapter": "CH-02",
+    "title": "Weights and biases",
+    "terms": [
+      [
+        "Weight",
+        "Scales one input contribution."
+      ],
+      [
+        "Bias",
+        "An additive offset independent of the input."
+      ]
+    ],
+    "explanation": "Multiply each input by its corresponding weight, sum, then add the bias once. A negative weight reverses the sign of its contribution. Bias can shift a decision boundary even when inputs are zero. Changing a weight has no effect when its input is zero.",
+    "why": "Weights express sensitivity to inputs; bias sets a baseline.",
+    "formula": "z = x\u2081w\u2081 + x\u2082w\u2082 + b",
+    "model": "dense",
+    "labels": [
+      "x\u2081",
+      "w\u2081",
+      "x\u2082",
+      "w\u2082",
+      "Bias"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          1,
+          -1,
+          2
+        ],
+        "expected": 7
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -2,
+          3,
+          1,
+          -1,
+          2
+        ],
+        "expected": -5
+      }
+    ],
+    "target": "preactivation",
+    "question": "What contributes when all inputs equal zero?",
+    "choices": [
+      "The bias",
+      "The sum of the weights alone"
+    ],
+    "correct": 0,
+    "reason": "Each weighted input becomes zero, leaving only the offset.",
+    "mistake": "Multiplying the bias by an input.",
+    "debug": "Set both inputs to zero in the sandbox and inspect the contributions.",
+    "project": "Choose weights for z = 2x\u2081 - x\u2082 + 3 and test a negative input.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "neuron"
+  },
+  {
+    "id": "dl-02-004",
+    "chapter": "CH-02",
+    "title": "Linear layers",
+    "terms": [
+      [
+        "Affine layer",
+        "A linear transformation plus a bias."
+      ],
+      [
+        "Output unit",
+        "One dot product with a column of weights, plus its bias."
+      ]
+    ],
+    "explanation": "A dense layer applies the same affine operation to every example. Multiple output units use different weight columns. Our panel computes one output from two inputs; the forward lab extends this to more layers. Two affine layers without a nonlinear activation combine into one affine transformation.",
+    "why": "The layer equation is the foundation of neural computation.",
+    "formula": "z = x\u2081w\u2081 + x\u2082w\u2082 + b",
+    "model": "dense",
+    "labels": [
+      "x\u2081",
+      "w\u2081",
+      "x\u2082",
+      "w\u2082",
+      "Bias"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          2,
+          2,
+          -3,
+          1
+        ],
+        "expected": -3
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          2,
+          2,
+          -3,
+          5
+        ],
+        "expected": 1
+      }
+    ],
+    "target": "layer output",
+    "question": "Why insert nonlinear activations between dense layers?",
+    "choices": [
+      "To make matrix dimensions disappear",
+      "To represent functions beyond one affine transformation"
+    ],
+    "correct": 1,
+    "reason": "Composing affine transformations remains affine; nonlinearities expand expressive power.",
+    "mistake": "Calling every affine output a probability.",
+    "debug": "A raw affine output can be negative or exceed one.",
+    "project": "Compose two affine layers on paper and simplify them into one.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "propagation"
+  },
+  {
+    "id": "dl-02-005",
+    "chapter": "CH-02",
+    "title": "Sigmoid, tanh, ReLU and leaky ReLU",
+    "terms": [
+      [
+        "Activation",
+        "A function applied to a preactivation."
+      ],
+      [
+        "Saturation",
+        "A region with very small local sensitivity."
+      ],
+      [
+        "Leaky slope",
+        "The multiplier on negative inputs."
+      ]
+    ],
+    "explanation": "Sigmoid maps to (0,1); tanh maps to (-1,1). ReLU keeps positive inputs and maps negatives to zero. Leaky ReLU retains a scaled negative branch. The panel displays all four results and asks for leaky ReLU. Sigmoid and tanh saturate at large magnitudes. ReLU has a corner at zero, where a chosen subgradient convention is needed.",
+    "why": "Nonlinear activations let stacked layers represent more than affine functions.",
+    "formula": "leaky ReLU(z) = z if z \u2265 0, otherwise \u03b1z",
+    "model": "activations",
+    "labels": [
+      "Preactivation z",
+      "Negative slope \u03b1"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          -2,
+          0.1
+        ],
+        "expected": -0.2
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          0.1
+        ],
+        "expected": 2
+      }
+    ],
+    "target": "leaky ReLU output",
+    "question": "What does ordinary ReLU return for a negative input?",
+    "choices": [
+      "Zero",
+      "The unchanged negative input"
+    ],
+    "correct": 0,
+    "reason": "Ordinary ReLU clips negatives; leaky ReLU keeps a scaled negative value.",
+    "mistake": "Using the derivative of sigmoid when the layer uses ReLU.",
+    "debug": "At z = -2, ordinary ReLU is 0 but leaky ReLU with \u03b1 = 0.1 is -0.2.",
+    "project": "Compare outputs and local derivatives at -2, 0 and 2.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "activation"
+  },
+  {
+    "id": "dl-02-006",
+    "chapter": "CH-02",
+    "title": "Stable softmax",
+    "terms": [
+      [
+        "Logit",
+        "A raw score before probability normalization."
+      ],
+      [
+        "Softmax",
+        "Exponentials normalized to sum to one."
+      ],
+      [
+        "Stabilization",
+        "Subtract a shared maximum before exponentiation."
+      ]
+    ],
+    "explanation": "Exponentiating logits like 1000 directly can overflow. Subtracting their maximum preserves softmax probabilities because the common scale cancels. For logits [1000,1001], use [-1,0]. The first probability is exp(-1)/(exp(-1)+1). Each probability depends on all logits, unlike separate scalar sigmoid outputs.",
+    "why": "Stable normalization prevents avoidable numerical failures.",
+    "formula": "p\u1d62 = exp(z\u1d62 - max(z)) / \u03a3exp(z\u2c7c - max(z))",
+    "model": "softmax",
+    "labels": [
+      "First logit",
+      "Second logit"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1000,
+          1001
+        ],
+        "expected": 0.2689414213699951
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0,
+          0
+        ],
+        "expected": 0.5
+      }
+    ],
+    "target": "first-class probability",
+    "question": "Why can the maximum be subtracted from every logit?",
+    "choices": [
+      "It changes the target class labels",
+      "The common exponential scale cancels in normalization"
+    ],
+    "correct": 1,
+    "reason": "Both numerator and denominator share the same factor; their ratio is unchanged.",
+    "mistake": "Exponentiating very large raw logits directly.",
+    "debug": "Compare [1000,1001] with [0,1]; the probabilities match.",
+    "project": "Normalize three logits [2,1,0] and verify the probabilities sum to one.",
+    "source": "https://d2l.ai/chapter_linear-classification/softmax-regression.html",
+    "lab": "activation"
+  },
+  {
+    "id": "dl-02-007",
+    "chapter": "CH-02",
+    "title": "Initialization",
+    "terms": [
+      [
+        "Fan-in",
+        "Number of incoming connections."
+      ],
+      [
+        "Symmetry",
+        "Units behaving identically because their parameters match."
+      ],
+      [
+        "He scale",
+        "A variance-based choice commonly used with ReLU."
+      ]
+    ],
+    "explanation": "Identical zero weights in a hidden layer can make units receive identical updates, preventing useful specialization. Random initialization breaks symmetry. He normal initialization uses variance 2/fan-in, hence standard deviation sqrt(2/fan-in), under its assumptions. The panel calculates the scale, not a random sample. One initializer is not suitable for every activation.",
+    "why": "Appropriate scale helps prevent unstable signals and gradients.",
+    "formula": "He standard deviation = sqrt(2/fan-in)",
+    "model": "he",
+    "labels": [
+      "Fan-in"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2
+        ],
+        "expected": 1
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          8
+        ],
+        "expected": 0.5
+      }
+    ],
+    "target": "initialization standard deviation",
+    "question": "Why avoid identical hidden-unit weights?",
+    "choices": [
+      "They can stay symmetric under identical updates",
+      "Every zero weight makes the software crash"
+    ],
+    "correct": 0,
+    "reason": "The mathematical symmetry prevents units from learning distinct features.",
+    "mistake": "Confusing variance with standard deviation.",
+    "debug": "For fan-in 8, variance is 0.25 and standard deviation is 0.5.",
+    "project": "Compare He and Xavier scale assumptions for ReLU and tanh.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html"
+  },
+  {
+    "id": "dl-03-001",
+    "chapter": "CH-03",
+    "title": "Shape, rank and dtype",
+    "terms": [
+      [
+        "Shape",
+        "Lengths of the array axes."
+      ],
+      [
+        "Rank",
+        "Number of axes, not matrix algebra rank here."
+      ],
+      [
+        "Dtype",
+        "Representation used for each element."
+      ]
+    ],
+    "explanation": "Shape (2,3) means two rows of three values. Tensor rank is two because there are two axes; there are six elements. float32 uses four payload bytes per element, giving 24 bytes. A vector of length 100 has tensor rank one. Scalar shape () has rank zero.",
+    "why": "Correct shape and dtype reasoning prevents errors before a layer runs.",
+    "formula": "payload = rows \u00d7 columns \u00d7 bytes per element",
+    "model": "memory",
+    "labels": [
+      "Rows",
+      "Columns",
+      "Bytes per element"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          4
+        ],
+        "expected": 24
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          4,
+          3,
+          8
+        ],
+        "expected": 96
+      }
+    ],
+    "target": "payload bytes",
+    "question": "What is the tensor rank of shape (4,3)?",
+    "choices": [
+      "Twelve",
+      "Two"
+    ],
+    "correct": 1,
+    "reason": "Rank counts axes; twelve is the element count.",
+    "mistake": "Confusing element count, tensor rank and matrix linear-algebra rank.",
+    "debug": "A 2\u00d73 matrix can have matrix rank at most two, but its tensor rank is always two.",
+    "project": "Run the Python NumPy inspector and verify shape, dtype and payload.",
+    "source": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+    "lab": "python"
+  },
+  {
+    "id": "dl-03-002",
+    "chapter": "CH-03",
+    "title": "Broadcasting",
+    "terms": [
+      [
+        "Broadcasting",
+        "Align trailing dimensions and expand axes of length one."
+      ],
+      [
+        "Compatible axes",
+        "Equal lengths, or at least one length equal to one."
+      ]
+    ],
+    "explanation": "A matrix of shape (2,2) can add a column of shape (2,1). Each row offset repeats across that row. For matrix rows [1,2] and [1,2], offsets [10,20] yield [11,12] and [21,22]. Shapes (2,2) and (3,) are incompatible because trailing lengths two and three cannot match.",
+    "why": "Broadcasting expresses useful repeated operations while shape mistakes can silently change meaning.",
+    "formula": "output[i,j] = matrix[i,j] + column[i,0]",
+    "model": "broadcast",
+    "labels": [
+      "Column 1 base",
+      "Column 2 base",
+      "Row 1 offset",
+      "Row 2 offset"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          2,
+          10,
+          20
+        ],
+        "expected": 22
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          3,
+          4,
+          -1,
+          2
+        ],
+        "expected": 6
+      }
+    ],
+    "target": "bottom-right output",
+    "question": "Can trailing axis lengths two and three broadcast?",
+    "choices": [
+      "No; neither is one and they differ",
+      "Yes; any two shapes can add"
+    ],
+    "correct": 0,
+    "reason": "Compatible trailing axes must match or have length one.",
+    "mistake": "Adding a row vector when a column offset was intended.",
+    "debug": "Compare (2,1) offsets with (1,2) offsets and explain the different repetition.",
+    "project": "Write the output of a 2\u00d73 matrix plus a 1\u00d73 row.",
+    "source": "https://numpy.org/doc/stable/user/basics.broadcasting.html"
+  },
+  {
+    "id": "dl-03-003",
+    "chapter": "CH-03",
+    "title": "Indexing and slicing",
+    "terms": [
+      [
+        "Index",
+        "An axis position, starting at zero."
+      ],
+      [
+        "Slice",
+        "A selected range with an exclusive stop."
+      ]
+    ],
+    "explanation": "For [10,20,30,40], slice [1:3] selects 20 and 30. It includes index one and excludes index three. Indexing may remove an axis; slicing usually retains it. Negative indices count from the end in Python, though this teaching control uses nonnegative bounds.",
+    "why": "Precise selection is necessary for batches, features and image crops.",
+    "formula": "selected sum = sum(values[start:stop])",
+    "model": "slice",
+    "labels": [
+      "Start index",
+      "Exclusive stop"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          3
+        ],
+        "expected": 50
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0,
+          2
+        ],
+        "expected": 30
+      }
+    ],
+    "target": "sum of selected values",
+    "question": "Is the stop index included in a Python slice?",
+    "choices": [
+      "Yes; it is always included",
+      "No; the stop is exclusive"
+    ],
+    "correct": 1,
+    "reason": "An exclusive stop makes adjacent slices line up without overlapping endpoints.",
+    "mistake": "Expecting [1:3] to contain three items.",
+    "debug": "Its length is stop - start = 2 for this unit-step slice.",
+    "project": "Split [10,20,30,40] into two non-overlapping slices and reconstruct it.",
+    "source": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+    "lab": "tensor"
+  },
+  {
+    "id": "dl-03-004",
+    "chapter": "CH-03",
+    "title": "Memory layout and views",
+    "terms": [
+      [
+        "View",
+        "A different interpretation of shared array memory."
+      ],
+      [
+        "Copy",
+        "Separate element storage."
+      ],
+      [
+        "Alias",
+        "Another reference to the same underlying object or memory."
+      ]
+    ],
+    "explanation": "A view can share data, so modifying it can modify the original array. A copy separates storage. Our panel uses a JavaScript alias to illustrate shared mutation of [1,2,3]; it does not claim to implement NumPy strides. In NumPy, basic slicing usually returns views while advanced indexing returns copies. Shape changes alone do not guarantee a copy.",
+    "why": "Unexpected shared mutation can corrupt inputs or cached intermediate values.",
+    "formula": "write through alias; then sum original",
+    "model": "view",
+    "labels": [
+      "Index to overwrite",
+      "New value"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          9
+        ],
+        "expected": 13
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0,
+          -1
+        ],
+        "expected": 4
+      }
+    ],
+    "target": "sum of the original after mutation",
+    "question": "Does modifying a copy necessarily modify the original?",
+    "choices": [
+      "No; copies have separate element storage",
+      "Yes; all selections share storage"
+    ],
+    "correct": 0,
+    "reason": "The distinction depends on memory sharing, not merely variable names.",
+    "mistake": "Assuming every selected array owns independent storage.",
+    "debug": "Predict the original after changing a basic NumPy slice, then compare with slice.copy().",
+    "project": "Draw shared buffers for a view and independent buffers for a copy.",
+    "source": "https://numpy.org/doc/stable/user/basics.copies.html"
+  },
+  {
+    "id": "dl-03-005",
+    "chapter": "CH-03",
+    "title": "float16, float32 and float64",
+    "terms": [
+      [
+        "Precision",
+        "How finely a format distinguishes representable values."
+      ],
+      [
+        "Rounding",
+        "Choosing a nearby representable number."
+      ],
+      [
+        "Range",
+        "Magnitudes a format can represent."
+      ]
+    ],
+    "explanation": "Finite precision means some nearby integers or decimals become the same stored value. This panel rounds to float16, float32 or JavaScript float64, using ties to even. float16 has fewer fraction bits and a smaller range; float32 balances memory and precision; float64 is useful for sensitive numerical checks. More bits increase payload but do not fix every algorithmic error.",
+    "why": "Rounding affects small updates, loss stability and gradient checks.",
+    "formula": "represented value = rounding to the selected binary format",
+    "model": "precision",
+    "labels": [
+      "Requested number",
+      "Format bits: 16, 32 or 64"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          4097,
+          16
+        ],
+        "expected": 4096
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          4097,
+          32
+        ],
+        "expected": 4097
+      }
+    ],
+    "target": "represented value",
+    "question": "Can distinct input values become equal after low-precision rounding?",
+    "choices": [
+      "No; every real number is represented exactly",
+      "Yes; the format has a finite set of values"
+    ],
+    "correct": 1,
+    "reason": "A finite bit pattern cannot represent infinitely many real numbers.",
+    "mistake": "Using low precision for a sensitive finite-difference check.",
+    "debug": "Compare 4096 and 4097 in float16; explain why one unit can disappear.",
+    "project": "Compare 16777217 in float32 and float64 and calculate the rounding error.",
+    "source": "https://numpy.org/doc/stable/user/absolute_beginners.html"
+  },
+  {
+    "id": "dl-03-006",
+    "chapter": "CH-03",
+    "title": "Device placement",
+    "terms": [
+      [
+        "Device",
+        "The processor/memory location used by a tensor."
+      ],
+      [
+        "Transfer",
+        "Moving data between devices."
+      ]
+    ],
+    "explanation": "CPU and GPU tensors generally cannot participate in the same operation without a compatible transfer. Move both model and data to the intended device. A transfer can dominate a tiny computation, so GPU is not automatically faster. Our device labels illustrate compatibility; they do not allocate real GPU tensors.",
+    "why": "Device mismatches cause runtime failures even when dimensions are correct.",
+    "formula": "compatible = one if both operands are on the same device",
+    "model": "device",
+    "labels": [
+      "First device: 0 CPU, 1 GPU",
+      "Second device: 0 CPU, 1 GPU"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          0,
+          1
+        ],
+        "expected": 0
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          1,
+          1
+        ],
+        "expected": 1
+      }
+    ],
+    "target": "compatibility flag",
+    "question": "What should be checked besides tensor shapes?",
+    "choices": [
+      "Device and dtype compatibility",
+      "Only the variable names"
+    ],
+    "correct": 0,
+    "reason": "Shape equality does not move memory or reconcile devices.",
+    "mistake": "Moving input data but leaving model parameters on CPU.",
+    "debug": "Describe the transfer needed when data is GPU and weights are CPU.",
+    "project": "Draw CPU storage, a transfer boundary and GPU computation; identify what moves.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html"
+  },
+  {
+    "id": "dl-03-007",
+    "chapter": "CH-03",
+    "title": "Autograd graphs",
+    "terms": [
+      [
+        "Graph node",
+        "An operation or value in a computation."
+      ],
+      [
+        "Gradient path",
+        "A route from a parameter to the loss."
+      ]
+    ],
+    "explanation": "For y = s \u00d7 x \u00d7 x, x appears on two multiplication inputs. Each route contributes to the derivative, so dy/dx = sx + sx = 2sx. Automatic differentiation records operations and applies their local derivative rules. It is not the same as perturbing parameters or generating a symbolic formula for every possible program.",
+    "why": "Shared parameters require adding contributions from every use.",
+    "formula": "dy/dx = s \u00d7 x + s \u00d7 x",
+    "model": "autograd",
+    "labels": [
+      "Input x",
+      "Scale s"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3
+        ],
+        "expected": 12
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1,
+          2
+        ],
+        "expected": -4
+      }
+    ],
+    "target": "dy/dx",
+    "question": "What happens when a parameter affects loss along two routes?",
+    "choices": [
+      "Keep only the last route",
+      "Add the gradient contributions from both routes"
+    ],
+    "correct": 1,
+    "reason": "The total sensitivity is the sum of path contributions.",
+    "mistake": "Forgetting one occurrence of a reused variable.",
+    "debug": "Treating x\u00d7x as if only one operand depended on x gives half the correct derivative.",
+    "project": "Draw the graph for y = 3x\u00b2 + x and calculate its derivative.",
+    "source": "https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html"
+  },
+  {
+    "id": "dl-04-001",
+    "chapter": "CH-04",
+    "title": "Dense layer shapes",
+    "terms": [
+      [
+        "Batch size",
+        "Number of examples processed together."
+      ],
+      [
+        "Input width",
+        "Number of features per example."
+      ],
+      [
+        "Output width",
+        "Number of output features."
+      ]
+    ],
+    "explanation": "Using the row-vector convention, X has shape (B,D), W has shape (D,H), and Y = XW + b has shape (B,H). A bias of shape (H,) broadcasts across B examples. The shared inner D dimensions contract. The panel counts output elements; zero cells are shape placeholders, not computed predictions.",
+    "why": "Writing shapes first catches incompatible layers early.",
+    "formula": "(B,D) @ (D,H) -> (B,H)",
+    "model": "dense-shape",
+    "labels": [
+      "Batch B",
+      "Input width D",
+      "Output width H"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          4
+        ],
+        "expected": 8
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          3,
+          4,
+          2
+        ],
+        "expected": 6
+      }
+    ],
+    "target": "number of output elements",
+    "question": "Which dimensions must match for XW?",
+    "choices": [
+      "The input width D of X and first axis of W",
+      "Batch size B and output width H"
+    ],
+    "correct": 0,
+    "reason": "The inner dimensions contract in matrix multiplication.",
+    "mistake": "Using a transposed weight convention without updating the equation.",
+    "debug": "Some libraries store W as (H,D); their forward operation uses its transpose.",
+    "project": "Track shapes through widths 3 -> 4 -> 2 for a batch of five.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "propagation"
+  },
+  {
+    "id": "dl-04-002",
+    "chapter": "CH-04",
+    "title": "Batch axis",
+    "terms": [
+      [
+        "Batch axis",
+        "The axis distinguishing examples."
+      ],
+      [
+        "Feature axis",
+        "The axis distinguishing values within an example."
+      ]
+    ],
+    "explanation": "Increasing batch size adds examples, not features or new model parameters. A batch of three rows with four features can feed the same weights as a batch of one row with four features. The output preserves the batch axis. Aggregate losses deliberately over examples; do not accidentally mix batch and feature reductions.",
+    "why": "Batch semantics determine how predictions and gradients are averaged.",
+    "formula": "output shape = (batch, output width)",
+    "model": "dense-shape",
+    "labels": [
+      "Batch B",
+      "Input width D",
+      "Output width H"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          4,
+          2
+        ],
+        "expected": 2
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          3,
+          4,
+          2
+        ],
+        "expected": 6
+      }
+    ],
+    "target": "output elements",
+    "question": "Does a larger batch automatically add model weights?",
+    "choices": [
+      "Yes; every example needs separate weights",
+      "No; examples share the same layer parameters"
+    ],
+    "correct": 1,
+    "reason": "A layer reuses its weight matrix for every row.",
+    "mistake": "Interpreting the first axis as features after batching.",
+    "debug": "Write shapes for an unbatched vector (4,) and batched inputs (3,4).",
+    "project": "Calculate parameter count for a 4-to-2 dense layer: 8 weights and 2 biases.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "tensor"
+  },
+  {
+    "id": "dl-04-003",
+    "chapter": "CH-04",
+    "title": "Matrix multiplication",
+    "terms": [
+      [
+        "Row-column product",
+        "A dot product defining one matrix output."
+      ],
+      [
+        "Inner dimension",
+        "The matched dimension summed over."
+      ]
+    ],
+    "explanation": "For A = [[1,2],[3,4]] and B = [[1,2],[3,4]], A@B is [[7,10],[15,22]]. The bottom-right result is 3\u00d72 + 4\u00d74 = 22. Elementwise multiplication would produce [[1,4],[9,16]], a different operation. The panel uses editable A and fixed B.",
+    "why": "Dense layers compute many weighted sums with matrix multiplication.",
+    "formula": "C[i,j] = \u03a3 A[i,k]B[k,j]",
+    "model": "matmul",
+    "labels": [
+      "A[0,0]",
+      "A[0,1]",
+      "A[1,0]",
+      "A[1,1]"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "expected": 22
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          0,
+          1,
+          -1
+        ],
+        "expected": -2
+      }
+    ],
+    "target": "bottom-right element",
+    "question": "Is matrix multiplication the same as multiplying matching entries?",
+    "choices": [
+      "No; each output combines a row and a column",
+      "Yes; both operations are identical"
+    ],
+    "correct": 0,
+    "reason": "The sum over the inner axis distinguishes matrix multiplication.",
+    "mistake": "Multiplying row i by row j rather than column j.",
+    "debug": "For bottom-right output, select A row one and B column one with zero-based indexing.",
+    "project": "Compute a 2\u00d73 by 3\u00d71 multiplication and annotate each term.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "propagation"
+  },
+  {
+    "id": "dl-04-004",
+    "chapter": "CH-04",
+    "title": "Layer composition",
+    "terms": [
+      [
+        "Hidden value",
+        "An intermediate representation between input and output."
+      ],
+      [
+        "Composition",
+        "Feeding one operation result into the next."
+      ]
+    ],
+    "explanation": "This small network computes hidden = ReLU(w\u2081x + b\u2081), then output = w\u2082hidden + b\u2082. With x = 2, w\u2081 = 3, b\u2081 = -1, hidden = 5. With w\u2082 = 2 and b\u2082 = 1, output = 11. An inactive hidden ReLU makes its input-dependent contribution zero.",
+    "why": "Following intermediate values explains the final prediction.",
+    "formula": "output = w\u2082 ReLU(w\u2081x + b\u2081) + b\u2082",
+    "model": "compose",
+    "labels": [
+      "x",
+      "w\u2081",
+      "b\u2081",
+      "w\u2082",
+      "b\u2082"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          3,
+          -1,
+          2,
+          1
+        ],
+        "expected": 11
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          -1,
+          3,
+          -1,
+          2,
+          1
+        ],
+        "expected": 1
+      }
+    ],
+    "target": "network output",
+    "question": "When hidden ReLU is zero, what remains at this output?",
+    "choices": [
+      "The original input x unchanged",
+      "The output bias b\u2082"
+    ],
+    "correct": 1,
+    "reason": "The weighted hidden term is zero, leaving the output offset.",
+    "mistake": "Applying the activation to the wrong layer or skipping it.",
+    "debug": "Compare the same network with hidden ReLU versus a linear hidden activation.",
+    "project": "Trace two hidden units and one output in the forward propagation lab.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "propagation"
+  },
+  {
+    "id": "dl-04-005",
+    "chapter": "CH-04",
+    "title": "Logits versus probabilities",
+    "terms": [
+      [
+        "Logit",
+        "An unrestricted raw score."
+      ],
+      [
+        "Probability",
+        "A normalized value interpreted under a model."
+      ]
+    ],
+    "explanation": "Raw logits can be negative, positive or much larger than one. Softmax converts a set of logits to nonnegative numbers summing to one. Larger logits increase relative probability, but probabilities still require calibration for reliable confidence claims. A predicted class usually selects the largest score or probability.",
+    "why": "Correct interpretation prevents treating raw scores as confidence percentages.",
+    "formula": "p\u2081 = exp(z\u2081 - max)/(exp(z\u2081 - max)+exp(z\u2082 - max))",
+    "model": "softmax",
+    "labels": [
+      "Logit 1",
+      "Logit 2"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          1,
+          0
+        ],
+        "expected": 0.7310585786300049
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          0,
+          1
+        ],
+        "expected": 0.2689414213699951
+      }
+    ],
+    "target": "first probability",
+    "question": "Can a raw logit of 3 mean probability 300%?",
+    "choices": [
+      "No; a logit is not a probability",
+      "Yes; multiplying by 100 always produces valid confidence"
+    ],
+    "correct": 0,
+    "reason": "Normalize with the model-appropriate function; probabilities cannot exceed one.",
+    "mistake": "Applying softmax twice to already normalized probabilities.",
+    "debug": "Compare argmax of [1,0] with argmax of its softmax.",
+    "project": "Compute softmax and distinguish class choice from calibrated confidence.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/index.html",
+    "lab": "activation"
+  },
+  {
+    "id": "dl-04-006",
+    "chapter": "CH-04",
+    "title": "Training versus inference",
+    "terms": [
+      [
+        "Training mode",
+        "Behavior used while learning parameters."
+      ],
+      [
+        "Inference mode",
+        "Behavior used for prediction after training."
+      ],
+      [
+        "Dropout mask",
+        "Values deciding which activations are retained."
+      ]
+    ],
+    "explanation": "Training can use randomness such as dropout and batch statistics. Inference generally disables dropout and uses learned normalization statistics. In inverted dropout, a kept activation is divided by its keep probability during training; inference returns the activation unchanged. A fixed mask is shown here for reproducibility, not sampled randomly.",
+    "why": "Forgetting the mode can produce inconsistent predictions.",
+    "formula": "training output = x \u00d7 mask/(1 - drop probability)",
+    "model": "dropout",
+    "labels": [
+      "Activation x",
+      "Drop probability",
+      "Fixed mask: 0 or 1"
+    ],
+    "cases": [
+      {
+        "name": "Worked case",
+        "values": [
+          2,
+          0.5,
+          1
+        ],
+        "expected": 4
+      },
+      {
+        "name": "Transfer case",
+        "values": [
+          2,
+          0.5,
+          0
+        ],
+        "expected": 0
+      }
+    ],
+    "target": "training-mode output",
+    "question": "What does inverted dropout do during inference?",
+    "choices": [
+      "It uses a fresh random mask every time",
+      "It returns the activation without dropping or rescaling it"
+    ],
+    "correct": 1,
+    "reason": "Training scaling already preserves the expected activation.",
+    "mistake": "Leaving the network in training mode during evaluation.",
+    "debug": "For x = 2 and drop rate 0.5, kept output is 4 or dropped output is 0; expectation is 2.",
+    "project": "Explain why inference output is 2 for both displayed training masks.",
+    "source": "https://d2l.ai/chapter_multilayer-perceptrons/dropout.html"
+  }
+]
