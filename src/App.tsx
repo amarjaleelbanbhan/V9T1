@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BrainCircuit, BookOpen, Check, ChevronRight, Code2, Compass, Eye, Focus, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
 import { computeNeuron, formatNumber, activationNames } from './engine/neuron';
 import { TIMELINE, LAST_STEP } from './engine/timeline';
-import { useLab, DEFAULT_LAB } from './store/lab';
+import { useLab } from './store/lab';
 import { NeuronScene } from './visuals/NeuronScene';
 import { NeuronDiagram } from './visuals/NeuronDiagram';
 import { ActivationPlot } from './visuals/ActivationPlot';
