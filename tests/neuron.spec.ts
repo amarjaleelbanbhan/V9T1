@@ -7,7 +7,7 @@ test('live neuron computation, controls, and 2D diagram', async ({page})=>{
   await expect(page.getByRole('heading',{name:/Inside a Neuron/})).toBeVisible();
   const output=page.getByTestId('output');
   await expect(output).toHaveText('0.957');
-  await page.getByLabel('Activation function').selectOption('relu');
+  await page.getByRole('combobox',{name:'Activation function'}).selectOption('relu');
   await expect(output).toHaveText('3.1');
   const slider=page.getByRole('slider',{name:/Input x1/});
   await slider.focus();await slider.press('ArrowRight');
