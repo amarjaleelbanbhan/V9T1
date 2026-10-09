@@ -1,1 +1,44 @@
-# V9T1
+# NeuralLab
+
+A visual-first Deep Learning classroom. This project implements one **real interactive neuron lesson**, not a fully populated curriculum.
+
+## First learning milestone
+
+- Edit three inputs, three weights (including negative values), and a bias.
+- Choose sigmoid, tanh, ReLU, or linear activation.
+- Watch the exact weighted contributions, sum, preactivation, and output update together.
+- Compare a manipulable Three.js scene with an accessible SVG diagram.
+- Play, pause, jump to, and step through six calculation stages at adjustable speed.
+- Inspect a synchronized mathematical expression or equivalent JavaScript code.
+- Predict and test the effect of increasing a weight.
+
+## Local development
+
+```bash
+npm install
+npm run dev
+npm test
+npm run build
+npm run test:e2e
+```
+
+Node.js 22+ recommended. `npm test` uses the built-in Node test runner and requires no third-party runtime dependencies. Browser visualization and production build require npm dependencies.
+
+## Architecture
+
+- `src/engine/` pure, deterministic math and timeline; testable without a browser
+- `src/store/` Zustand state as single source of truth for controls and renderers
+- `src/visuals/` Three.js scene, 2D SVG diagram, activation curve
+- `src/components/` accessible controls
+- `src/content/` course-aligned modules; future lessons explicitly marked *planned*
+- `docs/IMPLEMENTATION_PROGRESS.md` verified checkpoint and next task
+
+The calculation engine executes JavaScript in the browser. The site does **not** run a pretrained neural network, TensorFlow, or Python. All scene values derive from actual neuron calculations. 3D rendering requires WebGL; an SVG mode is provided when WebGL is unavailable.
+
+## Color system
+
+Use the selected green/teal design: `#092328` background, `#12544F` secondary surfaces, `#2A835F` active objects and `#8BBB92` positive highlights. Negative-weight connections additionally use amber for differentiation and have signed numeric labels.
+
+## Curriculum source
+
+The module list follows the *Deep Learning Course Outline — Sukkur IBA University, Khairpur Campus, Fall 2026*. Other modules are shown as planned and are not represented as completed lessons.
