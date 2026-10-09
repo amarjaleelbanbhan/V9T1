@@ -20,18 +20,22 @@ function Equation({values,weights,bias,z}:{values:readonly number[];weights:read
   <p className="formula-detail">= {values.map((v,i)=>`(${fmt(v)} × ${fmt(weights[i])})`).join(' + ')} + ({fmt(bias)})</p>
   <p className="formula-result">z = <strong>{fmt(z)}</strong></p></div>;
 }
-function Challenge({output,weights,setWeight}:{output:number;weights:number[];setWeight:(i:number,n:number)=>void}){
-  const [prediction,setPrediction]=useState<'increase'|'decrease'|null>(null);
-  const [result,setResult]=useState<{correct:boolean;previous:number}|null>(null);
-  const index=0;const next=Math.min(3,weights[index]+.5);
-  const isSame=next===weights[index];
-  return <div className="challenge"><p className="eyebrow">PREDICT · THEN EXPERIMENT</p><h3>What happens if weight 1 increases by 0.5?</h3><p className="hint">Input 1 is positive. Think about its contribution before testing.</p>
-    <div className="choice-row"><button className={prediction==='increase'?'selected':''} onClick={()=>{setPrediction('increase');setResult(null)}}>Output increases</button><button className={prediction==='decrease'?'selected':''} onClick={()=>{setPrediction('decrease');setResult(null)}}>Output decreases</button></div>
-    <button className="action" disabled={!prediction||isSame} onClick={()=>{setResult({correct:prediction==='increase',previous:output});setWeight(index,next)}}>Test prediction <ChevronRight size={16}/></button>
+function Challenge({output,inputs,weights,bias,activation,setWeight}:{output:number;inputs:number[];weights:number[];bias:number;activation:typeof activationNames[number];setWeight:(i:number,n:number)=>void}){
+  const [prediction,setPrediction]=useState<'increase'|'decrease'|'same'|null>(null);
+  const [result,setResult]=useState<{correct:boolean;previous:number;next:number;direction:string}|null>(null);
+  const next=Math.min(3,weights[0]+0.5);
+  const isSame=next===weights[0];
+  const projected=useMemo(()=>computeNeuron({inputs,weights:weights.map((w,i)=>i===0?next:w),bias,activation}).output,[inputs,weights,bias,activation,next]);
+  const direction=fmt(projected)===fmt(output)?'same':projected>output?'increase':'decrease';
+  return <div className="challenge"><p className="eyebrow">PREDICT · THEN EXPERIMENT</p><h3>What happens if weight 1 increases by up to 0.5?</h3>
+    <p className="hint">The result depends on input 1 and the selected activation. A negative input may reverse the effect; ReLU may keep output at zero.</p>
+    <div className="choice-row"><button className={prediction==='increase'?'selected':''} onClick={()=>{setPrediction('increase');setResult(null)}}>Output increases</button><button className={prediction==='decrease'?'selected':''} onClick={()=>{setPrediction('decrease');setResult(null)}}>Output decreases</button><button className={prediction==='same'?'selected':''} onClick={()=>{setPrediction('same');setResult(null)}}>Output unchanged</button></div>
+    <button className="action" disabled={!prediction||isSame} onClick={()=>{setResult({correct:prediction===direction,previous:output,next:projected,direction});setWeight(0,next)}}>Test prediction <ChevronRight size={16}/></button>
     {isSame&&<p className="hint">Move weight 1 below its maximum to try this experiment.</p>}
-    {result&&<div className="feedback" role="status">{result.correct?<><Check size={16}/> Correct: a positive input times a larger weight increases z and the output for sigmoid.</>:<>Try again. With a positive input, raising its weight raises z; sigmoid is increasing.</>} <small>Previous output: {fmt(result.previous)} · Check the updated result above.</small></div>}
+    {result&&<div className="feedback" role="status">{result.correct?<><Check size={16}/> Correct.</>:<>Try again.</>} At displayed precision, the output {result.direction==='same'?'stays unchanged':result.direction==='increase'?'increases':'decreases'}. <small>Before: {fmt(result.previous)} · After: {fmt(result.next)}. Current input and activation determine the behavior.</small></div>}
   </div>;
 }
+
 export default function App(){
   const {inputs,weights,bias,activation,step,playing,speed,setInput,setWeight,setBias,setActivation,setStep,setSpeed,play,pause,advance,reset}=useLab();
   const trace=useMemo(()=>computeNeuron({inputs,weights,bias,activation}),[inputs,weights,bias,activation]);
@@ -79,7 +83,7 @@ export default function App(){
         <div className="results-row"><section className="result-card result-output"><p className="eyebrow">FINAL OUTPUT · a = f(z)</p><strong data-testid="output">{fmt(trace.output)}</strong><div className="result-foot"><span>Activation: {activation}</span><span className="live-indicator">● Recalculated live</span></div></section>
           <section className="result-card plot-card"><div className="result-title"><div><p className="eyebrow">ACTIVATION CURVE</p><h3>{activation==='relu'?'ReLU':activation.charAt(0).toUpperCase()+activation.slice(1)}</h3></div><span className="badge-muted">z = {fmt(trace.preActivation)}</span></div><ActivationPlot kind={activation} z={trace.preActivation}/></section>
           <section className="result-card trace-card"><div className="tab-row" role="tablist" aria-label="Computation inspector"><button role="tab" aria-selected={tab==='math'} className={tab==='math'?'selected':''} onClick={()=>setTab('math')}>Math</button><button role="tab" aria-selected={tab==='code'} className={tab==='code'?'selected':''} onClick={()=>setTab('code')}>Code</button><button role="tab" aria-selected={tab==='challenge'} className={tab==='challenge'?'selected':''} onClick={()=>setTab('challenge')}>Challenge</button></div>
-            <div className="tab-content">{tab==='math'?<><Equation values={inputs} weights={weights} bias={bias} z={trace.preActivation}/><p className="output-formula">a = {activation}(z) = <strong>{fmt(trace.output)}</strong></p></>:tab==='code'?<div className="code-view"><p><Code2 size={16}/> Executable JavaScript equivalent</p><pre>{`const x = [${inputs.map(fmt).join(', ')}];\nconst w = [${weights.map(fmt).join(', ')}];\nconst b = ${fmt(bias)};\nconst z = x.reduce((s,v,i) => s + v*w[i], b);\n// z = ${fmt(trace.preActivation)}\nconst a = ${activation==='sigmoid'?'1/(1+Math.exp(-z))':activation==='relu'?'Math.max(0,z)':activation==='tanh'?'Math.tanh(z)':'z'};\n// a = ${fmt(trace.output)}`}</pre></div>:<Challenge output={trace.output} weights={weights} setWeight={setWeight}/>}</div></section></div>
+            <div className="tab-content">{tab==='math'?<><Equation values={inputs} weights={weights} bias={bias} z={trace.preActivation}/><p className="output-formula">a = {activation}(z) = <strong>{fmt(trace.output)}</strong></p></>:tab==='code'?<div className="code-view"><p><Code2 size={16}/> Executable JavaScript equivalent</p><pre>{`const x = [${inputs.map(fmt).join(', ')}];\nconst w = [${weights.map(fmt).join(', ')}];\nconst b = ${fmt(bias)};\nconst z = x.reduce((s,v,i) => s + v*w[i], b);\n// z = ${fmt(trace.preActivation)}\nconst a = ${activation==='sigmoid'?'1/(1+Math.exp(-z))':activation==='relu'?'Math.max(0,z)':activation==='tanh'?'Math.tanh(z)':'z'};\n// a = ${fmt(trace.output)}`}</pre></div>:<Challenge output={trace.output} inputs={inputs} weights={weights} bias={bias} activation={activation} setWeight={setWeight}/>}</div></section></div>
         <footer id="how-it-works" className="footnote"><Focus size={15}/> Every value comes from the same tested mathematical engine. The rendered scene is an interactive simulation, not a trained AI model. <span>Curriculum: Sukkur IBA · Deep Learning · Fall 2026</span></footer>
       </>}
       </main>
