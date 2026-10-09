@@ -17,6 +17,8 @@ jobs:
           cache-dependency-path: package.json
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Validate curriculum
+        run: npm run check:curriculum
       - name: Unit tests
         run: npm test
       - name: Typecheck and production build
@@ -25,3 +27,4 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser interaction tests
         run: npm run test:e2e
+

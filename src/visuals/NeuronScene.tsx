@@ -44,10 +44,10 @@ function Ball({position,label,color,radius=.34}:{position:Point;label:string;col
   </group>;
 }
 function Content({inputs,weights,trace,step}:{inputs:number[];weights:number[];trace:NeuronTrace;step:number}){
-  const green='#8BBB92',mint='#61D5A5',dim='#305E55';
+  const green='#638BFF',mint='#61D5A5',dim='#305E55';
   return <>
     <ambientLight intensity={1.6}/><pointLight position={[2,3,5]} intensity={48} color="#77dcae"/>
-    <pointLight position={[-4,-3,3]} intensity={18} color="#2A835F"/>
+    <pointLight position={[-4,-3,3]} intensity={18} color="#A78BFA"/>
     {Y.map((y,i)=>{
       const color=weights[i]<0?'#F9B77E':mint;
       return <group key={i}>
@@ -56,13 +56,13 @@ function Content({inputs,weights,trace,step}:{inputs:number[];weights:number[];t
         <Label position={[-2.3,y+.37,.2]} width={2} text={step>=1?`${formatNumber(inputs[i])} × ${formatNumber(weights[i])} = ${formatNumber(trace.contributions[i])}`:`w${i+1}: ${formatNumber(weights[i])}`}/>
       </group>;
     })}
-    <Ball position={[-.6,0,0]} radius={.55} label="Σ" color="#2A835F"/>
+    <Ball position={[-.6,0,0]} radius={.55} label="Σ" color="#A78BFA"/>
     <Label position={[-.6,-.9,0]} width={1.9} text={step>=2?`Σ = ${formatNumber(trace.weightedSum)}`:'Weighted sum'}/>
     <Wire a={[-.05,0,0]} b={[1.6,0,0]} color={step>=3?mint:dim} dim={step<3}/>
-    <Ball position={[1.95,0,0]} label="f(z)" color="#12544F" radius={.43}/>
+    <Ball position={[1.95,0,0]} label="f(z)" color="#37D6C4" radius={.43}/>
     <Label position={[1.95,-.83,0]} width={1.9} text={step>=3?`z = ${formatNumber(trace.preActivation)}`:'Activation'}/>
     <Wire a={[2.4,0,0]} b={[3.3,0,0]} color={step>=5?mint:dim} dim={step<5}/>
-    <Ball position={[3.65,0,0]} label={step>=5?formatNumber(trace.output):'?'} color="#8BBB92"/>
+    <Ball position={[3.65,0,0]} label={step>=5?formatNumber(trace.output):'?'} color="#638BFF"/>
     <OrbitControls enablePan={false} minDistance={7} maxDistance={18} maxPolarAngle={Math.PI*.8}/>
   </>;
 }
@@ -74,3 +74,4 @@ export function NeuronScene(props:{inputs:number[];weights:number[];trace:Neuron
     </Canvas>
   </div>;
 }
+

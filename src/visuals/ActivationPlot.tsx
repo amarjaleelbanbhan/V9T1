@@ -9,8 +9,9 @@ export function ActivationPlot({kind,z}:{kind:Activation;z:number}){
   const x=Math.max(xmin,Math.min(xmax,z));const y=activate(x,kind);
   return <svg viewBox="0 0 300 173" className="activation-plot" role="img" aria-label={`${kind} activation function graph. Current input ${formatNumber(z)}, output ${formatNumber(activate(z,kind))}`}>
     <path d={`M 22 ${py(0)} H 278 M ${px(0)} 17 V 147`} stroke="#52736D" strokeWidth="1"/>
-    <path d={path} fill="none" stroke="#8BBB92" strokeWidth="3.5" strokeLinecap="round"/>
+    <path d={path} fill="none" stroke="#638BFF" strokeWidth="3.5" strokeLinecap="round"/>
     {z>=xmin&&z<=xmax&&<><path d={`M ${px(x)} ${py(y)} V ${py(0)}`} stroke="#DAF7BA" strokeDasharray="3 4"/><circle cx={px(x)} cy={py(y)} r="6" fill="#DAF7BA" stroke="#092328" strokeWidth="2"/></>}
     <text x="22" y="163" fill="#93BCB0" fontSize="12">-5</text><text x="147" y="163" fill="#93BCB0" fontSize="12">0</text><text x="267" y="163" fill="#93BCB0" fontSize="12">5</text>
   </svg>
 }
+

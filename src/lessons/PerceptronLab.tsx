@@ -32,7 +32,7 @@ export function PerceptronLab(){
       <text x="311" y="263" fill="#B9E3CB" fontSize="12">x₁ = 1</text>
       {table.map((row,i)=>{
         const x=105+215*row.inputs[0],y=218-164*row.inputs[1],selected=i===selection;
-        return <g key={i}><circle cx={x} cy={y} r={selected?28:24} fill={row.output?'#2A835F':'#18443B'} stroke={selected?'#F5E4A2':row.correct?'#8BBB92':'#F0A66A'} strokeWidth={selected?4:2}/>
+        return <g key={i}><circle cx={x} cy={y} r={selected?28:24} fill={row.output?'#A78BFA':'#18443B'} stroke={selected?'#F5E4A2':row.correct?'#638BFF':'#F0A66A'} strokeWidth={selected?4:2}/>
           <text x={x} y={y+5} textAnchor="middle" fill="#F2FFF3" fontWeight="800" fontSize="17">{row.output}</text>
           <text x={x} y={y-39} fill="#B5D8C2" fontSize="12" textAnchor="middle">{'('+row.inputs.join(', ')+')'}</text>
         </g>;
@@ -70,3 +70,4 @@ export function PerceptronLab(){
   <p className="footnote">Matches the source lecture’s step activation, perceptron, AND/OR truth tables and logic gates. The XOR question extends the single-neuron limitations topic.</p>
  </div>;
 }
+

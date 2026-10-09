@@ -35,7 +35,7 @@ export function GradientDepthLab(){
        const normalized=Math.log10(1+magnitude)/Math.log10(1+maxAbs);
        const height=magnitude===0?0:Math.max(2,184*normalized);
        const chosen=i===Math.min(selected,depth-1);
-       return <g key={step.layer}><rect x={x} y={228-height} width={barW} height={height} rx="3" fill={chosen?'#F6D28C':'#8BBB92'} opacity={chosen?1:.8}/>
+       return <g key={step.layer}><rect x={x} y={228-height} width={barW} height={height} rx="3" fill={chosen?'#F6D28C':'#638BFF'} opacity={chosen?1:.8}/>
         <rect x={x} y="26" width={barW} height="202" fill="transparent" style={{cursor:'pointer'}} role="button" tabIndex={0} aria-label={'Inspect layer '+step.layer} onClick={()=>setSelected(i)} onKeyDown={e=>{if(e.key==='Enter'){setSelected(i)}}}/></g>;
       })}
       <text x="330" y="19" fontSize="11" fill="#D6EAD8" textAnchor="middle">Log-scaled bars · inspect a layer for exact numbers</text>
@@ -56,3 +56,4 @@ export function GradientDepthLab(){
   <p className="footnote">This is a deterministic scalar chain illustrating activation derivatives, not gradients of an entire trainable ANN or measured real-world training behavior. ReLU uses the zero subgradient at z = 0. The vertical bar scale is log-transformed for legibility.</p>
  </div>;
 }
+

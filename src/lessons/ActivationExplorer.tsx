@@ -11,7 +11,7 @@ const notes:Record<ScalarActivation,string>={
   'leaky-relu':'Keeps a small negative slope instead of fully discarding negative values.'
 };
 const palettes:{kind:ScalarActivation;color:string}[]=[
-  {kind:'sigmoid',color:'#8BBB92'},{kind:'tanh',color:'#4CD2C4'},
+  {kind:'sigmoid',color:'#638BFF'},{kind:'tanh',color:'#4CD2C4'},
   {kind:'relu',color:'#EAC87F'},{kind:'leaky-relu',color:'#C3A3EF'}
 ];
 function ScalarGraph({kind,z}:{kind:ScalarActivation;z:number}){
@@ -87,3 +87,4 @@ export function ActivationExplorer(){
     <p className="footnote" id="how-it-works">Syllabus: Sigmoid, Tanh, ReLU, Leaky ReLU and Softmax (Week 4). The Softmax demonstration calculates actual probabilities, not trained-model predictions.</p>
   </div>;
 }
+
