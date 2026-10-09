@@ -5,7 +5,7 @@ export const curriculum = [
   { id:'perceptron', title:'Perceptron & Logic Gates', week:'Neuron Story · Slides 14–17', status:'ready' },
   { id:'tensor', title:'Tensors & Slicing', week:'Lectures 02–03', status:'ready' },
   { id:'propagation', title:'Forward Propagation', week:'Weeks 3–4', status:'ready' },
-  { id:'backprop', title:'Backpropagation & Chain Rule', week:'Weeks 3–4', status:'planned' },
+  { id:'backprop', title:'Backpropagation & Chain Rule', week:'Weeks 3–4', status:'ready' },
   { id:'activation', title:'Activation Functions', week:'Week 4', status:'ready' },
   { id:'loss', title:'Loss & Gradient Descent', week:'Lecture 04 · Slides 4–13', status:'ready' },
   { id:'gradient-depth', title:'Vanishing & Exploding Gradients', week:'Lecture 05 · Slides 1–17', status:'ready' },
