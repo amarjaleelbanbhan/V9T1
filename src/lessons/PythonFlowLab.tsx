@@ -10,7 +10,7 @@ export function PythonFlowLab(){
  const [mode,setMode]=useState<Mode>('loops');const [numbers,setNumbers]=useState(['2','-1','3']);const [guess,setGuess]=useState('');const [step,setStep]=useState(0);const [answer,setAnswer]=useState<string|null>(null);const [evidence,setEvidence]=useState<string[]>([]);
  const {trace,status,busy,run,cancel,reset}=usePythonExecution();const info=examples[mode];const frame=trace?.frames[step];const final=trace?.frames.at(-1);const actual=final?.globals.total;const match=typeof actual==='number'&&Math.abs(Number(guess)-actual)<=1e-9*Math.max(1,Math.abs(actual));
  const invalidate=()=>{reset();setGuess('');setStep(0);setAnswer(null);};
- const key=mode+':'+numbers.join(',');
+ const key=mode+':'+JSON.stringify(numbers.map(Number));
  const record=()=>{setAnswer(info.right);if(match&&frame?.phase==='complete')setEvidence(old=>old.includes(key)?old:[...old,key]);};
  return <section aria-label="Python control flow lesson"><p className="eyebrow">BEGINNER · EXECUTED PYTHON</p><h1>Follow repetition and calls<span className="dot">.</span></h1><p className="subtitle">Predict, execute, then replay the real trace. Repeated lines and changing scopes show how Python gets its result.</p>
  <div className="foundation-choices" aria-label="Python example">{(Object.keys(examples) as Mode[]).map(m=><button key={m} disabled={busy} aria-pressed={m===mode} onClick={()=>{invalidate();setMode(m);}}>{examples[m].title}</button>)}</div>

@@ -14,7 +14,7 @@ test('tensor lab rank, shape, sample slicing and answer respond to controls',asy
  await expect(page.getByTestId('tensor-rank')).toHaveText('1');
  await expect(page.getByTestId('tensor-shape')).toHaveText('(4,)');
  await page.getByRole('button',{name:'Rank 1',exact:true}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
  await page.getByRole('button',{name:/Forward Propagation/}).click();
  await expect(page.getByRole('heading',{name:/Follow every signal/})).toBeVisible();
  expect(errors).toEqual([]);
@@ -27,3 +27,4 @@ test('tensor laboratory fits 390px viewport',async({page})=>{
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(1);
 });
+

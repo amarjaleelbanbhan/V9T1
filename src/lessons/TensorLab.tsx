@@ -1,3 +1,4 @@
+import {PythonProgram} from '../components/PythonProgram';
 import { useMemo, useState } from 'react';
 import { ChevronRight, Boxes, RotateCcw, CircleHelp } from 'lucide-react';
 import { DEMO_VECTOR, DEMO_MATRIX, DEMO_BATCH, tensorShape, tensorRank, tensorAt, sliceMatrix, selectBatchSample, type Tensor } from '../engine/tensor';
@@ -26,13 +27,13 @@ export function TensorLab(){
       <div role="group" aria-label="Choose tensor rank" className="activation-kind-buttons">{labels.map(item=><button key={item.id} type="button" className={mode===item.id?'picked':''} aria-pressed={mode===item.id} onClick={()=>{setMode(item.id);reset()}}>{item.title}</button>)}</div>
       <div className="tensor-layout">
         <div className="foundation-chart-card">
-          <div className="tensor-metrics"><div><span>Rank · ndim</span><strong data-testid="tensor-rank">{tensorRank(tensor)}</strong></div><div><span>Shape</span><strong data-testid="tensor-shape">{formatShape(shape)}</strong></div><div><span>Data type</span><strong>JS number</strong></div></div>
+          <div className="tensor-metrics"><div><span>Rank · ndim</span><strong data-testid="tensor-rank">{tensorRank(tensor)}</strong></div><div><span>Shape</span><strong data-testid="tensor-shape">{formatShape(shape)}</strong></div><div><span>Data type</span><strong>float64 (Python example)</strong></div></div>
           <div className="tensor-visual" role="img" aria-label={'Tensor of rank '+shape.length+' and shape '+formatShape(shape)}>
             {mode==='scalar'?<div className="tensor-cell scalar">{String(tensor)}</div>
             :mode==='vector'?<div className="tensor-row">{DEMO_VECTOR.map((v,i)=><div className="tensor-cell" key={i}><small>[{i}]</small>{v}</div>)}</div>
             :<div className="tensor-matrix" aria-label="Selected matrix values">{matrix.map((row,i)=><div className="tensor-row" key={i}>{row.map((v,j)=><div key={j} className={'tensor-cell '+(i>=rowStart&&i<rowStop&&j>=colStart&&j<colStop?'selected':'')}><small>{'['+i+','+j+']'}</small>{v}</div>)}</div>)}</div>}
           </div>
-          <p className="foundation-mini">A scalar is rank 0. A vector of 4 values is rank 1 with shape (4,), not rank 4. The JavaScript demonstration uses Number; it does not run NumPy.</p>
+          <p className="foundation-mini">A scalar is rank 0. A vector of 4 values is rank 1 with shape (4,), not rank 4. Run the matching NumPy program below to inspect actual Python shape, dtype and slices.</p>
           {mode==='batch'&&<p className="foundation-note">The leading dimension is the samples axis: two samples, each a 3 × 3 matrix. Select either sample with the control.</p>}
         </div>
         <div className="foundation-parameter-card">
@@ -56,5 +57,6 @@ export function TensorLab(){
       {answer&&<div role="status" className="foundation-answer">{answer==='rank'?'Correct: rank counts axes, not elements. The shape is (10,).':'Not quite. Ten elements make the vector length 10, but it still has one axis, so rank is 1.'}</div>}
     </div></section>
     <p className="footnote">Course mapping: Chapter 2 and Lecture 03, tensor rank/shape/data type, samples axis, and slicing. This lab uses small teaching arrays rather than downloading MNIST.</p>
-  </div>;
+  <PythonProgram source={`import numpy as np\nx = np.array(${JSON.stringify(tensor)}, dtype=np.float64)\nprint("shape:", x.shape, "rank:", x.ndim, "dtype:", x.dtype)\n${mode==='batch'?`matrix = x[${sample}]\n`:mode==='matrix'?'matrix = x\n':''}${mode==='batch'||mode==='matrix'?`result = matrix[${rowStart}:${rowStop}, ${colStart}:${colStop}].tolist()`:'result = x.tolist()'}\nprint(result)`} numpy/></div>;
 }
+

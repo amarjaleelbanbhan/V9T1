@@ -20,4 +20,4 @@ Predict both fixed cases, inspect the operations, and explain the result. Wrong 
 
 ## Execution and scope
 
-Deterministic JavaScript teaching models provide the numerical visualizations. Related Python labs execute actual fixed Python through Pyodide. GPU/device and array-view diagrams illustrate concepts without claiming real framework/device execution. Advanced chapters remain specified.
+Authored Python programs execute course answers through Pyodide. Python returns each intermediate value, grid and curve; browser drawing code displays that data. The capstone runs its optimizer updates and held-out evaluation in Python. GPU/device and array-view diagrams illustrate concepts without claiming real framework/device execution. Advanced chapters remain specified.

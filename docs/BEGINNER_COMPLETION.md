@@ -19,17 +19,19 @@ The repository's Absolute beginner path is chapters 00–07. All **60 core topic
 - **120 fixed calculation cases** are exercised in the browser. Editing values opens a sandbox, which does not earn course evidence.
 - **Eight mixed chapter reviews** contain 16 numerical tasks and eight explanations. Every item must pass; retakes and feedback are allowed. These are bounded practice checks, not proctored or validated mastery assessments.
 - The Python labs execute fixed trusted source in Pyodide 0.27.7, including NumPy inspection, assignments, conditions, repeated lines, function-local scopes and retained object state. Replay controls inspect captured execution rather than pausing the interpreter.
-- The capstone actually fits a scalar regression model using SGD, momentum or bias-corrected Adam. It exposes paired seeded batches, computed gradients, weight/bias updates, epoch losses, validation-selected checkpoints, optional early stopping and a held-out comparison with a training-mean baseline.
+- The capstone executes Python to fit a scalar regression model using SGD, momentum or bias-corrected Adam. It exposes paired seeded batches, computed gradients, weight/bias updates, epoch losses, validation-selected checkpoints, optional early stopping and a held-out comparison with a training-mean baseline.
 - Existing neural-network labs remain available, including actual single-example network parameter updates with finite-difference verification.
 
 ## Evidence persistence
 
 Topic evidence distinguishes visited, attempted and passed. Topic evidence and chapter review results persist on the current browser. A topic review becomes due after one day; passing guided exercises is not proof of retained understanding. Python and capstone transfer evidence lasts during the visit only. Saved inference checkpoints retain model weights and provenance, but not full optimizer/scheduler/random state for exact training resume.
 
+The course now executes Python for all answers, intermediate stages, grids and curves. Every legacy visual lab exposes a runnable Python example; the backprop Apply action runs its update in Python. Curriculum Markdown renders as semantic documents with internal lesson navigation. See [the focused repair audit](PYTHON_AND_MARKDOWN_AUDIT.md).
+
 ## Verification
 
-- **132/132 unit tests passed**, including independent numerical identities, finite differences, stable loss/softmax checks, float16 rounding boundaries, real trainer updates, reproducible paired batching and checkpoint selection.
-- **33/33 browser tests passed**, including all 120 course cases, eight chapter reviews, actual Python and NumPy, wrong-answer/sandbox handling, persistence, delayed-review timing, cancellation, keyboard, mobile and reduced motion.
+- **200/200 unit tests passed**, including independent numerical identities, finite differences, stable loss/softmax checks, float16 rounding boundaries, real trainer updates, reproducible paired batching and checkpoint selection.
+- **38/38 browser tests passed**, including all 120 course cases, eight chapter reviews, actual Python and NumPy, wrong-answer/sandbox handling, persistence, delayed-review timing, cancellation, keyboard, mobile and reduced motion.
 - TypeScript/Vite production build passed. The existing main-bundle size warning remains; beginner course and capstone load separately.
 - Catalog validation passed: **19 chapters, 149 entries, 20 sources**; all 60 core beginner topics resolve to implemented content, references are valid and prerequisites are acyclic.
 - Desktop and 390px screenshots of the course and capstone were inspected. Captured capstone flows had zero page errors and no horizontal overflow.

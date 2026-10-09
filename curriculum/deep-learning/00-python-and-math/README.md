@@ -23,4 +23,4 @@ For each topic, predict both worked and transfer calculations, inspect all opera
 
 ## Execution
 
-The course visualizations run deterministic JavaScript teaching models. Related Python labs execute fixed actual Python through Pyodide. No browser PyTorch/TensorFlow training is claimed. See each lesson for sources and explicit assumptions.
+Authored Python programs execute course answers through Pyodide. Browser code draws the visual explanations. The capstone performs real Python training and evaluation. No browser PyTorch/TensorFlow training is claimed. See each lesson for sources and explicit assumptions.

@@ -12,7 +12,7 @@ test('perceptron AND/OR truth table and live bias updates',async({page})=>{
  const slider=page.getByRole('slider',{name:/Bias b/});await slider.focus();await slider.press('End');
  await expect(page.getByTestId('perceptron-matches')).toHaveText('3 / 4');
  await page.getByRole('button',{name:'No',exact:true}).click();
- await expect(page.getByRole('status')).toContainText('Correct');
+ await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
  await page.getByRole('button',{name:'Reset'}).click();
  await expect(page.getByTestId('perceptron-matches')).toHaveText('4 / 4');
  expect(errors).toEqual([]);
@@ -26,3 +26,4 @@ test('perceptron truth table remains usable on mobile',async({page})=>{
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(1);
 });
+

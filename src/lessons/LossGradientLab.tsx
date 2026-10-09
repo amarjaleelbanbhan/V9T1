@@ -1,3 +1,5 @@
+import {PythonProgram} from '../components/PythonProgram';
+import {lossPython} from '../python/programs';
 import { useEffect,useMemo,useState } from 'react';
 import { ArrowRight, ChevronRight, RotateCcw, TrendingDown, Play, Pause, CircleHelp } from 'lucide-react';
 import { descentTrace, evaluateLoss, type LossMode } from '../engine/lossGradient';
@@ -103,5 +105,6 @@ export function LossGradientLab(){
       </div>
     </section>
     <p className="footnote">Lecture 04: gradient descent, derivatives and L(w) = w² (slides 8–13); Complete Neuron Story: half squared error (slide 25). The input and target values are illustrative teaching data.</p>
-  </div>;
+  <PythonProgram source={lossPython(mode,initialWeight,input,target,bias,rate,updates)}/></div>;
 }
+

@@ -1,3 +1,5 @@
+import {PythonProgram} from '../components/PythonProgram';
+import {activationPython} from '../python/programs';
 import { useMemo, useState } from 'react';
 import { ChevronRight, FunctionSquare, RotateCcw, Activity, CircleHelp } from 'lucide-react';
 import { SCALAR_ACTIVATIONS, scalarActivation, scalarDerivative, stableSoftmax, type ScalarActivation } from '../engine/activationLab';
@@ -85,6 +87,6 @@ export function ActivationExplorer(){
       {answer&&<div role="status" className="foundation-answer">{answer==='leaky'?'Correct. Leaky ReLU(-2) = -0.2 when the negative slope is 0.1.':'ReLU(-2) = 0. Leaky ReLU keeps a small negative slope, giving -0.2.'}</div>}</div>
     </section>
     <p className="footnote" id="how-it-works">Syllabus: Sigmoid, Tanh, ReLU, Leaky ReLU and Softmax (Week 4). The Softmax demonstration calculates actual probabilities, not trained-model predictions.</p>
-  </div>;
+  <PythonProgram source={activationPython(kind,z,logits)}/></div>;
 }
 

@@ -1,3 +1,4 @@
+import {PythonProgram} from '../components/PythonProgram';
 import { useMemo, useState } from 'react';
 import { ChevronRight, Waypoints, RotateCcw, CircleHelp } from 'lucide-react';
 import { BINARY_INPUTS, GATE_PRESETS, logicTable, type LogicGate } from '../engine/perceptron';
@@ -68,6 +69,6 @@ export function PerceptronLab(){
    {answer&&<div role="status" className="foundation-answer">{answer==='no'?'Correct. XOR is not linearly separable; a single step perceptron cannot model all four XOR outputs.':'Not quite. XOR needs a nonlinear boundary, which one step perceptron cannot create in 2D.'}</div>}
   </div></section>
   <p className="footnote">Matches the source lecture’s step activation, perceptron, AND/OR truth tables and logic gates. The XOR question extends the single-neuron limitations topic.</p>
- </div>;
+ <PythonProgram source={`weights = ${JSON.stringify(weights)}\nbias = ${bias}\ninputs = [(0,0),(0,1),(1,0),(1,1)]\nresult = [int(sum(x*w for x,w in zip(row,weights))+bias >= 0) for row in inputs]\nprint(result)`}/></div>;
 }
 
