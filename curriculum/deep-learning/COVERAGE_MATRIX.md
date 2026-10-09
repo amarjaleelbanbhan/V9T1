@@ -23,3 +23,5 @@ Existing labs are narrow demonstrations, not complete chapter coverage.
 | CH-16 Interpretability and responsible AI | none | Authored lessons, engines and browser assessments |
 | CH-17 Deployment and MLOps | none | Authored lessons, engines and browser assessments |
 | CH-18 Research and capstones | none | Authored lessons, engines and browser assessments |
+
+Chapter 00 now includes `python-basics`, a narrow actual-Python variable-assignment lesson with positive/negative transfer evidence. The rest of chapter 00 is not complete.

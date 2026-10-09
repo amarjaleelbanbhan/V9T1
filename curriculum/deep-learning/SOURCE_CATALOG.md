@@ -164,3 +164,8 @@ Checked 2026-10-09. Official pages retrieved; availability does not establish re
 
 ## Candidate requiring follow-up
 DeepLearning.AI courses (https://www.deeplearning.ai/courses): search indexed the official page, but direct retrieval failed. Do not treat as fully reviewed or reuse-cleared. Keras-specific guides, foundational papers and individual advanced-topic sources remain to be reviewed.
+
+
+## SRC-PYTHON — Python 3.12 introduction
+
+Official page: https://docs.python.org/3.12/tutorial/introduction.html. Author: Python documentation contributors. Scope: assignment and numeric expressions. Checked 2026-10-09 with https://docs.python.org/3.12/license.html. Precise language semantics, but not itself a zero-background visual progression. Content is linked; no examples, figures or datasets are imported. Current lesson content is original.

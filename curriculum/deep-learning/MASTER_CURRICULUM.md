@@ -23,3 +23,5 @@ Proposed prerequisite order, synthesized from primary course/documentation sourc
 - [CH-18 — Research and capstones](18-research-and-capstones/README.md): 9 lesson specifications; level 7.
 
 Teach small arithmetic first, then framework workflows, then specialist branches. Core evaluation returns in every project rather than being postponed to MLOps. Fast.ai supplies a useful applied contrast to the bottom-up sequence, but assumes coding; Stanford courses assume prerequisites that chapter 00 must supply. D2L contributes breadth, while official framework docs supply operational detail. This ordering is our synthesis, not an institution-endorsed syllabus.
+
+Implemented sublesson: [Python Variables and Data Flow](00-python-and-math/lessons/variables-and-data-flow.md), `dl-00-002-variables`. Chapter 00 now contains an additional implemented sublesson entry; the parent topic remains specified.
