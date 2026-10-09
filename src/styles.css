@@ -64,3 +64,18 @@
 @media(max-width:1100px){.foundation-family-layout,.foundation-experiment-layout{grid-template-columns:1fr}.foundation-family-map{max-height:280px;max-width:650px;margin:auto}}
 @media(max-width:700px){.foundation-panel{padding:14px}.foundation-review{display:block}.foundation-review-actions{margin-top:16px}.foundation-panel h2{font-size:18px}.foundation-choices button{font-size:11px;padding:9px 11px}}
 @media(max-width:440px){.foundation-family-map{max-height:240px}.foundation-family-detail h3{font-size:19px}.foundation-legend{font-size:9px}.foundation-task-switch{display:grid;grid-template-columns:1fr 1fr}.foundation-task-switch button{white-space:normal;line-height:1.4}}
+
+/* Week 4 activation explorer */
+.activation-kind-buttons{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:15px 0 18px}
+.activation-kind-buttons button{border:1px solid #3B735F;background:#153D37;color:#CBEBDA;border-radius:10px;padding:11px 14px;font-size:12px;font-weight:700}
+.activation-kind-buttons button.picked{background:#8BBB92;color:#092328;border-color:#8BBB92}
+.activation-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(250px,.7fr);gap:14px}
+.activation-lab-plot{width:100%;height:auto;max-height:375px;display:block;margin:auto}
+.activation-softmax-visual{display:grid;gap:24px;padding:32px 6px;min-height:250px;align-content:center}
+.softmax-row{display:grid;grid-template-columns:60px minmax(0,1fr) 52px;align-items:center;gap:9px;color:#D8EDE1;font-size:12px}
+.softmax-row strong{text-align:right;font-variant-numeric:tabular-nums;color:#C5F1C5}
+.softmax-bar-track{height:24px;background:#174338;border:1px solid #3C735D;border-radius:8px;overflow:hidden}
+.softmax-bar-fill{height:100%;background:linear-gradient(90deg,#2A835F,#B4E8A3);border-radius:7px;transition:width 180ms ease}
+@media(max-width:1120px){.activation-layout{grid-template-columns:1fr}}
+@media(max-width:600px){.activation-kind-buttons button{font-size:11px;padding:9px 10px}.activation-softmax-visual{padding:20px 2px}}
+@media(prefers-reduced-motion:reduce){.softmax-bar-fill{transition:none}}
