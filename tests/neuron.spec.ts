@@ -38,3 +38,20 @@ test('small viewport supports lessons and controls without horizontal overflow',
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   expect(overflow).toBeLessThanOrEqual(1);
 });
+
+test('prediction challenge respects negative input and ReLU zero region',async({page})=>{
+ await page.goto('/');
+ const input=page.getByRole('slider',{name:/Input x1/});
+ await input.focus();await input.press('Home');
+ await page.getByRole('tab',{name:'Challenge'}).click();
+ await page.getByRole('button',{name:'Output decreases'}).click();
+ await page.getByRole('button',{name:'Test prediction'}).click();
+ await expect(page.getByRole('status')).toContainText('Correct');
+ await page.getByRole('button',{name:'Reset parameters'}).click();
+ await page.getByRole('combobox',{name:'Activation function'}).selectOption('relu');
+ await input.focus();await input.press('Home');
+ await page.getByRole('tab',{name:'Challenge'}).click();
+ await page.getByRole('button',{name:'Output unchanged'}).click();
+ await page.getByRole('button',{name:'Test prediction'}).click();
+ await expect(page.getByRole('status')).toContainText('Correct');
+});

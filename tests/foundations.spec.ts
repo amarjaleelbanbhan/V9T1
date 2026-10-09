@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+test('Week 1: concept family, classification, regression, challenge and lesson navigation',async({page})=>{
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('/');
+  await page.getByRole('button',{name:/Deep Learning Foundations/}).click();
+  await expect(page.getByRole('heading',{name:/Build intuition before networks/})).toBeVisible();
+  await expect(page.getByRole('img',{name:/Nested concept map/})).toBeVisible();
+  await page.getByRole('button',{name:'ML',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Machine Learning',exact:true})).toBeVisible();
+  await expect(page.getByTestId('classification-accuracy')).toHaveText('100%');
+  const threshold=page.getByRole('slider',{name:/Decision threshold/});
+  await threshold.focus();await threshold.press('End');
+  await expect(page.getByTestId('classification-correct')).toContainText('4 / 6 correct');
+  await page.getByRole('button',{name:/Regression · number/}).click();
+  await expect(page.getByTestId('regression-mae')).toHaveText('0.8');
+  await expect(page.getByTestId('regression-mse')).toHaveText('0.72');
+  const slope=page.getByRole('slider',{name:/Slope/});
+  await slope.focus();await slope.press('ArrowRight');
+  await expect(page.getByTestId('regression-mae')).not.toHaveText('0.8');
+  await page.getByRole('button',{name:'Regression',exact:true}).click();
+  await expect(page.getByRole('status')).toContainText('Correct');
+  await page.getByRole('button',{name:/The Artificial Neuron/}).click();
+  await expect(page.getByRole('heading',{name:/Inside a Neuron/})).toBeVisible();
+  expect(errors).toEqual([]);
+});
+test('Week 1 is reachable and responsive at narrow mobile width',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/');
+  await page.getByRole('button',{name:'Toggle lesson navigation'}).click();
+  await page.getByRole('button',{name:/Deep Learning Foundations/}).click();
+  await expect(page.getByRole('heading',{name:/Build intuition before networks/})).toBeVisible();
+  await expect(page.getByRole('slider',{name:/Decision threshold/})).toBeVisible();
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+  expect(overflow).toBeLessThanOrEqual(1);
+});
