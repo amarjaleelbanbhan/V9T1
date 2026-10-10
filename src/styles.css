@@ -268,8 +268,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .stage-current text{font-weight:750}
 .course-stage-table tr.stage-current th,.course-stage-table tr.stage-current td{background:color-mix(in srgb,var(--panel) 55%,transparent)}
 .stage-speed{display:inline-flex;align-items:center;gap:6px;font-size:12px}
+.stage-speed select{min-height:44px;min-width:64px;padding:8px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:8px}
 .course-layout>nav button small{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
 .course-layout>nav button small.evidence-independent,.course-layout>nav button small.evidence-retained{color:var(--activation);font-weight:650}
-.course-layout>nav button small.evidence-retained::before{content:"¹3 a0"}
+.course-layout>nav button small.evidence-retained::before{content:"\2713\00a0"}
 .course-layout>nav button small.evidence-assisted{color:var(--gradient)}
 @media(prefers-reduced-motion:reduce){.stage-current text{font-weight:750}}
+
