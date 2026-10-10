@@ -1,3 +1,6 @@
+import {StagePlayer} from '../components/StagePlayer';
+import {lazy,Suspense} from 'react';
+const NetworkScene=lazy(()=>import('../visuals/NetworkScene').then(m=>({default:m.NetworkScene})));
 import {PythonProgram} from '../components/PythonProgram';
 import {forwardPython} from '../python/programs';
 import { useMemo, useState } from 'react';
@@ -32,7 +35,7 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
       const midX=(x1+x2)/2,midY=(y1+y2)/2;
       return <g key={s.layer+'-'+s.neuron+'-'+s.source} role="button" tabIndex={0} aria-label={'Connection '+(s.layer===0?'Input '+(s.source+1)+' to Hidden '+(s.neuron+1):'Hidden '+(s.source+1)+' to Output 1')} onClick={()=>onSelect({layer:s.layer,neuron:s.neuron,source:s.source})} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect({layer:s.layer,neuron:s.neuron,source:s.source})}}} style={{cursor:'pointer'}}>
         <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke="transparent" strokeWidth="23" fill="none"/>
-        <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke={chosen?'#F7E0A1':s.weight>=0?'#638BFF':'#F0A66A'} strokeWidth={chosen?5:3} opacity={active?1:.28} markerEnd="url(#forward-arrow)" fill="none"/>
+        <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke={chosen?'#F7E0A1':s.weight>=0?'#6BA3BE':'#F0A66A'} strokeWidth={chosen?5:3} opacity={active?1:.28} markerEnd="url(#forward-arrow)" fill="none"/>
         <rect pointerEvents="none" x={midX-25} y={midY-12} width="50" height="24" rx="7" fill={chosen?'#3A5743':'#102F2B'} stroke={chosen?'#F7E0A1':'#3A6857'}/>
         <text pointerEvents="none" x={midX} y={midY+4} fontSize="11" fill="#EFFEF1" textAnchor="middle">{fmt(s.weight)}</text>
       </g>;
@@ -41,7 +44,7 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
       const value=i===0?trace.input[j]:trace.layers[i-1].neurons[j].output;
       const isReady=i===0||i===1&&step>=2||i===2&&step>=4;
       return <g key={i+'-'+j}>
-        <circle cx={pos.x} cy={pos.y} r="25" fill={isReady?'#A78BFA':'#16483D'} stroke={isReady?'#A9E6B2':'#4B8370'} strokeWidth="2"/>
+        <circle cx={pos.x} cy={pos.y} r="25" fill={isReady?'#0C969C':'#16483D'} stroke={isReady?'#A9E6B2':'#4B8370'} strokeWidth="2"/>
         <text x={pos.x} y={pos.y+4} fontSize="12" fontWeight="bold" textAnchor="middle" fill="#F1FFF3">{isReady?fmt(value):'?'}</text>
         <text x={pos.x} y={pos.y+48} fontSize="12" fill="#A8D4BE" textAnchor="middle">{i===0?'x'+(j+1):i===1?'h'+(j+1):'ŷ'}</text>
       </g>;
@@ -50,6 +53,7 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
   </svg>;
 }
 export function ForwardLab(){
+ const [view3d,setView3d]=useState(false);
   const [inputs,setInputs]=useState<number[]>([...DEFAULT_FORWARD_INPUT]);
   const [layers,setLayers]=useState<DenseLayer[]>(()=>DEFAULT_FORWARD_LAYERS.map(l=>({weights:l.weights.map(r=>[...r]),biases:[...l.biases],activation:l.activation})));
   const [selected,setSelected]=useState<Edge>(initialEdge);
@@ -71,7 +75,7 @@ export function ForwardLab(){
       <div className="foundation-panel-heading"><div><p className="eyebrow">INPUT → HIDDEN → OUTPUT</p><h2>What happens between layers?</h2></div><GitBranch size={21}/></div>
       <div className="forward-grid">
         <div className="foundation-chart-card">
-          <NetworkDiagram trace={trace} layers={layers} step={step} edge={selected} onSelect={setSelected}/>
+          <button aria-pressed={view3d} onClick={()=>setView3d(v=>!v)}>{view3d?"Use 2D network":"Explore 3D network"}</button>{view3d?<Suspense fallback={<p>Loading network…</p>}><NetworkScene trace={trace} selected={selected} step={step} onSelect={setSelected}/></Suspense>:<NetworkDiagram trace={trace} layers={layers} step={step} edge={selected} onSelect={setSelected}/>}
           <div className="forward-edge-list" role="group" aria-label="Select a weighted connection">
             {layers.flatMap((layer,l)=>layer.weights.flatMap((row,n)=>row.map((_weight,s)=>{
               const label=l===0?'Input '+(s+1)+' to Hidden '+(n+1):'Hidden '+(s+1)+' to Output 1';
@@ -79,7 +83,7 @@ export function ForwardLab(){
               return <button type="button" key={l+'-'+n+'-'+s} aria-pressed={active} className={active?'picked':''} onClick={()=>setSelected({layer:l,neuron:n,source:s})} aria-label={'Inspect '+label}>{label}</button>;
             })))}
           </div>
-          <div className="forward-stages" role="group" aria-label="Forward computation stages">{steps.map((label,i)=><button key={label} type="button" className={step===i?'picked':''} aria-pressed={step===i} onClick={()=>setStep(i)}>{i+1}. {label}</button>)}</div>
+          <StagePlayer step={step} count={steps.length} onStep={setStep} label="Forward playback"/><div className="forward-stages" role="group" aria-label="Forward computation stages">{steps.map((label,i)=><button key={label} type="button" className={step===i?'picked':''} aria-pressed={step===i} onClick={()=>setStep(i)}>{i+1}. {label}</button>)}</div>
         </div>
         <div className="foundation-parameter-card">
           <div className="foundation-parameter-header"><h3>Change the network</h3><button type="button" onClick={reset} aria-label="Reset forward pass"><RotateCcw size={15}/> Reset</button></div>

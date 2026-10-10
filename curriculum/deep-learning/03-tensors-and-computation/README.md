@@ -14,7 +14,7 @@ Implemented topic lessons in the beginner course. Guided practice does not estab
 
 ## Practice and project rubric
 
-Predict both fixed cases, inspect the operations, and explain the result. Wrong answers and custom sandbox inputs earn no passing evidence. Mini-projects require independent calculations, changed inputs, a diagnosed defect and stated limitations. They are self-reviewed. Browser-local evidence distinguishes visited, attempted and passed; a review becomes due after one day.
+Predict both fixed cases, inspect the operations, and explain the result. Wrong answers and custom sandbox inputs earn no passing evidence. Mini-projects require independent calculations, changed inputs, a diagnosed defect and stated limitations. They are self-reviewed. Browser-local evidence distinguishes visited, attempted and passed; recall cards become due according to FSRS after an explicit retrieval rating.
 
 ## Execution and scope
 
