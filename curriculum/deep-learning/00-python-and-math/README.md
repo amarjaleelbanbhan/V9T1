@@ -19,7 +19,7 @@ Trace programs, interpret data and memory, and calculate algebra, statistics, do
 
 ## Practice and project rubric
 
-For each topic, predict both worked and transfer calculations, inspect all operations, then answer the explanation check. Wrong answers and sandbox experiments do not earn passing evidence. Projects require an independent worked calculation, a changed case, a diagnosed mistake and limitations; they are self-reviewed. Local saved evidence distinguishes visited, attempted and passed, with review due after one day. A progress count alone does not prove mastery.
+For each topic, predict both worked and transfer calculations, inspect all operations, then answer the explanation check. Wrong answers and sandbox experiments do not earn passing evidence. Projects require an independent worked calculation, a changed case, a diagnosed mistake and limitations; they are self-reviewed. Local saved evidence distinguishes visited, attempted and passed, with recall review scheduled by FSRS after an explicit retrieval rating. A progress count alone does not prove mastery.
 
 ## Execution
 
