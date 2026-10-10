@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { BufferGeometry, Float32BufferAttribute } from "three";
+import { BufferGeometry, Color, Float32BufferAttribute } from "three";
 import { useEffect } from "react";
 import { surfaceLoss, surfacePath } from "../engine/surface";
 import { SceneFrame } from "../components/SceneFrame";
@@ -23,7 +23,8 @@ export function LossSurface({
     const point = (w: number, b: number) => {
       const loss = surfaceLoss(w, b).loss;
       p.push(w - 1, Math.min(loss, 12) * 0.2 - 1.8, b);
-      colors.push(0.2 + loss / 30, 0.45 - loss / 60, 0.8 - loss / 40);
+      const shade = new Color("#0C969C").lerp(new Color("#6BA3BE"), Math.min(loss / 12, 1));
+      colors.push(shade.r, shade.g, shade.b);
     };
     for (let i = 0; i < 28; i++)
       for (let j = 0; j < 28; j++) {
@@ -73,7 +74,7 @@ export function LossSurface({
             args={[i === path.length - 1 ? 0.12 : 0.055, 12, 8]}
           />
           <meshStandardMaterial
-            color={i === path.length - 1 ? "#f6ce78" : "#f4f7ff"}
+            color={i === path.length - 1 ? "#B8E6ED" : "#f4f7ff"}
           />
         </mesh>
       ))}

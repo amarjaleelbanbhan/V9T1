@@ -16,7 +16,7 @@ export function SceneLabel({
     c.height = 128;
     const x = c.getContext("2d");
     if (x) {
-      x.fillStyle = "#0b1428";
+      x.fillStyle = "#031716";
       x.fillRect(0, 0, 512, 128);
       x.font = "600 70px system-ui";
       x.textAlign = "center";
@@ -56,7 +56,7 @@ export function SceneNode({
       >
         <sphereGeometry args={[selected ? 0.45 : 0.34, 24, 16]} />
         <meshStandardMaterial
-          color={selected ? "#f6ce78" : color}
+          color={selected ? "#B8E6ED" : color}
           roughness={0.3}
           metalness={0.2}
           emissive={color}
@@ -94,7 +94,7 @@ export function SceneEdge({
       length: end.distanceTo(start),
     };
   }, [...a, ...b]);
-  const color = selected ? "#f6ce78" : value < 0 ? "#fbac87" : "#68a1ff";
+  const color = selected ? "#B8E6ED" : value < 0 ? "#fbac87" : "#6BA3BE";
   return (
     <group>
       <mesh

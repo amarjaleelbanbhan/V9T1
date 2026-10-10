@@ -123,7 +123,7 @@ export function MathWorkshop() {
         <p>
           Three fixed data points: (−1,−1), (0,1), (1,3). Model: ŷ = wx + b. L =
           mean[½(ŷ−y)²]. Height is loss; the white trail records gradient steps,
-          and gold marks the current step. Unlike a decorative landscape, every
+          and pale aqua marks the current step. Unlike a decorative landscape, every
           height comes from this formula.
         </p>
         <div className="basics-inputs">
@@ -201,7 +201,7 @@ export function MathWorkshop() {
           role="img"
           aria-label="2D contour of the same weight-bias loss with exact gradient descent path"
         >
-          <rect x="30" y="10" width="430" height="245" fill="#111d34" />
+          <rect x="30" y="10" width="430" height="245" fill="#032F30" />
           {[0.1, 0.3, 0.7, 1.5, 3].map((l) => (
             <ellipse
               key={l}
@@ -210,7 +210,7 @@ export function MathWorkshop() {
               rx={Math.sqrt(3 * l) * 86}
               ry={Math.sqrt(2 * l) * 49}
               fill="none"
-              stroke="#638bff"
+              stroke="#6BA3BE"
             />
           ))}
           <polyline
@@ -221,7 +221,7 @@ export function MathWorkshop() {
               )
               .join(" ")}
             fill="none"
-            stroke="#f6ce78"
+            stroke="#B8E6ED"
             strokeWidth="3"
           />
           {path.map((p, i) => (
@@ -230,7 +230,7 @@ export function MathWorkshop() {
               cx={30 + (p.weight + 1) * 86}
               cy={255 - (p.bias + 1.5) * 49}
               r="4"
-              fill="#f6ce78"
+              fill="#B8E6ED"
             />
           ))}
           <text x="30" y="280" fill="currentColor">

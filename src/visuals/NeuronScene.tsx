@@ -54,7 +54,7 @@ export function NeuronScene({
             <SceneNode
               position={p}
               text={`x${i + 1} = ${fmt(inputs[i])}`}
-              color="#638bff"
+              color="#6BA3BE"
               selected={selected === "input" + i}
               onSelect={() => setSelected("input" + i)}
             />
@@ -71,7 +71,7 @@ export function NeuronScene({
         <SceneNode
           position={sum}
           text={step >= 2 ? `Σ = ${fmt(trace.weightedSum)}` : "Σ contributions"}
-          color="#aa8bf5"
+          color="#0C969C"
           selected={selected === "sum"}
           onSelect={() => setSelected("sum")}
         />
@@ -85,7 +85,7 @@ export function NeuronScene({
         <SceneNode
           position={activation}
           text={step >= 3 ? `z = ${fmt(trace.preActivation)}` : "Activation"}
-          color="#43d1bf"
+          color="#0C969C"
           selected={selected === "activation"}
           onSelect={() => setSelected("activation")}
         />
@@ -99,7 +99,7 @@ export function NeuronScene({
         <SceneNode
           position={out}
           text={step >= 5 ? `a = ${fmt(trace.output)}` : "Output: ?"}
-          color="#638bff"
+          color="#6BA3BE"
           selected={selected === "output"}
           onSelect={() => setSelected("output")}
         />
@@ -137,7 +137,7 @@ export function NeuronScene({
           {description}
         </p>
         <p className="foundation-mini">
-          Blue = positive connection · coral = negative · gold = selected.
+          Slate blue = positive connection · coral = negative · pale aqua = selected.
           Timeline highlights computed stages. Select with the scene or the
           buttons above.
         </p>

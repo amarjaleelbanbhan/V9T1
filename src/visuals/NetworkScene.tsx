@@ -66,7 +66,7 @@ export function NetworkScene({
               <SceneNode
                 position={positions[l + 1][j]}
                 text={`${l === 0 ? "h" + (j + 1) : "ŷ"} = ${step >= (l === 0 ? 2 : 4) ? fmt(n.output) : "?"}`}
-                color={l === 0 ? "#aa8bf5" : "#43d1bf"}
+                color={l === 0 ? "#6BA3BE" : "#0C969C"}
                 selected={node[0] === l && node[1] === j}
                 onSelect={() => setNode([l, j])}
               />
@@ -78,7 +78,7 @@ export function NetworkScene({
             key={i}
             position={positions[0][i]}
             text={`x${i + 1} = ${fmt(x)}`}
-            color="#638bff"
+            color="#6BA3BE"
             onSelect={() =>
               onSelect({ layer: 0, neuron: selected.neuron, source: i })
             }

@@ -1,8 +1,9 @@
-/* Semantic roles: inputs blue; weights violet; activations aqua; errors coral; gradients gold. */
+/* User palette: deep teal surfaces, teal/aqua interaction, slate-blue input values.
+   Light text and coral error indicators preserve contrast and mathematical meaning. */
 :root {
- --background:#0B1020; --surface:#121B30; --panel:#18223B; --line:#354564;
- --text:#EDF2FF; --muted:#AFBCD5; --input:#638BFF; --weight:#A78BFA;
- --activation:#37D6C4; --error:#FF9078; --gradient:#F5C978;
+ --background:#031716; --surface:#032F30; --panel:#274D60; --line:#0A7075;
+ --text:#EDF7F8; --muted:#B3D4DD; --input:#6BA3BE; --weight:#0C969C;
+ --activation:#0C969C; --error:#FF9078; --gradient:#B8E6ED;
  --mint:var(--input); --emerald:var(--weight); --teal:var(--activation);
  color:var(--text); background:var(--background);
  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-6:24px;

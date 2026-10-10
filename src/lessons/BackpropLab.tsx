@@ -30,7 +30,7 @@ function BackwardNetwork({trace,stage,selected}:{trace:ReturnType<typeof backpro
      const x1=a.x+26,x2=b.x-26,midX=(x1+x2)/2,midY=(a.y+b.y)/2;
      const direction=reversed?'M'+x2+' '+b.y+'L'+x1+' '+a.y:'M'+x1+' '+a.y+'L'+x2+' '+b.y;
      return <g key={l+'-'+n+'-'+s} pointerEvents="none">
-       <path d={direction} fill="none" stroke={isSelected?'#F8E6A3':reversed?'#F5C47B':'#638BFF'} strokeWidth={isSelected?4:2.5} opacity={isSelected?1:.58} markerEnd={reversed?'url(#backprop-arrow)':undefined}/>
+       <path d={direction} fill="none" stroke={isSelected?'#F8E6A3':reversed?'#F5C47B':'#6BA3BE'} strokeWidth={isSelected?4:2.5} opacity={isSelected?1:.58} markerEnd={reversed?'url(#backprop-arrow)':undefined}/>
        <rect x={midX-28} y={midY-12} width="56" height="24" rx="7" fill={isSelected?'#43614C':'#102F2B'} stroke={isSelected?'#F8E6A3':'#386D58'}/>
        <text x={midX} y={midY+4} textAnchor="middle" fill="#F2FFF2" fontSize="10">{stage>=4?fmt(gradient):fmt(weight)}</text>
      </g>;
@@ -39,7 +39,7 @@ function BackwardNetwork({trace,stage,selected}:{trace:ReturnType<typeof backpro
       const output=l===0?trace.forward.input[n]:trace.forward.layers[l-1].neurons[n].output;
       const delta=l===0?null:trace.layers[l-1].neurons[n].delta;
       return <g key={l+'-'+n}>
-        <circle cx={pos.x} cy={pos.y} r="28" stroke={l===0?'#5D967B':reversed?'#F3CE8C':'#638BFF'} strokeWidth="2" fill={l===0?'#133B34':'#245A43'}/>
+        <circle cx={pos.x} cy={pos.y} r="28" stroke={l===0?'#5D967B':reversed?'#F3CE8C':'#6BA3BE'} strokeWidth="2" fill={l===0?'#133B34':'#245A43'}/>
         <text x={pos.x} y={pos.y+4} textAnchor="middle" fontSize="12" fill="#E9FFEA" fontWeight="700">{stage>=3&&delta!==null?fmt(delta):fmt(output)}</text>
         <text x={pos.x} y={pos.y+47} textAnchor="middle" fontSize="11" fill="#BBDCCD">{l===0?'x'+(n+1):l===1?'h'+(n+1):'ŷ'}</text>
       </g>;

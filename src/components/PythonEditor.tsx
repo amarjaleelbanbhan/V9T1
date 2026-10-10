@@ -27,6 +27,13 @@ export function PythonEditor({
         basicSetup,
         python(),
         oneDark,
+        EditorView.theme({
+          "&": { backgroundColor: "var(--background)", color: "var(--text)" },
+          ".cm-gutters": { backgroundColor: "var(--surface)", color: "var(--muted)", borderColor: "var(--line)" },
+          ".cm-activeLine, .cm-activeLineGutter": { backgroundColor: "var(--panel)" },
+          "&.cm-focused .cm-selectionBackground, .cm-selectionBackground": { backgroundColor: "var(--line)" },
+          ".cm-cursor": { borderLeftColor: "var(--text)" },
+        }, { dark: true }),
         EditorView.lineWrapping,
         EditorState.readOnly.of(readOnly),
         EditorView.editable.of(!readOnly),

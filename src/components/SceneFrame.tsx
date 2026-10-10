@@ -67,10 +67,10 @@ export function SceneFrame({
             gl={{ antialias: true }}
             fallback={fallback}
           >
-            <color attach="background" args={["#0b1428"]} />
+            <color attach="background" args={["#031716"]} />
             <ambientLight intensity={1.4} />
-            <pointLight position={[0, 4, 5]} intensity={55} color="#b0c8ff" />
-            <pointLight position={[-4, -3, 2]} intensity={22} color="#c4a6ff" />
+            <pointLight position={[0, 4, 5]} intensity={55} color="#6BA3BE" />
+            <pointLight position={[-4, -3, 2]} intensity={22} color="#0C969C" />
             <PerformanceMonitor
               onDecline={() => setDpr(1)}
               onIncline={() => setDpr(Math.min(window.devicePixelRatio, 1.5))}
@@ -85,7 +85,7 @@ export function SceneFrame({
               maxDistance={22}
             />
             <gridHelper
-              args={[16, 16, "#304265", "#182640"]}
+              args={[16, 16, "#0A7075", "#032F30"]}
               position={[0, -2.2, 0]}
             />
           </Canvas>
