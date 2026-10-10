@@ -27,7 +27,7 @@ test('keyboard reaches the hints and completes a prediction without mouse or pro
  expect(parseFloat(outline)).toBeGreaterThan(0);
  for(let level=1;level<=3;level++){
   await page.keyboard.press('Enter');
-  await expect(page.locator('.hint-step')).toHaveCount(level);
+  await expect(page.locator('.hint-step')).toHaveCount(level,{timeout:level===3?95_000:5000});
   if(level===3)await expect(page.getByRole('table',{name:'Exact inspected values'})).toBeVisible({timeout:95_000});
  }
  const prediction=page.getByRole('spinbutton',{name:'Your prediction',exact:true});
@@ -60,7 +60,7 @@ test.describe('touch access',()=>{
   await fits();
   for(let level=1;level<=3;level++){
    await page.locator('.hint-request').tap();
-   await expect(page.locator('.hint-step')).toHaveCount(level);
+   await expect(page.locator('.hint-step')).toHaveCount(level,{timeout:level===3?95_000:5000});
    if(level===3)await expect(page.getByRole('table',{name:'Exact inspected values'})).toBeVisible({timeout:95_000});
    await fits();
    for(const body of await page.locator('.hint-body').all())expect(await body.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);

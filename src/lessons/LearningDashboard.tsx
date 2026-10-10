@@ -1,9 +1,10 @@
+import { CourseMap } from "../components/CourseMap";
 import { learningBackup, parseBackup } from "../course/backup";
 import { useState } from "react";
 import { beginnerLessons } from "../course/catalog";
 import { dueCards, recommendLesson } from "../course/learning";
 import { useLearning } from "../course/useLearning";
-import { readProgress } from "../course/progress";
+import { readProgress, type Progress } from "../course/progress";
 import { RecallPractice } from "../components/LessonLearning";
 import type { RecallKind } from "../course/scaffolding";
 export function LearningDashboard({
@@ -16,7 +17,7 @@ export function LearningDashboard({
     [mode, setMode] = useState<"all" | "bookmarks">("all"),
     [card, setCard] = useState<string | null>(null),
     [message, setMessage] = useState("");
-  let progress = {};
+  let progress: Progress = {};
   try {
     progress = readProgress(localStorage);
   } catch {}
@@ -79,6 +80,7 @@ export function LearningDashboard({
           estimate.
         </p>
       </section>
+      <CourseMap progress={progress} learning={state} onLesson={onLesson}/>
       <section className="foundation-panel">
         <h2>Spaced review queue</h2>
         <p>

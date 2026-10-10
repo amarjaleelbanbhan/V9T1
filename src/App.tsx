@@ -1,7 +1,7 @@
 import {PythonProgram} from './components/PythonProgram';
 import {neuronPython} from './python/programs';
-import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
-import { BrainCircuit, BookOpen, Check, ChevronRight, Compass, Eye, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
+import { BrainCircuit, BookOpen, Check, ChevronRight, Eye, Play, Pause, RotateCcw, SkipForward, SlidersHorizontal, ZoomIn } from 'lucide-react';
 import { computeNeuron, formatNumber, activationNames } from './engine/neuron';
 import { TIMELINE, LAST_STEP } from './engine/timeline';
 import { useLab } from './store/lab';
@@ -12,7 +12,9 @@ const MathWorkshop=lazy(()=>import('./lessons/MathWorkshop').then(m=>({default:m
 import { NeuronDiagram } from './visuals/NeuronDiagram';
 import { ActivationPlot } from './visuals/ActivationPlot';
 import { ParameterSlider } from './components/ParameterSlider';
-import { curriculum } from './content/curriculum';
+import { WorkspaceNavigation } from './components/WorkspaceNavigation';
+import { NeuronMission } from './components/NeuronMission';
+import { useWorkspace, type ActiveLesson } from './store/workspace';
 const FoundationsLab=lazy(()=>import('./lessons/FoundationsLab').then(m=>({default:m.FoundationsLab})));
 const ActivationExplorer=lazy(()=>import('./lessons/ActivationExplorer').then(m=>({default:m.ActivationExplorer})));
 const ForwardLab=lazy(()=>import('./lessons/ForwardLab').then(m=>({default:m.ForwardLab})));
@@ -29,7 +31,6 @@ const PythonFlowLab=lazy(()=>import('./lessons/PythonFlowLab').then(m=>({default
 const PythonBasicsLab=lazy(()=>import('./lessons/PythonBasicsLab').then(m=>({default:m.PythonBasicsLab})));
 const PythonTraceLab=lazy(()=>import('./lessons/PythonTraceLab').then(m=>({default:m.PythonTraceLab})));
 
-type ActiveLesson='intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'|'library'|'python'|'python-basics'|'python-flow'|'beginner'|'training-project'|'dashboard'|'python-workshop'|'math-workshop';
 type View='3d'|'2d';
 type InspectorTab='math'|'code'|'challenge';
 function canUseWebGL(){try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'));}catch{return false;}}
@@ -59,34 +60,29 @@ export default function App(){
   const {inputs,weights,bias,activation,step,playing,speed,setInput,setWeight,setBias,setActivation,setStep,setSpeed,play,pause,advance,reset}=useLab();
   const trace=useMemo(()=>computeNeuron({inputs,weights,bias,activation}),[inputs,weights,bias,activation]);
   const [supported]=useState(canUseWebGL);
-  const [view,setView]=useState<View>(supported&&window.innerWidth>=650&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'3d':'2d');
+  const [view,setView]=useState<View>('2d');
   const [tab,setTab]=useState<InspectorTab>('math');
-  const [activeLesson,setActiveLesson]=useState<ActiveLesson>(()=>{try{const id=localStorage.getItem('neurallab.workspace');return ['intro','neuron','activation','propagation','tensor','perceptron','loss','backprop','gradient-depth','library','python','python-basics','python-flow','beginner','training-project','dashboard','python-workshop','math-workshop'].includes(id||'')?id as ActiveLesson:'neuron';}catch{return 'neuron';}});
+  const [activeLesson,setActiveLesson]=useWorkspace();
   const [beginnerStart,setBeginnerStart]=useState<string|undefined>(undefined);
   const [sidebarOpen,setSidebarOpen]=useState(false);
+  const closeSidebar=useCallback(()=>setSidebarOpen(false),[]);
+  const navigate=(id:ActiveLesson,topic?:string)=>{setBeginnerStart(topic);setActiveLesson(id);pause();};
   useEffect(()=>{if(!playing)return;const handle=window.setInterval(()=>{const {step:s,advance:a,pause:p}=useLab.getState();if(s>=LAST_STEP)p();else a();},Math.max(250,1250/speed));return()=>window.clearInterval(handle);},[playing,speed]);
   useEffect(()=>{const mq=window.matchMedia('(prefers-reduced-motion: reduce)');const stop=()=>{if(mq.matches)pause();};if(playing)stop();mq.addEventListener('change',stop);return()=>mq.removeEventListener('change',stop);},[playing,pause]);
-  useEffect(()=>{try{localStorage.setItem('neurallab.workspace',activeLesson);}catch{}const main=document.getElementById('lab');main?.focus({preventScroll:true});main?.scrollIntoView({block:'start',behavior:'instant'});},[activeLesson]);
+  useEffect(()=>{pause();const main=document.getElementById('lab');main?.focus({preventScroll:true});main?.scrollIntoView({block:'start',behavior:'instant'});},[activeLesson,pause]);
   useEffect(()=>{const stop=()=>{if(document.hidden)pause();};document.addEventListener('visibilitychange',stop);return()=>document.removeEventListener('visibilitychange',stop);},[pause]);
   const resetAll=()=>{reset();setTab('math');};
   return <div className="app-shell">
-    <a className="skip-link" href="#lab">Skip to learning workspace</a><header className="top-bar"><a className="brand" href="#top"><BrainCircuit size={28} strokeWidth={2.4}/><span>Neural<span>Lab</span></span></a>
-      <nav className="global-nav" aria-label="Main navigation"><a className="active" href="#lab" onClick={()=>{setActiveLesson('neuron');pause();}}>Learn</a><a href="#curriculum" onClick={()=>{setActiveLesson('library');pause();}}>Curriculum</a></nav>
-      <button className="dashboard-link" onClick={()=>{setActiveLesson('dashboard');pause();}}>My learning</button><span className="header-label">VISUAL DEEP LEARNING <span className="status-dot"/></span>
-      <button className="mobile-toggle" onClick={()=>setSidebarOpen(v=>!v)} aria-expanded={sidebarOpen} aria-label="Toggle lesson navigation"><BookOpen size={20}/></button>
+    <a className="skip-link" href="#lab" onClick={e=>{e.preventDefault();document.getElementById('lab')?.focus();document.getElementById('lab')?.scrollIntoView({block:'start'});}}>Skip to learning workspace</a><header className="top-bar"><a className="brand" href="#/lab/neuron" onClick={e=>{e.preventDefault();navigate('neuron');}}><BrainCircuit size={28} strokeWidth={2.4}/><span>Neural<span>Lab</span></span></a>
+      <nav className="global-nav" aria-label="Main navigation"><a className={activeLesson!=='library'&&activeLesson!=='dashboard'?'active':''} aria-current={activeLesson!=='library'&&activeLesson!=='dashboard'?'page':undefined} href="#/lab/neuron" onClick={e=>{e.preventDefault();navigate('neuron');}}>Learn</a><a className={activeLesson==='library'?'active':''} aria-current={activeLesson==='library'?'page':undefined} href="#/lab/library" onClick={e=>{e.preventDefault();navigate('library');}}>Curriculum</a></nav>
+      <button className={'dashboard-link '+(activeLesson==='dashboard'?'current':'')} aria-current={activeLesson==='dashboard'?'page':undefined} onClick={()=>navigate('dashboard')}>My learning</button><span className="header-label">AN EXPERIMENT IN UNDERSTANDING <span className="status-dot"/></span>
+      <button className="mobile-toggle" onClick={()=>setSidebarOpen(v=>!v)} aria-expanded={sidebarOpen} aria-controls="course-navigation" aria-label="Toggle lesson navigation"><BookOpen size={20}/></button>
     </header>
     <div className="app-grid" id="top">
-      <aside className={'sidebar '+(sidebarOpen?'sidebar-open':'')} id="curriculum"><div className="side-title"><p className="eyebrow">YOUR LEARNING PATH</p><h2>Deep Learning</h2><p>Explore the invisible.</p></div>
-        <nav aria-label="Course lessons" className="lesson-nav">{curriculum.map((lesson,i)=>{
-          const inner=<><span className="lesson-number">{String(i+1).padStart(2,'0')}</span><span className="lesson-name">{lesson.title}<small>{lesson.week}</small></span>{lesson.status==='ready'?<span className="lesson-active" aria-label="Available now"/>:<span className="later">Soon</span>}</>;
-          return lesson.status==='ready'
-            ? <button key={lesson.id} type="button" className={'lesson-item lesson-ready '+(activeLesson===lesson.id?'current':'')} aria-current={activeLesson===lesson.id?'page':undefined} onClick={()=>{if(lesson.id==='optimizers'){setBeginnerStart('dl-05-005');setActiveLesson('beginner');}else setActiveLesson(lesson.id as 'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'|'python-basics'|'python-flow'|'beginner'|'training-project');setSidebarOpen(false);pause();}}>{inner}</button>
-            : <div key={lesson.id} className="lesson-item planned">{inner}</div>;
-        })}</nav>
-        <button className="library-button" onClick={()=>{setBeginnerStart(undefined);setActiveLesson('beginner');setSidebarOpen(false);pause();}}>Start beginner course</button><button className="library-button" onClick={()=>{setActiveLesson('library');setSidebarOpen(false);pause();}}>Browse full curriculum</button><button className="library-button" onClick={()=>{setActiveLesson('training-project');setSidebarOpen(false);pause();}}>Beginner training project</button><button className="library-button" onClick={()=>{setActiveLesson('python');setSidebarOpen(false);pause();}}>Python execution lab</button><button className="library-button" onClick={()=>{setActiveLesson('python-workshop');setSidebarOpen(false);pause();}}>Editable Python workshop</button><button className="library-button" onClick={()=>{setActiveLesson('math-workshop');setSidebarOpen(false);pause();}}>Matrix and loss workshop</button><div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>{curriculum.filter(l=>l.status==='ready').length} interactive lessons available</span></div>
-      </aside>
+      <WorkspaceNavigation active={activeLesson} open={sidebarOpen} close={closeSidebar} navigate={navigate}/>
       <main id="lab" className="workspace" tabIndex={-1}><Suspense fallback={<p role="status">Loading learning workspace…</p>}> {activeLesson==='dashboard'?<LearningDashboard onLesson={id=>{setBeginnerStart(id);setActiveLesson('beginner');}}/>:activeLesson==='python-workshop'?<PythonWorkshop/>:activeLesson==='math-workshop'?<MathWorkshop/>:activeLesson==='training-project'?<TrainingProject/>:activeLesson==='beginner'?<BeginnerCourse key={beginnerStart} initialLesson={beginnerStart} onOpen={id=>setActiveLesson(id as ActiveLesson)}/>:activeLesson==='python-flow'?<PythonFlowLab/>:activeLesson==='python-basics'?<PythonBasicsLab/>:activeLesson==='library'?<CurriculumLibrary/>:activeLesson==='python'?<PythonTraceLab/>:activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:activeLesson==='gradient-depth'?<GradientDepthLab/>:<>
         <div className="heading"><div><div className="crumb"><span>MODULE 02</span><ChevronRight size={15}/> <span>ARTIFICIAL NEURONS</span></div><h1>Inside a Neuron<span className="dot">.</span></h1><p className="subtitle">Move the numbers. Follow the signals. Understand the result.</p></div><div className="module-chip"><span className="status-dot"/> LIVE SIMULATION</div></div>
+        <NeuronMission/>
         <div className="workbench">
           <section className="scene-card" aria-label="Neuron visualization"><div className="scene-bar"><div className="scene-label"><Eye size={17}/> LIVE COMPUTATION <span className="badge-muted">STEP {step+1} / 6</span></div><div className="view-switch" role="group" aria-label="Visualization mode"><button className={view==='2d'?'on':''} onClick={()=>setView('2d')} aria-pressed={view==='2d'}>2D</button><button className={view==='3d'?'on':''} onClick={()=>setView('3d')} disabled={!supported} aria-pressed={view==='3d'}>3D</button></div></div>
             <div className="canvas-area">{view==='3d'&&supported?<NeuronScene inputs={inputs} weights={weights} trace={trace} step={step}/>:<NeuronDiagram inputs={inputs} weights={weights} trace={trace} step={step}/>}<div className="scene-hint"><ZoomIn size={14}/>{view==='3d'?'Drag to rotate · Scroll to zoom · Right drag to pan':'2D mathematical flow'}</div></div>

@@ -1,3 +1,4 @@
+import { palette } from '../design/palette';
 import { useEffect, useMemo } from "react";
 import { CanvasTexture, Quaternion, Vector3 } from "three";
 export type Point = [number, number, number];
@@ -16,7 +17,7 @@ export function SceneLabel({
     c.height = 128;
     const x = c.getContext("2d");
     if (x) {
-      x.fillStyle = "#031716";
+      x.fillStyle = palette.background;
       x.fillRect(0, 0, 512, 128);
       x.font = "600 70px system-ui";
       x.textAlign = "center";
@@ -56,7 +57,7 @@ export function SceneNode({
       >
         <sphereGeometry args={[selected ? 0.45 : 0.34, 24, 16]} />
         <meshStandardMaterial
-          color={selected ? "#B8E6ED" : color}
+          color={selected ? palette.gradient : color}
           roughness={0.3}
           metalness={0.2}
           emissive={color}
@@ -94,7 +95,7 @@ export function SceneEdge({
       length: end.distanceTo(start),
     };
   }, [...a, ...b]);
-  const color = selected ? "#B8E6ED" : value < 0 ? "#fbac87" : "#6BA3BE";
+  const color = selected ? palette.gradient : value < 0 ? "#fbac87" : palette.input;
   return (
     <group>
       <mesh

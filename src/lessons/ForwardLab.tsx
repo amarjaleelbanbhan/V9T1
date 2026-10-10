@@ -1,3 +1,4 @@
+import { palette } from '../design/palette';
 import {StagePlayer} from '../components/StagePlayer';
 import {lazy,Suspense} from 'react';
 const NetworkScene=lazy(()=>import('../visuals/NetworkScene').then(m=>({default:m.NetworkScene})));
@@ -25,8 +26,8 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
       }
     }
   }
-  return <svg viewBox="0 0 610 372" className="forward-network" role="img" aria-label="Interactive forward propagation computational graph, two input nodes, two hidden neurons and one output neuron">
-    <defs><marker id="forward-arrow" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0 0L5 2.5L0 5" fill="#9CCBB4"/></marker></defs>
+  return <svg viewBox="0 0 610 372" className="forward-network" role="group" aria-label="Interactive forward propagation computational graph, two input nodes, two hidden neurons and one output neuron">
+    <defs><marker id="forward-arrow" markerWidth="5" markerHeight="5" refX="3.5" refY="2.5" orient="auto"><path d="M0 0L5 2.5L0 5" fill={palette.gradient}/></marker></defs>
     {['INPUTS','HIDDEN · ReLU','OUTPUT · SIGMOID'].map((name,i)=><text key={name} x={positions[i][0].x} y="29" className="forward-heading" textAnchor="middle">{name}</text>)}
     {segments.map(s=>{
       const active=s.layer===0?step>=1:step>=3;
@@ -35,21 +36,21 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
       const midX=(x1+x2)/2,midY=(y1+y2)/2;
       return <g key={s.layer+'-'+s.neuron+'-'+s.source} role="button" tabIndex={0} aria-label={'Connection '+(s.layer===0?'Input '+(s.source+1)+' to Hidden '+(s.neuron+1):'Hidden '+(s.source+1)+' to Output 1')} onClick={()=>onSelect({layer:s.layer,neuron:s.neuron,source:s.source})} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect({layer:s.layer,neuron:s.neuron,source:s.source})}}} style={{cursor:'pointer'}}>
         <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke="transparent" strokeWidth="23" fill="none"/>
-        <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke={chosen?'#F7E0A1':s.weight>=0?'#6BA3BE':'#F0A66A'} strokeWidth={chosen?5:3} opacity={active?1:.28} markerEnd="url(#forward-arrow)" fill="none"/>
-        <rect pointerEvents="none" x={midX-25} y={midY-12} width="50" height="24" rx="7" fill={chosen?'#3A5743':'#102F2B'} stroke={chosen?'#F7E0A1':'#3A6857'}/>
-        <text pointerEvents="none" x={midX} y={midY+4} fontSize="11" fill="#EFFEF1" textAnchor="middle">{fmt(s.weight)}</text>
+        <path d={'M'+x1+' '+y1+'L'+x2+' '+y2} stroke={chosen?palette.gradient:s.weight>=0?palette.input:palette.error} strokeWidth={chosen?5:3} opacity={active?1:.28} markerEnd="url(#forward-arrow)" fill="none"/>
+        <rect pointerEvents="none" x={midX-25} y={midY-12} width="50" height="24" rx="7" fill={chosen?palette.panel:palette.surface} stroke={chosen?palette.gradient:palette.line}/>
+        <text pointerEvents="none" x={midX} y={midY+4} fontSize="11" fill={palette.text} textAnchor="middle">{fmt(s.weight)}</text>
       </g>;
     })}
     {positions.map((nodes,i)=>nodes.map((pos,j)=>{
       const value=i===0?trace.input[j]:trace.layers[i-1].neurons[j].output;
       const isReady=i===0||i===1&&step>=2||i===2&&step>=4;
       return <g key={i+'-'+j}>
-        <circle cx={pos.x} cy={pos.y} r="25" fill={isReady?'#0C969C':'#16483D'} stroke={isReady?'#A9E6B2':'#4B8370'} strokeWidth="2"/>
-        <text x={pos.x} y={pos.y+4} fontSize="12" fontWeight="bold" textAnchor="middle" fill="#F1FFF3">{isReady?fmt(value):'?'}</text>
-        <text x={pos.x} y={pos.y+48} fontSize="12" fill="#A8D4BE" textAnchor="middle">{i===0?'x'+(j+1):i===1?'h'+(j+1):'ŷ'}</text>
+        <circle cx={pos.x} cy={pos.y} r="25" fill={isReady?palette.weight:palette.surface} stroke={isReady?palette.gradient:palette.line} strokeWidth="2"/>
+        <text x={pos.x} y={pos.y+4} fontSize="12" fontWeight="bold" textAnchor="middle" fill={palette.text}>{isReady?fmt(value):'?'}</text>
+        <text x={pos.x} y={pos.y+48} fontSize="12" fill={palette.muted} textAnchor="middle">{i===0?'x'+(j+1):i===1?'h'+(j+1):'ŷ'}</text>
       </g>;
     }))}
-    <text x="305" y="339" textAnchor="middle" fill="#9FC7B3" fontSize="12">Select any connection to inspect its exact multiplication and edit its weight.</text>
+    <text x="305" y="339" textAnchor="middle" fill={palette.muted} fontSize="12">Select any connection to inspect its exact multiplication and edit its weight.</text>
   </svg>;
 }
 export function ForwardLab(){

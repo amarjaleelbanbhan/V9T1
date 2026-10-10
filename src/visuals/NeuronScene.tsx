@@ -1,3 +1,4 @@
+import { palette } from '../design/palette';
 import { useState } from "react";
 import type { NeuronTrace } from "../engine/neuron";
 import { formatNumber as fmt } from "../engine/neuron";
@@ -54,7 +55,7 @@ export function NeuronScene({
             <SceneNode
               position={p}
               text={`x${i + 1} = ${fmt(inputs[i])}`}
-              color="#6BA3BE"
+              color={palette.input}
               selected={selected === "input" + i}
               onSelect={() => setSelected("input" + i)}
             />
@@ -71,7 +72,7 @@ export function NeuronScene({
         <SceneNode
           position={sum}
           text={step >= 2 ? `Σ = ${fmt(trace.weightedSum)}` : "Σ contributions"}
-          color="#0C969C"
+          color={palette.weight}
           selected={selected === "sum"}
           onSelect={() => setSelected("sum")}
         />
@@ -85,7 +86,7 @@ export function NeuronScene({
         <SceneNode
           position={activation}
           text={step >= 3 ? `z = ${fmt(trace.preActivation)}` : "Activation"}
-          color="#0C969C"
+          color={palette.weight}
           selected={selected === "activation"}
           onSelect={() => setSelected("activation")}
         />
@@ -99,7 +100,7 @@ export function NeuronScene({
         <SceneNode
           position={out}
           text={step >= 5 ? `a = ${fmt(trace.output)}` : "Output: ?"}
-          color="#6BA3BE"
+          color={palette.input}
           selected={selected === "output"}
           onSelect={() => setSelected("output")}
         />

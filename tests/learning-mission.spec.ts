@@ -161,7 +161,7 @@ test("3D neuron and layered network selection share math, with keyboard transpor
   ).toContainText("Stage 1");
   await page.getByRole("button", { name: "Use 2D network" }).click();
   await expect(
-    page.getByRole("img", { name: /Interactive forward propagation/ }),
+    page.getByRole("group", { name: /Interactive forward propagation/ }),
   ).toBeVisible();
   expect(errors).toEqual([]);
 });
