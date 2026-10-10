@@ -1,3 +1,4 @@
+import { validateWorkshop } from "../engine/workshopValidation";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { usePythonProgram } from "../python/usePythonProgram";
 const PythonEditor = lazy(() =>
@@ -16,14 +17,14 @@ const templates = [
   {
     name: "Repair a gradient update",
     prompt:
-      "The code below moves uphill. Repair the update to minimize (weight - 3)². Predict the new weight before running. Reference: at weight 1 and rate 0.1, a downhill update gives 1.4.",
+      "The code below moves uphill. Repair the update to minimize (weight - 3)². Predict the new weight before running.",
     source: `weight = 1.0\nrate = 0.1\ngradient = 2 * (weight - 3)\nnew_weight = weight + rate * gradient  # Repair this sign\nresult = {"gradient": gradient, "output": new_weight}\nprint(result)`,
     expected: 1.4,
   },
   {
     name: "NumPy matrix cells",
     prompt:
-      "Predict the bottom-right cell of A @ B. Use the selected row and column. Reference: 3×0 + 4×1 = 4.",
+      "Predict the bottom-right cell of A @ B. Use the selected row and column.",
     source: `import numpy as np\nA = np.array([[1.0, 2.0], [3.0, 4.0]])\nB = np.array([[2.0, 0.0], [-1.0, 1.0]])\nC = A @ B\nresult = {"cells": C.tolist(), "output": float(C[1, 1])}\nprint(result)`,
     expected: 4,
   },
@@ -112,6 +113,13 @@ export function PythonWorkshop() {
         <p role="status">{p.status}</p>
         {result && (
           <>
+            <p role="status" data-testid="workshop-contract">
+              {validateWorkshop(index, result)
+                ? "The executed values satisfy this exercise’s numerical contract."
+                : "The program executed, but its returned values do not satisfy the intended exercise. Compare every required field with the task."}{" "}
+              This is sandbox validation, separate from assessed course
+              evidence.
+            </p>
             <pre className="python-code" data-testid="workshop-result">
               {JSON.stringify(result, null, 2)}
             </pre>
@@ -120,9 +128,10 @@ export function PythonWorkshop() {
               Math.abs(result.output - Number(guess)) < 1e-6
                 ? "Your prediction matches the executed output."
                 : "Compare your prediction with the returned output and trace the difference."}{" "}
-              For the unmodified intended exercise, expected output is{" "}
-              {templates[index].expected}. Edited programs may intentionally
-              give a different answer.
+              Sandbox comparison only; matching your prediction does not
+              validate the intended task. For the intended exercise, expected
+              output is {templates[index].expected}. Edited programs may
+              intentionally give a different answer.
             </p>
             {Array.isArray(result.contributions) &&
               result.contributions.every(

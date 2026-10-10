@@ -1,27 +1,328 @@
-import {useState} from 'react';
-import {usePythonExecution} from '../python/usePythonExecution';
-const examples={
- loops:{title:'Loops and conditions',meaning:'A loop repeats its indented instructions for each list item. An if condition decides whether a block runs.',why:'Filtering sensor readings or summing only positive values requires both repetition and a decision.',question:'Why is the negative value skipped?',right:'The condition value > 0 is false',wrong:'The loop never reads negative numbers',explain:'The loop reads every item. Only the addition is skipped when the condition is false.'},
- functions:{title:'Functions and local names',meaning:'A function is a named reusable procedure. A parameter receives a value for one call; return passes a result back.',why:'Writing double once lets every item use the same transformation without repeating its instructions.',question:'Where does result belong?',right:'Inside one call to double',wrong:'It automatically becomes a global variable',explain:'Each call has local names. Returning result provides its value to the caller; it does not create a global result name.'},
- objects:{title:'Objects, state and methods',meaning:'A class defines behavior. An object is one instance, with its own attributes. A method is a function operating on that instance.',why:'A counter keeps a running total together with the method that updates it. self refers to the current instance.',question:'What does self.total refer to?',right:'The total attribute of this counter instance',wrong:'A fresh local variable erased after every call',explain:'The instance retains its attribute between calls. Two separately constructed Counter instances would retain separate totals.'}
+import {
+  useSandboxDraft,
+  numericStrings,
+  shortText,
+} from "../course/useSandboxDraft";
+import { useState } from "react";
+import { usePythonExecution } from "../python/usePythonExecution";
+const examples = {
+  loops: {
+    title: "Loops and conditions",
+    meaning:
+      "A loop repeats its indented instructions for each list item. An if condition decides whether a block runs.",
+    why: "Filtering sensor readings or summing only positive values requires both repetition and a decision.",
+    question: "Why is the negative value skipped?",
+    right: "The condition value > 0 is false",
+    wrong: "The loop never reads negative numbers",
+    explain:
+      "The loop reads every item. Only the addition is skipped when the condition is false.",
+  },
+  functions: {
+    title: "Functions and local names",
+    meaning:
+      "A function is a named reusable procedure. A parameter receives a value for one call; return passes a result back.",
+    why: "Writing double once lets every item use the same transformation without repeating its instructions.",
+    question: "Where does result belong?",
+    right: "Inside one call to double",
+    wrong: "It automatically becomes a global variable",
+    explain:
+      "Each call has local names. Returning result provides its value to the caller; it does not create a global result name.",
+  },
+  objects: {
+    title: "Objects, state and methods",
+    meaning:
+      "A class defines behavior. An object is one instance, with its own attributes. A method is a function operating on that instance.",
+    why: "A counter keeps a running total together with the method that updates it. self refers to the current instance.",
+    question: "What does self.total refer to?",
+    right: "The total attribute of this counter instance",
+    wrong: "A fresh local variable erased after every call",
+    explain:
+      "The instance retains its attribute between calls. Two separately constructed Counter instances would retain separate totals.",
+  },
 } as const;
-type Mode=keyof typeof examples;
-export function PythonFlowLab(){
- const [mode,setMode]=useState<Mode>('loops');const [numbers,setNumbers]=useState(['2','-1','3']);const [guess,setGuess]=useState('');const [step,setStep]=useState(0);const [answer,setAnswer]=useState<string|null>(null);const [evidence,setEvidence]=useState<string[]>([]);
- const {trace,status,busy,run,cancel,reset}=usePythonExecution();const info=examples[mode];const frame=trace?.frames[step];const final=trace?.frames.at(-1);const actual=final?.globals.total;const match=typeof actual==='number'&&Math.abs(Number(guess)-actual)<=1e-9*Math.max(1,Math.abs(actual));
- const invalidate=()=>{reset();setGuess('');setStep(0);setAnswer(null);};
- const key=mode+':'+JSON.stringify(numbers.map(Number));
- const record=()=>{setAnswer(info.right);if(match&&frame?.phase==='complete')setEvidence(old=>old.includes(key)?old:[...old,key]);};
- return <section aria-label="Python control flow lesson"><p className="eyebrow">BEGINNER · EXECUTED PYTHON</p><h1>Follow repetition and calls<span className="dot">.</span></h1><p className="subtitle">Predict, execute, then replay the real trace. Repeated lines and changing scopes show how Python gets its result.</p>
- <div className="foundation-choices" aria-label="Python example">{(Object.keys(examples) as Mode[]).map(m=><button key={m} disabled={busy} aria-pressed={m===mode} onClick={()=>{invalidate();setMode(m);}}>{examples[m].title}</button>)}</div>
- <h2>{info.title}</h2><p className="foundation-copy">{info.meaning}</p><p>{info.why}</p>
- <dl className="vocabulary-grid"><div><dt>List</dt><dd>An ordered collection, with positions starting at zero.</dd></div><div><dt>Indentation</dt><dd>Spaces group the instructions belonging to a loop, condition, function or class.</dd></div><div><dt>Scope</dt><dd>The context in which a name is stored and looked up.</dd></div><div><dt>State</dt><dd>Values retained as instructions change them.</dd></div></dl>
- <div className="basics-inputs">{numbers.map((n,i)=><label key={i}>List item {i+1}<input type="number" className="python-input" value={n} disabled={busy} onChange={e=>{invalidate();setNumbers(old=>old.map((v,j)=>j===i?e.target.value:v));}}/></label>)}<label>Predict final total<input type="number" className="python-input" value={guess} disabled={busy||!!trace} onChange={e=>setGuess(e.target.value)}/></label></div>
- <p>Loop example: add only positive items. Function example: double every item, then sum the outputs. Object example: add every item to one counter.</p>
- <div className="python-actions"><button disabled={busy||!guess.trim()||!Number.isFinite(Number(guess))} onClick={()=>{setStep(0);setAnswer(null);run({example:mode,values:numbers.map(n=>n.trim()?Number(n):NaN) as [number,number,number]});}}>Execute my prediction</button><button disabled={!busy} onClick={cancel}>Cancel execution</button><button disabled={!trace||step===0} onClick={()=>setStep(s=>s-1)}>Previous event</button><button disabled={!trace||step>=trace.frames.length-1} onClick={()=>setStep(s=>s+1)}>Next event</button><button disabled={!trace} onClick={()=>setStep(trace!.frames.length-1)}>Inspect completed trace</button></div><p role="status">{status}</p>
- {trace?<div className="basics-workbench"><div><h2>Executed instructions</h2><div className="python-code">{trace.source.split('\n').map((line,i)=><div key={i} className={frame?.line===i+1?'current-line':''}><code>{i+1} · {line}</code></div>)}</div></div><div><h2>Scope: {frame?.scope}</h2><p>Event {step+1} / {trace.frames.length} · {frame?.phase}. Values below are captured before the highlighted line, or after all execution.</p><h3>Global names</h3><pre className="python-code" data-testid="flow-globals">{JSON.stringify(frame?.globals,null,2)}</pre><h3>Current local names</h3><pre className="python-code" data-testid="flow-locals">{JSON.stringify(frame?.locals,null,2)}</pre><h3>Output so far</h3><pre>{frame?.stdout||'Nothing printed yet.'}</pre></div></div>:<p>Run your prediction to load the source and recorded scopes.</p>}
- {trace&&<p role="status">{match?'Prediction matched.':'Try a new prediction by changing an input.'} Final total: {String(actual)}.</p>}
- {frame?.phase==='complete'&&<section className="foundation-panel"><h2>{info.question}</h2><div className="foundation-choices"><button onClick={record}>{info.right}</button><button onClick={()=>setAnswer(info.wrong)}>{info.wrong}</button></div>{answer&&<p role="status">{answer===info.right?'Correct.':'Try again.'} {info.explain}</p>}</section>}
- <section className="foundation-panel" aria-label="Flow practice evidence"><h2>Transfer practice</h2><p>For each example, predict correctly and explain it for two different lists. Try [2, −1, 3], then [1, −3, 2]. Evidence lasts for this visit only.</p><ul>{(Object.keys(examples) as Mode[]).map(m=><li key={m}>{examples[m].title}: {evidence.filter(k=>k.startsWith(m+':')).length>=2?'practice criteria met':'two distinct lists needed'}</li>)}</ul></section>
- <p className="foundation-mini">Fixed numeric examples run in a disposable worker; stepping replays recorded execution. <a href="https://docs.python.org/3.12/tutorial/controlflow.html" target="_blank" rel="noreferrer">Python control flow</a> · <a href="https://docs.python.org/3.12/tutorial/classes.html" target="_blank" rel="noreferrer">Python classes</a></p></section>;
+type Mode = keyof typeof examples;
+export function PythonFlowLab() {
+  const [mode, setMode] = useState<Mode>("loops");
+  const [numbers, setNumbers] = useSandboxDraft(
+    "flow-numbers",
+    ["2", "-1", "3"],
+    numericStrings(3),
+  );
+  const [guess, setGuess] = useSandboxDraft("flow-guess", "", shortText);
+  const [step, setStep] = useState(0);
+  const [answer, setAnswer] = useState<string | null>(null);
+  const [evidence, setEvidence] = useState<string[]>([]);
+  const { trace, status, busy, run, cancel, reset } = usePythonExecution();
+  const info = examples[mode];
+  const frame = trace?.frames[step];
+  const final = trace?.frames.at(-1);
+  const actual = final?.globals.total;
+  const match =
+    typeof actual === "number" &&
+    Math.abs(Number(guess) - actual) <= 1e-9 * Math.max(1, Math.abs(actual));
+  const invalidate = () => {
+    reset();
+    setGuess("");
+    setStep(0);
+    setAnswer(null);
+  };
+  const key = mode + ":" + JSON.stringify(numbers.map(Number));
+  const record = () => {
+    setAnswer(info.right);
+    if (match && frame?.phase === "complete")
+      setEvidence((old) => (old.includes(key) ? old : [...old, key]));
+  };
+  return (
+    <section aria-label="Python control flow lesson">
+      <p className="eyebrow">BEGINNER · EXECUTED PYTHON</p>
+      <h1>
+        Follow repetition and calls<span className="dot">.</span>
+      </h1>
+      <p className="subtitle">
+        Predict, execute, then replay the real trace. Repeated lines and
+        changing scopes show how Python gets its result.
+      </p>
+      <div className="foundation-choices" aria-label="Python example">
+        {(Object.keys(examples) as Mode[]).map((m) => (
+          <button
+            key={m}
+            disabled={busy}
+            aria-pressed={m === mode}
+            onClick={() => {
+              invalidate();
+              setMode(m);
+            }}
+          >
+            {examples[m].title}
+          </button>
+        ))}
+      </div>
+      <h2>{info.title}</h2>
+      <p className="foundation-copy">{info.meaning}</p>
+      <p>{info.why}</p>
+      <dl className="vocabulary-grid">
+        <div>
+          <dt>List</dt>
+          <dd>An ordered collection, with positions starting at zero.</dd>
+        </div>
+        <div>
+          <dt>Indentation</dt>
+          <dd>
+            Spaces group the instructions belonging to a loop, condition,
+            function or class.
+          </dd>
+        </div>
+        <div>
+          <dt>Scope</dt>
+          <dd>The context in which a name is stored and looked up.</dd>
+        </div>
+        <div>
+          <dt>State</dt>
+          <dd>Values retained as instructions change them.</dd>
+        </div>
+      </dl>
+      <div className="basics-inputs">
+        {numbers.map((n, i) => (
+          <label key={i}>
+            List item {i + 1}
+            <input
+              type="number"
+              className="python-input"
+              value={n}
+              disabled={busy}
+              onChange={(e) => {
+                invalidate();
+                setNumbers((old) =>
+                  old.map((v, j) => (j === i ? e.target.value : v)),
+                );
+              }}
+            />
+          </label>
+        ))}
+        <label>
+          Predict final total
+          <input
+            type="number"
+            className="python-input"
+            value={guess}
+            disabled={busy || !!trace}
+            onChange={(e) => setGuess(e.target.value)}
+          />
+        </label>
+      </div>
+      <p>
+        Loop example: add only positive items. Function example: double every
+        item, then sum the outputs. Object example: add every item to one
+        counter.
+      </p>
+      <div className="python-actions">
+        <button
+          disabled={busy || !guess.trim() || !Number.isFinite(Number(guess))}
+          onClick={() => {
+            setStep(0);
+            setAnswer(null);
+            run({
+              example: mode,
+              values: numbers.map((n) => (n.trim() ? Number(n) : NaN)) as [
+                number,
+                number,
+                number,
+              ],
+            });
+          }}
+        >
+          Execute my prediction
+        </button>
+        <button disabled={!busy} onClick={cancel}>
+          Cancel execution
+        </button>
+        <button
+          disabled={!trace || step === 0}
+          onClick={() => setStep((s) => s - 1)}
+        >
+          Previous event
+        </button>
+        <button
+          disabled={!trace || step >= trace.frames.length - 1}
+          onClick={() => setStep((s) => s + 1)}
+        >
+          Next event
+        </button>
+        <button
+          disabled={!trace}
+          onClick={() => setStep(trace!.frames.length - 1)}
+        >
+          Inspect completed trace
+        </button>
+      </div>
+      <p role="status">{status}</p>
+      {trace && (
+        <nav
+          className="execution-events"
+          aria-label="Captured execution events"
+        >
+          <h2>
+            {mode === "functions"
+              ? "Call frames"
+              : mode === "objects"
+                ? "Object state transitions"
+                : "Loop iterations"}
+          </h2>
+          <ol>
+            {trace.frames.map((event, i) => (
+              <li key={i}>
+                <button
+                  aria-current={step === i ? "step" : undefined}
+                  onClick={() => setStep(i)}
+                >
+                  Event {i + 1} · {event.scope} · line {event.line} ·{" "}
+                  {event.phase}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      {trace ? (
+        <div className="basics-workbench">
+          <div>
+            <h2>Executed instructions</h2>
+            <div className="python-code">
+              {trace.source.split("\n").map((line, i) => (
+                <div
+                  key={i}
+                  className={frame?.line === i + 1 ? "current-line" : ""}
+                >
+                  <code>
+                    {i + 1} · {line}
+                  </code>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h2>Scope: {frame?.scope}</h2>
+            <p>
+              Event {step + 1} / {trace.frames.length} · {frame?.phase}. Values
+              below are captured before the highlighted line, or after all
+              execution.
+            </p>
+            <h3>Global names</h3>
+            <pre className="python-code" data-testid="flow-globals">
+              {JSON.stringify(frame?.globals, null, 2)}
+            </pre>
+            <h3>Current local names</h3>
+            <pre className="python-code" data-testid="flow-locals">
+              {JSON.stringify(frame?.locals, null, 2)}
+            </pre>
+            <h3>Output so far</h3>
+            <pre>{frame?.stdout || "Nothing printed yet."}</pre>
+          </div>
+        </div>
+      ) : (
+        <p>Run your prediction to load the source and recorded scopes.</p>
+      )}
+      {trace && (
+        <p role="status">
+          {match
+            ? "Prediction matched."
+            : "Try a new prediction by changing an input."}{" "}
+          Final total: {String(actual)}.
+        </p>
+      )}
+      {frame?.phase === "complete" && (
+        <section className="foundation-panel">
+          <h2>{info.question}</h2>
+          <div className="foundation-choices">
+            <button onClick={record}>{info.right}</button>
+            <button onClick={() => setAnswer(info.wrong)}>{info.wrong}</button>
+          </div>
+          {answer && (
+            <p role="status">
+              {answer === info.right ? "Correct." : "Try again."} {info.explain}
+            </p>
+          )}
+        </section>
+      )}
+      <section className="foundation-panel" aria-label="Flow practice evidence">
+        <h2>Transfer practice</h2>
+        <p>
+          For each example, predict correctly and explain it for two different
+          lists. Try [2, −1, 3], then [1, −3, 2]. Input and prediction drafts
+          resume on this browser and are included in learning backups. Traces
+          and practice checks last for this visit; rerun Python to verify
+          resumed inputs. Sandbox practice does not grant course credit.
+        </p>
+        <ul>
+          {(Object.keys(examples) as Mode[]).map((m) => (
+            <li key={m}>
+              {examples[m].title}:{" "}
+              {evidence.filter((k) => k.startsWith(m + ":")).length >= 2
+                ? "practice criteria met"
+                : "two distinct lists needed"}
+            </li>
+          ))}
+        </ul>
+      </section>
+      <p className="foundation-mini">
+        Fixed numeric examples run in a disposable worker; stepping replays
+        recorded execution.{" "}
+        <a
+          href="https://docs.python.org/3.12/tutorial/controlflow.html"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Python control flow
+        </a>{" "}
+        ·{" "}
+        <a
+          href="https://docs.python.org/3.12/tutorial/classes.html"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Python classes
+        </a>
+      </p>
+    </section>
+  );
 }

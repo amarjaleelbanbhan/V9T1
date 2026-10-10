@@ -1,10 +1,148 @@
-import {useState} from 'react';import {chapterReviews} from '../course/reviews';import {closeAnswer} from '../engine/beginner';
-const KEY='neurallab.chapter-review.v1';
-function read():string[]{try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(v)?v.filter(id=>chapterReviews.some(r=>r.chapter===id)):[];}catch{return [];}}
-export function ChapterReview(){
- const [chapter,setChapter]=useState(0);const [answers,setAnswers]=useState(['','']);const [choice,setChoice]=useState<number|null>(null);const [result,setResult]=useState<boolean[]|null>(null);const [passed,setPassed]=useState<string[]>(read);const [saved,setSaved]=useState(true);const review=chapterReviews[chapter];
- const submit=()=>{const checks=review.tasks.map((t,i)=>answers[i].trim()!==''&&closeAnswer(Number(answers[i]),t.expected));checks.push(choice===review.correct);setResult(checks);if(checks.every(Boolean)){const next=passed.includes(review.chapter)?passed:[...passed,review.chapter];setPassed(next);try{localStorage.setItem(KEY,JSON.stringify(next));setSaved(true);}catch{setSaved(false);}}};
- return <section className="foundation-panel" aria-label="Mixed chapter review"><p className="eyebrow">MIXED REVIEW · SOLVE WITHOUT A VISUAL REVEAL</p><h2>Connect the chapter ideas</h2><p>All three items must pass, including the explanation. Review results are local practice evidence. Retakes and solution feedback are allowed; this is not a proctored or validated mastery assessment.</p><label>Review chapter<select value={chapter} onChange={e=>{setChapter(Number(e.target.value));setAnswers(['','']);setChoice(null);setResult(null);}}>{chapterReviews.map((r,i)=><option key={r.chapter} value={i}>{r.chapter}{passed.includes(r.chapter)?' · practice passed':''}</option>)}</select></label>
- {review.tasks.map((t,i)=><div key={i}><p>{i+1}. {t.prompt}</p><label>Review answer {i+1}<input className="python-input" type="number" step="any" value={answers[i]} onChange={e=>{setAnswers(old=>old.map((a,j)=>j===i?e.target.value:a));setResult(null);}}/></label></div>)}<h3>{review.question}</h3><div className="foundation-choices">{review.choices.map((c,i)=><button key={c} aria-pressed={choice===i} onClick={()=>{setChoice(i);setResult(null);}}>{c}</button>)}</div><button disabled={choice===null||answers.some(a=>!a.trim()||!Number.isFinite(Number(a)))} onClick={submit}>Check mixed review</button>
- {result&&<div role="status"><p>{result.every(Boolean)?'All review items passed.':'Review needs another attempt.'}</p>{review.tasks.map((t,i)=><p key={i}>Item {i+1}: {result[i]?'correct':`expected ${Number(t.expected.toFixed(6))}; revisit its lesson operations`}</p>)}<p>{review.reason}</p></div>}<p role="status">{passed.length} / 8 chapter reviews passed. {saved?'Saved on this browser.':'Storage unavailable; this visit only.'}</p></section>;
+import { useState } from "react";
+import { chapterReviews } from "../course/reviews";
+import { closeAnswer } from "../engine/beginner";
+const KEY = "neurallab.chapter-review.v1";
+function read(): string[] {
+  try {
+    const v = JSON.parse(localStorage.getItem(KEY) || "[]");
+    return Array.isArray(v)
+      ? v.filter((id) => chapterReviews.some((r) => r.chapter === id))
+      : [];
+  } catch {
+    return [];
+  }
+}
+export function ChapterReview({ currentChapter }: { currentChapter?: string }) {
+  const [chapter, setChapter] = useState(() =>
+    Math.max(
+      0,
+      chapterReviews.findIndex((r) => r.chapter === currentChapter),
+    ),
+  );
+  const [answers, setAnswers] = useState(["", ""]);
+  const [choice, setChoice] = useState<number | null>(null);
+  const [result, setResult] = useState<boolean[] | null>(null);
+  const [passed, setPassed] = useState<string[]>(read);
+  const [saved, setSaved] = useState(true);
+  const review = chapterReviews[chapter];
+  const submit = () => {
+    const checks = review.tasks.map(
+      (t, i) =>
+        answers[i].trim() !== "" && closeAnswer(Number(answers[i]), t.expected),
+    );
+    checks.push(choice === review.correct);
+    setResult(checks);
+    if (checks.every(Boolean)) {
+      const next = passed.includes(review.chapter)
+        ? passed
+        : [...passed, review.chapter];
+      setPassed(next);
+      try {
+        localStorage.setItem(KEY, JSON.stringify(next));
+        setSaved(true);
+      } catch {
+        setSaved(false);
+      }
+    }
+  };
+  return (
+    <section className="foundation-panel" aria-label="Mixed chapter review">
+      <p className="eyebrow">MIXED REVIEW · SOLVE WITHOUT A VISUAL REVEAL</p>
+      <h2>Connect the chapter ideas</h2>
+      <p>
+        All three items must pass, including the explanation. Review results are
+        local practice evidence. Retakes and solution feedback are allowed; this
+        is not a proctored or validated mastery assessment.
+      </p>
+      <label>
+        Review chapter
+        <select
+          value={chapter}
+          onChange={(e) => {
+            setChapter(Number(e.target.value));
+            setAnswers(["", ""]);
+            setChoice(null);
+            setResult(null);
+          }}
+        >
+          {chapterReviews.map((r, i) => (
+            <option key={r.chapter} value={i}>
+              {r.chapter}
+              {passed.includes(r.chapter) ? " · practice passed" : ""}
+            </option>
+          ))}
+        </select>
+      </label>
+      {review.tasks.map((t, i) => (
+        <div key={i}>
+          <p>
+            {i + 1}. {t.prompt}
+          </p>
+          <label>
+            Review answer {i + 1}
+            <input
+              className="python-input"
+              type="number"
+              step="any"
+              value={answers[i]}
+              onChange={(e) => {
+                setAnswers((old) =>
+                  old.map((a, j) => (j === i ? e.target.value : a)),
+                );
+                setResult(null);
+              }}
+            />
+          </label>
+        </div>
+      ))}
+      <h3>{review.question}</h3>
+      <div className="foundation-choices">
+        {review.choices.map((c, i) => (
+          <button
+            key={c}
+            aria-pressed={choice === i}
+            onClick={() => {
+              setChoice(i);
+              setResult(null);
+            }}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+      <button
+        disabled={
+          choice === null ||
+          answers.some((a) => !a.trim() || !Number.isFinite(Number(a)))
+        }
+        onClick={submit}
+      >
+        Check mixed review
+      </button>
+      {result && (
+        <div role="status">
+          <p>
+            {result.every(Boolean)
+              ? "All review items passed."
+              : "Review needs another attempt."}
+          </p>
+          {review.tasks.map((t, i) => (
+            <p key={i}>
+              Item {i + 1}:{" "}
+              {result[i]
+                ? "correct"
+                : `expected ${Number(t.expected.toFixed(6))}; revisit its lesson operations`}
+            </p>
+          ))}
+          <p>{review.reason}</p>
+        </div>
+      )}
+      <p role="status">
+        {passed.length} / 8 chapter reviews passed.{" "}
+        {saved
+          ? "Saved on this browser."
+          : "Storage unavailable; this visit only."}
+      </p>
+    </section>
+  );
 }

@@ -1,3 +1,4 @@
+import { openCourseSupport } from "./fixtures/courseSupport";
 import { test, expect } from "@playwright/test";
 import { installPyodideMirror } from "./fixtures/pyodide";
 async function navigate(page: import("@playwright/test").Page, name: string) {
@@ -10,9 +11,10 @@ test("recall requires retrieval, records FSRS ratings, saves explanation and res
 }) => {
   await page.goto("/");
   await navigate(page, "Start beginner course");
+  await openCourseSupport(page);
   await page
     .getByRole("navigation", { name: "Beginner topics" })
-    .getByRole("button", { name: "Weights and biases", exact: true })
+    .getByRole("link", { name: "Weights and biases", exact: true })
     .click();
   const recall = page.getByRole("region", { name: "Active recall" });
   await expect(
@@ -131,13 +133,17 @@ test("3D neuron and layered network selection share math, with keyboard transpor
     await page.getByRole("button", { name: "3D", exact: true }).click();
     await page.getByRole("button", { name: "Weight 2", exact: true }).click();
     await expect(page.getByTestId("neuron-selection")).toContainText(
+      "Step to Multiply weights",
+    );
+    await page.getByRole("button", { name: "Next step", exact: true }).click();
+    await expect(page.getByTestId("neuron-selection")).toContainText(
       "-1 × weight -0.4 = contribution 0.4",
     );
     await page
       .getByRole("button", { name: "Reset camera", exact: true })
       .click();
   }
-  await page.getByRole("button", { name: /Forward Propagation/ }).click();
+  await page.getByRole("link", { name: /Forward Propagation/ }).click();
   await page.getByRole("button", { name: "Explore 3D network" }).click();
   await page
     .getByRole("button", { name: "Inspect hidden 2", exact: true })
@@ -176,7 +182,7 @@ test("matrix cells and loss surface synchronize live formulas and Python", async
   await expect(page.getByTestId("matrix-cell-equation")).toContainText(
     "(3 × 0) + (4 × 1) = 4",
   );
-  await page.getByRole("spinbutton", { name: "B[1,1]" }).fill("2");
+  await page.getByRole("textbox", { name: "B[1,1]" }).fill("2");
   await expect(page.getByTestId("matrix-cell-equation")).toContainText("= 8");
   const p = page.getByRole("region", { name: "Executable Python" }).first();
   await p.getByRole("button", { name: "Run Python example" }).click();
@@ -202,7 +208,7 @@ test("Markdown compiles math, nested lists, tables, callouts and Python highligh
   await navigate(page, "Browse full curriculum");
   await page.getByRole("searchbox").fill("Python");
   await page
-    .getByRole("button", {
+    .getByRole("link", {
       name: "Read Python, data and mathematics specification",
     })
     .click();
@@ -329,4 +335,28 @@ test("scene switching disposes canvases and malformed edited visual data cannot 
   ).toHaveCount(0);
   expect(errors).toEqual([]);
 });
-test('corrupt saved topic falls back to a real lesson and cannot break dashboard resume',async({page})=>{await page.addInitScript(()=>{localStorage.setItem('neurallab.learning.v1',JSON.stringify({version:1,cards:{},history:[],drafts:{},bookmarks:['dl-07-999'],selected:'dl-07-999'}));localStorage.setItem('neurallab.workspace','dashboard');});await page.goto('/');await page.getByRole('button',{name:'Resume saved lesson'}).click();await expect(page.getByRole('article',{name:'Beginner lesson'}).getByRole('heading',{name:'Computers and programs',exact:true})).toBeVisible();});
+test("corrupt saved topic falls back to a real lesson and cannot break dashboard resume", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "neurallab.learning.v1",
+      JSON.stringify({
+        version: 1,
+        cards: {},
+        history: [],
+        drafts: {},
+        bookmarks: ["dl-07-999"],
+        selected: "dl-07-999",
+      }),
+    );
+    localStorage.setItem("neurallab.workspace", "dashboard");
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Resume saved lesson" }).click();
+  await expect(
+    page
+      .getByRole("article", { name: "Beginner lesson" })
+      .getByRole("heading", { name: "Computers and programs", exact: true }),
+  ).toBeVisible();
+});

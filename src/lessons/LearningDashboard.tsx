@@ -17,12 +17,24 @@ export function LearningDashboard({
     [mode, setMode] = useState<"all" | "bookmarks">("all"),
     [card, setCard] = useState<string | null>(null),
     [message, setMessage] = useState("");
+  const matches = beginnerLessons.filter(
+    (l) =>
+      (mode === "all" || state.bookmarks.includes(l.id)) &&
+      [l.title, ...l.terms.flat()]
+        .join(" ")
+        .toLowerCase()
+        .includes(query.toLowerCase()),
+  );
   let progress: Progress = {};
   try {
     progress = readProgress(localStorage);
   } catch {}
   const passed = Object.entries(progress)
-    .filter(([id, p]) => (p as { passedAt?: number }).passedAt && beginnerLessons.some(l => l.id === id))
+    .filter(
+      ([id, p]) =>
+        (p as { passedAt?: number }).passedAt &&
+        beginnerLessons.some((l) => l.id === id),
+    )
     .map(([id]) => id);
   const due = dueCards(state, Date.now()),
     next = recommendLesson(
@@ -45,6 +57,27 @@ export function LearningDashboard({
         Practice evidence, honest recall, explanations and a clear next step.
         Your data stays in this browser.
       </p>
+      <section className="foundation-panel">
+        <h2>Recommended next step</h2>
+        <p>{next.reason}</p>
+        <button className="action-primary" onClick={() => onLesson(next.id)}>
+          {beginnerLessons.find((l) => l.id === next.id)?.title}
+        </button>
+        <button
+          className="action-secondary"
+          onClick={() => onLesson(state.selected)}
+        >
+          Resume saved lesson
+        </button>
+        <details>
+          <summary>How recommendations work</summary>
+          <p>
+            Rule order: due recall → two recent mistakes on a topic → first
+            incomplete guided topic. No hidden AI grade or automatic difficulty
+            estimate.
+          </p>
+        </details>
+      </section>
       <div className="learning-stats">
         <section>
           <strong>{passed.length}/60</strong>
@@ -65,22 +98,7 @@ export function LearningDashboard({
           <span>Explanation drafts</span>
         </section>
       </div>
-      <section className="foundation-panel">
-        <h2>Recommended next step</h2>
-        <p>{next.reason}</p>
-        <button onClick={() => onLesson(next.id)}>
-          {beginnerLessons.find((l) => l.id === next.id)?.title}
-        </button>
-        <button onClick={() => onLesson(state.selected)}>
-          Resume saved lesson
-        </button>
-        <p>
-          Rule order: due recall → two recent mistakes on a topic → first
-          incomplete guided topic. No hidden AI grade or automatic difficulty
-          estimate.
-        </p>
-      </section>
-      <CourseMap progress={progress} learning={state} onLesson={onLesson}/>
+      <CourseMap progress={progress} learning={state} onLesson={onLesson} />
       <section className="foundation-panel">
         <h2>Spaced review queue</h2>
         <p>
@@ -132,29 +150,35 @@ export function LearningDashboard({
             Bookmarks
           </button>
         </div>
+        <p role="status">
+          {matches.length
+            ? `${matches.length} topics match`
+            : `No topics match “${query}”. Try a shorter term or show all topics.`}
+        </p>
+        {!matches.length && (
+          <button
+            onClick={() => {
+              setQuery("");
+              setMode("all");
+            }}
+          >
+            Clear search and show all topics
+          </button>
+        )}
         <div className="glossary-results">
-          {beginnerLessons
-            .filter(
-              (l) =>
-                (mode === "all" || state.bookmarks.includes(l.id)) &&
-                [l.title, ...l.terms.flat()]
-                  .join(" ")
-                  .toLowerCase()
-                  .includes(query.toLowerCase()),
-            )
-            .map((l) => (
-              <article key={l.id}>
-                <button onClick={() => onLesson(l.id)}>{l.title}</button>
-                <dl>
-                  {l.terms.map(([w, d]) => (
-                    <div key={w}>
-                      <dt>{w}</dt>
-                      <dd>{d}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </article>
-            ))}
+          {matches.map((l) => (
+            <article key={l.id}>
+              <button onClick={() => onLesson(l.id)}>{l.title}</button>
+              <dl>
+                {l.terms.map(([w, d]) => (
+                  <div key={w}>
+                    <dt>{w}</dt>
+                    <dd>{d}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
         </div>
       </section>
       <section className="foundation-panel">
