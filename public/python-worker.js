@@ -22,6 +22,7 @@ self.onmessage=async ({data})=>{
   importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js');
   const py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});
   if(example==='array')await py.loadPackage('numpy');
+  self.postMessage({ready:true});
   py.globals.set('values_json',JSON.stringify(values));
   py.globals.set('trusted_source',source);
   const result=await py.runPythonAsync(`

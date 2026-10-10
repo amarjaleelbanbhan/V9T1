@@ -1,0 +1,54 @@
+/* Execution actions have one color/variant owner, independent of surrounding panels. */
+.python-actions button,
+.action-secondary,
+.foundation-panel .action-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  min-height: 44px;
+  padding: 10px 15px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+.python-actions button:first-child,
+.action-primary,
+.foundation-panel .action-primary {
+  background: var(--gradient);
+  color: var(--background);
+  border-color: var(--gradient);
+}
+.python-actions button.cancel,
+.action-danger,
+.foundation-panel .action-danger {
+  background: var(--surface);
+  color: var(--error);
+  border: 1px solid var(--error);
+  border-radius: 5px;
+  min-height: 44px;
+  padding: 10px 15px;
+  font: inherit;
+}
+.python-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.python-actions button:hover:not(:disabled),
+.foundation-panel .action-secondary:hover {
+  background:var(--surface-raised);
+  border-color:var(--input);
+}
+.python-actions button:first-child:hover:not(:disabled),
+.foundation-panel .action-primary:hover {
+  background:var(--gradient);
+  color:var(--background);
+  border-color:var(--text);
+}
+.python-actions button.cancel:hover:not(:disabled),
+.foundation-panel .action-danger:hover {
+  background:var(--surface);
+  color:var(--error);
+  border-color:var(--error);
+}

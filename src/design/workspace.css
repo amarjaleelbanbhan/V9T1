@@ -50,7 +50,7 @@ body {font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--te
 .control-heading {border-color:var(--rule);padding:16px 18px}.control-heading h2 {font-size:20px}.control-content h3 {font-size:11px;margin:16px 0 12px}.parameter-head {font-size:12px}.parameter-head strong {font-family:var(--font-numeric);font-weight:500;font-size:13px}.parameter input {min-height:24px;margin-top:6px}.parameter-ends {color:var(--muted);font-size:10px}.control-divider {background:var(--rule);margin:10px 0}.activation-select {font-size:12px}.controls select {border-color:var(--rule);border-radius:5px;background:var(--surface);font-size:13px;padding:9px}.reset-params {font-size:12px;border-color:var(--rule);border-radius:5px}
 .results-row {gap:20px;margin-top:20px}.result-card {padding:20px;min-height:245px}.result-output {background:var(--surface);border-top:3px solid var(--input)}.result-output>strong {font-family:var(--font-numeric);font-size:clamp(36px,4vw,60px);font-weight:500;letter-spacing:-.06em}.result-foot {font-size:11px}.trace-card {padding:0}.tab-row button {font-size:13px;min-height:44px}.tab-row button.selected {border-color:var(--input)}.formula {font-family:var(--font-numeric);font-size:18px;line-height:1.6}.formula-detail,.formula-result,.output-formula {font-size:13px}.formula-result strong,.output-formula strong {color:var(--input)}.badge-muted {border-radius:4px;border-color:var(--rule);font-size:10px}.view-switch {border-radius:5px;border-color:var(--rule)}.view-switch button {min-height:34px;border-radius:3px;font-size:12px}
 .workspace button {transition:background var(--motion-fast),border-color var(--motion-fast),color var(--motion-fast)}
-.foundation-panel button,.foundation-choices button,.foundation-review-actions button,.python-actions button,.course-layout button,.chapter-card button,.challenge button {min-height:40px;font-size:13px;border-radius:5px}
+.foundation-panel button,.foundation-choices button,.foundation-review-actions button,.course-layout button,.chapter-card button,.challenge button {min-height:40px;font-size:13px;border-radius:5px}
 input,textarea,select {font-size:14px}.workspace input:not([type=range]):not([type=checkbox]),.workspace textarea,.workspace select {border-radius:5px;border-color:var(--rule)}
 button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible {outline:2px solid var(--input);outline-offset:4px}
 button:disabled {opacity:.68}.workspace button:not(:disabled):hover {filter:brightness(1.08)}
@@ -71,3 +71,47 @@ button:disabled {opacity:.68}.workspace button:not(:disabled):hover {filter:brig
 
 html {scroll-padding-top:84px}
 :where(button, a, input, select, textarea, summary) {scroll-margin-block:84px 24px}
+
+/* Library owns list/detail composition; chapter cards no longer follow the generic grid. */
+.library-workspace {display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:28px;align-items:start}
+.library-workspace:not(.library-reading) {grid-template-columns:minmax(0,780px)}
+.library-index {max-height:75dvh;overflow:auto;scrollbar-width:thin}
+.library-index .chapter-card {padding:18px 12px;border-right:0}
+.library-index .chapter-card h2 {font-size:20px}
+.library-index .curriculum-tools {display:grid;gap:12px}
+.library-index input,.library-index select {width:100%;min-width:0}
+.library-index a {color:var(--gradient)}
+.library-workspace .chapter-detail {margin:0;min-width:0}
+@media(max-width:700px){.library-workspace {display:block}.library-reading .library-index {display:none}.library-index {max-height:none}.library-workspace .chapter-detail {padding:16px}.course-layout {display:flex;flex-direction:column}.course-layout>nav {width:100%;max-height:none}.topic-navigation:not([open]) {padding:4px}.timeline button {font-size:12px}.timeline {grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px}.timeline button {flex:1 1 28%}}
+.nav-scrim {inset:0}
+.matrix-inputs [aria-invalid=true] {border-color:var(--error)}
+.matrix-inputs label>span {font-size:13px;color:var(--error);line-height:1.5}
+svg [role=button]:focus-visible,.perceptron-table:focus-visible {outline:3px solid var(--gradient);outline-offset:3px}
+input[type=range] {accent-color:var(--weight)}
+
+.compact-neuron,.compact-network {display:none}
+@media(max-width:700px){.compact-neuron,.compact-network {display:grid;gap:10px;font-size:14px;line-height:1.5;padding:14px}.compact-neuron button {display:grid;gap:6px;text-align:left;min-height:44px;padding:10px;background:var(--surface);color:var(--text);border:1px solid var(--rule);border-radius:5px;font:inherit}.compact-neuron button[aria-pressed=true] {border-color:var(--gradient)}.neuron-map>.diagram,.forward-network,.backprop-network {display:none}.canvas-area:has(.compact-neuron) {height:auto}.node-inspector {padding:14px}.node-inspector p {font-size:14px}.forward-equation {font-size:14px}.backprop-equations {display:block}.backprop-equations>div {border-bottom:1px solid var(--rule);padding:14px 0;background:none}}
+
+.lesson-item,.course-layout nav a {text-decoration:none;color:var(--text)}
+.course-layout nav a {display:block;padding:12px;border:1px solid var(--rule);border-radius:5px;margin:4px 0;font-size:14px}
+.course-layout nav a small {display:block;font-size:12px;color:var(--muted);margin-top:5px}
+.course-layout nav a[aria-current] {border-color:var(--gradient)}
+
+.execution-events ol {display:flex;gap:8px;overflow:auto;max-height:200px;padding:12px;list-style:none}
+.execution-events button {min-width:130px;text-align:left;padding:10px;border:1px solid var(--rule);background:var(--surface);color:var(--text);border-radius:5px}
+.execution-events button[aria-current] {border-color:var(--gradient)}
+.trace-context {border-left:3px solid var(--gradient);padding:10px;font-family:var(--font-numeric);font-size:14px;overflow-wrap:anywhere}
+.array-values {width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+.array-values th,.array-values td {padding:12px;border:1px solid var(--rule);text-align:center}
+.loss-explainer>div,.backprop-equations>div {border:0;border-bottom:1px solid var(--rule);border-radius:0;background:none}
+.chart-scale {font-size:14px;line-height:1.6}
+.transfer-prediction label {display:grid;gap:8px;margin-bottom:12px;max-width:300px}
+.workspace details>summary {min-height:44px;padding-block:8px;cursor:pointer}
+
+.matrix-selected-operand {border-bottom:3px solid var(--gradient);padding-bottom:8px}
+.tensor-visual .tensor-cell {font-size:19px;font-weight:700}
+.tensor-visual .tensor-cell small {font-size:12px;color:var(--text)}
+
+.node-controls button {font-size:12px}
+.parameter-live-values {grid-column:1/-1;border-block:1px solid var(--rule);padding:12px 0;font-family:var(--font-numeric);font-size:14px;color:var(--text)}
+@media(max-width:700px){.canvas-area:has(.compact-neuron) .scene-hint {position:static;margin:0 14px 14px;width:fit-content}}

@@ -47,7 +47,7 @@ test('scheduled-review provenance survives storage and older histories fail clos
   let state = start();
   state = scheduleRecall(state, id, Rating.Good, state.cards[id].due.getTime() + 1);
   assert.equal(recalledAfterIndependent(parseLearning(JSON.stringify(state)), 'dl-00-001', 500), true);
-  const old = { ...state, history: state.history.map(({ scheduled, ...event }) => event) };
+  const old = { ...state, history: state.history.map(event => {const old = {...event};delete old.scheduled;return old;}) };
   assert.equal(recalledAfterIndependent(parseLearning(JSON.stringify(old)), 'dl-00-001', 500), false);
   const invalid = { ...state, history: state.history.map(event => ({ ...event, scheduled: 'yes' })) };
   assert.equal(parseLearning(JSON.stringify(invalid)).history.length, 0);

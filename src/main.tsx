@@ -4,6 +4,7 @@ import App from './App';
 import { installPalette } from './design/palette';
 import './styles.css';
 import './design/workspace.css';
+import './design/actions.css';
 
 installPalette();
 

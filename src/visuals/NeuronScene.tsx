@@ -1,4 +1,4 @@
-import { palette } from '../design/palette';
+import { palette } from "../design/palette";
 import { useState } from "react";
 import type { NeuronTrace } from "../engine/neuron";
 import { formatNumber as fmt } from "../engine/neuron";
@@ -28,15 +28,25 @@ export function NeuronScene({
   const description = selected.startsWith("edge")
     ? (() => {
         const i = Number(selected.slice(4));
-        return `Input ${i + 1}: ${fmt(inputs[i])} × weight ${fmt(weights[i])} = contribution ${fmt(trace.contributions[i])}`;
+        return step >= 1
+          ? `Input ${i + 1}: ${fmt(inputs[i])} × weight ${fmt(weights[i])} = contribution ${fmt(trace.contributions[i])}`
+          : `Input ${i + 1} = ${fmt(inputs[i])}; weight = ${fmt(weights[i])}. Step to Multiply weights for its contribution.`;
       })()
     : selected.startsWith("input")
       ? `Input ${Number(selected.slice(5)) + 1} = ${fmt(inputs[Number(selected.slice(5))])}`
       : selected === "sum"
-        ? `Weighted sum = ${trace.contributions.map(fmt).join(" + ")} = ${fmt(trace.weightedSum)}. Bias = ${fmt(trace.preActivation - trace.weightedSum)}. z = ${fmt(trace.preActivation)}.`
+        ? step < 2
+          ? "Step to Sum contributions to inspect the weighted sum."
+          : `Weighted sum = ${trace.contributions.map(fmt).join(" + ")} = ${fmt(trace.weightedSum)}. ${step >= 3 ? `Bias = ${fmt(trace.bias)}. z = ${fmt(trace.preActivation)}.` : "Step to Add bias to inspect z."}`
         : selected === "activation"
-          ? `Activation transforms z = ${fmt(trace.preActivation)} into a = ${fmt(trace.output)}.`
-          : `Final output = ${fmt(trace.output)}.`;
+          ? step < 3
+            ? "Step to Add bias to inspect z."
+            : step < 5
+              ? `Activation input z = ${fmt(trace.preActivation)}. Step to Final output for the result.`
+              : `Activation transforms z = ${fmt(trace.preActivation)} into a = ${fmt(trace.output)}.`
+          : step >= 5
+            ? `Final output = ${fmt(trace.output)}.`
+            : "Step to Final output to inspect the result.";
   return (
     <div className="three-wrap">
       <SceneFrame
@@ -138,9 +148,9 @@ export function NeuronScene({
           {description}
         </p>
         <p className="foundation-mini">
-          Slate blue = positive connection · coral = negative · pale aqua = selected.
-          Timeline highlights computed stages. Select with the scene or the
-          buttons above.
+          Slate blue = positive connection · coral = negative · pale aqua =
+          selected. Timeline highlights computed stages. Select with the scene
+          or the buttons above.
         </p>
       </div>
     </div>
