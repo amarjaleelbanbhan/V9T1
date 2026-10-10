@@ -55,3 +55,4 @@ for (const l of lessons) {
   }
 }
 console.log(rule(`${lessons.length} lesson(s). Write entries in src/course/lessonHints.ts.`));
+
