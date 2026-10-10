@@ -1,0 +1,197 @@
+[
+  {
+    "name": "diagram-legibility",
+    "width": 320,
+    "data": {
+      "svgText": [
+        {
+          "text": "2",
+          "css": "19px",
+          "effectivePx": 7.87
+        },
+        {
+          "text": "w=0.8",
+          "css": "12px",
+          "effectivePx": 4.97
+        },
+        {
+          "text": "×",
+          "css": "13px",
+          "effectivePx": 5.39
+        },
+        {
+          "text": "-1",
+          "css": "19px",
+          "effectivePx": 7.87
+        },
+        {
+          "text": "w=-0.4",
+          "css": "12px",
+          "effectivePx": 4.97
+        },
+        {
+          "text": "×",
+          "css": "13px",
+          "effectivePx": 5.39
+        },
+        {
+          "text": "0.5",
+          "css": "19px",
+          "effectivePx": 7.87
+        },
+        {
+          "text": "w=1.2",
+          "css": "12px",
+          "effectivePx": 4.97
+        },
+        {
+          "text": "×",
+          "css": "13px",
+          "effectivePx": 5.39
+        },
+        {
+          "text": "Σ",
+          "css": "36px",
+          "effectivePx": 14.91
+        },
+        {
+          "text": "f(z)",
+          "css": "19px",
+          "effectivePx": 7.87
+        },
+        {
+          "text": "?",
+          "css": "19px",
+          "effectivePx": 7.87
+        },
+        {
+          "text": "b = 0.5",
+          "css": "19px",
+          "effectivePx": 7.87
+        },
+        {
+          "text": "SUM",
+          "css": "13px",
+          "effectivePx": 5.39
+        },
+        {
+          "text": "ACTIVATION",
+          "css": "13px",
+          "effectivePx": 5.39
+        },
+        {
+          "text": "OUTPUT",
+          "css": "13px",
+          "effectivePx": 5.39
+        }
+      ],
+      "outputTop": 2088.28125,
+      "timelineLabels": [
+        {
+          "text": "INPUT",
+          "size": "8px"
+        },
+        {
+          "text": "MULTIPLY",
+          "size": "8px"
+        },
+        {
+          "text": "SUM",
+          "size": "8px"
+        },
+        {
+          "text": "BIAS",
+          "size": "8px"
+        },
+        {
+          "text": "ACTIVATE",
+          "size": "8px"
+        },
+        {
+          "text": "OUTPUT",
+          "size": "8px"
+        }
+      ]
+    }
+  },
+  {
+    "name": "course-task-location",
+    "width": 320,
+    "data": {
+      "labels": [
+        {
+          "text": "Your prediction",
+          "top": 2344.328125
+        }
+      ],
+      "reviewTop": 5427.921875,
+      "nestedScroll": [
+        {
+          "height": 338,
+          "scrollHeight": 4803
+        }
+      ]
+    }
+  },
+  {
+    "name": "drawer-background",
+    "width": 320,
+    "data": {
+      "url": "http://127.0.0.1:4176/#/lab/dashboard",
+      "drawerStillVisible": true,
+      "focus": "MAIN",
+      "backgroundInert": null
+    }
+  },
+  {
+    "name": "mission-navigation-loss",
+    "error": "TimeoutError: locator.inputValue: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('slider', { name: 'Bias b', exact: true })\u001b[22m\n"
+  },
+  {
+    "name": "lazy-load-failure",
+    "width": 320,
+    "data": {
+      "errors": [
+        "Failed to fetch dynamically imported module: http://127.0.0.1:4176/assets/CurriculumLibrary-mMemtMU4.js"
+      ],
+      "bodyText": "",
+      "mainCount": 0,
+      "retryButtons": 0
+    }
+  },
+  {
+    "name": "hover-and-motion",
+    "width": 1440,
+    "data": {
+      "before": {
+        "filter": "none",
+        "bg": "rgb(107, 163, 190)"
+      },
+      "after": {
+        "filter": "brightness(1.08)",
+        "bg": "rgb(107, 163, 190)"
+      },
+      "stepAfter": "STEP 2 / 6",
+      "reducedMotionPaused": false
+    }
+  },
+  {
+    "name": "cdn-python",
+    "width": 1440,
+    "data": {
+      "observedForMs": 15000,
+      "status": "NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js' failed to load.",
+      "nextEnabled": false,
+      "requests": [
+        "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"
+      ],
+      "failures": [
+        {
+          "url": "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js",
+          "error": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "cancelStatus": "NetworkError: Failed to execute 'importScripts' on 'WorkerGlobalScope': The script at 'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js' failed to load."
+    }
+  }
+]

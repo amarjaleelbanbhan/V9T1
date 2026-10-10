@@ -1,0 +1,48 @@
+[
+  {
+    "name": "all-reference-documents",
+    "documents": 95,
+    "discoverable": 95
+  },
+  {
+    "name": "first-middle-last-reading",
+    "index": 0,
+    "top": 228.375,
+    "exact": "http://127.0.0.1:4173/#/lab/library?document=00-python-and-math%2FREADME.md",
+    "cleanContext": true
+  },
+  {
+    "name": "first-middle-last-reading",
+    "index": 9,
+    "top": -225.625,
+    "exact": "http://127.0.0.1:4173/#/lab/library?document=09-computer-vision%2FREADME.md",
+    "cleanContext": true
+  },
+  {
+    "name": "first-middle-last-reading",
+    "index": 18,
+    "top": 236.375,
+    "exact": "http://127.0.0.1:4173/#/lab/library?document=18-research-and-capstones%2FREADME.md",
+    "cleanContext": true
+  },
+  {
+    "name": "document-back-forward",
+    "completed": true
+  },
+  {
+    "name": "transfer-before-reveal",
+    "id": "tensor",
+    "prediction": "6",
+    "matched": true
+  },
+  {
+    "name": "transfer-before-reveal",
+    "id": "activation",
+    "prediction": "-0.35",
+    "matched": true
+  },
+  {
+    "name": "xor-construction",
+    "matches": "3 / 4"
+  }
+]

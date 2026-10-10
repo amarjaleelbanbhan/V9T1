@@ -1,0 +1,206 @@
+[
+  {
+    "id": "neuron",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": "0.957",
+      "after": "0.98",
+      "missionWrong": 0,
+      "missionCorrect": 1.5,
+      "arrowFocus": "Code",
+      "selected": "Code"
+    },
+    "errors": []
+  },
+  {
+    "id": "python-basics",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "product": "6",
+      "status": "Show that you can transfer the idea\n\nPass one positive-x prediction and one negative-x prediction with a nonzero factor. Reach the final step and explain assignment correctly. Inputs and prediction drafts resume on this browser and travel in learning backups. Execution traces and practice checks belong to this visit; rerun Python to verify a resumed draft. Sandbox activity never grants course credit.\n\nPositive input prediction: passed\nNegative input prediction: still needed\nAssignment explanation: passed\n\nKeep experimenting; opening this lesson alone does not complete the practice."
+    },
+    "errors": []
+  },
+  {
+    "id": "python-flow",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "values": "{\n  \"numbers\": [\n    2,\n    -1,\n    3\n  ],\n  \"total\": 5,\n  \"value\": 3\n}"
+    },
+    "errors": []
+  },
+  {
+    "id": "intro",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": "100%",
+      "after": "67%",
+      "mode": "regression"
+    },
+    "errors": []
+  },
+  {
+    "id": "perceptron",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": "4 / 4",
+      "after": "3 / 4"
+    },
+    "errors": []
+  },
+  {
+    "id": "tensor",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": "[[1,2,3],[4,5,6],[7,8,9]]",
+      "after": "[[10,11,12],[13,14,15],[16,17,18]]",
+      "slice": "(2, 3)"
+    },
+    "errors": []
+  },
+  {
+    "id": "propagation",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "selected": 0,
+      "changed": true
+    },
+    "errors": []
+  },
+  {
+    "id": "backprop",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": 0.1058,
+      "after": 0.0768,
+      "feedback": "Before loss 0.1058 → After loss 0.0768. This sample improved."
+    },
+    "errors": []
+  },
+  {
+    "id": "activation",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "leaky": -0.2,
+      "softmaxSum": 1
+    },
+    "errors": []
+  },
+  {
+    "id": "loss",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": "2",
+      "after": "1.8"
+    },
+    "errors": []
+  },
+  {
+    "id": "gradient-depth",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "before": "Layer 1\n\nz = 1 × 1 + 0 = 1\n\nActivation output = 0.73106\n\nLocal factor = 1 × 0.19661 = 0.19661\n\nAccumulated derivative = 0.19661",
+      "afterSpace": "Layer 3\n\nz = 0.67504 × 1 + 0 = 0.67504\n\nActivation output = 0.66263\n\nLocal factor = 1 × 0.22355 = 0.22355\n\nAccumulated derivative = 0.0096416",
+      "afterEnter": "Layer 3\n\nz = 0.67504 × 1 + 0 = 0.67504\n\nActivation output = 0.66263\n\nLocal factor = 1 × 0.22355 = 0.22355\n\nAccumulated derivative = 0.0096416",
+      "gradient": "Final derivative magnitude\n4096\nLarge / amplified"
+    },
+    "errors": []
+  },
+  {
+    "id": "beginner",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "initialReview": "0",
+      "selectedHeading": "Training diagnostics",
+      "reviewAfterTopic": "7",
+      "url": "http://127.0.0.1:4176/#/lab/beginner?topic=dl-07-009"
+    },
+    "errors": []
+  },
+  {
+    "id": "training-project",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "model": "Restored w = 1.962746, b = 0.980556.",
+      "test": "Test half MSE: 0.000854 · training-mean baseline: 0.638726 · beats baseline."
+    },
+    "errors": []
+  },
+  {
+    "id": "library",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "initialHeight": 1025,
+      "scroll": 1,
+      "beforeURL": "http://127.0.0.1:4176/#/lab/library?document=00-python-and-math%2FREADME.md",
+      "matches": "1 chapters match"
+    },
+    "errors": []
+  },
+  {
+    "id": "python",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "text": "ACTUAL EXECUTED PYTHON · BOUNDED NUMPY EXAMPLE\n\nWatch an array come alive.\n\nEdit six numeric inputs. Run a fixed Python program, then inspect its captured line events. This prototype does not run arbitrary code or train models.\n\nx[0, 0]\nx[0, 1]\nx[0, 2]\nx[1, 0]\nx[1, 1]\nx[1, 2]\n\nPREDICT BEFORE REVEAL · SANDBOX PRACTICE\n\nPredict this 2×3 float32 array’s data payload in bytes. Each element uses 4 bytes; exclude runtime and object overhead.\nTransfer prediction\nCheck transfer prediction\n\nExploratory feedback only; this task does not award authored-course credit or independent mastery.\n\nRun Python\nCancel execution\nPrevious line\nNext line\n\nExecuted Python. Step through captured line events.\n\n1 · import numpy as np\n2 · x = np.array(values, dtype=np.float32)\n3 · print(x.shape)\n4 · print(x.dtype)\n5 · print(x.nbytes)\n\nExecution complete. Final state.\n\nRow / column\tColumn 0\tColumn 1\tColumn 2\nRow 0\t1\t2\t3\nRow 1\t4\t5\t6\nShape: (2, 3)\nRank: 2\ndtype: float32\nMeasured payload: 24 bytes\n\nPayload excludes object overhead and Python/WASM runtime memory. This runtime is network-dependent on first load; offline support has not been implemented.\n\nCaptured output\n(2, 3)\nfloat32\n24\n"
+    },
+    "errors": []
+  },
+  {
+    "id": "dashboard",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "emptyCount": 0,
+      "emptyMessage": "No topics match “zzzz-no-match”. Try a shorter term or show all topics.",
+      "nextURL": "http://127.0.0.1:4176/#/lab/beginner?topic=dl-00-001"
+    },
+    "errors": []
+  },
+  {
+    "id": "python-workshop",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "output": "{\n  \"output\": 3\n}",
+      "staleCleared": true
+    },
+    "errors": []
+  },
+  {
+    "id": "math-workshop",
+    "width": 768,
+    "completed": true,
+    "data": {
+      "matrix8": true,
+      "invalidValue": "999",
+      "surface": "Step 1: weight 0.2667 · bias 0.2 · loss 1.3215 · dL/dw -1.1556 · dL/db -0.8."
+    },
+    "errors": []
+  },
+  {
+    "id": "neuron",
+    "width": 320,
+    "completed": true,
+    "data": {
+      "drawerRestoredFocus": "Toggle lesson navigation",
+      "inspection": "Input 1\nInput 2\nInput 3\nWeight 1\nWeight 2\nWeight 3\nsum\nactivation\noutput\n\nStep to Final output to inspect the result.\n\nSlate blue = positive connection · coral = negative · pale aqua = selected. Timeline highlights computed stages. Select with the scene or the buttons above.",
+      "overflow": 0
+    },
+    "errors": []
+  }
+]

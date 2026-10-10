@@ -1,0 +1,710 @@
+[
+  {
+    "id": "tensor",
+    "width": 390,
+    "data": [
+      {
+        "text": "[0,0]1",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,0]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,1]2",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,1]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,2]3",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,2]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,0]4",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,0]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,1]5",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,1]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,2]6",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,2]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,0]7",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,0]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,1]8",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,1]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,2]9",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,2]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      }
+    ]
+  },
+  {
+    "id": "activation",
+    "width": 390,
+    "data": [
+      {
+        "text": "Sigmoid",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "Tanh",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "ReLU",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "Leaky ReLU",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      }
+    ]
+  },
+  {
+    "id": "python-workshop",
+    "width": 390,
+    "data": [
+      {
+        "text": "inputs",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 10.721257339623245
+      },
+      {
+        "text": "2.0",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 9.996945474469092
+      },
+      {
+        "text": "-",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 10.721257339623245
+      },
+      {
+        "text": "1.0",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 9.996945474469092
+      },
+      {
+        "text": "0.5",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 9.996945474469092
+      },
+      {
+        "text": "weights",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "0.8",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "-",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "0.4",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "1.2",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "bias",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "0.5",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "contributions",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "x",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "*",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "w",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "for",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "x",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "w",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "in",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "zip",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "inputs",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "weights",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "z",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "sum",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "contributions",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "+",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "bias",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "output",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "max",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "0.0",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "z",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "result",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 13.69021483866067
+      },
+      {
+        "text": "\"contributions\"",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "contributions",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "\"z\"",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "z",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "\"output\"",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 12.765324713366859
+      },
+      {
+        "text": "output",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "print",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      },
+      {
+        "text": "result",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 23, 22)",
+        "opacity": "1",
+        "ratio": 16.924785878681565
+      }
+    ]
+  },
+  {
+    "id": "tensor",
+    "width": 1440,
+    "data": [
+      {
+        "text": "[0,0]1",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,0]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,1]2",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,1]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,2]3",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[0,2]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,0]4",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,0]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,1]5",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,1]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,2]6",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[1,2]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,0]7",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,0]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,1]8",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,1]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,2]9",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      },
+      {
+        "text": "[2,2]",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(39, 77, 96)",
+        "opacity": "1",
+        "ratio": 8.313755577575007
+      }
+    ]
+  },
+  {
+    "id": "activation",
+    "width": 1440,
+    "data": [
+      {
+        "text": "Sigmoid",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "Tanh",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "ReLU",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "Leaky ReLU",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      }
+    ]
+  },
+  {
+    "id": "python-workshop",
+    "width": 1440,
+    "data": [
+      {
+        "text": "inputs",
+        "foreground": "rgb(237, 247, 248)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 13.254356265538235
+      },
+      {
+        "text": "=",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 10.721257339623245
+      },
+      {
+        "text": "2.0",
+        "foreground": "rgb(242, 211, 149)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 9.996945474469092
+      },
+      {
+        "text": "-",
+        "foreground": "rgb(184, 230, 237)",
+        "background": "rgb(3, 47, 48)",
+        "opacity": "1",
+        "ratio": 10.721257339623245
+      }
+    ]
+  }
+]

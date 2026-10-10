@@ -29,15 +29,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Abort a lazy JS request; shell and accessible error status remain, retry/reload is operable, and another lab can open.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/App.tsx; src/components/WorkspaceBoundary.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** tests/audit-remediation.spec.ts: failed lazy download; production blocked-chunk probe.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** A workspace boundary keeps navigation mounted; a fresh lazy instance retries, and explicit reload preserves neuron recovery state because Chromium caches rejected imports.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/error-library-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r01).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 2. R02 — Responsive mathematics shrinks below readable size
 
@@ -64,15 +66,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** At 320/390/768px, essential mathematical labels have a readable equivalent at least 12px; selected parameter and resulting value can be compared without scrolling multiple screens.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/visuals/NeuronDiagram.tsx; src/components/NeuronWorkspace.tsx; src/lessons/ForwardLab.tsx; src/lessons/BackpropLab.tsx; src/design/workspace.css.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Five-width readable-math probes; forward/backprop/neuron browser scenarios.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Compact staged HTML values replace scaled mobile diagrams; selected connection and derivative math stay beside their controls. A current-calculation strip sits beside neuron parameters. Timeline uses three columns on mobile.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/neuron-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r02).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 3. R03 — The first learning task is buried behind administration and explanation
 
@@ -99,15 +103,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** At 320px a learner reaches the first editable prediction within two initial viewports; recall and review remain discoverable and keyboard usable, and existing assessment gates remain intact.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/BeginnerCourse.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** 320px position probe; all 60 worked and transfer authored lessons; keyboard hint/review tests.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** The objective and prediction precede optional explanation; topic navigation and saved evidence are disclosures. Existing recall/explanation gates remain unchanged.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/beginner-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r03).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 4. R04 — The modal allows background navigation
 
@@ -134,15 +140,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** While a modal drawer is open, mouse, touch and keyboard cannot activate background controls; focus stays inside, Escape restores the trigger, and resizing closes cleanly.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/App.tsx; src/components/WorkspaceNavigation.tsx; src/design/workspace.css.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Drawer isolation regression and production pointer/focus/resize probe.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Header and main become inert; the scrim covers the viewport. Focus traps inside the drawer, Escape restores the trigger, and navigation/resize closes it.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/drawer-focus-390.png); [comparison and observed results](AUDIT_COMPARISON.md#r04).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 5. R05 — Leaving the mission discards the experiment recovery snapshot
 
@@ -169,15 +177,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Load mission, visit another workspace, return and restore original inputs, weights, bias and activation; correct/incorrect feedback and course-evidence isolation still pass.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/store/lab.ts; src/components/NeuronMission.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Mission navigation/recovery regression; mission altered-setup, wrong/correct and restoration tests.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** The mission snapshot belongs to the persistent lab store; copies of all parameters survive workspace unmount and remain available after reset. Restore clears the snapshot explicitly.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-neuron-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r05).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 6. R06 — Three visual states fail text contrast
 
@@ -204,15 +214,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Axe contrast passes at desktop/mobile in selected tensor, all activation selections and active/inactive code lines; preserve mathematical color meanings.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/components/PythonEditor.tsx; src/lessons/ActivationExplorer.tsx; src/design/workspace.css.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** 36 initial-state axe scans; mobile/desktop selected-state axe scans; computed rendered contrast ratios.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Tensor selection uses a dark panel with readable indices; activation legend text is not faded; CodeMirror uses explicit scientific syntax colors on dark surfaces.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/contrast-final.json); [comparison and observed results](AUDIT_COMPARISON.md#r06).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 7. R07 — Interactive chart semantics and Space activation are broken
 
@@ -239,15 +251,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** No nested-interactive violation; keyboard and assistive names identify each layer; Enter and Space select the same layer and update the exact inspector.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/GradientDepthLab.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Space selection regression, existing depth test, changed-state Enter/Space comparison, axe.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** The interactive chart is a named group. Layer controls expose pressed state and prevent default for Enter/Space; a native layer select supplies the same exact inspector.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-gradient-depth-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r07).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 8. R08 — Scrollable truth table lacks a keyboard focus entry
 
@@ -274,15 +288,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** At 320/390px keyboard users can reach and scroll every column; axe rule passes and header/value relationships remain understandable.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/PerceptronLab.tsx; src/design/workspace.css.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** 320/390px focus plus ArrowRight scroll probes; axe scrollable-region-focusable.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** The table overflow region is named, focusable, and has a visible focus outline. The native table and column headers remain.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/probe-truth-table-keyboard-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r08).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 9. R09 — ARIA tabs are ordinary buttons dressed as a tab widget
 
@@ -309,15 +325,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** If tabs remain, arrow keys move between tabs, one tab is in the tab sequence, selected panel is named/linked and all content stays reachable.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/components/NeuronWorkspace.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Roving-focus regression and neuron changed-state ArrowRight comparison.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Inspector tabs have linked IDs/panels, a single tab stop and roving ArrowLeft/Right/Home/End focus. Panel content stays keyboard reachable.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-neuron-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r09).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 10. R10 — Deep navigation has no deep URL or history
 
@@ -344,15 +362,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Copy/reload an exact topic/document URL in a clean context; Back/Forward restores prior topic/document, invalid IDs fall back safely, native link actions work. Every available authored reference document has a discoverable link; planned catalog-only entries remain clearly labeled.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/store/workspace.ts; src/lessons/BeginnerCourse.tsx; src/lessons/CurriculumLibrary.tsx; src/components/MarkdownDocument.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Topic Back/Forward/refresh/invalid-ID regressions; library browser coverage and document URL probe.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Validated topic and document query parameters own nested selection and browser history. Authored items are native anchors. All imported reference documents appear in the document index, including CH00 extras and all general references. Markdown document links expose the same native deep URLs.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-library-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r10).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 11. R11 — Chapter detail opens after the entire catalog
 
@@ -379,15 +399,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Open first/middle/last chapter without traversing other chapter content; return preserves query, chapter and scroll position; label implemented practice versus specifications.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/CurriculumLibrary.tsx; src/design/workspace.css.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Library detail/search regression; existing Markdown and library scenarios; five widths.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Compact chapter navigation sits beside desktop reading. Mobile hides the index in reading mode, with an explicit return restoring query and index scroll. Specification and implemented practice are labeled.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/library-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r11).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 12. R12 — Review selection does not follow the selected lesson chapter
 
@@ -414,15 +436,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Selecting a lesson in each chapter presents the intended contextual review; deliberate cross-chapter selection remains available and persisted results retain their correct chapter identity.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/BeginnerCourse.tsx; src/lessons/ChapterReview.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Chapter 7 context regression; mixed reviews for every implemented chapter.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Review receives the current lesson chapter, resets context when that chapter changes, and retains a deliberate review choice within that context. Persisted reviews keep chapter identity.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-beginner-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r12).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 13. R13 — Practice disappears when moving between tools
 
@@ -449,15 +473,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** A documented evidence contract survives reload/navigation for intended records, backups include them where appropriate, and exploratory actions never grant authored course credit.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/course/learning.ts; src/course/useSandboxDraft.ts; src/lessons/PythonBasicsLab.tsx; src/lessons/PythonFlowLab.tsx; src/lessons/TrainingProject.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Draft-refresh browser regression; sandbox backup/parser unit tests; backup/provenance/training tests.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Bounded whitelisted sandbox input/prediction drafts resume and travel in existing version-1 backups. Execution traces and practice checks remain visit-local and explicitly require rerunning. Course evidence and inference checkpoints retain their original provenance.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-python-basics-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r13).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 14. R14 — Primary, secondary and unavailable actions compete visually
 
@@ -484,15 +510,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Each task has a visually dominant next action; cancellation looks consistent, transport remains keyboard accessible, and empty states explain why the task is not ready.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/design/actions.css; src/styles.css; src/design/workspace.css; src/components/PythonProgram.tsx; src/lessons/TrainingProject.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Execution/cancel/stale-input browser scenarios and five-width gallery inspection.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** One action stylesheet owns execution variants: primary run, secondary transport, subdued unavailable actions and consistent danger cancellation. Source is optional; ready/loading/executing states explain availability.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/python-flow-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r14).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 15. R15 — The design system is an override layer over surviving feature dialects
 
@@ -519,15 +547,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** A migrated primitive has one owner, no competing legacy declaration and defined state colors; all five-width screenshots and relevant interactions remain valid.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/design/actions.css; src/main.tsx; src/styles.css; src/design/workspace.css; src/components/PythonEditor.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Source cascade inspection; five-width screenshots; all execution interactions.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Migrated execution-action variants into a single stylesheet and removed the competing legacy Python action colors. Selected tensor/legend and editor syntax roles use the supplied palette. Broader legacy CSS remains intentionally incremental.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/python-basics-1440.png); [comparison and observed results](AUDIT_COMPARISON.md#r15).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 16. R16 — Several checks verify recognition after teaching the answer
 
@@ -554,15 +584,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** A new task requires a prediction/construction on unseen valid parameters, offers evidence-based feedback, and does not reveal its answer before submission or relabel existing checks as mastery.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/components/TransferPrediction.tsx; src/components/XorExperiment.tsx; src/engine/workshopValidation.ts; relevant lab components.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Transfer reveal/course-isolation browser regression; XOR and workshop-contract unit tests.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Fresh numerical transfer tasks require a finite prediction before reveal; XOR lets learners construct and test a boundary. Workshop validates all required mathematical fields. Exploratory feedback never awards authored mastery.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-perceptron-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r16).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 17. R17 — Plots are correct enough to compute but weakly equipped to be read
 
@@ -589,15 +621,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** At desktop/mobile a learner can identify axis variables, scale and contour/layer values from labels; mathematical levels and path still agree with the engine.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/LossGradientLab.tsx; src/lessons/GradientDepthLab.tsx; src/lessons/MathWorkshop.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Engine/contour unit checks; loss, depth and matrix/surface browser tests; mobile/desktop visual inspection.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Loss shows numerical y ticks; depth explains its inverse logarithmic scale with numeric magnitudes; contour has coordinate ticks and actual loss levels from its anisotropic quadratic.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/math-workshop-320.png); [comparison and observed results](AUDIT_COMPARISON.md#r17).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 18. R18 — Invalid values are silently replaced instead of explained
 
@@ -624,15 +658,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Blank, transient minus, out-of-range and nonfinite input states have understandable feedback; no silent computation with an unintended replacement value; valid values still update the matrix exactly.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/MathWorkshop.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Invalid-draft regression; matrix B[1,1]=2 gives C[1,1]=8 and genuine NumPy output.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Text drafts retain blank, transient minus, nonfinite and out-of-range entries with explicit validation. Computation keeps the last valid matrix and updates exactly when corrected. Selected A row and B column expose the dot product operands.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-math-workshop-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r18).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 19. R19 — No-match search produces an unexplained blank region
 
@@ -659,15 +695,17 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 **Acceptance criteria:** Zero and nonzero result states are announced without excessive chatter; clear filter restores all results and keyboard focus stays stable.
 
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/LearningDashboard.tsx.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** Dashboard empty/search regression and changed-state probe.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** A status announces match count or an explicit no-match message. Show all topics clears the filter without removing focus unexpectedly. Recommendation is the first actionable section.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Evidence](audit/evidence/after/state-dashboard-768.png); [comparison and observed results](AUDIT_COMPARISON.md#r19).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## 20. R20 — Unrelated learning tasks keep the same visual rhythm
 
@@ -693,145 +731,183 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 
 **Acceptance criteria:** Each lab has one identifiable primary interaction and subordinate supporting proof; existing controls/content remain available, and before/after evidence shows distinction without introducing new dependencies or layouts for their own sake.
 
-**Status:** Not started
+**Status:** Verified
 
-**Files affected:** See Source above; confirm during implementation.
+**Files affected:** src/lessons/*.tsx; src/components/NeuronWorkspace.tsx; src/components/PythonProgram.tsx; src/design/workspace.css.
 
-**Tests required:** Regression reproducing the acceptance criteria above; responsive and keyboard inspection where relevant.
+**Tests required / performed:** All 18 routes at five widths; representative changed-state checks; existing meaningful browser scenarios.
 
-**Evidence of completion:** Pending.
+**Implemented correction:** Task compositions now emphasize tensor-region selection, selected derivative chain, loss prediction, executable assignment/scope, matrix operands, simple training decision, library reader, dashboard recommendation, and fresh transfer tasks. Shared source is disclosed and secondary.
 
-**Commit reference:** Pending.
+**Evidence of completion:** [Five-width gallery](audit/GALLERY.md); [comparison and observed results](AUDIT_COMPARISON.md#r20).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E01 — Mission snapshot ownership
 
 **Original problem / planned correction:** Mission snapshot ownership.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** The recovery snapshot was local while lab parameters survived unmount.
+
+**Files affected:** src/store/lab.ts; src/components/NeuronMission.tsx.
 
 **Dependencies:** R05.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Shared snapshot ownership and exact restoration. R05 regression.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E02 — Workspace lazy error containment
 
 **Original problem / planned correction:** Workspace lazy error containment.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** Suspense did not contain rejected imports.
+
+**Files affected:** src/components/WorkspaceBoundary.tsx; src/App.tsx.
 
 **Dependencies:** R01.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Isolated retryable workspaces outside the shell, production retry/reload proof. R01.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E03 — Incremental styling consolidation
 
 **Original problem / planned correction:** Incremental styling consolidation.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** Execution actions had repeated context-specific colors.
+
+**Files affected:** src/design/actions.css; src/styles.css; src/design/workspace.css.
 
 **Dependencies:** R15.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** One action variant owner, superseded Python rules removed. R14/R15.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E04 — Reviewable component boundaries
 
 **Original problem / planned correction:** Reviewable component boundaries.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** Compressed large JSX obscured ownership.
+
+**Files affected:** src/lessons/*.tsx; src/components/NeuronWorkspace.tsx; src/components/TransferPrediction.tsx; src/components/XorExperiment.tsx.
 
 **Dependencies:** R20.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Formatted lessons; extracted neuron orchestration, sandbox persistence and transfer/XOR tasks. Lint, types, meaningful unit/browser tests.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E05 — Root responsibility separation
 
 **Original problem / planned correction:** Root responsibility separation.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** App combined root shell and the complete neuron experiment.
+
+**Files affected:** src/App.tsx; src/components/NeuronWorkspace.tsx.
 
 **Dependencies:** R01/R09.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Root shell owns route/navigation; neuron owns computation lifecycle and view. Route registry keeps all 18 workspaces.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E06 — Coherent async execution states
 
 **Original problem / planned correction:** Coherent async execution states.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** Status messages mixed download, execution and stale results.
+
+**Files affected:** src/python/usePythonProgram.ts; src/python/usePythonExecution.ts; public/python-program-worker.js; public/python-worker.js.
 
 **Dependencies:** R13.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Explicit idle/loading/executing/canceled/invalidated/failed/completed phases and worker-ready signals. Worker identity, cancellation and budgets remain enforced.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E07 — Nested URL ownership
 
 **Original problem / planned correction:** Nested URL ownership.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** Nested selections were disconnected from URL history.
+
+**Files affected:** src/store/workspace.ts; src/lessons/BeginnerCourse.tsx; src/lessons/CurriculumLibrary.tsx; src/components/MarkdownDocument.tsx.
 
 **Dependencies:** R10.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Shared validated nested selection hook; native authored links; Back/Forward/reload coverage. R10.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## E08 — Keyboard and semantic contracts
 
 **Original problem / planned correction:** Keyboard and semantic contracts.
 
-**Root cause / files affected:** Confirm source during implementation.
+**Root cause:** Custom widgets only partially implemented native/ARIA contracts.
+
+**Files affected:** src/components/WorkspaceNavigation.tsx; src/components/NeuronWorkspace.tsx; src/lessons/GradientDepthLab.tsx; src/lessons/PerceptronLab.tsx.
 
 **Dependencies:** R04/R07/R08/R09.
 
-**Status:** Not started
+**Status:** Verified
 
-**Tests required / acceptance criteria:** Verify corresponding defect scenarios and source ownership.
+**Tests required / acceptance criteria:** Inert drawer, proper tabs, Enter/Space layer controls, focusable named truth-table overflow. R04/R07/R08/R09.
 
-**Evidence of completion / commit reference:** Pending.
+**Evidence of completion:** [Comparison](AUDIT_COMPARISON.md); [route and state gallery](audit/GALLERY.md).
+
+**Commit reference:** `e26dbe1` (workspace/state/shared primitives), `52876b6` (lab flows and regression coverage); follow-ups `7a2eddd` (document reload) and `3507106` (native Markdown links).
 
 ## Route verification
 
-- [ ] `/lab/neuron` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/python-basics` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/python-flow` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/intro` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/perceptron` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/tensor` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/propagation` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/backprop` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/activation` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/loss` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/gradient-depth` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/beginner` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/training-project` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/library` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/python` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/dashboard` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/python-workshop` — task, changed states, keyboard, five widths, mathematics and provenance.
-- [ ] `/lab/math-workshop` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/neuron` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/python-basics` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/python-flow` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/intro` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/perceptron` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/tensor` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/propagation` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/backprop` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/activation` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/loss` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/gradient-depth` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/beginner` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/training-project` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/library` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/python` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/dashboard` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/python-workshop` — task, changed states, keyboard, five widths, mathematics and provenance.
+- [x] `/lab/math-workshop` — task, changed states, keyboard, five widths, mathematics and provenance.
+
+## Publication status
+
+Local implementation and evidence are complete. The CLI reports an invalid `GH_TOKEN`; the connected GitHub app reports repository write access and is being used to publish the review branch. No merge has occurred. The PR description is prepared in [AUDIT_PR_DESCRIPTION.md](AUDIT_PR_DESCRIPTION.md).

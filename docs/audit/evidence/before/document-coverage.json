@@ -1,0 +1,46 @@
+{
+  "chapters": 19,
+  "navigated_links": 83,
+  "unique_documents": 63,
+  "catalog_entries": 149,
+  "linked_catalog_documents": 60,
+  "unlinked_authored_documents": [
+    {
+      "id": "dl-00-002-variables",
+      "title": "Python Variables and Data Flow",
+      "chapter": "CH-00",
+      "parent_id": "dl-00-002",
+      "prerequisites": [
+        "dl-00-001"
+      ],
+      "status": "implemented",
+      "source_refs": [
+        "SRC-PYTHON"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 25,
+      "route_id": "python-basics",
+      "document": "00-python-and-math/lessons/variables-and-data-flow.md",
+      "scope": "Numeric assignment sublesson only; loops/functions/objects are not implemented"
+    },
+    {
+      "id": "dl-00-002-flow",
+      "title": "Python Loops, Functions and Objects",
+      "chapter": "CH-00",
+      "parent_id": "dl-00-002",
+      "prerequisites": [
+        "dl-00-002-variables"
+      ],
+      "status": "implemented",
+      "source_refs": [
+        "SRC-PYTHON"
+      ],
+      "visual_priority": "high",
+      "estimated_minutes": 35,
+      "route": "python-flow",
+      "document": "00-python-and-math/lessons/control-flow.md"
+    }
+  ],
+  "catalog_only_specified_entries": 87,
+  "note": "Catalog-only specifications have no separate Markdown document to traverse; chapter overview and prerequisite/source links were inspected."
+}

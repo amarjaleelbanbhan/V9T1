@@ -1,0 +1,21 @@
+[
+  {
+    "name": "dashboard-empty",
+    "count": 0
+  },
+  {
+    "name": "network-3d",
+    "canvas": 1,
+    "inspector": "Weighted sum = 1.2. z = -0.4 + 1.6 + bias (-0.2) = 1. relu(z) = 1."
+  },
+  {
+    "name": "loss-3d",
+    "canvas": 1,
+    "numbers": "Step 0: weight 0 · bias 0 · loss 1.8333 · dL/dw -1.3333 · dL/db -1."
+  },
+  {
+    "name": "neuron-3d",
+    "canvas": 1,
+    "numbers": "Final output = 0.957."
+  }
+]

@@ -22,7 +22,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Put objective, selected contribution, predicted bias and resulting activation into one compact task region. At narrow widths, show a staged graph with readable HTML operands and an adjacent result strip. Make exhaustive parameters/trace secondary, retain explicit 3D, and preserve recovery across navigation.
 
-**Priority:** High — R02, R05, R09, R14. [Desktop](evidence/neuron-1440.png) · [320px](evidence/neuron-320.png) · [changed state](evidence/state-neuron-768.png).
+**Priority:** High — R02, R05, R09, R14. [Desktop](evidence/before/neuron-1440.png) · [320px](evidence/before/neuron-320.png) · [changed state](evidence/before/state-neuron-768.png).
 
 ## 2. Names, values, instructions — `#/lab/python-basics`
 
@@ -42,7 +42,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Start with the current instruction and two adjacent name/value slots. Ask for the next value, run, then animate the assignment and explicitly show that later x changes do not rerun product. Disclose vocabulary inline. Preserve intended practice drafts when moving between tools without granting course credit.
 
-**Priority:** Medium — R13, R14, R20. [Desktop](evidence/python-basics-1440.png) · [320px](evidence/python-basics-320.png) · [executed state](evidence/state-python-basics-768.png).
+**Priority:** Medium — R13, R14, R20. [Desktop](evidence/before/python-basics-1440.png) · [320px](evidence/before/python-basics-320.png) · [executed state](evidence/before/state-python-basics-768.png).
 
 ## 3. Follow repetition and calls — `#/lab/python-flow`
 
@@ -62,7 +62,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Give loops a highlighted collection/cursor, functions a call frame that opens and closes, and objects an instance-state panel. Keep captured Python events as the authority. Reveal transport after execution and place the prediction beside the relevant transition.
 
-**Priority:** Medium — R13, R14, R20. [Desktop](evidence/python-flow-1440.png) · [320px](evidence/python-flow-320.png) · [executed state](evidence/state-python-flow-768.png).
+**Priority:** Medium — R13, R14, R20. [Desktop](evidence/before/python-flow-1440.png) · [320px](evidence/before/python-flow-320.png) · [executed state](evidence/before/state-python-flow-768.png).
 
 ## 4. Build intuition before networks — `#/lab/intro`
 
@@ -82,7 +82,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Make a single classification mission: choose a threshold under a stated false-positive/false-negative cost, predict affected samples and inspect the result. Keep regression as a clear alternate task and taxonomy as compact prerequisite help. Render metrics in a ledger next to the plot.
 
-**Priority:** Medium — R14–R16, R20. [Desktop](evidence/intro-1440.png) · [320px](evidence/intro-320.png) · [changed state](evidence/state-intro-768.png).
+**Priority:** Medium — R14–R16, R20. [Desktop](evidence/before/intro-1440.png) · [320px](evidence/before/intro-320.png) · [changed state](evidence/before/state-intro-768.png).
 
 ## 5. One neuron, a decision — `#/lab/perceptron`
 
@@ -102,7 +102,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Keep plot and four-case result strip together. Add an explicit XOR exploration with a boundary and misclassified points, then ask the learner to explain what stays impossible. Make each narrow-screen row reveal its arithmetic without losing table headers.
 
-**Priority:** High for keyboard scrolling; Medium for composition — R08, R16, R20. [Desktop](evidence/perceptron-1440.png) · [390px](evidence/perceptron-390.png) · [changed state](evidence/state-perceptron-768.png).
+**Priority:** High for keyboard scrolling; Medium for composition — R08, R16, R20. [Desktop](evidence/before/perceptron-1440.png) · [390px](evidence/before/perceptron-390.png) · [changed state](evidence/before/state-perceptron-768.png).
 
 ## 6. See the shape of data — `#/lab/tensor`
 
@@ -122,7 +122,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Place readable coordinates on the selected row/column edges; keep start/stop controls adjacent to a highlighted slice. Ask for a requested shape before revealing the crop, then diagnose off-by-one choices from actual indices. Keep rank/dtype in a compact information strip.
 
-**Priority:** High for contrast/readability — R02, R06, R16, R20. [Desktop](evidence/tensor-1440.png) · [320px](evidence/tensor-320.png) · [changed state](evidence/state-tensor-768.png).
+**Priority:** High for contrast/readability — R02, R06, R16, R20. [Desktop](evidence/before/tensor-1440.png) · [320px](evidence/before/tensor-320.png) · [changed state](evidence/before/state-tensor-768.png).
 
 ## 7. Follow every signal — `#/lab/propagation`
 
@@ -142,7 +142,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** A selected-edge strip should show source × weight → contribution and destination output beside the graph at every width. Make stage replay one compact control. Ask for a weight/contribution producing a target hidden activation before revealing the full pass.
 
-**Priority:** High for mobile readability; Medium for teaching task — R02, R14, R16, R20. [Desktop](evidence/propagation-1440.png) · [320px](evidence/propagation-320.png) · [changed state](evidence/state-propagation-768.png).
+**Priority:** High for mobile readability; Medium for teaching task — R02, R14, R16, R20. [Desktop](evidence/before/propagation-1440.png) · [320px](evidence/before/propagation-320.png) · [changed state](evidence/before/state-propagation-768.png).
 
 ## 8. Reverse the signal — `#/lab/backprop`
 
@@ -162,7 +162,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Turn the selected path into a derivative ledger: output error → activation slope → hidden contribution → selected gradient → proposed weight. Highlight its matching graph path. Ask the learner to fill or predict one factor, then show how the update changes loss. Keep the complete Python source behind explicit inspection.
 
-**Priority:** High for task readability; Medium for refinement — R02, R14, R20. [Desktop](evidence/backprop-1440.png) · [320px](evidence/backprop-320.png) · [updated state](evidence/state-backprop-768.png).
+**Priority:** High for task readability; Medium for refinement — R02, R14, R20. [Desktop](evidence/before/backprop-1440.png) · [320px](evidence/before/backprop-320.png) · [updated state](evidence/before/state-backprop-768.png).
 
 ## 9. Shape the signal — `#/lab/activation`
 
@@ -182,7 +182,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Keep the plot and point inspector together, with a readable tangent/local-slope view. Ask learners to predict what changing z does in a saturated region. For Softmax, ask for a relative-score change and show all probabilities responding. Preserve text identities alongside color.
 
-**Priority:** High for contrast — R06; Medium for task — R16, R20. [Desktop](evidence/activation-1440.png) · [320px](evidence/activation-320.png) · [changed state](evidence/state-activation-768.png).
+**Priority:** High for contrast — R06; Medium for task — R16, R20. [Desktop](evidence/before/activation-1440.png) · [320px](evidence/before/activation-320.png) · [changed state](evidence/before/state-activation-768.png).
 
 ## 10. Follow the loss downhill — `#/lab/loss`
 
@@ -202,7 +202,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Place the prediction directly beside the current point before the next update. Keep current gradient and proposed movement in a compact strip under the plot; show full derivation on demand. Offer stable/oscillating/unchanged experiments with learner diagnosis.
 
-**Priority:** Medium — R14, R16, R20. [Desktop](evidence/loss-1440.png) · [320px](evidence/loss-320.png) · [updated state](evidence/state-loss-320.png).
+**Priority:** Medium — R14, R16, R20. [Desktop](evidence/before/loss-1440.png) · [320px](evidence/before/loss-320.png) · [updated state](evidence/before/state-loss-320.png).
 
 ## 11. See gradients fade — `#/lab/gradient-depth`
 
@@ -222,7 +222,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Use a grouped chart with readable scale labels and an HTML layer selector. Keep local factor, cumulative derivative and selected bar together. Ask the learner to diagnose whether a changed weight, saturation or zero ReLU slope causes the observed result.
 
-**Priority:** High — R07; Medium for chart literacy — R17. [Desktop](evidence/gradient-depth-1440.png) · [320px](evidence/gradient-depth-320.png) · [changed state](evidence/state-gradient-depth-768.png).
+**Priority:** High — R07; Medium for chart literacy — R17. [Desktop](evidence/before/gradient-depth-1440.png) · [320px](evidence/before/gradient-depth-320.png) · [changed state](evidence/before/state-gradient-depth-768.png).
 
 ## 12. Learn, calculate, explain — `#/lab/beginner`
 
@@ -242,7 +242,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** One topic route and one task screen with a compact topic switcher. Offer vocabulary/hints beside the task. After practice, offer explain/recall deliberately and present the current chapter review at a checkpoint. Keep evidence policy concise and link its full definitions.
 
-**Priority:** High — R03, R10; Medium — R12, R16. [Desktop](evidence/beginner-1440.png) · [320px](evidence/beginner-320.png) · [changed topic](evidence/state-beginner-768.png).
+**Priority:** High — R03, R10; Medium — R12, R16. [Desktop](evidence/before/beginner-1440.png) · [320px](evidence/before/beginner-320.png) · [changed topic](evidence/before/state-beginner-768.png).
 
 ## 13. Train a model you can inspect — `#/lab/training-project`
 
@@ -262,7 +262,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Begin with a preset dataset/model and one learning-rate decision. Show fitted line/loss/first update, then disclose optimizer/batch/regularization settings as experiments. Make validation selection and held-out evaluation distinct workflow stages with resumable draft state.
 
-**Priority:** Medium — R13, R14, R20. [Desktop](evidence/training-project-1440.png) · [320px](evidence/training-project-320.png) · [trained state](evidence/state-training-project-768.png).
+**Priority:** Medium — R13, R14, R20. [Desktop](evidence/before/training-project-1440.png) · [320px](evidence/before/training-project-320.png) · [trained state](evidence/before/state-training-project-768.png).
 
 ## 14. Explore your learning path — `#/lab/library`
 
@@ -282,7 +282,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** A compact searchable chapter index beside readable detail on desktop, dedicated detail with a clear return path on mobile, deep document links and strong “Practice available / Reference specification” labels. Keep source content and provenance.
 
-**Priority:** High — R01, R10, R11. [Desktop](evidence/library-1440.png) · [320px](evidence/library-320.png) · [chapter state](evidence/chapter-CH-00.png).
+**Priority:** High — R01, R10, R11. [Desktop](evidence/before/library-1440.png) · [320px](evidence/before/library-320.png) · [chapter state](evidence/before/chapter-CH-00.png).
 
 ## 15. Watch an array come alive — `#/lab/python`
 
@@ -302,7 +302,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Keep array cells and shape/dtype/payload annotations together. Ask for a predicted property before running; offer a small validated alternative shape/dtype exercise if teaching those relationships, without pretending to be a general Python runner.
 
-**Priority:** Medium — R14, R16, R20. [Desktop](evidence/python-1440.png) · [320px](evidence/python-320.png) · [executed state](evidence/state-python-768.png).
+**Priority:** Medium — R14, R16, R20. [Desktop](evidence/before/python-1440.png) · [320px](evidence/before/python-320.png) · [executed state](evidence/before/state-python-768.png).
 
 ## 16. Keep the learning moving — `#/lab/dashboard`
 
@@ -322,7 +322,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Lead with one next task and a compact due-review summary. Keep the map as expandable progress context. Search should return concise matches/count/empty guidance; full glossary and data management can be intentional secondary destinations/disclosures.
 
-**Priority:** Medium; Low for the local empty-state fix — R19, R20. [Desktop](evidence/dashboard-1440.png) · [320px](evidence/dashboard-320.png) · [search state](evidence/state-dashboard-search-768.png).
+**Priority:** Medium; Low for the local empty-state fix — R19, R20. [Desktop](evidence/before/dashboard-1440.png) · [320px](evidence/before/dashboard-320.png) · [search state](evidence/before/state-dashboard-search-768.png).
 
 ## 17. Make the code your own — `#/lab/python-workshop`
 
@@ -342,7 +342,7 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Use contrast-tested syntax roles within the teal system. Give each template one precise success condition with model-derived checks where appropriate, preserve unrestricted exploratory edits within current bounds, and distinguish “output matched” from “task solved.”
 
-**Priority:** High for contrast — R06; Medium for task contracts — R14, R16. [Desktop](evidence/python-workshop-1440.png) · [320px](evidence/python-workshop-320.png) · [edited state](evidence/state-python-workshop-768.png).
+**Priority:** High for contrast — R06; Medium for task contracts — R14, R16. [Desktop](evidence/before/python-workshop-1440.png) · [320px](evidence/before/python-workshop-320.png) · [edited state](evidence/before/state-python-workshop-768.png).
 
 ## 18. Inspect a cell. Follow a slope. — `#/lab/math-workshop`
 
@@ -362,4 +362,4 @@ Audited commit: `75df2438839a1ee80821c30cee27009a408689f6`. Every route below wa
 
 **Specific redesign direction:** Give matrix multiplication a row/column highlight crossing at the chosen output cell, with editable draft text and inline validation. Give loss descent a separately selectable task with labeled contours, point inspector and predicted next step. Preserve both domain implementations and optional 3D.
 
-**Priority:** Medium — R17, R18, R20. [Desktop](evidence/math-workshop-1440.png) · [320px](evidence/math-workshop-320.png) · [changed state](evidence/state-math-workshop-768.png).
+**Priority:** Medium — R17, R18, R20. [Desktop](evidence/before/math-workshop-1440.png) · [320px](evidence/before/math-workshop-320.png) · [changed state](evidence/before/state-math-workshop-768.png).

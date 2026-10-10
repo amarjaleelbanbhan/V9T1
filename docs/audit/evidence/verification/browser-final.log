@@ -1,0 +1,148 @@
+
+Running 77 tests using 1 worker
+
+(node:18974) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18974) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/activation.spec.ts:2:1 › Week 4 scalar activation and Softmax are synchronized (3.1s)
+  ✓   2 [chromium] › tests/activation.spec.ts:54:1 › Week 4 fits narrow mobile layout (1.8s)
+  ✓   3 [chromium] › tests/audit-remediation.spec.ts:2:1 › failed lazy download keeps shell, navigation, and can retry (2.7s)
+  ✓   4 [chromium] › tests/audit-remediation.spec.ts:25:1 › mission recovery survives repeated navigation (2.1s)
+  ✓   5 [chromium] › tests/audit-remediation.spec.ts:46:1 › inspector tabs implement roving focus and linked panel (1.5s)
+  ✓   6 [chromium] › tests/audit-remediation.spec.ts:67:1 › drawer isolates background and restores focus (2.5s)
+  ✓   7 [chromium] › tests/audit-remediation.spec.ts:86:1 › Space selects an exact gradient layer (1.1s)
+  ✓   8 [chromium] › tests/audit-remediation.spec.ts:97:1 › invalid matrix drafts retain calculation and can be corrected (2.0s)
+  ✓   9 [chromium] › tests/audit-remediation.spec.ts:115:1 › dashboard announces empty matches and clears search (3.2s)
+  ✓  10 [chromium] › tests/audit-remediation.spec.ts:130:1 › beginner prediction is within two viewports and review follows topic (2.3s)
+  ✓  11 [chromium] › tests/audit-remediation.spec.ts:153:1 › library opens detail near top and restores search (2.0s)
+  ✓  12 [chromium] › tests/audit-remediation.spec.ts:182:1 › nested topic links support Back, Forward and invalid selection fallback (2.4s)
+  ✓  13 [chromium] › tests/audit-remediation.spec.ts:204:1 › resumable sandbox drafts keep prediction but require a new Python execution (2.3s)
+  ✓  14 [chromium] › tests/audit-remediation.spec.ts:227:1 › fresh transfer predictions hide results until submission and preserve course isolation (4.0s)
+  ✓  15 [chromium] › tests/backprop.spec.ts:3:1 › backpropagation chain-rule math, gradient inspector and real training step (6.1s)
+  ✓  16 [chromium] › tests/backprop.spec.ts:55:1 › backprop lab supports gradient controls on 390px screen (1.5s)
+Verified worked and transfer cases: dl-00-001
+Verified worked and transfer cases: dl-00-002
+Verified worked and transfer cases: dl-00-003
+Verified worked and transfer cases: dl-00-004
+Verified worked and transfer cases: dl-00-005
+Verified worked and transfer cases: dl-00-006
+Verified worked and transfer cases: dl-00-007
+Verified worked and transfer cases: dl-00-008
+Verified worked and transfer cases: dl-01-001
+Verified worked and transfer cases: dl-01-002
+Verified worked and transfer cases: dl-01-003
+Verified worked and transfer cases: dl-01-004
+Verified worked and transfer cases: dl-01-005
+Verified worked and transfer cases: dl-01-006
+Verified worked and transfer cases: dl-01-007
+Verified worked and transfer cases: dl-01-008
+Verified worked and transfer cases: dl-01-009
+Verified worked and transfer cases: dl-02-001
+Verified worked and transfer cases: dl-02-002
+Verified worked and transfer cases: dl-02-003
+Verified worked and transfer cases: dl-02-004
+Verified worked and transfer cases: dl-02-005
+Verified worked and transfer cases: dl-02-006
+Verified worked and transfer cases: dl-02-007
+Verified worked and transfer cases: dl-03-001
+Verified worked and transfer cases: dl-03-002
+Verified worked and transfer cases: dl-03-003
+Verified worked and transfer cases: dl-03-004
+Verified worked and transfer cases: dl-03-005
+Verified worked and transfer cases: dl-03-006
+Verified worked and transfer cases: dl-03-007
+Verified worked and transfer cases: dl-04-001
+Verified worked and transfer cases: dl-04-002
+Verified worked and transfer cases: dl-04-003
+Verified worked and transfer cases: dl-04-004
+Verified worked and transfer cases: dl-04-005
+Verified worked and transfer cases: dl-04-006
+Verified worked and transfer cases: dl-05-001
+Verified worked and transfer cases: dl-05-002
+Verified worked and transfer cases: dl-05-003
+Verified worked and transfer cases: dl-05-004
+Verified worked and transfer cases: dl-05-005
+Verified worked and transfer cases: dl-05-006
+Verified worked and transfer cases: dl-05-007
+Verified worked and transfer cases: dl-06-001
+Verified worked and transfer cases: dl-06-002
+Verified worked and transfer cases: dl-06-003
+Verified worked and transfer cases: dl-06-004
+Verified worked and transfer cases: dl-06-005
+Verified worked and transfer cases: dl-06-006
+Verified worked and transfer cases: dl-06-007
+Verified worked and transfer cases: dl-07-001
+Verified worked and transfer cases: dl-07-002
+Verified worked and transfer cases: dl-07-003
+Verified worked and transfer cases: dl-07-004
+Verified worked and transfer cases: dl-07-005
+Verified worked and transfer cases: dl-07-006
+Verified worked and transfer cases: dl-07-007
+Verified worked and transfer cases: dl-07-008
+Verified worked and transfer cases: dl-07-009
+All 60 criteria checked; reloading the persisted workspace.
+Reload reached DOMContentLoaded.
+  ✓  17 [chromium] › tests/beginner-course.spec.ts:56:1 › each foundation lesson calculates both cases, explains and persists evidence (1.9m)
+  ✓  18 [chromium] › tests/beginner-course.spec.ts:89:1 › wrong answers and sandbox inputs earn no evidence; mobile keyboard and reset (4.3s)
+  ✓  19 [chromium] › tests/ch06-feedback.spec.ts:6:1 › all chapter 06 choices explain the selected option after real Python execution (17.9s)
+  ✓  20 [chromium] › tests/ch06-feedback.spec.ts:58:1 › chapter 06 authored hints and diagnostic packs appear against executed Python traces (11.8s)
+  ✓  21 [chromium] › tests/chapter-review.spec.ts:5:1 › all chapter mixed reviews require the explanation and persist independently (11.8s)
+  ✓  22 [chromium] › tests/chapter-review.spec.ts:56:1 › FSRS recall becomes due at its scheduled timestamp rather than immediately on practice (2.6s)
+  ✓  23 [chromium] › tests/forward.spec.ts:2:1 › multi-layer forward network shows actual math for selected weighted connection (3.2s)
+  ✓  24 [chromium] › tests/forward.spec.ts:49:1 › forward-pass graph and sliders fit 390px mobile view (2.5s)
+  ✓  25 [chromium] › tests/foundations.spec.ts:2:1 › Week 1: concept family, classification, regression, challenge and lesson navigation (4.4s)
+  ✓  26 [chromium] › tests/foundations.spec.ts:64:1 › Week 1 is reachable and responsive at narrow mobile width (2.2s)
+  ✓  27 [chromium] › tests/gradient-depth.spec.ts:2:1 › depth visualizer computes true derivatives and responds to settings (3.4s)
+  ✓  28 [chromium] › tests/hint-integrity.spec.ts:14:1 › partial hints keep completed grids and curves hidden until the full reveal (11.5s)
+  ✓  29 [chromium] › tests/hint-integrity.spec.ts:60:1 › a worked solution cannot treat an empty prediction as the correct answer zero (14.7s)
+  ✓  30 [chromium] › tests/hint-integrity.spec.ts:93:1 › failed scheduled recall keeps the topic unaided without claiming successful later recall (6.2s)
+  ✓  31 [chromium] › tests/hint-ladder-keyboard.spec.ts:19:1 › keyboard reaches the hints and completes a prediction without mouse or programmatic focus (24.9s)
+  ✓  32 [chromium] › tests/hint-ladder-keyboard.spec.ts:89:3 › touch access › 390px hint text wraps and playback speed responds to touch (13.4s)
+  ✓  33 [chromium] › tests/hint-ladder.spec.ts:33:1 › hints 1 and 2 need no runtime, hint 3 reveals exactly one real operation, hint 4 reveals the rest (14.4s)
+  ✓  34 [chromium] › tests/hint-ladder.spec.ts:96:1 › a hinted pass records assisted success; an unaided pass records independent success (12.4s)
+  ✓  35 [chromium] › tests/hint-ladder.spec.ts:219:1 › a wrong prediction is diagnosed against the executed trace, not just marked wrong (6.7s)
+  ✓  36 [chromium] › tests/hint-ladder.spec.ts:265:1 › operation playback is keyboard operable, speed adjustable and honours reduced motion (8.1s)
+  ✓  37 [chromium] › tests/learning-mission.spec.ts:14:1 › recall requires retrieval, records FSRS ratings, saves explanation and resumes topic (6.4s)
+  ✓  38 [chromium] › tests/learning-mission.spec.ts:79:1 › real edited Python, changing source clears output, syntax failures and NumPy exercise (16.4s)
+  ✓  39 [chromium] › tests/learning-mission.spec.ts:136:1 › editable execution bounds output, blocks unsupported imports and stops infinite loop (23.5s)
+  ✓  40 [chromium] › tests/learning-mission.spec.ts:171:1 › 3D neuron and layered network selection share math, with keyboard transport and 2D alternative (5.1s)
+  ✓  41 [chromium] › tests/learning-mission.spec.ts:243:1 › matrix cells and loss surface synchronize live formulas and Python (6.5s)
+  ✓  42 [chromium] › tests/learning-mission.spec.ts:283:1 › Markdown compiles math, nested lists, tables, callouts and Python highlighting (2.6s)
+  ✓  43 [chromium] › tests/learning-mission.spec.ts:306:1 › 3D gracefully falls back when WebGL is unavailable (821ms)
+  ✓  44 [chromium] › tests/learning-mission.spec.ts:325:1 › new learner tools fit mobile, preserve focus and respect reduced motion (1.8s)
+  ✓  45 [chromium] › tests/learning-mission.spec.ts:348:1 › Markdown rejects raw HTML and unsafe links while rendering trusted math (1.1s)
+  ✓  46 [chromium] › tests/learning-mission.spec.ts:375:1 › scene switching disposes canvases and malformed edited visual data cannot crash the workshop (5.1s)
+  ✓  47 [chromium] › tests/learning-mission.spec.ts:417:1 › corrupt saved topic falls back to a real lesson and cannot break dashboard resume (1.4s)
+  ✓  48 [chromium] › tests/library.spec.ts:3:1 › searches curriculum, loads a source-backed chapter, preserves labs and removes footer (1.5s)
+  ✓  49 [chromium] › tests/library.spec.ts:27:1 › curriculum and Python controls fit mobile and reduced motion (1.3s)
+  ✓  50 [chromium] › tests/library.spec.ts:52:1 › fixed Python runs NumPy and exposes real traced values (4.7s)
+  ✓  51 [chromium] › tests/library.spec.ts:81:1 › chapter Markdown renders semantic headings and navigates lesson files internally (1.6s)
+  ✓  52 [chromium] › tests/lossGradient.spec.ts:2:1 › loss and gradient descent calculations follow the visual timeline (1.7s)
+  ✓  53 [chromium] › tests/lossGradient.spec.ts:49:1 › learning rate 1 oscillates for w squared, while zero rate does not update (2.1s)
+  ✓  54 [chromium] › tests/lossGradient.spec.ts:84:1 › loss lab works on narrow mobile viewport (1.4s)
+  ✓  55 [chromium] › tests/neuron.spec.ts:2:1 › live neuron computation, controls, and 2D diagram (1.4s)
+  ✓  56 [chromium] › tests/neuron.spec.ts:58:1 › small viewport supports lessons and controls without horizontal overflow (888ms)
+  ✓  57 [chromium] › tests/neuron.spec.ts:82:1 › prediction challenge respects negative input and ReLU zero region (3.2s)
+  ✓  58 [chromium] › tests/perceptron.spec.ts:2:1 › perceptron AND/OR truth table and live bias updates (1.4s)
+  ✓  59 [chromium] › tests/perceptron.spec.ts:40:1 › perceptron truth table remains usable on mobile (1.2s)
+  ✓  60 [chromium] › tests/python-basics.spec.ts:3:1 › real Python shows ordered assignment, fixed product and transfer-based completion (7.9s)
+  ✓  61 [chromium] › tests/python-basics.spec.ts:93:1 › wrong prediction is explained and does not pass evidence (3.6s)
+  ✓  62 [chromium] › tests/python-basics.spec.ts:120:1 › invalid inputs, cancellation, keyboard and mobile layout (1.5s)
+  ✓  63 [chromium] › tests/python-basics.spec.ts:177:1 › worker rejects unknown example before fetching Python (875ms)
+  ✓  64 [chromium] › tests/python-flow.spec.ts:3:1 › actual Python executes conditions, call-local values and retained object state (17.8s)
+  ✓  65 [chromium] › tests/python-programs.spec.ts:3:1 › neuron Python executes current parameters and clears stale output on changes (3.6s)
+  ✓  66 [chromium] › tests/python-programs.spec.ts:35:1 › forward inspector executes valid Python instead of pseudocode (4.4s)
+  ✓  67 [chromium] › tests/python-programs.spec.ts:59:1 › all other visual labs expose working Python matching current controls (28.7s)
+  ✓  68 [chromium] › tests/python-programs.spec.ts:85:1 › cancel and changed input cannot restore stale output; failed downloads remain retryable (1.9s)
+  ✓  69 [chromium] › tests/tensor.spec.ts:2:1 › tensor lab rank, shape, sample slicing and answer respond to controls (2.9s)
+  ✓  70 [chromium] › tests/tensor.spec.ts:50:1 › tensor laboratory fits 390px viewport (3.5s)
+  ✓  71 [chromium] › tests/training-project.spec.ts:20:1 › fits real data, inspects updates, validates transfer and restores inference checkpoint (6.6s)
+  ✓  72 [chromium] › tests/training-project.spec.ts:103:1 › mobile keyboard flow and invalid settings clear results (5.3s)
+  ✓  73 [chromium] › tests/workspace-experience.spec.ts:2:1 › workspace URLs take priority over resume and browser history returns to the previous lab (2.3s)
+  ✓  74 [chromium] › tests/workspace-experience.spec.ts:28:1 › mobile navigation traps focus, closes with Escape, and returns focus to its trigger (1.7s)
+  ✓  75 [chromium] › tests/workspace-experience.spec.ts:68:1 › bias mission uses the real model, rejects an altered setup and restores the prior experiment (1.6s)
+  ✓  76 [chromium] › tests/workspace-experience.spec.ts:109:1 › node inspection follows calculation stages and the map opens a real authored lesson (2.1s)
+  ✓  77 [chromium] › tests/workspace-experience.spec.ts:141:1 › forward SVG exposes keyboard connections and scrollable Python source receives focus (1.2s)
+
+  77 passed (8.7m)

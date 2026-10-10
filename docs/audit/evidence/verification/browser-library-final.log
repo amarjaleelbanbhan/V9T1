@@ -1,0 +1,19 @@
+
+Running 10 tests using 1 worker
+
+(node:30313) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:30313) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/audit-remediation.spec.ts:153:1 › library opens detail near top and restores search (2.4s)
+  ✓   2 [chromium] › tests/audit-remediation.spec.ts:182:1 › nested topic links support Back, Forward and invalid selection fallback (2.2s)
+  ✓   3 [chromium] › tests/audit-remediation.spec.ts:261:1 › failed reference document can recover its exact URL by reload (2.6s)
+  ✓   4 [chromium] › tests/audit-remediation.spec.ts:274:1 › Markdown references expose exact native deep links for a new tab (3.5s)
+  ✓   5 [chromium] › tests/learning-mission.spec.ts:283:1 › Markdown compiles math, nested lists, tables, callouts and Python highlighting (3.1s)
+  ✓   6 [chromium] › tests/learning-mission.spec.ts:348:1 › Markdown rejects raw HTML and unsafe links while rendering trusted math (1.8s)
+  ✓   7 [chromium] › tests/library.spec.ts:3:1 › searches curriculum, loads a source-backed chapter, preserves labs and removes footer (2.6s)
+  ✓   8 [chromium] › tests/library.spec.ts:27:1 › curriculum and Python controls fit mobile and reduced motion (1.8s)
+  ✓   9 [chromium] › tests/library.spec.ts:52:1 › fixed Python runs NumPy and exposes real traced values (5.7s)
+  ✓  10 [chromium] › tests/library.spec.ts:81:1 › chapter Markdown renders semantic headings and navigates lesson files internally (1.6s)
+
+  10 passed (29.8s)

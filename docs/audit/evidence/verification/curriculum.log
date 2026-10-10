@@ -1,0 +1,7 @@
+
+> neurallab@0.1.0 check:curriculum
+> node scripts/validate-curriculum.mjs && node scripts/validate-beginner.mjs
+
+Validated 19 chapters, 149 lessons, 20 sources; references and prerequisite graph valid.
+Validated 60 authored beginner lessons and catalog routes.
+All 60 core beginner topics covered; advanced chapters remain specified.
