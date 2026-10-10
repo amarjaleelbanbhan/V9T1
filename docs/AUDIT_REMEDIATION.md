@@ -1,6 +1,6 @@
 # NeuralLab audit remediation
 
-Baseline: clean `75df2438839a1ee80821c30cee27009a408689f6`; branch `fix/audit-remediation`. Original audit retained in `docs/audit/`. Screenshots: `/workspace/v9t1-roast/evidence/`. No findings previously fixed.
+Baseline: clean `75df2438839a1ee80821c30cee27009a408689f6`; branch `fix/audit-remediation`. Original audit retained in `docs/audit/`. Screenshots: [matching gallery](audit/GALLERY.md). No findings previously fixed.
 
 States: Not started → In progress → Implemented → Verified; Blocked with evidence only for demonstrated constraints.
 
@@ -910,4 +910,18 @@ States: Not started → In progress → Implemented → Verified; Blocked with e
 
 ## Publication status
 
-Local implementation and evidence are complete. The CLI reports an invalid `GH_TOKEN`; the connected GitHub app reports repository write access and is being used to publish the review branch. No merge has occurred. The PR description is prepared in [AUDIT_PR_DESCRIPTION.md](AUDIT_PR_DESCRIPTION.md).
+Local implementation and evidence are complete. [Draft PR #27](https://github.com/amarjaleelbanbhan/V9T1/pull/27) is open on `fix/audit-remediation`. The connected GitHub app published the branch after CLI authentication was unavailable. No merge has occurred. The PR description is prepared in [AUDIT_PR_DESCRIPTION.md](AUDIT_PR_DESCRIPTION.md).
+
+## Published commit references
+
+The API publishes different commit metadata from the local Git history. Each pair below has the **same verified file tree**. Local source commits are retained in each published commit message.
+
+| Local source commit | Published GitHub commit |
+|---|---|
+| `75df243` | [eb9637c](https://github.com/amarjaleelbanbhan/V9T1/commit/eb9637c18bb5467c6c3375716b44dcd07e8754dd) |
+| `513566b` | [f2ccd41](https://github.com/amarjaleelbanbhan/V9T1/commit/f2ccd41bd406565535abfd1059c2989916c8f4ca) |
+| `e26dbe1` | [0eff0af](https://github.com/amarjaleelbanbhan/V9T1/commit/0eff0afdaf0d31a197c877d28be994c98d3dc11e) |
+| `52876b6` | [55345b2](https://github.com/amarjaleelbanbhan/V9T1/commit/55345b2f849f6f5595398c28dfb12d4feb7fd347) |
+| `7a2eddd` | [4512a61](https://github.com/amarjaleelbanbhan/V9T1/commit/4512a6117281ca4bbbb223136c6c77005c9d4353) |
+| `3507106` | [00452ee](https://github.com/amarjaleelbanbhan/V9T1/commit/00452eee7489811138aae621a6946e4b9a658f12) |
+| `9b76e03` | [e597200](https://github.com/amarjaleelbanbhan/V9T1/commit/e59720073d8abcaec61f1f7c428df6d5c605fd87) |

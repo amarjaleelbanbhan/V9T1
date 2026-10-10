@@ -38,7 +38,7 @@ Verified by: 320px position probe; all 60 worked and transfer authored lessons; 
 
 Header and main become inert; the scrim covers the viewport. Focus traps inside the drawer, Escape restores the trigger, and navigation/resize closes it.
 
-Verified by: Drawer isolation regression and production pointer/focus/resize probe. Observed: Pointer activation through the open scrim cannot change the route; 40 Tabs remain in the dialog, Escape restores focus, and desktop resize removes inert state. Evidence: [evidence](audit/evidence/after/drawer-focus-390.png); [tracker acceptance criteria](AUDIT_REMEDIATION.md). Status: Verified.
+Verified by: Drawer isolation regression and production pointer/focus/resize probe. Observed: Mouse and touchscreen activation through the open scrim cannot change the route; 40 Tabs remain in the dialog, Escape restores focus, and desktop resize removes inert state. Evidence: [evidence](audit/evidence/after/drawer-focus-390.png); [tracker acceptance criteria](AUDIT_REMEDIATION.md). Status: Verified.
 
 ### R05
 
@@ -146,4 +146,4 @@ Fresh sandbox transfer tasks hide their numerical answer until a finite predicti
 
 Execution-action styles are consolidated incrementally. Legacy styling outside that primitive remains; broad removal would add unnecessary regression risk. Existing large curriculum/WebGL chunks still trigger Vite's size advisory and remain lazy. The optional 3D renderer retains the tested 2D fallback.
 
-The CLI reports an invalid `GH_TOKEN`. The connected GitHub app provides a separate authenticated publication route. No merge or production promotion is part of this remediation. A local PR description is prepared in `docs/AUDIT_PR_DESCRIPTION.md`.
+[Draft PR #27](https://github.com/amarjaleelbanbhan/V9T1/pull/27) is open. The connected GitHub app published the preserved audited baseline and focused remediation commits; every published tree matches the corresponding local tree. The CLI token was unavailable. No merge or production promotion is part of this remediation. Remote commit references are in the tracker.

@@ -10,6 +10,7 @@ NEURALLAB_PYODIDE_ASSETS=/path/to/authentic/pyodide-0.27.7 node docs/audit/tools
 node docs/audit/tools/probes-final.mjs
 node docs/audit/tools/contrast-final.mjs
 node docs/audit/tools/navigation-final.mjs
+node docs/audit/tools/document-recovery.mjs
 ```
 
 The runtime mirror fixture serves actual pinned files and does not replace execution or outputs. Without the mirror, the interaction script uses the original CDN. Scripts use `/usr/bin/chromium`; adjust the executable path for another system. Evidence is written to `docs/audit/evidence/after`. Preserve a copy before regeneration.

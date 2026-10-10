@@ -33,4 +33,6 @@ Before images belong to audited commit `75df243`; after images come from the rem
 
 ## Machine evidence
 
+[Touch isolation and invalid-document fallback](evidence/after/touch-and-invalid-document.json).
+
 [Five-width inspection and axe results](evidence/after/inspection.json) · [Changed-state interactions](evidence/after/interactions.json) · [Targeted production probes](evidence/after/probes-final.json). Axe incompletes remain recorded; zero violations is not accessibility certification.
