@@ -1,5 +1,8 @@
 # Competitive landscape — interactive deep-learning education, October 2026
 
+> Historical audit: measurements below describe `e565635` unless a later checkpoint is named. For current implementation status and product decisions, read [the reconciliation](../PROJECT_RENAISSANCE_2026.md#current-checkpoint-after-pr-25). Research findings remain sourced proposals, not demonstrated NeuralLab learning outcomes.
+
+
 Research date: 2026-10-10. All claims are sourced; where a claim comes from secondary coverage
 rather than a primary artefact it is marked **[secondary]**. Marketing copy is excluded — only
 demonstrated functionality is recorded.
@@ -255,3 +258,4 @@ Retrieved 2026-10-10 unless stated.
 - [Learning from mistakes: objective and subjective error magnitudes predict the testing effect (2026)](https://link.springer.com/article/10.3758/s13423-026-03009-z)
 - [Generative Processing Strengthens Learning Across Errorful and Non-Errorful Contexts (2026)](https://www.tandfonline.com/doi/abs/10.1080/00220973.2026.2636103)
 - [Metcalfe, Learning from Errors, *Annual Review of Psychology*](https://www.annualreviews.org/content/journals/10.1146/annurev-psych-010416-044022)
+

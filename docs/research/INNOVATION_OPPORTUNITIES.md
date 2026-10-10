@@ -1,5 +1,8 @@
 # Innovation opportunities — candidate ideas, novelty, feasibility
 
+> Historical audit: measurements below describe `e565635` unless a later checkpoint is named. For current implementation status and product decisions, read [the reconciliation](../PROJECT_RENAISSANCE_2026.md#current-checkpoint-after-pr-25). Research findings remain sourced proposals, not demonstrated NeuralLab learning outcomes.
+
+
 Date: 2026-10-10. Evidence base:
 [COMPETITIVE_LANDSCAPE.md](./COMPETITIVE_LANDSCAPE.md) (market + learning science) and
 [ARCHITECTURE_REVIEW.md](../engineering/ARCHITECTURE_REVIEW.md) (what the code can already do).
@@ -359,3 +362,4 @@ spectacular-sounding idea, was **downgraded** after research: NeuroViz (arXiv:26
 published a within-epoch forward/backward comparison with a usability study five months ago, so
 "rewind training" is no longer novel territory. That downgrade is the kind of finding this research
 was for.
+

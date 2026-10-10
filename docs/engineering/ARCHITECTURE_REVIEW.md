@@ -1,5 +1,8 @@
 # Architecture review — NeuralLab, October 2026
 
+> Historical audit: measurements below describe `e565635` unless a later checkpoint is named. For current implementation status and product decisions, read [the reconciliation](../PROJECT_RENAISSANCE_2026.md#current-checkpoint-after-pr-25). Research findings remain sourced proposals, not demonstrated NeuralLab learning outcomes.
+
+
 Audit date: 2026-10-10. Base commit: `e565635ff7e54c6fe472b3e3cef98f77d3b7739b` (main, PR #15 merged).
 Environment: Node 26.7.0, npm 11.14.1, Vite 6.4.4, Chromium 141 (Playwright build 1223).
 
@@ -422,3 +425,4 @@ a formatter, and any math/code-highlighting renderer.
 Explicitly **not** recommended: migrating state management, adopting a meta-framework, replacing
 Three.js, replacing Pyodide, or restructuring `src/engine/`. See
 [PROJECT_RENAISSANCE_2026.md](../PROJECT_RENAISSANCE_2026.md) §"What not to build".
+

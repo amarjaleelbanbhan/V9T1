@@ -1,6 +1,6 @@
 # Learning missions, hint ladder and diagnostics — design contract
 
-Date: 2026-10-10. Base: `09a9646` (after PR #16).
+Date: 2026-10-10. Reviewed base: `0ae811c` (after PR #25). Hints and diagnostics exist; the mission catalogue below is proposed, not shipped.
 Target experience: roughly **90 % of learning time spent acting on real mathematical state**, 10 %
 on concise supporting text.
 
@@ -26,15 +26,14 @@ say which one and why.
 
 ## 2. Evidence model — four distinct states
 
-The product must never collapse these. `src/course/progress.ts` currently records only
-`attempts`, `cases` and `passedAt`.
+The product must never collapse these. `src/course/progress.ts` records per-case hint evidence and `independentAt`; due-review provenance lives in `learning.history`.
 
 | State | Definition | Stored as |
 |---|---|---|
-| **Completed** | The learner reached the end of the activity | `visited` / `attempts` |
-| **Assisted success** | Correct answer with hint level ≥ 1, or after a reveal | `passedAt` with `hints > 0` |
+| **Completed** | The learner visited or attempted the activity; this does not establish success | `visited` / `attempts` |
+| **Assisted success** | Practice criteria met using hint level ≥ 1 | `passedAt` with `hints > 0` |
 | **Independent success** | Correct on both the worked and transfer case with **hint level 0** | `independentAt` |
-| **Retained understanding** | Independent success **plus** a later successful FSRS recall at a scheduled interval | derived from `independentAt` + `learning.cards` |
+| **Retained understanding** | Independent success plus the latest later due FSRS review self-rated Hard, Good or Easy (Again does not count) | derived from `independentAt` + due-review events in `learning.history` |
 
 Finishing the site is not mastery, and nothing in the interface may imply it. Independent success is
 the strongest claim the product may make without learner research.
@@ -46,13 +45,13 @@ against the attempt and suppresses independent-success evidence.
 
 | Level | Name | Source | Needs Python |
 |---|---|---|---|
-| 1 | **Attention** | Names the quantity that drives the answer and the first operation in the formula | no |
+| 1 | **Attention** | Directs attention to a quantity or dependency without stating the rule or an answer | no |
 | 2 | **Rule** | The lesson formula with its symbols defined, plus why it applies | no |
 | 3 | **One step** | The *first* operation of the Python trace, with its computed value — and nothing after it | yes |
 | 4 | **Worked solution** | Every operation and the result | yes |
 
 Levels 3 and 4 execute the same authored Python program the lesson already runs. Level 3 must not
-reveal later stages; the prediction stays editable after level 3 and is locked by level 4.
+reveal later stages, completed grids or full curves; the prediction stays editable after level 3. Level 4 requires a finite non-empty prediction and locks it. The latest recall is a self-rating, not a graded retention or mastery measure; legacy histories without due provenance cannot establish it.
 
 ## 4. Diagnostic feedback
 
@@ -67,21 +66,22 @@ Required ordering (first confident match wins):
 | 1 | `match` | within `closeAnswer` tolerance | correct |
 | 2 | `sign` | magnitude matches, sign is reversed | "The magnitude matches; the sign is reversed." |
 | 3 | `intermediate` | equals a non-final numeric stage | "Your answer equals the value after *&lt;stage&gt;*. N later operations were not applied." |
-| 4 | `offset` | result − guess equals a named input or stage value | "Your answer differs from the result by exactly X, which is *&lt;name&gt;*." |
-| 5 | `factor` | result ÷ guess equals a named input or stage value | "Your answer is smaller than the result by a factor of *&lt;name&gt;* = k." |
-| 6 | `reciprocal` | guess ≈ 1 / result | "Your answer is the reciprocal of the result." |
-| 7 | `magnitude` | same sign, ratio ≥ 10 or ≤ 0.1 | order-of-magnitude observation |
-| 8 | `near` | within 5 % | "Very close — check rounding and the number of operations applied." |
-| 9 | `unmatched` | none of the above | states the gap and points at the trace |
+| 4 | `pack` | guarded chapter-specific slip, after structural checks | observation about the number, with `certain: false` unless justified |
+| 5 | `offset` | result − guess equals a named input or stage value | "Your answer differs from the result by exactly X, which is *&lt;name&gt;*." |
+| 6 | `factor` | result ÷ guess equals a named input or stage value | "Your answer is smaller than the result by a factor of *&lt;name&gt;* = k." |
+| 7 | `reciprocal` | guess ≈ 1 / result | "Your answer is the reciprocal of the result." |
+| 8 | `magnitude` | same sign, ratio ≥ 10 or ≤ 0.1 | order-of-magnitude observation |
+| 9 | `near` | within 5 % | "Very close — check rounding and the number of operations applied." |
+| 10 | `unmatched` | none of the above | states the gap and points at the trace |
 
 **Phrasing rule.** Every message is an observation about *the number*. None may be a conclusion
 about the learner ("you don't understand the chain rule" is forbidden; "your answer equals the value
-before the bias was added" is correct). Categories 4–8 are heuristics and must carry a
+before the bias was added" is correct). Generic categories 5–9 are heuristics and must carry a
 `certain: false` flag so the interface can hedge them.
 
 ## 5. Mission catalogue for chapters 00–07
 
-Each mission uses existing engine state. "Engine" names the module that must produce the numbers.
+Each proposed mission uses existing mathematical state. The table names reference models; implementations must execute the corresponding authored Python program before displaying assessed numerical results. Pure TypeScript engines remain differential-test references, not replacements for Python.
 
 | Mission | Chapter | Mechanic | Engine |
 |---|---|---|---|
@@ -119,3 +119,4 @@ Each mission uses existing engine state. "Engine" names the module that must pro
 
 Intermediate/advanced chapters, any paid API, any backend, model-generated feedback, and any claim
 of mastery beyond independent success.
+

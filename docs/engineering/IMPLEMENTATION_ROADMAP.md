@@ -1,5 +1,8 @@
 # Implementation roadmap
 
+> Historical audit: measurements below describe `e565635` unless a later checkpoint is named. For current implementation status and product decisions, read [the reconciliation](../PROJECT_RENAISSANCE_2026.md#current-checkpoint-after-pr-25). Research findings remain sourced proposals, not demonstrated NeuralLab learning outcomes.
+
+
 Date: 2026-10-10. Base: `e565635`. Reads with
 [ARCHITECTURE_REVIEW.md](./ARCHITECTURE_REVIEW.md) (A1–A9 technical changes),
 [INNOVATION_OPPORTUNITIES.md](../research/INNOVATION_OPPORTUNITIES.md) (A1–A9, B1–B8 proposals) and
@@ -30,14 +33,14 @@ review, assuming one developer familiar with the codebase; ranges reflect genuin
 **Goal.** Remove the measured defects that make the product slower, less reliable and less
 reviewable than its content deserves. No new capability.
 
-**Definition of done.** First calculation is instant and works offline; every view is addressable;
+**Definition of done.** Cached-runtime calculations meet a measured latency budget; first-load downloads are disclosed; every view is addressable;
 entry bundle reduced by ≥ 40 %; CI installs reproducibly.
 
 | PR | Scope | Files | Effort | Risk | Rollback |
 |---|---|---|---|---|---|
 | **M0-1** | CI hygiene: `npm ci`, `cache-dependency-path: package-lock.json`, regenerate the lockfile, bump `@playwright/test` to ≥ 1.55.1 (closes GHSA-7mvr-c777-76hp), add `tests`/`scripts` to `tsconfig.json` | `.github/workflows/ci.yml`, `package.json`, `package-lock.json`, `tsconfig.json` | 0.5 | low | revert |
 | **M0-2** | `src/design/tokens.ts` + parity test; replace **92** hex literals across 12 `.tsx` files; fix `index.html` `theme-color`; rename the misleading `green` variable in `NeuronScene.tsx:47` | `src/design/`, `src/visuals/*`, `src/lessons/*`, `index.html` | 1.5–2 | low | revert; purely presentational |
-| **M0-3** | **Reduce Python latency without replacing Python.** Warm the shared worker when the course mounts so the runtime downloads while the learner reads; precache the pinned assets; optionally show a clearly labelled `calculate()` *preview* that the Python result overwrites on arrival. Python remains the authoritative source for every displayed number | `src/lessons/BeginnerCourse.tsx`, `src/python/usePythonProgram.ts` | 2–3 | low–med | remove the warm-up and the preview flag |
+| **M0-3** | **Reduce Python latency without replacing Python.** Warm the shared worker when the course mounts so the runtime downloads while the learner reads; precache the pinned assets; keep assessed results and traces hidden until Python returns. Python remains the authoritative source for every displayed calculation | `src/lessons/BeginnerCourse.tsx`, `src/python/usePythonProgram.ts` | 2–3 | low–med | remove the warm-up and the preview flag |
 | **M0-4** | Bundle: `lazy()` `NeuronScene` behind the 2D/3D switch; `eager:false` for the curriculum Markdown glob; deep-import `lucide-react` icons | `src/App.tsx`, `src/lessons/CurriculumLibrary.tsx`, all icon imports | 1 | low | revert |
 | **M0-5** | **URL routing.** Lesson/lab/chapter in the path; History API integration; restore on load; derive the nav active state (fixes V12) | `src/App.tsx`, `BeginnerCourse.tsx`, `CurriculumLibrary.tsx`, new `src/router.ts` | 2–3 | med | revert; no data migration involved |
 | **M0-6** | Accessibility: `role="img"` + live text alternative on the 3D canvas; fix the `small` contrast rule; heading order; landmark labelling; favicon | `src/visuals/NeuronScene.tsx`, `src/styles.css`, `src/App.tsx`, `public/` | 1 | low | revert |
@@ -46,8 +49,7 @@ entry bundle reduced by ≥ 40 %; CI installs reproducibly.
 **Testing.** M0-3 needs a test asserting the rendered stages equal `calculate()` output for a
 sample of lessons, plus an e2e test that the first reveal produces a result with the network
 offline. M0-5 needs e2e tests for deep link, reload and browser Back.
-**Acceptance.** Time-to-first-number < 100 ms (baseline 5 149 ms); first-reveal CDN bytes = 0
-(baseline 11 361 233); entry chunk < 750 kB (baseline 1 260.78 kB); Back returns to the previous
+**Acceptance.** Measure cold and warm Python latency separately; no unverified promise of <100 ms for a cold interpreter. Cached pinned assets may support repeat-session offline calculation, with explicit missing-cache errors. Lazy entry loading is already delivered by #16; Back returns to the previous
 in-app view; `grep -rE '#[0-9a-fA-F]{6}' src --include=*.tsx` returns nothing; axe serious/critical
 = 0 on the four main views.
 
@@ -193,3 +195,4 @@ deferred without blocking.
 | Addressable views | 1 URL | every lesson, lab and chapter |
 | Distinct practice items per lesson | 2, with answers published | unbounded, generated, reproducible |
 | Unit / e2e tests | 200 / 38 passing | never fewer, never red |
+

@@ -1,6 +1,6 @@
 # Project Renaissance 2026 — NeuralLab product transformation proposal
 
-Status: **proposal, for maintainer review. Nothing here is implemented.**
+Status: **accepted direction with historical audit evidence; implementation is tracked separately.**
 Date: 2026-10-10 · Base commit: `e565635ff7e54c6fe472b3e3cef98f77d3b7739b`
 
 | Document | Contains |
@@ -18,6 +18,20 @@ Earlier checkpoints that remain valid and are *not* superseded:
 [BEGINNER_COMPLETION.md](./BEGINNER_COMPLETION.md).
 
 ---
+
+## Current checkpoint after PR #25
+
+Current reviewed base: `0ae811c` (2026-10-10). This checkpoint overrides earlier baseline statements and proposed work where they disagree.
+
+- PR #16 delivered lazy labs and Markdown, rendered mathematics, editable Python, FSRS, backups, resume, scaffolding and the supplied six-colour palette.
+- PR #22 delivered deterministic prediction diagnostics, the four-level hint ladder, assisted versus unaided evidence, and stage playback in the beginner course. It also fixed reduced-motion initialization and planned-navigation contrast.
+- PR #25 fixed partial-hint grid/curve leaks, authored rule hint rendering, empty prediction matching zero, and recall provenance. Exact-head CI passed 243 unit and 56 browser tests, including all 60 beginner worked/transfer cases. Production was READY on that merged commit.
+- Chapter-06 authored hints (#18), per-choice feedback (#19), conceptual diagnostic packs (#20), and keyboard/touch regressions (#21) are tracked in their implementation PRs; this roadmap does not itself close them.
+- URL routing, seeded fresh transfer, chapter mission checkpoints, divergence teaching and token consolidation remain future work. No learner-outcome study has been performed.
+
+Product decisions for this cycle: depth in chapters 00–07; Python remains authoritative; preserve the supplied teal/slate palette; retain the pinned runtime until an upgrade is separately verified; keep portable evidence; support game-like problem solving with explicit goals and informative motion. Points, streaks or completion must not imply mastery. Broad formatting, a new theme and chapters 08–18 are separate future decisions.
+
+The 90% action / 10% supporting text split is a design target, not a measured result or a guarantee that a learner will become a master. The old audit and screenshots below remain historical evidence; their counts and defects must not be presented as current observations.
 
 ## 0. Reconciliation against PR #16 (added 2026-10-10, after merge `09a9646`)
 
@@ -194,7 +208,7 @@ Everything in this section was observed by running the code on 2026-10-10. Full 
 The honesty is a product feature, not a disclaimer. "Visited, attempted and passed are distinct.
 Guided practice and self-reviewed projects do not prove retained mastery" is a sentence almost no
 competing product would ship — and in a market full of overstatement, it is a differentiator worth
-protecting. It is also why gamification is rejected outright.
+protecting. Game-like missions are allowed when their goals require real mathematical actions and their rewards do not overstate the evidence.
 
 ---
 
@@ -477,9 +491,10 @@ that matter most:
 
 Rejected with reasons in
 [INNOVATION_OPPORTUNITIES.md](./research/INNOVATION_OPPORTUNITIES.md) §2 Tier D: meta-framework
-migration, replacing Three.js, gamification, an AI tutor sidebar, replacing Pyodide with a JS
+migration, replacing Three.js, rewards unrelated to learning evidence, an AI tutor sidebar, replacing Pyodide with a JS
 interpreter, a drag-and-drop network builder, a mobile app, WebGPU compute, user accounts and a
 backend, and an infinite-canvas curriculum map.
 
 The single sentence behind all ten: **nothing in this plan trades away the fact that every number
 NeuralLab shows can be checked.**
+

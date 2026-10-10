@@ -1,5 +1,8 @@
 # Experience evolution — design and interaction plan
 
+> Historical audit: measurements below describe `e565635` unless a later checkpoint is named. For current implementation status and product decisions, read [the reconciliation](../PROJECT_RENAISSANCE_2026.md#current-checkpoint-after-pr-25). Research findings remain sourced proposals, not demonstrated NeuralLab learning outcomes.
+
+
 Date: 2026-10-10. Evidence: screenshots captured at 1440 × 900 and 390 × 844 against commit
 `e565635`, axe-core 4.10.2 scans, and computed-style measurements. Supporting findings in
 [ARCHITECTURE_REVIEW.md](../engineering/ARCHITECTURE_REVIEW.md) §6–§7.
@@ -308,3 +311,4 @@ A change in this plan is done when:
 7. Horizontal overflow remains **0 px** at 390 px (current state — must not regress).
 8. Every animation has a reduced-motion path that preserves the information, verified by running the
    suite with the preference forced.
+
