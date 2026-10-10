@@ -1,4 +1,4 @@
-import { parseLearning, type LearningState } from "./learning.ts";
+import { parseLearning, isLessonId, type LearningState } from "./learning.ts";
 import { readProgress, type Progress } from "./progress.ts";
 export function learningBackup(
   state: LearningState,
@@ -12,7 +12,7 @@ export function learningBackup(
   } catch {}
   return {
     ...state,
-    courseProgress: readProgress(storage),
+    courseProgress: Object.fromEntries(Object.entries(readProgress(storage)).filter(([id]) => isLessonId(id))),
     chapterReviews: Array.isArray(chapters)
       ? chapters.filter(
           (id) => typeof id === "string" && /^CH-0[0-7]$/.test(id),
@@ -42,7 +42,7 @@ export function parseBackup(raw: string): {
     progress:
       data.courseProgress === undefined
         ? undefined
-        : readProgress({ getItem: () => JSON.stringify(data.courseProgress) }),
+        : Object.fromEntries(Object.entries(readProgress({ getItem: () => JSON.stringify(data.courseProgress) })).filter(([id]) => isLessonId(id))),
     chapters:
       data.chapterReviews === undefined
         ? undefined

@@ -329,3 +329,4 @@ test("scene switching disposes canvases and malformed edited visual data cannot 
   ).toHaveCount(0);
   expect(errors).toEqual([]);
 });
+test('corrupt saved topic falls back to a real lesson and cannot break dashboard resume',async({page})=>{await page.addInitScript(()=>{localStorage.setItem('neurallab.learning.v1',JSON.stringify({version:1,cards:{},history:[],drafts:{},bookmarks:['dl-07-999'],selected:'dl-07-999'}));localStorage.setItem('neurallab.workspace','dashboard');});await page.goto('/');await page.getByRole('button',{name:'Resume saved lesson'}).click();await expect(page.getByRole('article',{name:'Beginner lesson'}).getByRole('heading',{name:'Computers and programs',exact:true})).toBeVisible();});

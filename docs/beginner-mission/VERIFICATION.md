@@ -4,7 +4,7 @@
 
 - `npm ci --no-audit --no-fund` uses the committed dependency lock.
 - `npm run check:curriculum`: 19 chapters, 149 catalog lessons, 20 sources; 60 authored beginner topics and their routes validated.
-- `npm test`: 207 tests passed, including all existing numerical/Python regressions and new FSRS, storage, backup, recommendation and loss-surface tests.
+- `npm test`: 208 tests passed, including all existing numerical/Python regressions and new FSRS, storage, backup, recommendation and loss-surface tests.
 - `npm run build`: TypeScript and Vite production build passed. Large optional Markdown and Three chunks still trigger the existing bundle-size warning.
 - Browser verification: final result is recorded with the PR checks. The local command uses `NEURALLAB_PYODIDE_ASSETS=/workspace/scratch/f9dbdc03cf7b/pyodide-assets npx playwright test`. This mirror supplies genuine pinned Pyodide/NumPy assets; it does not mock Python calculations. GitHub CI uses the public pinned CDN.
 - `node scripts/capture-beginner.mjs`: renders six after screenshots for visual review; two baseline screenshots are retained.
@@ -12,7 +12,7 @@
 
 ## Covered behavior
 
-Every beginner worked/transfer case; numerical and conceptual evidence; mixed chapter review; actual Python and NumPy execution; stale result clearing; source edits; cancellation; invalid imports; bounded output; syntax failure; infinite-loop timeout; malformed returned visual data; retained draft/bookmark/FSRS schedule; glossary; restored topic; matrix-cell formula; loss surface and finite differences; 3D inspection; keyboard stage rewind; 2D alternative; WebGL unavailable fallback; repeated scene switching; semantic Markdown, MathML, nested lists, callouts, syntax highlighting and rejection of raw HTML/unsafe links; narrow mobile layout and reduced motion.
+Every beginner worked/transfer case; numerical and conceptual evidence; mixed chapter review; actual Python and NumPy execution; stale result clearing; source edits; cancellation; invalid imports; bounded output; syntax failure; infinite-loop timeout; malformed returned visual data; retained draft/bookmark/FSRS schedule; corrupt/nonexistent topic fallback; glossary; restored topic; matrix-cell formula; loss surface and finite differences; 3D inspection; keyboard stage rewind; 2D alternative; WebGL unavailable fallback; repeated scene switching; semantic Markdown, MathML, nested lists, callouts, syntax highlighting and rejection of raw HTML/unsafe links; narrow mobile layout and reduced motion.
 
 ## Known limits
 

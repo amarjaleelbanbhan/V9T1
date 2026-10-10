@@ -143,3 +143,4 @@ test("backup round-trips learning plus guided evidence and filters invalid chapt
   assert.equal(restored.learning.cards["dl-00-001:concept"].reps, 1);
   assert.throws(() => parseBackup('{"version":1}'));
 });
+test('nonexistent topic IDs cannot become restored lessons, bookmarks or due cards',()=>{const state=scheduleRecall(emptyLearning(),'dl-00-001:concept',Rating.Good,now);const encoded=JSON.parse(JSON.stringify(state));encoded.selected='dl-07-999';encoded.bookmarks=['dl-00-001:concept','dl-07-999','dl-00-001'];encoded.cards['dl-07-999:concept']=encoded.cards['dl-00-001:concept'];const parsed=parseLearning(JSON.stringify(encoded));assert.equal(parsed.selected,'dl-00-001');assert.deepEqual(parsed.bookmarks,['dl-00-001']);assert.deepEqual(Object.keys(parsed.cards),['dl-00-001:concept']);assert.throws(()=>scheduleRecall(state,'dl-07-999:concept',Rating.Good,now));});

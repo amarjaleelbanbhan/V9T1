@@ -32,7 +32,7 @@ function LessonWorkspace({lesson,onPractice,onOpen,onSelect,python}:{lesson:Less
 }
 export function BeginnerCourse({onOpen,initialLesson}:{onOpen:(id:string)=>void;initialLesson?:string}){
  const python=usePythonProgram<Calculation>();const learning=useLearning();
- const [selected,setSelected]=useState(()=>initialLesson|| (beginnerLessons.some(l=>l.id===learning.state.selected)?learning.state.selected:beginnerLessons[0].id));const [progress,setProgress]=useState<Progress>(()=>{try{return readProgress(localStorage);}catch{return {};}});const [saved,setSaved]=useState(true);const [resetArmed,setResetArmed]=useState(false);const [review,setReview]=useState(false);
+ const [selected,setSelected]=useState(()=>(initialLesson&&beginnerLessons.some(l=>l.id===initialLesson)?initialLesson:undefined)|| (beginnerLessons.some(l=>l.id===learning.state.selected)?learning.state.selected:beginnerLessons[0].id));const [progress,setProgress]=useState<Progress>(()=>{try{return readProgress(localStorage);}catch{return {};}});const [saved,setSaved]=useState(true);const [resetArmed,setResetArmed]=useState(false);const [review,setReview]=useState(false);
  const lesson=beginnerLessons.find(l=>l.id===selected)!;
  useEffect(()=>{updateLearning(old=>({...old,selected}));setProgress(old=>({...old,[selected]:{...(old[selected]||{attempts:0,cases:[]}),visited:old[selected]?.visited??Date.now()}}));},[selected]);
  useEffect(()=>{try{setSaved(writeProgress(localStorage,progress));}catch{setSaved(false);}},[progress]);

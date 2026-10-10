@@ -30,8 +30,16 @@ export const emptyLearning = (): LearningState => ({
   bookmarks: [],
   selected: "dl-00-001",
 });
-const validId = (id: string) =>
-  /^dl-0[0-7]-\d{3}(:(concept|formula|mistake|number))?$/.test(id);
+const topicCounts = [8, 9, 7, 7, 6, 7, 7, 9];
+export function isLessonId(id: string) {
+  const match = /^dl-0([0-7])-(\d{3})$/.exec(id);
+  return !!match && Number(match[2]) >= 1 && Number(match[2]) <= topicCounts[Number(match[1])];
+}
+const validId = (id: unknown) => {
+  if (typeof id !== "string" || id.split(":").length > 2) return false;
+  const [lesson, kind] = id.split(":");
+  return isLessonId(lesson) && (kind === undefined || ["concept", "formula", "mistake", "number"].includes(kind));
+};
 const engine = fsrs({ enable_fuzz: false, request_retention: 0.9 });
 export function parseLearning(raw: string | null): LearningState {
   try {
@@ -77,12 +85,12 @@ export function parseLearning(raw: string | null): LearningState {
       )
       .slice(-2000);
     for (const [id, d] of Object.entries(v.drafts || {}))
-      if (validId(id) && typeof d === "string")
+      if (isLessonId(id) && typeof d === "string")
         out.drafts[id] = d.slice(0, 8000);
     out.bookmarks = (Array.isArray(v.bookmarks) ? v.bookmarks : [])
-      .filter((id: unknown) => typeof id === "string" && validId(id))
+      .filter((id: unknown) => typeof id === "string" && isLessonId(id))
       .slice(0, 60);
-    if (typeof v.selected === "string" && validId(v.selected))
+    if (typeof v.selected === "string" && isLessonId(v.selected))
       out.selected = v.selected;
     return out;
   } catch {

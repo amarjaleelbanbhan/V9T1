@@ -21,7 +21,7 @@ export function LearningDashboard({
     progress = readProgress(localStorage);
   } catch {}
   const passed = Object.entries(progress)
-    .filter(([, p]) => (p as { passedAt?: number }).passedAt)
+    .filter(([id, p]) => (p as { passedAt?: number }).passedAt && beginnerLessons.some(l => l.id === id))
     .map(([id]) => id);
   const due = dueCards(state, Date.now()),
     next = recommendLesson(
