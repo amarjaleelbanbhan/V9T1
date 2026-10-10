@@ -19,6 +19,19 @@ export interface LessonHintCopy {
 }
 
 export const lessonHints: Record<string, LessonHintCopy> = {
+  // ---------------------------------------------------------------------
+  // Issue #18: chapter 06. Uncomment and fill each entry.
+  // Run `node --experimental-strip-types scripts/author-hints.mjs CH-06`
+  // to see each lesson's own wording and the generic text you are replacing.
+  //
+  // "dl-06-001": { attention: "", rule: "" },   // derivative        - local derivative
+  // "dl-06-002": { attention: "", rule: "" },   // chain             - dy/dx
+  // "dl-06-003": { attention: "", rule: "" },   // hidden-delta      - hidden delta
+  // "dl-06-004": { attention: "", rule: "" },   // weight-gradient   - first hidden-weight gradient
+  // "dl-06-005": { attention: "", rule: "" },   // autograd          - reverse-mode derivative
+  // "dl-06-006": { attention: "", rule: "" },   // finite-difference - estimated derivative
+  // "dl-06-007": { attention: "", rule: "" },   // depth             - path gradient
+  // ---------------------------------------------------------------------
   "dl-00-001": {
     attention:
       "Instructions run in the order they are written. Find which of your inputs is touched first, and note that changing that order would change the answer.",
