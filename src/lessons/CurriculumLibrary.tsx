@@ -251,6 +251,9 @@ export function CurriculumLibrary() {
                 <button onClick={() => setRetry((n) => n + 1)}>
                   Retry document
                 </button>
+                <button onClick={() => window.location.reload()}>
+                  Reload and retry document download
+                </button>
               </div>
             ) : (
               <MarkdownDocument

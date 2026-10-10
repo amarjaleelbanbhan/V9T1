@@ -229,3 +229,24 @@ test("fresh transfer predictions hide results until submission and preserve cour
       .getByRole("status"),
   ).toContainText("3 / 4");
 });
+
+test("failed reference document can recover its exact URL by reload", async ({
+  page,
+}) => {
+  await page.route(
+    "**/curriculum/deep-learning/00-python-and-math/README.md*",
+    (route) => route.abort(),
+  );
+  await page.goto("/#/lab/library?document=00-python-and-math%2FREADME.md");
+  await expect(page.getByRole("alert")).toContainText(
+    "Document could not load",
+  );
+  await page.unroute(
+    "**/curriculum/deep-learning/00-python-and-math/README.md*",
+  );
+  await page
+    .getByRole("button", { name: "Reload and retry document download" })
+    .click();
+  await expect(page.locator(".markdown-document h1").first()).toBeVisible();
+  await expect(page).toHaveURL(/document=00-python-and-math%2FREADME.md/);
+});
