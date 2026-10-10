@@ -7,3 +7,4 @@ dist/
 .DS_Store
 coverage/
 playwright-report/
+_pw.config.ts
