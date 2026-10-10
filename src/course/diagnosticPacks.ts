@@ -39,30 +39,42 @@ export interface PackRule {
   match(context: PackContext): string | null;
 }
 
-export const diagnosticPacks: Record<string, PackRule[]> = {
-  // -------------------------------------------------------------------
-  // Issue #20: chapter 06. Uncomment and implement at least two.
-  // First run, for each model you target:
-  //   node --experimental-strip-types scripts/trace-stages.mjs chain 6 10
-  // Anything the tool reports as [intermediate] is already handled.
-  //
-  // chain: [          // dl-06-002, y = (s*x)^2, dy/dx = 2*s^2*x
-  //   {
-  //     id: "chain-added-not-multiplied",
-  //     certain: false,
-  //     match: ({ guess, values, close }) => {
-  //       const [x, s] = values;
-  //       if (![x, s].every(Number.isFinite)) return null;
-  //       // Local derivatives along one path multiply; adding them is the slip.
-  //       return close(guess, 2 * s * x + s) ? "…" : null;
-  //     },
-  //   },
-  // ],
-  // depth: [          // dl-06-007, factor^depth
-  //   // Slip to target: factor multiplied by depth instead of raised to it.
-  // ],
-  // -------------------------------------------------------------------
+/** A pack must defer to correct answers, reversed signs and exact trace stages. */
+function uncoveredSlip({guess, result, calc, close}: PackContext, slip: number) {
+  return Number.isFinite(guess) && Number.isFinite(result) && Number.isFinite(slip) &&
+    !close(guess, result) && !(result !== 0 && close(guess, -result)) &&
+    !calc.stages.some(s => typeof s.value === "number" && close(guess, s.value)) &&
+    close(guess, slip);
+}
 
+export const diagnosticPacks: Record<string, PackRule[]> = {
+  chain: [
+    {
+      id: "chain-added-not-multiplied",
+      certain: false,
+      match: (context) => {
+        const outer = context.calc.stages.find(s => s.label === "dy/du = 2u")?.value;
+        const inner = context.calc.stages.find(s => s.label === "du/dx")?.value;
+        if (typeof outer !== "number" || typeof inner !== "number") return null;
+        return uncoveredSlip(context, outer + inner)
+          ? "Your answer equals the sum of dy/du and du/dx. Along this composed path those local sensitivities multiply: dy/dx = (dy/du) × (du/dx)."
+          : null;
+      },
+    },
+  ],
+  depth: [
+    {
+      id: "depth-multiplied-not-powered",
+      certain: false,
+      match: (context) => {
+        const [factor, depth] = context.values;
+        if (!Number.isFinite(factor) || !Number.isInteger(depth) || depth < 1 || depth > 20 || Math.abs(factor) > 5) return null;
+        return uncoveredSlip(context, factor * depth)
+          ? "Your answer equals the local factor multiplied by the path depth. Each link multiplies the arriving sensitivity again, so a shared factor f across d links gives f^d rather than f × d."
+          : null;
+      },
+    },
+  ],
   // Worked example. dl-05-001 and friends use `gd`: w - rate * 2w.
   gd: [
     {
@@ -88,3 +100,4 @@ export const diagnosticPacks: Record<string, PackRule[]> = {
  * the slip lands on a value the trace already contains - if it does, the
  * structural rule is strictly better and a pack rule would only shadow it.
  */
+

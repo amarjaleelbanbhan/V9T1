@@ -6,6 +6,8 @@ export interface RecallEvent {
   rating: Grade;
   due: number;
   kind: "recall";
+  /** An existing reviewed card was due before this attempt. Older events omit this. */
+  scheduled?: boolean;
 }
 export interface MistakeEvent {
   id: string;
@@ -81,7 +83,8 @@ export function parseLearning(raw: string | null): LearningState {
             ? typeof e.correct === "boolean"
             : e.kind === "recall" &&
               [1, 2, 3, 4].includes(e.rating) &&
-              Number.isFinite(e.due)),
+              Number.isFinite(e.due) &&
+              (e.scheduled === undefined || typeof e.scheduled === "boolean")),
       )
       .slice(-2000);
     for (const [id, d] of Object.entries(v.drafts || {}))
@@ -110,6 +113,8 @@ export function scheduleRecall(
     now < 0
   )
     throw Error("Invalid review");
+  const previous = state.cards[id];
+  const scheduled = !!previous?.last_review && previous.due.getTime() <= now;
   const next = engine.repeat(
     state.cards[id] || createEmptyCard(new Date(now)),
     new Date(now),
@@ -119,9 +124,20 @@ export function scheduleRecall(
     cards: { ...state.cards, [id]: next },
     history: [
       ...state.history,
-      { kind: "recall" as const, id, at: now, rating, due: next.due.getTime() },
+      { kind: "recall" as const, id, at: now, rating, due: next.due.getTime(), scheduled },
     ].slice(-2000),
   };
+}
+/** Latest due review after unaided success; self-ratings remain distinct from graded mastery. */
+export function recalledAfterIndependent(state: LearningState, lessonId: string, independentAt: number | undefined) {
+  if (independentAt === undefined || !Number.isFinite(independentAt)) return false;
+  let latest: RecallEvent | undefined;
+  for (const event of state.history) {
+    if (event.kind === "recall" && event.id.startsWith(lessonId + ":") &&
+        event.scheduled === true && event.at > independentAt &&
+        (!latest || event.at >= latest.at)) latest = event;
+  }
+  return !!latest && latest.rating !== Rating.Again;
 }
 export function practiceEvent(
   state: LearningState,
