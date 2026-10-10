@@ -1,0 +1,23 @@
+[
+  {
+    "name": "loss-update",
+    "width": 320,
+    "before": "2",
+    "after": "1.8"
+  },
+  {
+    "name": "mission-navigation-loss",
+    "width": 320,
+    "original": "0.5",
+    "during": "-2",
+    "returned": "-2",
+    "restoreButtonCount": 0,
+    "loadButtonCount": 1
+  },
+  {
+    "name": "reduced-motion-confirmed",
+    "frozen": "STEP 1 / 6",
+    "later": "STEP 1 / 6",
+    "paused": true
+  }
+]

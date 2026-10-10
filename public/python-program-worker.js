@@ -7,7 +7,7 @@ self.onmessage=async({data})=>{
   if(data.numpy)await runtime.loadPackage('numpy');
   if(data.editable&&data.source.length>20000)throw Error('Editable source is limited to 20,000 characters.');
   runtime.globals.set('editable_program',!!data.editable);
-  if(data.editable)self.postMessage({ready:true});
+  self.postMessage({ready:true});
   runtime.globals.set('lesson_source',data.source);
   const encoded=await runtime.runPythonAsync(`
 import io, json, contextlib, ast

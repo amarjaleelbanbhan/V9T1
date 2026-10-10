@@ -1,3 +1,4 @@
+import { palette } from '../design/palette';
 import { useMemo } from "react";
 import { BufferGeometry, Color, Float32BufferAttribute } from "three";
 import { useEffect } from "react";
@@ -23,7 +24,7 @@ export function LossSurface({
     const point = (w: number, b: number) => {
       const loss = surfaceLoss(w, b).loss;
       p.push(w - 1, Math.min(loss, 12) * 0.2 - 1.8, b);
-      const shade = new Color("#0C969C").lerp(new Color("#6BA3BE"), Math.min(loss / 12, 1));
+      const shade = new Color(palette.weight).lerp(new Color(palette.input), Math.min(loss / 12, 1));
       colors.push(shade.r, shade.g, shade.b);
     };
     for (let i = 0; i < 28; i++)
@@ -74,7 +75,7 @@ export function LossSurface({
             args={[i === path.length - 1 ? 0.12 : 0.055, 12, 8]}
           />
           <meshStandardMaterial
-            color={i === path.length - 1 ? "#B8E6ED" : "#f4f7ff"}
+            color={i === path.length - 1 ? palette.gradient : "#f4f7ff"}
           />
         </mesh>
       ))}

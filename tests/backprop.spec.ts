@@ -1,39 +1,77 @@
-import {installPyodideMirror} from './fixtures/pyodide';
-import {test,expect} from '@playwright/test';
-test('backpropagation chain-rule math, gradient inspector and real training step',async({page})=>{test.setTimeout(140000);await installPyodideMirror(page.context());
-  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('/');
-  await page.getByRole('button',{name:/Backpropagation & Chain Rule/}).click();
-  await expect(page.getByRole('heading',{name:/Reverse the signal/})).toBeVisible();
-  const initialLoss=Number(await page.getByTestId('backprop-loss').innerText());
-  await expect(page.getByTestId('backprop-prediction')).toHaveText('0.5399');
-  await expect(page.getByRole('img',{name:/Gradient flow in a 2 to 2 to 1 network/})).toBeVisible();
-  await page.getByRole('button',{name:'Inspect Input 2 to Hidden 1'}).click();
-  await expect(page.getByTestId('backprop-source')).toHaveText('2');
-  await expect(page.getByTestId('backprop-edge-gradient')).not.toContainText('= 0');
-  await page.getByRole('button',{name:'4. Hidden deltas'}).click();
-  await expect(page.getByTestId('backprop-stage-note')).toContainText('ReLU');
-  await page.getByRole('button',{name:'6. Update weights'}).click();
-  await expect(page.getByTestId('backprop-proposed-weight')).toContainText('=');
-  await page.getByRole('button',{name:/Apply one training step/}).click();
-  await expect(page.getByTestId('backprop-training-change')).toContainText('This sample improved',{timeout:95000});
-  const after=Number(await page.getByTestId('backprop-loss').innerText());
+import { installPyodideMirror } from "./fixtures/pyodide";
+import { test, expect } from "@playwright/test";
+test("backpropagation chain-rule math, gradient inspector and real training step", async ({
+  page,
+}) => {
+  test.setTimeout(140000);
+  await installPyodideMirror(page.context());
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await page
+    .getByRole("link", { name: /Backpropagation & Chain Rule/ })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: /Reverse the signal/ }),
+  ).toBeVisible();
+  const initialLoss = Number(
+    await page.getByTestId("backprop-loss").innerText(),
+  );
+  await expect(page.getByTestId("backprop-prediction")).toHaveText("0.5399");
+  await expect(
+    page.getByRole("img", { name: /Gradient flow in a 2 to 2 to 1 network/ }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Inspect Input 2 to Hidden 1" })
+    .click();
+  await expect(page.getByTestId("backprop-source")).toHaveText("2");
+  await expect(page.getByTestId("backprop-edge-gradient")).not.toContainText(
+    "= 0",
+  );
+  await page.getByRole("button", { name: "4. Hidden deltas" }).click();
+  await expect(page.getByTestId("backprop-stage-note")).toContainText("ReLU");
+  await page.getByRole("button", { name: "6. Update weights" }).click();
+  await expect(page.getByTestId("backprop-proposed-weight")).toContainText("=");
+  await page.getByRole("button", { name: /Apply one training step/ }).click();
+  await expect(page.getByTestId("backprop-training-change")).toContainText(
+    "This sample improved",
+    { timeout: 95000 },
+  );
+  const after = Number(await page.getByTestId("backprop-loss").innerText());
   expect(after).toBeLessThan(initialLoss);
-  await page.getByRole('button',{name:'Output → Hidden'}).click();
-  await expect(page.getByRole('status').filter({hasText:'Correct'})).toContainText('Correct');
-  await page.getByRole('button',{name:'Reset backpropagation'}).click();
-  await expect(page.getByTestId('backprop-prediction')).toHaveText('0.5399');
+  await page.getByRole("button", { name: "Output → Hidden" }).click();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Correct" }),
+  ).toContainText("Correct");
+  await page.getByRole("button", { name: "Reset backpropagation" }).click();
+  await expect(page.getByTestId("backprop-prediction")).toHaveText("0.5399");
   expect(errors).toEqual([]);
 });
-test('backprop lab supports gradient controls on 390px screen',async({page})=>{test.setTimeout(140000);await installPyodideMirror(page.context());
-  await page.setViewportSize({width:390,height:844});await page.goto('/');
-  await page.getByRole('button',{name:'Toggle lesson navigation'}).click();
-  await page.getByRole('button',{name:/Backpropagation & Chain Rule/}).click();
-  await expect(page.getByRole('heading',{name:/Reverse the signal/})).toBeVisible();
-  await expect(page.getByRole('slider',{name:/Learning rate/})).toBeVisible();
-  await page.getByRole('button',{name:'Inspect Hidden 2 to Output'}).click();
-  await expect(page.getByTestId('backprop-source')).toHaveText('1');
-  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+test("backprop lab supports gradient controls on 390px screen", async ({
+  page,
+}) => {
+  test.setTimeout(140000);
+  await installPyodideMirror(page.context());
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Toggle lesson navigation" }).click();
+  await page
+    .getByRole("link", { name: /Backpropagation & Chain Rule/ })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: /Reverse the signal/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("slider", { name: /Learning rate/ }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Inspect Hidden 2 to Output" })
+    .click();
+  await expect(page.getByTestId("backprop-source")).toHaveText("1");
+  const overflow = await page.evaluate(
+    () =>
+      document.documentElement.scrollWidth -
+      document.documentElement.clientWidth,
+  );
   expect(overflow).toBeLessThanOrEqual(1);
 });
-

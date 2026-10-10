@@ -22,6 +22,7 @@ export interface LearningState {
   drafts: Record<string, string>;
   bookmarks: string[];
   selected: string;
+  sandboxDrafts?: Record<string,string>;
 }
 export const LEARNING_KEY = "neurallab.learning.v1";
 export const emptyLearning = (): LearningState => ({
@@ -72,6 +73,9 @@ export function parseLearning(raw: string | null): LearningState {
         continue;
       out.cards[id] = { ...c, due, last_review: last };
     }
+    out.sandboxDrafts = {};
+    const draftIds = ['basics-inputs','basics-prediction','flow-numbers','flow-guess','project-config','project-direction'];
+    for (const [id,value] of Object.entries(v.sandboxDrafts || {})) if(draftIds.includes(id)&&typeof value==='string') out.sandboxDrafts[id]=value.slice(0,8000);
     out.history = (Array.isArray(v.history) ? v.history : [])
       .filter(
         (e: RecallEvent | MistakeEvent) =>

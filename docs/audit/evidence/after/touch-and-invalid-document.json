@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "production": true,
+  "width": 390,
+  "touchBackgroundNavigationBlocked": true,
+  "touchPoint": {
+    "x": 237.421875,
+    "y": 31.5
+  },
+  "invalidDocumentFallsBackToIndex": true
+}

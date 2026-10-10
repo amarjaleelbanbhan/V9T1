@@ -1,26 +1,320 @@
-import {useEffect,useRef,useState} from 'react';
-import {usePythonExecution} from '../python/usePythonExecution';
-type Attempt={x:number;factor:number;prediction:number;actual:number;correct:boolean};
-export function PythonBasicsLab(){
- const [inputs,setInputs]=useState(['2','3']);const [prediction,setPrediction]=useState('');const [index,setIndex]=useState(0);const [concept,setConcept]=useState<'stored'|'recomputed'|null>(null);const [attempts,setAttempts]=useState<Attempt[]>([]);
- const {trace,status,busy,run,cancel,reset}=usePythonExecution();const submitted=useRef<{x:number;factor:number;prediction:number}|null>(null);const seen=useRef<unknown>(null);
- useEffect(()=>{if(!trace||trace===seen.current||!submitted.current)return;seen.current=trace;const actual=trace.frames.at(-1)?.variables.product?.value;if(actual===undefined)return;const a=submitted.current;setAttempts(old=>[...old,{...a,actual,correct:Math.abs(a.prediction-actual)<=1e-9*Math.max(1,Math.abs(actual))}]);},[trace]);
- const change=(i:number,value:string)=>{setInputs(old=>old.map((v,j)=>j===i?value:v));setPrediction('');setConcept(null);setIndex(0);submitted.current=null;reset();};
- const execute=()=>{const [x,factor]=inputs.map(v=>v.trim()?Number(v):NaN);const guessed=Number(prediction);submitted.current={x,factor,prediction:guessed};setIndex(0);setConcept(null);run({example:'variables',values:[x,factor]});};
- const frame=trace?.frames[index];const final=trace?.frames.at(-1);const actual=final?.variables.product?.value;
- const positive=attempts.some(a=>a.correct&&a.x>0&&a.factor!==0);const negative=attempts.some(a=>a.correct&&a.x<0&&a.factor!==0);const completed=positive&&negative&&concept==='stored'&&frame?.phase==='complete';
- const source=trace?.source||`x = ${inputs[0]||'?'}\nfactor = ${inputs[1]||'?'}\nproduct = x * factor\nx = x + 1\nprint(product)\nprint(x)`;
- return <section aria-label="Python variables lesson"><p className="eyebrow">BEGINNER · ACTUAL PYTHON · NO CODING BACKGROUND REQUIRED</p><h1>Names, values, instructions<span className="dot">.</span></h1><p className="subtitle">A program is a sequence of instructions. Python follows these lines in order. Run it once, then replay the values recorded before each line.</p>
- <dl className="vocabulary-grid"><div><dt>Variable</dt><dd>A name referring to a value, such as <code>x</code>.</dd></div><div><dt>Assignment <code>=</code></dt><dd>Evaluate the right side, then bind the name on the left to that result.</dd></div><div><dt>Expression</dt><dd>A calculation, such as <code>x * factor</code>. The star means multiply.</dd></div><div><dt>Output</dt><dd><code>print</code> displays a value. Assignment alone does not print it.</dd></div></dl>
- <div className="basics-inputs">{inputs.map((v,i)=><label key={i}>{i===0?'Starting x':'Multiplication factor'}<input className="python-input" type="number" min={-1e6} max={1e6} value={v} disabled={busy} onChange={e=>change(i,e.target.value)}/></label>)}<label>Predict the stored product<input className="python-input" type="number" value={prediction} disabled={busy||!!trace} onChange={e=>setPrediction(e.target.value)}/></label></div>
- <p className="foundation-copy">Before running: what value will <code>product = x * factor</code> store? Start with 2 × 3, then try x = −2 with factor = 4.</p>
- <div className="python-actions"><button disabled={busy||!prediction.trim()||!Number.isFinite(Number(prediction))} onClick={execute}>Run my prediction</button><button className="cancel" disabled={!busy} onClick={cancel}>Cancel execution</button><button disabled={!trace||index===0} onClick={()=>setIndex(i=>i-1)}>Previous instruction</button><button disabled={!trace||index>=trace.frames.length-1} onClick={()=>setIndex(i=>i+1)}>Next instruction</button></div><p role="status">{status}</p>
- <div className="basics-workbench"><div><h2>Instructions</h2><div className="python-code" aria-label="Python instructions">{source.split('\n').map((line,i)=><div key={i} className={frame?.line===i+1?'current-line':''} aria-current={frame?.line===i+1?'step':undefined}><code>{i+1} · {line}</code></div>)}</div><p className="foundation-mini">{frame?.phase==='complete'?'All instructions completed.':frame?`Before instruction ${frame.line}: inspect the values left by previous instructions.`:'Names are not assigned until their instruction runs.'}</p></div>
- <div><h2>Recorded values</h2><div className="variable-cards">{(['x','factor','product'] as const).map(name=>{const v=frame?.variables[name];return <div className={`variable-card variable-${name}`} key={name}><span>{name}</span><strong data-testid={`variable-${name}`}>{v?.value??'Not assigned'}</strong><small>{v?`Python ${v.type}`:'No binding yet'}</small></div>})}</div><p className="foundation-copy">Changing <code>x</code> later does not run the earlier multiplication again. <code>product</code> keeps its stored number until another assignment changes it.</p></div></div>
- <h2>Recorded output</h2><pre className="python-code">{frame?.stdout||'Nothing printed at this step.'}</pre>
- {trace&&actual!==undefined&&<div className="foundation-note" role="status">{attempts.at(-1)?.correct?'Your prediction matched.':'Compare your prediction with the executed result.'} Stored product: {actual}. You predicted {submitted.current?.prediction}. The multiplication used the earlier x and factor values.</div>}
- {frame?.phase==='complete'&&<section className="foundation-panel" aria-label="Assignment concept check"><h2>Why did product keep its old value?</h2><div className="foundation-choices"><button className={concept==='stored'?'picked':''} aria-pressed={concept==='stored'} onClick={()=>setConcept('stored')}>Assignment stored the earlier result</button><button className={concept==='recomputed'?'picked':''} aria-pressed={concept==='recomputed'} onClick={()=>setConcept('recomputed')}>It recalculates whenever x changes</button></div>{concept&&<p role="status">{concept==='stored'?'Correct. Assignment runs when Python reaches that line; it is not a live spreadsheet formula.':'Try again. Inspect product before and after x = x + 1. Its assignment did not execute a second time.'}</p>}</section>}
- <section className="foundation-panel" aria-label="Practice evidence"><h2>Show that you can transfer the idea</h2><p className="foundation-copy">Pass one positive-x prediction and one negative-x prediction with a nonzero factor. Reach the final step and explain assignment correctly. Evidence is kept for this lesson visit only. Leaving or reloading the lesson resets it.</p><ul><li>Positive input prediction: {positive?'passed':'still needed'}</li><li>Negative input prediction: {negative?'passed':'still needed'}</li><li>Assignment explanation: {concept==='stored'?'passed':'still needed'}</li></ul><p role="status">{completed?'Practice criteria met for this lesson. This is not a claim of Python mastery.':'Keep experimenting; opening this lesson alone does not complete the practice.'}</p></section>
- <p className="foundation-mini">A fixed trusted program runs in a disposable worker. Numeric inputs are editable; arbitrary Python editing and offline loading are not supported. <a href="https://docs.python.org/3.12/tutorial/introduction.html" target="_blank" rel="noreferrer">Official Python reference</a>.</p>
- </section>;
+import {
+  useSandboxDraft,
+  numericStrings,
+  shortText,
+} from "../course/useSandboxDraft";
+import { useEffect, useRef, useState } from "react";
+import { usePythonExecution } from "../python/usePythonExecution";
+type Attempt = {
+  x: number;
+  factor: number;
+  prediction: number;
+  actual: number;
+  correct: boolean;
+};
+export function PythonBasicsLab() {
+  const [inputs, setInputs] = useSandboxDraft(
+    "basics-inputs",
+    ["2", "3"],
+    numericStrings(2),
+  );
+  const [prediction, setPrediction] = useSandboxDraft(
+    "basics-prediction",
+    "",
+    shortText,
+  );
+  const [index, setIndex] = useState(0);
+  const [concept, setConcept] = useState<"stored" | "recomputed" | null>(null);
+  const [attempts, setAttempts] = useState<Attempt[]>([]);
+  const { trace, status, busy, run, cancel, reset } = usePythonExecution();
+  const submitted = useRef<{
+    x: number;
+    factor: number;
+    prediction: number;
+  } | null>(null);
+  const seen = useRef<unknown>(null);
+  useEffect(() => {
+    if (!trace || trace === seen.current || !submitted.current) return;
+    seen.current = trace;
+    const actual = trace.frames.at(-1)?.variables.product?.value;
+    if (actual === undefined) return;
+    const a = submitted.current;
+    setAttempts((old) => [
+      ...old,
+      {
+        ...a,
+        actual,
+        correct:
+          Math.abs(a.prediction - actual) <=
+          1e-9 * Math.max(1, Math.abs(actual)),
+      },
+    ]);
+  }, [trace]);
+  const change = (i: number, value: string) => {
+    setInputs((old) => old.map((v, j) => (j === i ? value : v)));
+    setPrediction("");
+    setConcept(null);
+    setIndex(0);
+    submitted.current = null;
+    reset();
+  };
+  const execute = () => {
+    const [x, factor] = inputs.map((v) => (v.trim() ? Number(v) : NaN));
+    const guessed = Number(prediction);
+    submitted.current = { x, factor, prediction: guessed };
+    setIndex(0);
+    setConcept(null);
+    run({ example: "variables", values: [x, factor] });
+  };
+  const frame = trace?.frames[index];
+  const final = trace?.frames.at(-1);
+  const actual = final?.variables.product?.value;
+  const positive = attempts.some((a) => a.correct && a.x > 0 && a.factor !== 0);
+  const negative = attempts.some((a) => a.correct && a.x < 0 && a.factor !== 0);
+  const completed =
+    positive && negative && concept === "stored" && frame?.phase === "complete";
+  const source =
+    trace?.source ||
+    `x = ${inputs[0] || "?"}\nfactor = ${inputs[1] || "?"}\nproduct = x * factor\nx = x + 1\nprint(product)\nprint(x)`;
+  return (
+    <section aria-label="Python variables lesson">
+      <p className="eyebrow">
+        BEGINNER · ACTUAL PYTHON · NO CODING BACKGROUND REQUIRED
+      </p>
+      <h1>
+        Names, values, instructions<span className="dot">.</span>
+      </h1>
+      <p className="subtitle">
+        A program is a sequence of instructions. Python follows these lines in
+        order. Run it once, then replay the values recorded before each line.
+      </p>
+      <dl className="vocabulary-grid">
+        <div>
+          <dt>Variable</dt>
+          <dd>
+            A name referring to a value, such as <code>x</code>.
+          </dd>
+        </div>
+        <div>
+          <dt>
+            Assignment <code>=</code>
+          </dt>
+          <dd>
+            Evaluate the right side, then bind the name on the left to that
+            result.
+          </dd>
+        </div>
+        <div>
+          <dt>Expression</dt>
+          <dd>
+            A calculation, such as <code>x * factor</code>. The star means
+            multiply.
+          </dd>
+        </div>
+        <div>
+          <dt>Output</dt>
+          <dd>
+            <code>print</code> displays a value. Assignment alone does not print
+            it.
+          </dd>
+        </div>
+      </dl>
+      <div className="basics-inputs">
+        {inputs.map((v, i) => (
+          <label key={i}>
+            {i === 0 ? "Starting x" : "Multiplication factor"}
+            <input
+              className="python-input"
+              type="number"
+              min={-1e6}
+              max={1e6}
+              value={v}
+              disabled={busy}
+              onChange={(e) => change(i, e.target.value)}
+            />
+          </label>
+        ))}
+        <label>
+          Predict the stored product
+          <input
+            className="python-input"
+            type="number"
+            value={prediction}
+            disabled={busy || !!trace}
+            onChange={(e) => setPrediction(e.target.value)}
+          />
+        </label>
+      </div>
+      <p className="foundation-copy">
+        Before running: what value will <code>product = x * factor</code> store?
+        Start with 2 × 3, then try x = −2 with factor = 4.
+      </p>
+      <div className="python-actions">
+        <button
+          disabled={
+            busy || !prediction.trim() || !Number.isFinite(Number(prediction))
+          }
+          onClick={execute}
+        >
+          Run my prediction
+        </button>
+        <button className="cancel" disabled={!busy} onClick={cancel}>
+          Cancel execution
+        </button>
+        <button
+          disabled={!trace || index === 0}
+          onClick={() => setIndex((i) => i - 1)}
+        >
+          Previous instruction
+        </button>
+        <button
+          disabled={!trace || index >= trace.frames.length - 1}
+          onClick={() => setIndex((i) => i + 1)}
+        >
+          Next instruction
+        </button>
+      </div>
+      <p role="status">{status}</p>
+      <div className="basics-workbench">
+        <div>
+          <h2>Instructions</h2>
+          <div className="python-code" aria-label="Python instructions">
+            {source.split("\n").map((line, i) => (
+              <div
+                key={i}
+                className={frame?.line === i + 1 ? "current-line" : ""}
+                aria-current={frame?.line === i + 1 ? "step" : undefined}
+              >
+                <code>
+                  {i + 1} · {line}
+                </code>
+              </div>
+            ))}
+          </div>
+          <p className="foundation-mini">
+            {frame?.phase === "complete"
+              ? "All instructions completed."
+              : frame
+                ? `Before instruction ${frame.line}: inspect the values left by previous instructions.`
+                : "Names are not assigned until their instruction runs."}
+          </p>
+        </div>
+        <div>
+          <h2>Recorded values</h2>
+          <p className="trace-context">
+            {frame?.phase === "complete"
+              ? "All assignments completed"
+              : frame
+                ? `Before line ${frame.line}: ${source.split("\n")[frame.line - 1]}`
+                : "Run a prediction to connect an assignment with its stored values."}
+          </p>
+          <div className="variable-cards">
+            {(["x", "factor", "product"] as const).map((name) => {
+              const v = frame?.variables[name];
+              return (
+                <div className={`variable-card variable-${name}`} key={name}>
+                  <span>{name}</span>
+                  <strong data-testid={`variable-${name}`}>
+                    {v?.value ?? "Not assigned"}
+                  </strong>
+                  <small>{v ? `Python ${v.type}` : "No binding yet"}</small>
+                </div>
+              );
+            })}
+          </div>
+          <p className="foundation-copy">
+            Changing <code>x</code> later does not run the earlier
+            multiplication again. <code>product</code> keeps its stored number
+            until another assignment changes it.
+          </p>
+        </div>
+      </div>
+      <h2>Recorded output</h2>
+      <pre className="python-code">
+        {frame?.stdout || "Nothing printed at this step."}
+      </pre>
+      {trace && actual !== undefined && (
+        <div className="foundation-note" role="status">
+          {attempts.at(-1)?.correct
+            ? "Your prediction matched."
+            : "Compare your prediction with the executed result."}{" "}
+          Stored product: {actual}. You predicted{" "}
+          {submitted.current?.prediction}. The multiplication used the earlier x
+          and factor values.
+        </div>
+      )}
+      {frame?.phase === "complete" && (
+        <section
+          className="foundation-panel"
+          aria-label="Assignment concept check"
+        >
+          <h2>Why did product keep its old value?</h2>
+          <div className="foundation-choices">
+            <button
+              className={concept === "stored" ? "picked" : ""}
+              aria-pressed={concept === "stored"}
+              onClick={() => setConcept("stored")}
+            >
+              Assignment stored the earlier result
+            </button>
+            <button
+              className={concept === "recomputed" ? "picked" : ""}
+              aria-pressed={concept === "recomputed"}
+              onClick={() => setConcept("recomputed")}
+            >
+              It recalculates whenever x changes
+            </button>
+          </div>
+          {concept && (
+            <p role="status">
+              {concept === "stored"
+                ? "Correct. Assignment runs when Python reaches that line; it is not a live spreadsheet formula."
+                : "Try again. Inspect product before and after x = x + 1. Its assignment did not execute a second time."}
+            </p>
+          )}
+        </section>
+      )}
+      <section className="foundation-panel" aria-label="Practice evidence">
+        <h2>Show that you can transfer the idea</h2>
+        <p className="foundation-copy">
+          Pass one positive-x prediction and one negative-x prediction with a
+          nonzero factor. Reach the final step and explain assignment correctly.
+          Inputs and prediction drafts resume on this browser and travel in
+          learning backups. Execution traces and practice checks belong to this
+          visit; rerun Python to verify a resumed draft. Sandbox activity never
+          grants course credit.
+        </p>
+        <ul>
+          <li>
+            Positive input prediction: {positive ? "passed" : "still needed"}
+          </li>
+          <li>
+            Negative input prediction: {negative ? "passed" : "still needed"}
+          </li>
+          <li>
+            Assignment explanation:{" "}
+            {concept === "stored" ? "passed" : "still needed"}
+          </li>
+        </ul>
+        <p role="status">
+          {completed
+            ? "Practice criteria met for this lesson. This is not a claim of Python mastery."
+            : "Keep experimenting; opening this lesson alone does not complete the practice."}
+        </p>
+      </section>
+      <p className="foundation-mini">
+        A fixed trusted program runs in a disposable worker. Numeric inputs are
+        editable; arbitrary Python editing and offline loading are not
+        supported.{" "}
+        <a
+          href="https://docs.python.org/3.12/tutorial/introduction.html"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Official Python reference
+        </a>
+        .
+      </p>
+    </section>
+  );
 }

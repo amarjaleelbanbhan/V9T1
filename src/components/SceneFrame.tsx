@@ -1,3 +1,4 @@
+import { palette } from '../design/palette';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerformanceMonitor } from "@react-three/drei";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
@@ -49,7 +50,7 @@ export function SceneFrame({
     };
   }, []);
   return (
-    <div ref={host} className="scene-frame" aria-label={label}>
+    <div ref={host} className="scene-frame" role="group" aria-label={label}>
       <div className="scene-tools">
         <span>Drag: orbit · wheel: zoom · right drag / two fingers: pan</span>
         <button onClick={() => setReset((n) => n + 1)}>Reset camera</button>
@@ -67,10 +68,10 @@ export function SceneFrame({
             gl={{ antialias: true }}
             fallback={fallback}
           >
-            <color attach="background" args={["#031716"]} />
+            <color attach="background" args={[palette.background]} />
             <ambientLight intensity={1.4} />
-            <pointLight position={[0, 4, 5]} intensity={55} color="#6BA3BE" />
-            <pointLight position={[-4, -3, 2]} intensity={22} color="#0C969C" />
+            <pointLight position={[0, 4, 5]} intensity={55} color={palette.input} />
+            <pointLight position={[-4, -3, 2]} intensity={22} color={palette.weight} />
             <PerformanceMonitor
               onDecline={() => setDpr(1)}
               onIncline={() => setDpr(Math.min(window.devicePixelRatio, 1.5))}
@@ -85,7 +86,7 @@ export function SceneFrame({
               maxDistance={22}
             />
             <gridHelper
-              args={[16, 16, "#0A7075", "#032F30"]}
+              args={[16, 16, palette.line, palette.surface]}
               position={[0, -2.2, 0]}
             />
           </Canvas>

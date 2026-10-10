@@ -3,7 +3,7 @@ function halfRound(x:number){if(x===0)return x;const sign=Math.sign(x),v=Math.ab
 const sum=(v:number[])=>v.reduce((a,b)=>a+b,0);const mean=(v:number[])=>sum(v)/v.length;
 export function calculate(model:string,p:readonly number[]):Calculation{
  if(!p.length||p.some(v=>!Number.isFinite(v)||Math.abs(v)>1e6))throw Error('Use finite inputs within ±1,000,000.');
- const [a,b,c,d]=p;let result:number;let stages:Stage[]=[];let cells:number[][]|undefined;let curve:[number,number][]|undefined;
+ const [a,b,c,d]=p;let result:number;const stages:Stage[]=[];let cells:number[][]|undefined;let curve:[number,number][]|undefined;
  const step=(label:string,value:number|string)=>stages.push({label,value});
  switch(model){
  case 'program':step('Read x',a);step('Multiply by factor',a*b);result=a*b+c;step('Add offset',result);break;

@@ -1,0 +1,661 @@
+[
+  {
+    "name": "readable-math",
+    "width": 320,
+    "completed": true,
+    "data": [
+      {
+        "id": "neuron",
+        "text": [
+          {
+            "text": "Inputs → weighted sum → bias → activationx1 = 2 · w1 = 0.8Contribution hidden until Multiply weightsx2 = -1 · w2 = -0.4Contribution hidden until Multi",
+            "font": 14
+          },
+          {
+            "text": "Inputs → weighted sum → bias → activation",
+            "font": 14
+          },
+          {
+            "text": "x1 = 2 · w1 = 0.8Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "x2 = -1 · w2 = -0.4Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "x3 = 0.5 · w3 = 1.2Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Σ = Inspect Sum contributions",
+            "font": 14
+          },
+          {
+            "text": "Bias 0.5 · z = Inspect Add bias",
+            "font": 14
+          },
+          {
+            "text": "Output = Inspect Final output",
+            "font": 14
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "propagation",
+        "text": [
+          {
+            "text": "Final predictionInputs: 1, 2Hidden: 0.3, 1Output: 0.54",
+            "font": 14
+          },
+          {
+            "text": "Final prediction",
+            "font": 14
+          },
+          {
+            "text": "Inputs: 1, 2",
+            "font": 14
+          },
+          {
+            "text": "Hidden: 0.3, 1",
+            "font": 14
+          },
+          {
+            "text": "Output: 0.54",
+            "font": 14
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "backprop",
+        "text": [
+          {
+            "text": "Forward predictionSelected weight: 1.2Source activation: 0.3Step to Hidden deltas to inspect derivative factors.Step to Parameter gradients to reveal ",
+            "font": 14
+          },
+          {
+            "text": "Forward prediction",
+            "font": 14
+          },
+          {
+            "text": "Selected weight: 1.2",
+            "font": 14
+          },
+          {
+            "text": "Source activation: 0.3",
+            "font": 14
+          },
+          {
+            "text": "Step to Hidden deltas to inspect derivative factors.",
+            "font": 14
+          },
+          {
+            "text": "Step to Parameter gradients to reveal the selected derivative.",
+            "font": 14
+          }
+        ],
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "name": "readable-math",
+    "width": 390,
+    "completed": true,
+    "data": [
+      {
+        "id": "neuron",
+        "text": [
+          {
+            "text": "Inputs → weighted sum → bias → activationx1 = 2 · w1 = 0.8Contribution hidden until Multiply weightsx2 = -1 · w2 = -0.4Contribution hidden until Multi",
+            "font": 14
+          },
+          {
+            "text": "Inputs → weighted sum → bias → activation",
+            "font": 14
+          },
+          {
+            "text": "x1 = 2 · w1 = 0.8Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "x2 = -1 · w2 = -0.4Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "x3 = 0.5 · w3 = 1.2Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Contribution hidden until Multiply weights",
+            "font": 14
+          },
+          {
+            "text": "Σ = Inspect Sum contributions",
+            "font": 14
+          },
+          {
+            "text": "Bias 0.5 · z = Inspect Add bias",
+            "font": 14
+          },
+          {
+            "text": "Output = Inspect Final output",
+            "font": 14
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "propagation",
+        "text": [
+          {
+            "text": "Final predictionInputs: 1, 2Hidden: 0.3, 1Output: 0.54",
+            "font": 14
+          },
+          {
+            "text": "Final prediction",
+            "font": 14
+          },
+          {
+            "text": "Inputs: 1, 2",
+            "font": 14
+          },
+          {
+            "text": "Hidden: 0.3, 1",
+            "font": 14
+          },
+          {
+            "text": "Output: 0.54",
+            "font": 14
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "backprop",
+        "text": [
+          {
+            "text": "Forward predictionSelected weight: 1.2Source activation: 0.3Step to Hidden deltas to inspect derivative factors.Step to Parameter gradients to reveal ",
+            "font": 14
+          },
+          {
+            "text": "Forward prediction",
+            "font": 14
+          },
+          {
+            "text": "Selected weight: 1.2",
+            "font": 14
+          },
+          {
+            "text": "Source activation: 0.3",
+            "font": 14
+          },
+          {
+            "text": "Step to Hidden deltas to inspect derivative factors.",
+            "font": 14
+          },
+          {
+            "text": "Step to Parameter gradients to reveal the selected derivative.",
+            "font": 14
+          }
+        ],
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "name": "readable-math",
+    "width": 768,
+    "completed": true,
+    "data": [
+      {
+        "id": "neuron",
+        "text": [
+          {
+            "text": "Input 1Input 2Input 3Weighted sumBias & activationOutputStep to Sum contributions to inspect the weighted sum.",
+            "font": 14
+          },
+          {
+            "text": "Input 1",
+            "font": 12
+          },
+          {
+            "text": "Input 2",
+            "font": 12
+          },
+          {
+            "text": "Input 3",
+            "font": 12
+          },
+          {
+            "text": "Weighted sum",
+            "font": 12
+          },
+          {
+            "text": "Bias & activation",
+            "font": 12
+          },
+          {
+            "text": "Output",
+            "font": 12
+          },
+          {
+            "text": "Step to Sum contributions to inspect the weighted sum.",
+            "font": 12
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "propagation",
+        "text": [
+          {
+            "text": "1 × 0.6 = 0.6",
+            "font": 13
+          },
+          {
+            "text": "0.6",
+            "font": 13
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "backprop",
+        "text": [
+          {
+            "text": "1. Destination delta (dL/dz)-0.4601 × 0.2484 = -0.11432. Source activation0.33. Weight gradient (dL/dw)-0.1143 × 0.3 = -0.03434. Proposed gradient upd",
+            "font": 14
+          },
+          {
+            "text": "-0.4601 × 0.2484 = -0.1143",
+            "font": 15
+          },
+          {
+            "text": "0.3",
+            "font": 15
+          },
+          {
+            "text": "-0.1143 × 0.3 = -0.0343",
+            "font": 15
+          },
+          {
+            "text": "1.2 − 0.2 × (-0.0343) = 1.2069",
+            "font": 15
+          }
+        ],
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "name": "readable-math",
+    "width": 1280,
+    "completed": true,
+    "data": [
+      {
+        "id": "neuron",
+        "text": [
+          {
+            "text": "Input 1Input 2Input 3Weighted sumBias & activationOutputStep to Sum contributions to inspect the weighted sum.",
+            "font": 14
+          },
+          {
+            "text": "Input 1",
+            "font": 12
+          },
+          {
+            "text": "Input 2",
+            "font": 12
+          },
+          {
+            "text": "Input 3",
+            "font": 12
+          },
+          {
+            "text": "Weighted sum",
+            "font": 12
+          },
+          {
+            "text": "Bias & activation",
+            "font": 12
+          },
+          {
+            "text": "Output",
+            "font": 12
+          },
+          {
+            "text": "Step to Sum contributions to inspect the weighted sum.",
+            "font": 12
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "propagation",
+        "text": [
+          {
+            "text": "1 × 0.6 = 0.6",
+            "font": 13
+          },
+          {
+            "text": "0.6",
+            "font": 13
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "backprop",
+        "text": [
+          {
+            "text": "1. Destination delta (dL/dz)-0.4601 × 0.2484 = -0.11432. Source activation0.33. Weight gradient (dL/dw)-0.1143 × 0.3 = -0.03434. Proposed gradient upd",
+            "font": 14
+          },
+          {
+            "text": "-0.4601 × 0.2484 = -0.1143",
+            "font": 15
+          },
+          {
+            "text": "0.3",
+            "font": 15
+          },
+          {
+            "text": "-0.1143 × 0.3 = -0.0343",
+            "font": 15
+          },
+          {
+            "text": "1.2 − 0.2 × (-0.0343) = 1.2069",
+            "font": 15
+          }
+        ],
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "name": "readable-math",
+    "width": 1440,
+    "completed": true,
+    "data": [
+      {
+        "id": "neuron",
+        "text": [
+          {
+            "text": "Input 1Input 2Input 3Weighted sumBias & activationOutputStep to Sum contributions to inspect the weighted sum.",
+            "font": 14
+          },
+          {
+            "text": "Input 1",
+            "font": 12
+          },
+          {
+            "text": "Input 2",
+            "font": 12
+          },
+          {
+            "text": "Input 3",
+            "font": 12
+          },
+          {
+            "text": "Weighted sum",
+            "font": 12
+          },
+          {
+            "text": "Bias & activation",
+            "font": 12
+          },
+          {
+            "text": "Output",
+            "font": 12
+          },
+          {
+            "text": "Step to Sum contributions to inspect the weighted sum.",
+            "font": 12
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "propagation",
+        "text": [
+          {
+            "text": "1 × 0.6 = 0.6",
+            "font": 13
+          },
+          {
+            "text": "0.6",
+            "font": 13
+          }
+        ],
+        "overflow": 0
+      },
+      {
+        "id": "backprop",
+        "text": [
+          {
+            "text": "1. Destination delta (dL/dz)-0.4601 × 0.2484 = -0.11432. Source activation0.33. Weight gradient (dL/dw)-0.1143 × 0.3 = -0.03434. Proposed gradient upd",
+            "font": 14
+          },
+          {
+            "text": "-0.4601 × 0.2484 = -0.1143",
+            "font": 15
+          },
+          {
+            "text": "0.3",
+            "font": 15
+          },
+          {
+            "text": "-0.1143 × 0.3 = -0.0343",
+            "font": 15
+          },
+          {
+            "text": "1.2 − 0.2 × (-0.0343) = 1.2069",
+            "font": 15
+          }
+        ],
+        "overflow": 0
+      }
+    ]
+  },
+  {
+    "name": "truth-table-keyboard",
+    "width": 320,
+    "completed": true,
+    "data": {
+      "scrollLeft": 40,
+      "clientWidth": 292,
+      "scrollWidth": 490,
+      "focus": "solid",
+      "columns": [
+        "x₁",
+        "x₂",
+        "Target (AND)",
+        "z",
+        "Prediction",
+        "Result"
+      ]
+    }
+  },
+  {
+    "name": "truth-table-keyboard",
+    "width": 390,
+    "completed": true,
+    "data": {
+      "scrollLeft": 40,
+      "clientWidth": 362,
+      "scrollWidth": 490,
+      "focus": "solid",
+      "columns": [
+        "x₁",
+        "x₂",
+        "Target (AND)",
+        "z",
+        "Prediction",
+        "Result"
+      ]
+    }
+  },
+  {
+    "name": "first-course-task",
+    "width": 320,
+    "completed": true,
+    "data": {
+      "predictionTop": 1123.625,
+      "initialViewport": 844,
+      "beforeAuditTop": 2344
+    }
+  },
+  {
+    "name": "failed-production-chunk",
+    "width": 320,
+    "completed": true,
+    "data": {
+      "shellSurvives": true,
+      "reloadRecovery": true,
+      "missionRestored": true
+    }
+  },
+  {
+    "name": "drawer-pointer-focus-resize",
+    "width": 390,
+    "completed": true,
+    "data": {
+      "backgroundPointerBlocked": true,
+      "focusTrapped": true,
+      "resizeCloses": true
+    }
+  },
+  {
+    "name": "selected-tensor-contrast",
+    "width": 390,
+    "completed": true,
+    "data": {
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr"
+      ]
+    }
+  },
+  {
+    "name": "activation-states-contrast",
+    "width": 390,
+    "completed": true,
+    "data": [
+      {
+        "name": "ReLU",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "name": "Sigmoid",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "name": "Tanh",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "name": "Leaky ReLU",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "editor-syntax-contrast",
+    "width": 390,
+    "completed": true,
+    "data": {
+      "violations": [],
+      "incomplete": []
+    }
+  },
+  {
+    "name": "selected-tensor-contrast",
+    "width": 1440,
+    "completed": true,
+    "data": {
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr"
+      ]
+    }
+  },
+  {
+    "name": "activation-states-contrast",
+    "width": 1440,
+    "completed": true,
+    "data": [
+      {
+        "name": "ReLU",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "name": "Sigmoid",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "name": "Tanh",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "name": "Leaky ReLU",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "editor-syntax-contrast",
+    "width": 1440,
+    "completed": true,
+    "data": {
+      "violations": [],
+      "incomplete": []
+    }
+  }
+]

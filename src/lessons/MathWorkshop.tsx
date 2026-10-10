@@ -22,6 +22,11 @@ export function MathWorkshop() {
     [view, setView] = useState(false),
     [guess, setGuess] = useState(""),
     [reveal, setReveal] = useState(false);
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const validDraft = (value: string) =>
+    value.trim() !== "" &&
+    Number.isFinite(Number(value)) &&
+    Math.abs(Number(value)) <= 10;
   const product = a.map((row) =>
     b[0].map((_, j) => row.reduce((sum, x, k) => sum + x * b[k][j], 0)),
   );
@@ -48,17 +53,31 @@ export function MathWorkshop() {
               {m.map((row, i) => (
                 <div key={i}>
                   {row.map((v, j) => (
-                    <label key={j}>
+                    <label
+                      className={
+                        (n === 0 && i === cell[0]) || (n === 1 && j === cell[1])
+                          ? "matrix-selected-operand"
+                          : undefined
+                      }
+                      key={j}
+                    >
                       {n === 0 ? "A" : "B"}[{i},{j}]
                       <input
-                        type="number"
-                        min="-10"
-                        max="10"
-                        step=".1"
-                        value={v}
+                        type="text"
+                        inputMode="decimal"
+                        aria-invalid={
+                          !validDraft(drafts[`${n}-${i}-${j}`] ?? String(v))
+                        }
+                        aria-describedby={`matrix-help-${n}-${i}-${j}`}
+                        value={drafts[`${n}-${i}-${j}`] ?? String(v)}
                         onChange={(e) => {
-                          const x = Number(e.target.value);
-                          if (Number.isFinite(x) && Math.abs(x) <= 10)
+                          const value = e.target.value;
+                          setDrafts((old) => ({
+                            ...old,
+                            [`${n}-${i}-${j}`]: value,
+                          }));
+                          const x = Number(value);
+                          if (validDraft(value))
                             (n === 0 ? setA : setB)((old) =>
                               old.map((r, k) =>
                                 k === i
@@ -68,6 +87,12 @@ export function MathWorkshop() {
                             );
                         }}
                       />
+                      {!validDraft(drafts[`${n}-${i}-${j}`] ?? String(v)) && (
+                        <span id={`matrix-help-${n}-${i}-${j}`} role="status">
+                          Enter a finite number from −10 to 10. Calculation
+                          retains the last valid value.
+                        </span>
+                      )}
                     </label>
                   ))}
                 </div>
@@ -123,8 +148,8 @@ export function MathWorkshop() {
         <p>
           Three fixed data points: (−1,−1), (0,1), (1,3). Model: ŷ = wx + b. L =
           mean[½(ŷ−y)²]. Height is loss; the white trail records gradient steps,
-          and pale aqua marks the current step. Unlike a decorative landscape, every
-          height comes from this formula.
+          and pale aqua marks the current step. Unlike a decorative landscape,
+          every height comes from this formula.
         </p>
         <div className="basics-inputs">
           {[
@@ -213,6 +238,38 @@ export function MathWorkshop() {
               stroke="#6BA3BE"
             />
           ))}
+          {[-1, 0, 1, 2, 3, 4].map((value) => (
+            <g key={`w-${value}`}>
+              <line
+                x1={30 + (value + 1) * 86}
+                x2={30 + (value + 1) * 86}
+                y1="255"
+                y2="260"
+                stroke="currentColor"
+              />
+              <text
+                x={30 + (value + 1) * 86}
+                y="274"
+                textAnchor="middle"
+                fontSize="12"
+                fill="currentColor"
+              >
+                {value}
+              </text>
+            </g>
+          ))}
+          {[-1, 0, 1, 2, 3].map((value) => (
+            <text
+              key={`b-${value}`}
+              x="26"
+              y={259 - (value + 1.5) * 49}
+              textAnchor="end"
+              fontSize="12"
+              fill="currentColor"
+            >
+              {value}
+            </text>
+          ))}
           <polyline
             points={path
               .map(
@@ -233,10 +290,16 @@ export function MathWorkshop() {
               fill="#B8E6ED"
             />
           ))}
-          <text x="30" y="280" fill="currentColor">
+          <text x="40" y="298" fill="currentColor">
             weight → · center w=2, b=1 · bias ↑
           </text>
         </svg>
+        <p className="chart-scale">
+          Horizontal axis: weight w, −1 to 4. Vertical axis: bias b, −1.5 to
+          3.5. Contour losses (inner → outer): 0.1, 0.3, 0.7, 1.5, 3. Each level
+          satisfies (w−2)²/3 + (b−1)²/2 = loss. Path points show successive
+          gradient updates.
+        </p>
         <p data-testid="surface-values">
           Step {step}: weight {fmt(last.weight)} · bias {fmt(last.bias)} · loss{" "}
           {fmt(last.loss)} · dL/dw {fmt(last.dw)} · dL/db {fmt(last.db)}.

@@ -2,7 +2,19 @@ import { useEffect, useRef } from "react";
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { python } from "@codemirror/lang-python";
-import { oneDark } from "@codemirror/theme-one-dark";
+import { syntaxHighlighting, HighlightStyle } from "@codemirror/language";
+import { tags } from "@lezer/highlight";
+const scientificSyntax = HighlightStyle.define([
+  { tag: [tags.keyword, tags.operator], color: "#B8E6ED" },
+  { tag: [tags.string, tags.number, tags.bool], color: "#F2D395" },
+  {
+    tag: [tags.variableName, tags.function(tags.variableName)],
+    color: "#EDF7F8",
+  },
+  { tag: [tags.comment], color: "#B3D4DD" },
+  { tag: [tags.typeName, tags.className], color: "#99DACA" },
+  { tag: [tags.invalid], color: "#FF9078" },
+]);
 export function PythonEditor({
   value,
   onChange,
@@ -26,14 +38,25 @@ export function PythonEditor({
       extensions: [
         basicSetup,
         python(),
-        oneDark,
-        EditorView.theme({
-          "&": { backgroundColor: "var(--background)", color: "var(--text)" },
-          ".cm-gutters": { backgroundColor: "var(--surface)", color: "var(--muted)", borderColor: "var(--line)" },
-          ".cm-activeLine, .cm-activeLineGutter": { backgroundColor: "var(--panel)" },
-          "&.cm-focused .cm-selectionBackground, .cm-selectionBackground": { backgroundColor: "var(--line)" },
-          ".cm-cursor": { borderLeftColor: "var(--text)" },
-        }, { dark: true }),
+        syntaxHighlighting(scientificSyntax),
+        EditorView.theme(
+          {
+            "&": { backgroundColor: "var(--background)", color: "var(--text)" },
+            ".cm-gutters": {
+              backgroundColor: "var(--surface)",
+              color: "var(--muted)",
+              borderColor: "var(--line)",
+            },
+            ".cm-activeLine, .cm-activeLineGutter": {
+              backgroundColor: "var(--surface)",
+            },
+            "&.cm-focused .cm-selectionBackground, .cm-selectionBackground": {
+              backgroundColor: "var(--line)",
+            },
+            ".cm-cursor": { borderLeftColor: "var(--text)" },
+          },
+          { dark: true },
+        ),
         EditorView.lineWrapping,
         EditorState.readOnly.of(readOnly),
         EditorView.editable.of(!readOnly),
