@@ -250,3 +250,25 @@ test("failed reference document can recover its exact URL by reload", async ({
   await expect(page.locator(".markdown-document h1").first()).toBeVisible();
   await expect(page).toHaveURL(/document=00-python-and-math%2FREADME.md/);
 });
+
+test("Markdown references expose exact native deep links for a new tab", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/#/lab/library?document=00-python-and-math%2FREADME.md");
+  const reference = page.getByRole("link", {
+    name: "From symbols to executable Python",
+    exact: true,
+  });
+  const href = await reference.getAttribute("href");
+  expect(href).toMatch(/^#\/lab\/library\?document=/);
+  const original = page.url();
+  const [popup] = await Promise.all([
+    context.waitForEvent("page"),
+    reference.click({ modifiers: ["Control"] }),
+  ]);
+  await expect(popup.locator(".markdown-document h1").first()).toBeVisible();
+  await expect(page).toHaveURL(original);
+  expect(popup.url()).toContain(href!);
+  await popup.close();
+});

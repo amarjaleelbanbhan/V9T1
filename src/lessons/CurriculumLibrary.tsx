@@ -258,17 +258,16 @@ export function CurriculumLibrary() {
             ) : (
               <MarkdownDocument
                 source={source}
-                onDocument={(href) => {
-                  if (/^(?:[a-z]+:|#|\/)/i.test(href)) return false;
+                documentURL={(href) => {
+                  if (/^(?:[a-z]+:|#|\/)/i.test(href)) return undefined;
                   const parts = documentId.split("/").slice(0, -1);
                   for (const part of href.split("#")[0].split("/")) {
                     if (part === "..") parts.pop();
                     else if (part !== ".") parts.push(decodeURIComponent(part));
                   }
                   const id = parts.join("/");
-                  if (!ids.includes(id)) return false;
-                  selectDocument(id);
-                  return true;
+                  if (!ids.includes(id)) return undefined;
+                  return `#/lab/library?document=${encodeURIComponent(id)}`;
                 }}
               />
             )}
