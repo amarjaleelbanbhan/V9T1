@@ -65,10 +65,10 @@ The quantities in play are ${inputs}.`
     {
       level: 2,
       title: HINT_TITLES[2],
-      body:
+      body: authored.rule ?? (
         `${lesson.formula}\n\n` +
         lesson.terms.map(([word, meaning]) => `${word}: ${meaning}`).join("\n") +
-        `\n\nWhy it applies here: ${lesson.why}`,
+        `\n\nWhy it applies here: ${lesson.why}`),
       needsCalculation: false,
     },
     {
@@ -104,3 +104,4 @@ export function hintEvidenceNote(level: number) {
     return "Worked solution shown. This attempt can still record assisted success, not independent success.";
   return `Hint level ${level} used. This attempt can record assisted success, not independent success.`;
 }
+
