@@ -281,8 +281,8 @@ test("Markdown rejects raw HTML and unsafe links while rendering trusted math", 
     const host = document.createElement("div");
     host.id = "markdown-safety-check";
     document.body.append(host);
-    DOM.createRoot(host).render(
-      React.createElement(MarkdownDocument, {
+    (DOM.createRoot || DOM.default.createRoot)(host).render(
+      (React.createElement || React.default.createElement)(MarkdownDocument, {
         source:
           '# Safe heading\n\n<script>window.injected = true</script>\n\n<img src=x onerror="window.injected=true">\n\n[unsafe](javascript:alert(1))\n\n$z=xw+b$',
       }),

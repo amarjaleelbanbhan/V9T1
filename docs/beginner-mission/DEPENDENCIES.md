@@ -5,6 +5,7 @@ Checked installed package manifests on 2026-10-10. Exact versions of new direct 
 | Package | Installed version | Declared license | Upstream |
 | --- | --- | --- | --- |
 | ts-fsrs | 5.4.2 | MIT | git+https://github.com/open-spaced-repetition/ts-fsrs.git |
+| @codemirror/state | 6.7.6 | MIT | https://github.com/codemirror/state |
 | codemirror | 6.0.2 | MIT | https://github.com/codemirror/basic-setup.git |
 | @codemirror/lang-python | 6.2.1 | MIT | https://github.com/codemirror/lang-python.git |
 | @codemirror/theme-one-dark | 6.1.3 | MIT | https://github.com/codemirror/theme-one-dark.git |
