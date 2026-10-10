@@ -24,8 +24,8 @@ function FamilyMap({selected}:{selected:Family}){
     <rect x="55" y="80" width="462" height="200" rx="23" fill="#14564A" stroke={selected==='ml'?'#BDF6BC':'#4B9375'} strokeWidth={selected==='ml'?3:1.5}/>
     <text x="76" y="108" className="foundation-map-title">MACHINE LEARNING</text>
     <text x="76" y="128" className="foundation-map-subtitle">Learn patterns from examples</text>
-    <rect x="110" y="150" width="356" height="113" rx="21" fill="#A78BFA" stroke={selected==='dl'?'#E1F8B7':'#7FCAA4'} strokeWidth={selected==='dl'?3:1.5}/>
-    <circle cx="201" cy="211" r="13" fill="#638BFF"/><circle cx="280" cy="194" r="13" fill="#BCE6B2"/><circle cx="280" cy="230" r="13" fill="#BCE6B2"/><circle cx="366" cy="211" r="13" fill="#D5F5BE"/>
+    <rect x="110" y="150" width="356" height="113" rx="21" fill="#0C969C" stroke={selected==='dl'?'#E1F8B7':'#7FCAA4'} strokeWidth={selected==='dl'?3:1.5}/>
+    <circle cx="201" cy="211" r="13" fill="#6BA3BE"/><circle cx="280" cy="194" r="13" fill="#BCE6B2"/><circle cx="280" cy="230" r="13" fill="#BCE6B2"/><circle cx="366" cy="211" r="13" fill="#D5F5BE"/>
     <g stroke="#C9EDB3" strokeWidth="3" opacity=".75"><path d="M214 211L267 194M214 211L267 230M293 194L353 211M293 230L353 211"/></g>
     <text x="288" y="174" textAnchor="middle" fontSize="11" fill="#F1FFF0" fontWeight="bold">DEEP LEARNING</text>
     <text x="288" y="251" textAnchor="middle" fontSize="10" fill="#E2F7DC">Multiple neural layers</text>
@@ -43,7 +43,7 @@ function ClassificationChart({threshold}:{threshold:number}){
     <path d={'M'+plotX(threshold)+' 26V171'} stroke="#F0C87F" strokeWidth="2" strokeDasharray="5 4"/>
     <text x={Math.min(plotX(threshold)+7,450)} y="19" fill="#F7DCAA" fontSize="11">threshold {show(threshold)}</text>
     {CLASSIFICATION_SAMPLES.map((p,i)=><g key={i}>
-      <circle cx={plotX(p.score)} cy={p.label?80:153} r="11" fill={assessment.predictions[i]===p.label?'#638BFF':'#F0A66A'} stroke="#F4FFF3" strokeWidth="1.5"/>
+      <circle cx={plotX(p.score)} cy={p.label?80:153} r="11" fill={assessment.predictions[i]===p.label?'#6BA3BE':'#F0A66A'} stroke="#F4FFF3" strokeWidth="1.5"/>
       <text x={plotX(p.score)} y={(p.label?80:153)+4} textAnchor="middle" fontSize="10" fill="#082923" fontWeight="bold">{p.label}</text>
       <text x={plotX(p.score)} y={(p.label?80:153)+28} textAnchor="middle" fill="#C7E7D3" fontSize="10">{p.score}</text>
     </g>)}
@@ -58,7 +58,7 @@ function RegressionChart({slope,intercept}:{slope:number;intercept:number}){
     <path d={'M'+plotX(0)+' '+plotY(intercept)+'L'+plotX(4)+' '+plotY(4*slope+intercept)} stroke="#C7E9A0" strokeWidth="3" fill="none"/>
     {REGRESSION_SAMPLES.map((p,i)=><g key={i}>
       <line x1={plotX(p.x)} y1={plotY(p.y)} x2={plotX(p.x)} y2={plotY(slope*p.x+intercept)} stroke="#F0C87F" strokeWidth="2" strokeDasharray="3 3"/>
-      <circle cx={plotX(p.x)} cy={plotY(p.y)} r="7" fill="#638BFF" stroke="#F4FFF3" strokeWidth="1.5"/>
+      <circle cx={plotX(p.x)} cy={plotY(p.y)} r="7" fill="#6BA3BE" stroke="#F4FFF3" strokeWidth="1.5"/>
       <text x={plotX(p.x)+10} y={plotY(p.y)-7} fontSize="10" fill="#C6E4D2">{p.y}</text>
     </g>)}
     <text x="240" y="201" className="foundation-axis-label">Input x →</text>

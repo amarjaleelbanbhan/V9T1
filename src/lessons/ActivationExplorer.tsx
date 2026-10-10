@@ -13,8 +13,8 @@ const notes:Record<ScalarActivation,string>={
   'leaky-relu':'Keeps a small negative slope instead of fully discarding negative values.'
 };
 const palettes:{kind:ScalarActivation;color:string}[]=[
-  {kind:'sigmoid',color:'#638BFF'},{kind:'tanh',color:'#4CD2C4'},
-  {kind:'relu',color:'#EAC87F'},{kind:'leaky-relu',color:'#C3A3EF'}
+  {kind:'sigmoid',color:'#6BA3BE'},{kind:'tanh',color:'#0C969C'},
+  {kind:'relu',color:'#EAC87F'},{kind:'leaky-relu',color:'#6BA3BE'}
 ];
 function ScalarGraph({kind,z}:{kind:ScalarActivation;z:number}){
   const xmin=-5,xmax=5,ymin=-1.5,ymax=5.5;

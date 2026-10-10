@@ -1,8 +1,11 @@
+import {StagePlayer} from '../components/StagePlayer';
+import {lazy,Suspense} from 'react';
+const NetworkScene=lazy(()=>import('../visuals/NetworkScene').then(m=>({default:m.NetworkScene})));
 import {usePythonProgram} from '../python/usePythonProgram';
 import {PythonProgram} from '../components/PythonProgram';
 import {backpropPython} from '../python/programs';
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, ChevronRight, GitBranch, RotateCcw, Play, Pause, CircleHelp } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronRight, GitBranch, RotateCcw, CircleHelp } from 'lucide-react';
 import { DEFAULT_FORWARD_INPUT, DEFAULT_FORWARD_LAYERS, type DenseLayer } from '../engine/forward';
 import { backpropagate } from '../engine/backprop';
 type Edge={layer:number;neuron:number;source:number};
@@ -27,7 +30,7 @@ function BackwardNetwork({trace,stage,selected}:{trace:ReturnType<typeof backpro
      const x1=a.x+26,x2=b.x-26,midX=(x1+x2)/2,midY=(a.y+b.y)/2;
      const direction=reversed?'M'+x2+' '+b.y+'L'+x1+' '+a.y:'M'+x1+' '+a.y+'L'+x2+' '+b.y;
      return <g key={l+'-'+n+'-'+s} pointerEvents="none">
-       <path d={direction} fill="none" stroke={isSelected?'#F8E6A3':reversed?'#F5C47B':'#638BFF'} strokeWidth={isSelected?4:2.5} opacity={isSelected?1:.58} markerEnd={reversed?'url(#backprop-arrow)':undefined}/>
+       <path d={direction} fill="none" stroke={isSelected?'#F8E6A3':reversed?'#F5C47B':'#6BA3BE'} strokeWidth={isSelected?4:2.5} opacity={isSelected?1:.58} markerEnd={reversed?'url(#backprop-arrow)':undefined}/>
        <rect x={midX-28} y={midY-12} width="56" height="24" rx="7" fill={isSelected?'#43614C':'#102F2B'} stroke={isSelected?'#F8E6A3':'#386D58'}/>
        <text x={midX} y={midY+4} textAnchor="middle" fill="#F2FFF2" fontSize="10">{stage>=4?fmt(gradient):fmt(weight)}</text>
      </g>;
@@ -36,7 +39,7 @@ function BackwardNetwork({trace,stage,selected}:{trace:ReturnType<typeof backpro
       const output=l===0?trace.forward.input[n]:trace.forward.layers[l-1].neurons[n].output;
       const delta=l===0?null:trace.layers[l-1].neurons[n].delta;
       return <g key={l+'-'+n}>
-        <circle cx={pos.x} cy={pos.y} r="28" stroke={l===0?'#5D967B':reversed?'#F3CE8C':'#638BFF'} strokeWidth="2" fill={l===0?'#133B34':'#245A43'}/>
+        <circle cx={pos.x} cy={pos.y} r="28" stroke={l===0?'#5D967B':reversed?'#F3CE8C':'#6BA3BE'} strokeWidth="2" fill={l===0?'#133B34':'#245A43'}/>
         <text x={pos.x} y={pos.y+4} textAnchor="middle" fontSize="12" fill="#E9FFEA" fontWeight="700">{stage>=3&&delta!==null?fmt(delta):fmt(output)}</text>
         <text x={pos.x} y={pos.y+47} textAnchor="middle" fontSize="11" fill="#BBDCCD">{l===0?'x'+(n+1):l===1?'h'+(n+1):'ŷ'}</text>
       </g>;
@@ -45,6 +48,7 @@ function BackwardNetwork({trace,stage,selected}:{trace:ReturnType<typeof backpro
  </svg>;
 }
 export function BackpropLab(){
+ const [view3d,setView3d]=useState(false);
  const python=usePythonProgram<{loss:number;updated:DenseLayer[]}>();
  const [inputs,setInputs]=useState<number[]>([...DEFAULT_FORWARD_INPUT]);
  const [layers,setLayers]=useState<DenseLayer[]>(()=>copyLayers(DEFAULT_FORWARD_LAYERS));
@@ -52,7 +56,6 @@ export function BackpropLab(){
  const [learningRate,setLearningRate]=useState(.2);
  const [stage,setStage]=useState(0);
  const [selected,setSelected]=useState<Edge>(INITIAL_EDGE);
- const [playing,setPlaying]=useState(false);
  const [answer,setAnswer]=useState<'earlier'|'later'|null>(null);
  const [lastUpdate,setLastUpdate]=useState<{previous:number;next:number}|null>(null);
  const trace=useMemo(()=>backpropagate(inputs,layers,target),[inputs,layers,target]);
@@ -60,13 +63,12 @@ export function BackpropLab(){
  const forwardNeuron=trace.forward.layers[selected.layer].neurons[selected.neuron];
  const weight=layers[selected.layer].weights[selected.neuron][selected.source];
  const gradient=neuron.weights[selected.source];
- const setStep=(v:number)=>{setPlaying(false);setStage(Math.max(0,Math.min(5,v)))};
+ const setStep=(v:number)=>{setStage(Math.max(0,Math.min(5,v)))};
  const changeWeight=(v:number)=>{setLastUpdate(null);setLayers(old=>old.map((l,i)=>i!==selected.layer?l:{...l,weights:l.weights.map((r,j)=>j!==selected.neuron?r:r.map((w,k)=>k===selected.source?v:w))}))};
  const changeBias=(li:number,j:number,v:number)=>{setLastUpdate(null);setLayers(old=>old.map((l,i)=>i===li?{...l,biases:l.biases.map((b,k)=>k===j?v:b)}:l))};
  const apply=async()=>{const result=await python.run(backpropPython(inputs,layers,target,learningRate));if(!result)return;setLastUpdate({previous:result.loss,next:backpropagate(inputs,result.updated,target).loss});setLayers(result.updated);setStep(5)};
  useEffect(()=>{python.reset();},[inputs,layers,target,learningRate]);
  const reset=()=>{setInputs([...DEFAULT_FORWARD_INPUT]);setLayers(copyLayers(DEFAULT_FORWARD_LAYERS));setTarget(1);setLearningRate(.2);setStep(0);setSelected(INITIAL_EDGE);setAnswer(null);setLastUpdate(null)};
- useEffect(()=>{if(!playing)return;if(stage>=5){setPlaying(false);return;}const t=window.setTimeout(()=>setStage(s=>Math.min(5,s+1)),750);return()=>window.clearTimeout(t)},[playing,stage]);
  const activeExplanation=stage===0?'Compute input → hidden ReLU → output Sigmoid. Every displayed neuron value comes from the forward engine.'
   :stage===1?'Half-squared loss: L = ½(ŷ − target)², so the upstream output gradient is ŷ − target.'
   :stage===2?'Output delta: dL/dz_out = (ŷ − target) × sigmoid′(z_out).'
@@ -79,11 +81,10 @@ export function BackpropLab(){
     <div className="foundation-panel-heading"><div><p className="eyebrow">FORWARD → LOSS → BACKWARD → UPDATE</p><h2>How does an earlier weight know to change?</h2></div><GitBranch size={22}/></div>
     <div className="backprop-layout">
       <div className="foundation-chart-card">
-        <BackwardNetwork trace={trace} stage={stage} selected={selected}/>
-        <div className="backprop-stages" role="group" aria-label="Backpropagation stages">{stages.map((s,i)=><button key={s} type="button" className={stage===i?'picked':''} aria-pressed={stage===i} onClick={()=>setStep(i)}>{i+1}. {s}</button>)}</div>
+        <button aria-pressed={view3d} onClick={()=>setView3d(v=>!v)}>{view3d?"Use 2D gradients":"Explore 3D gradients"}</button>{view3d?<Suspense fallback={<p>Loading gradient network…</p>}><NetworkScene trace={trace.forward} backward={trace} selected={selected} onSelect={setSelected}/></Suspense>:<BackwardNetwork trace={trace} stage={stage} selected={selected}/>}
+        <StagePlayer step={stage} count={stages.length} onStep={setStep} label="Backward playback"/><div className="backprop-stages" role="group" aria-label="Backpropagation stages">{stages.map((s,i)=><button key={s} type="button" className={stage===i?'picked':''} aria-pressed={stage===i} onClick={()=>setStep(i)}>{i+1}. {s}</button>)}</div>
         <div className="loss-transport" role="group" aria-label="Backpropagation playback">
           <button type="button" aria-label="Previous stage" disabled={stage===0} onClick={()=>setStep(stage-1)}><ArrowLeft size={16}/> Previous</button>
-          <button type="button" aria-pressed={playing} aria-label={playing?'Pause explanation':'Play explanation'} onClick={()=>{if(stage===5)setStage(0);setPlaying(v=>!v)}}>{playing?<Pause size={16}/>:<Play size={16}/>} {playing?'Pause':'Play'}</button>
           <button type="button" aria-label="Next stage" disabled={stage===5} onClick={()=>setStep(stage+1)}>Next <ArrowRight size={16}/></button>
         </div>
         <p className="backprop-stage-note" data-testid="backprop-stage-note">{activeExplanation}</p>
