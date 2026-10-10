@@ -12,6 +12,39 @@ import {
 import fs from "node:fs";
 import { calculate } from "./beginner.ts";
 
+for (const [model, values, slip, phrase] of [
+  ["chain", [1, 2], 6, "sum of dy/du and du/dx"],
+  ["chain", [-2, 2], -6, "sum of dy/du and du/dx"],
+  ["depth", [0.5, 4], 2, "factor multiplied by the path depth"],
+]) {
+  test(`${model} names its conceptual slip at ${values}`, () => {
+    const l = beginnerLessons.find(l => l.model === model);
+    const calc = calculate(model, values);
+    const d = diagnose(slip, calc, l, values);
+    assert.equal(d.category, "pack");
+    assert.equal(d.certain, false);
+    assert.ok(d.observation.includes(phrase));
+    assert.equal(diagnose(calc.result, calc, l, values).category, "match");
+    assert.notEqual(diagnose(12345, calc, l, values).category, "pack");
+    const rule = diagnosticPacks[model][0];
+    for (const stage of calc.stages) if (typeof stage.value === "number") {
+      assert.equal(rule.match({guess: stage.value, result: calc.result, calc, values,
+        quantities: [], close: (a,b) => Math.abs(a-b) <= 1e-4*Math.max(1,Math.abs(b))}), null);
+    }
+  });
+}
+
+test("chapter packs defer when a slip coincides with a trace stage and reject invalid inputs", () => {
+  const l = beginnerLessons.find(l => l.model === "depth");
+  const calc = calculate("depth", [2,4]);
+  assert.equal(diagnose(8, calc, l, [2,4]).category, "intermediate");
+  for (const model of ["chain", "depth"]) {
+    const context = {guess: NaN, result: calc.result, calc, values: [NaN,4], quantities: [], close: () => false};
+    assert.equal(diagnosticPacks[model][0].match(context), null);
+    assert.equal(diagnosticPacks[model][0].match({...context, guess: Infinity}), null);
+  }
+});
+
 // catalog.ts imports JSON, which bare Node ESM cannot do; read the same files directly.
 const beginnerLessons = ["foundations", "neural", "training"].flatMap((name) =>
   JSON.parse(fs.readFileSync(`src/course/${name}.json`, "utf8")),
@@ -284,3 +317,4 @@ test("pack rules stay silent on the authored cases of their own lessons", () => 
     }
   }
 });
+

@@ -1,5 +1,6 @@
 export interface Case {name:string;values:number[];expected:number}
 export interface Lesson {
+ choiceReasons?: string[];
  id:string;chapter:string;title:string;terms:[string,string][];explanation:string;why:string;formula:string;model:string;labels:string[];cases:[Case,Case];target:string;question:string;choices:string[];correct:number;reason:string;mistake:string;debug:string;project:string;source:string;lab?:string;
 }
 export interface Stage {label:string;value:number|string}
