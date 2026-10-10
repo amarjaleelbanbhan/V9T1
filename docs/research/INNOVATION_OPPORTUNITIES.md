@@ -128,8 +128,12 @@ is merely *shown*.
 term; correct for the worked case but not the transfer case; order of magnitude out. Then require a
 short free-text restatement of the rule before the item can be retried.
 
-**Problem solved.** This is the best-evidenced change available. Retrieval practice yields g = 0.14
-without feedback and **g = 0.50 with it** (*Educ Psychol Rev*, Dec 2025); rephrasing feedback beats
+**Problem solved.** This is the best-evidenced change available. In the 44-study
+retrieval-vs-elaborative-encoding meta-analysis (*Educ Psychol Rev*, Dec 2025) the **overall**
+advantage of retrieval practice is g = 0.14, rising to g = 0.50 **in the subset where feedback was
+available**; g = 0.14 is the pooled overall comparison, not a no-feedback condition, and neither
+number is an effect size for adding feedback. The defensible reading is that feedback availability
+moderates the comparison strongly enough to prioritise it. Separately, rephrasing feedback beats
 reading it (*J Exp Educ*, 2026); error magnitude predicts memory updating (2026). NeuralLab is
 currently in the low-g condition.
 
@@ -235,7 +239,9 @@ the low-feedback condition again, in the one place designed for transfer.
 
 #### A9. Portable evidence
 
-**Mechanism.** Export and import the learner's evidence as a signed-by-hash JSON file; show what it
+**Mechanism.** Export and import the learner's evidence as a plain JSON file carrying a non-cryptographic
+integrity checksum, which detects accidental corruption and nothing else. It is **not** a signature
+and proves no authorship; show what it
 does and does not attest.
 
 **Problem solved.** 60 lessons of evidence live in one `localStorage` key and vanish with a cleared

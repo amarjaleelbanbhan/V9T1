@@ -19,6 +19,88 @@ Earlier checkpoints that remain valid and are *not* superseded:
 
 ---
 
+## 0. Reconciliation against PR #16 (added 2026-10-10, after merge `09a9646`)
+
+The audit in sections 1–12 below was performed against `e565635`. **PR #16 then merged and
+delivered a large part of Milestone 0 and Milestone 1.** Re-verified on current `main`
+(`09a9646`): 208/208 unit tests pass; production build clean; curriculum validation clean.
+
+This section is authoritative where it contradicts anything later in the document.
+
+### 0.1 Already implemented — remove from the plan
+
+| Capability | Evidence on `main` |
+|---|---|
+| Entry-bundle reduction | Entry chunk is now **266.13 kB / 82.92 kB gzip** (was 1 260.78 kB / 351.17 kB). Three.js, CodeMirror, KaTeX, every lab and **every curriculum document** are separate chunks |
+| Lazy 3D and lazy curriculum Markdown | `App.tsx` lazy-loads all labs and scenes; each `dl-NN-NNN.md` is its own ~2.8 kB chunk |
+| Mathematical notation and code highlighting | `remark-math` + `rehype-katex` + `rehype-highlight` + a safe `remarkCallouts` plugin |
+| Editable Python | `src/components/PythonEditor.tsx` on CodeMirror 6 with `@codemirror/lang-python` |
+| Spaced repetition | Real FSRS via `ts-fsrs` in `src/course/learning.ts`, four card kinds per lesson, validated persistence |
+| Portable evidence | `src/course/backup.ts` export/import with strict validation |
+| Resume last position | `neurallab.workspace` + `learning.selected` |
+| Prerequisite scaffolding | `src/course/scaffolding.ts`: per-chapter bridges, per-topic prerequisites, navigable |
+| Explanation drafts (Feynman) | `LessonLearning.tsx`, persisted, with a self-review checklist |
+| 3D rebuild | `NetworkScene`, `LossSurface`, `SceneObjects`, `SceneFrame` (visibility-gated `frameloop`, `PerformanceMonitor`, error boundary, 2D fallback) |
+| Motion controls | `StagePlayer` — play/pause/rewind/replay, pauses when hidden, offscreen or reduced-motion |
+| The `aria-prohibited-attr` defect on the 3D canvas | **Fixed.** axe now reports it clean |
+| CI reproducibility | `npm ci` with a `package-lock.json` cache key |
+| Palette | Six-colour deep-teal/slate-blue set applied across CSS, SVG and scenes |
+
+### 0.2 Implemented but needing polish
+
+| Capability | What is still weak |
+|---|---|
+| Hints | `scaffolding()` returns one static `<details>` with an analogy and four generic steps identical for every lesson. There is **no progressive ladder** and **no record of hint use** |
+| Stage trace | `TraceVisual` still renders the same values three times (bar chart, grid, table) and still needs N manual clicks before the result appears. `StagePlayer` exists but is not wired into the beginner course |
+| Chapter review | Still appended to the bottom of all 60 lessons; `tasks[].model` and `.values` are still read by nothing |
+| Design tokens | **88 hardcoded hex values across 17 `.tsx` files.** They were recoloured to the new palette by hand rather than referenced from a token module, so the next palette change repeats the work |
+| Evidence model | `completed`, `assisted success`, `independent success` and `retained understanding` are not separated. `Evidence` records attempts, cases and `passedAt` only |
+
+### 0.3 Verified defects still open
+
+| Defect | Measurement on `main`, 2026-10-10 |
+|---|---|
+| No URL routing | In-app navigation leaves the URL unchanged; Back still exits the app. Position is restored from `localStorage`, which is not the same as addressability |
+| Python cold start | First reveal of a session: **7 762 ms, 11 361 233 bytes** from the CDN. Nothing warms the worker while the learner reads |
+| Accessibility | **1 serious axe violation remains** (down from 6): `color-contrast` on `.planned .lesson-name small`, 5 nodes — one CSS rule |
+| Wrong-answer feedback | Still the single string "Prediction differs; review the operations and retry." No diagnosis of *how* the answer was wrong |
+| Assessment integrity | Transfer-case answers are still printed in the public curriculum Markdown; still exactly 2 cases and 2 MCQ choices per lesson |
+| Divergence | A diverging training run still raises instead of being shown |
+
+### 0.4 New learning interactions (this cycle's work)
+
+Missions with an objective, an action on real mathematical state and visible consequences; a
+four-level hint ladder with hint use recorded separately from independent success; deterministic
+diagnostic feedback derived from the Python-returned stages; mission progression with scaffolding
+removed one step at a time. Specified in [`docs/missions/LEARNING_MISSIONS.md`](./missions/LEARNING_MISSIONS.md).
+
+### 0.5 Experiments requiring learner evaluation
+
+Claims that cannot be settled by engineering and must not be stated as outcomes: whether diagnostic
+feedback reduces retries; whether missions beat the current guided lesson; whether generated items
+preserve difficulty; whether the prerequisite graph helps learners or only authors; whether any of
+this improves retention. Each needs learners, and none is asserted in this plan.
+
+### 0.6 Corrections to this document's earlier research
+
+1. **g = 0.14 was misread.** It is the *overall* pooled retrieval-versus-elaborative-encoding
+   comparison across 44 studies, **not** a no-feedback condition. g = 0.50 is the subset where
+   feedback was available. Feedback availability moderates that comparison; neither figure is an
+   effect size for adding feedback to a product. Corrected in
+   [COMPETITIVE_LANDSCAPE.md](./research/COMPETITIVE_LANDSCAPE.md) §5 and
+   [INNOVATION_OPPORTUNITIES.md](./research/INNOVATION_OPPORTUNITIES.md) A4.
+2. **"Signed-by-hash" overstated a checksum.** A non-cryptographic integrity check detects accidental
+   corruption and proves nothing about authorship. Corrected.
+3. **Python stays the authoritative calculation source.** An earlier draft proposed rendering lesson
+   stages from `calculate()` and demoting Python to verification. That contradicts a product
+   requirement: the lesson text promises the learner that Python produced the numbers. The latency
+   fix is to warm the worker during reading and precache the pinned assets; any `calculate()` output
+   shown before Python returns must be labelled a preview and replaced. Corrected in
+   [ARCHITECTURE_REVIEW.md](./engineering/ARCHITECTURE_REVIEW.md) A2 and
+   [IMPLEMENTATION_ROADMAP.md](./engineering/IMPLEMENTATION_ROADMAP.md) M0-3.
+
+---
+
 ## 1. Executive assessment
 
 NeuralLab is in better shape than its surface suggests, and its problems are not the ones a
@@ -48,7 +130,7 @@ states are tracked and surfaced as one line of text. The design tokens are defin
 contradicted by 92 hardcoded colours in the visualisation layer.
 
 The honest verdict: **this is a good product with excellent foundations, two structural omissions
-(no local-first rendering, no URL routing), and a presentation layer that has not caught up with
+(no latency budget for the Python runtime, no URL routing), and a presentation layer that has not caught up with
 the engineering.** It does not need a rewrite. It needs about three weeks of connecting things that
 already exist, and then it is positioned in a market gap nothing else occupies.
 
@@ -198,7 +280,7 @@ P3 = ambitious · R = research. Full specifications and scoring in
 
 | Pri | Feature | Why now | Effort | Risk |
 |---|---|---|---|---|
-| **P0** | Local-first calculation; Python becomes explicit verification | 5 149 ms → <100 ms; 11 MB → 0; works offline; makes the correctness claim *visible* | 2–3 d | low–med |
+| **P0** | Reduce Python latency without replacing Python: warm the worker on course entry, precache assets, optional labelled preview | Python stays authoritative — it is a product requirement. The cost is paid off by scheduling, not by swapping engines | 2–3 d | low–med |
 | **P0** | Design tokens reachable from TS/SVG/3D; replace 92 literals | Unblocks every visual change; fixes the teal-in-navy canvas | 1.5–2 d | low |
 | **P0** | URL routing and history | Unblocks deep links, sharing, resume, pre-rendering | 2–3 d | med |
 | **P0** | Accessibility: 6 violations → 0; 3D gets a real accessible name | The signature visual is currently invisible to assistive technology | 1 d | low |
@@ -206,7 +288,7 @@ P3 = ambitious · R = research. Full specifications and scoring in
 | **P0** | CI hygiene: `npm ci`, lockfile, Playwright ≥ 1.55.1, typecheck tests | Reproducible builds; closes 2 high advisories | 0.5 d | low |
 | **P1** | Type scale, measure, breakpoints, states | 24 font sizes, 171-char lines, 20 breakpoints | 4–5 d | med |
 | **P1** | Trace redesign — one representation, not three | The most-used surface says the same thing three times | 2–3 d | med |
-| **P1** | **Proportional diagnostic feedback** | Best-evidenced change available: retrieval practice g = 0.14 without feedback, **g = 0.50 with it** | 2–3 d | med |
+| **P1** | **Proportional diagnostic feedback** | Best-evidenced change available: feedback availability strongly moderates the retrieval-practice meta-analysis (overall g = 0.14; g = 0.50 in the feedback-available subset). Current wrong-answer text carries no corrective information | 2–3 d | med |
 | **P1** | Rephrase-the-rule step after an error | Rephrasing feedback beats reading it (*J Exp Educ* 2026) | 1 d | low |
 | **P1** | Wire the dead chapter-review data into worked solutions | Data already present; near-zero cost | 0.5–1 d | very low |
 | **P1** | Progress rail surfacing four existing states | Tracked, never shown | 1–1.5 d | low |
@@ -280,9 +362,12 @@ Three hostile readings, and what changed because of them.
 
 > *"Local-first rendering duplicates the Python path. Two sources of truth."*
 >
-> **They are already two sources of truth, and already tested as one.** `pythonPrograms.test.mjs`
-> asserts their equality for every lesson, stage, grid and curve. The proposal changes which one is
-> *displayed*, not how many exist. If anything it makes the duplication honest by showing both.
+> **Objection accepted; the proposal was changed.** An earlier draft made `calculate()` the default
+> display source. The maintainer's requirement is that lesson numbers are produced by real Python,
+> and the lesson text says so to the learner. Python stays authoritative. Latency is addressed by
+> warming the worker during reading and precaching assets; any `calculate()` output shown before
+> Python returns must be labelled a preview and replaced. `pythonPrograms.test.mjs` already asserts
+> the two agree for every lesson, stage, grid and curve.
 
 > *"URL routing in a 15-branch ternary will be messy."*
 >
@@ -315,9 +400,13 @@ Three hostile readings, and what changed because of them.
 
 ### Skeptical designer and learning scientist
 
-> *"g = 0.50 is from a meta-analysis of laboratory retrieval studies, not from this product."*
+> *"g = 0.50 is from a meta-analysis of laboratory retrieval studies, not from this product — and
+> an earlier draft of this plan misread it as a no-feedback versus feedback contrast."*
 >
-> **Correct, and the claim is scoped accordingly.** The literature justifies *prioritising* feedback
+> **Both correct; the earlier draft was wrong and is fixed.** g = 0.14 is the *overall* pooled
+> retrieval-versus-elaborative-encoding comparison across 44 studies; g = 0.50 is the subset where
+> feedback was available. Feedback availability is a moderator of that comparison, not a measured
+> effect of adding feedback. The literature justifies *prioritising* feedback
 > quality; it does not predict an effect size here. The roadmap proposes measuring
 > retries-to-correct before and after, and states plainly that this is not a controlled study.
 
