@@ -34,4 +34,3 @@ Node.js 22+ is recommended. Restricted local environments can set `NEURALLAB_PYO
 See [beginner completion checkpoint](docs/BEGINNER_COMPLETION.md), [coverage](curriculum/deep-learning/COVERAGE_MATRIX.md), [sources](curriculum/deep-learning/SOURCE_CATALOG.md) and [research gaps](curriculum/deep-learning/RESEARCH_GAPS.md). The course outline and research path set scope; empirical learning effectiveness, independent project grading, low-end physical-device testing, comprehensive accessibility review and offline runtime caching remain future work.
 
 Product direction and historical audit: [Project Renaissance 2026](docs/PROJECT_RENAISSANCE_2026.md). Current status is recorded in its reconciliation; proposed missions are described in [Learning missions](docs/missions/LEARNING_MISSIONS.md).
-
