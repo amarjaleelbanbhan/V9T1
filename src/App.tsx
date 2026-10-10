@@ -5,27 +5,31 @@ import { BrainCircuit, BookOpen, Check, ChevronRight, Compass, Eye, Play, Pause,
 import { computeNeuron, formatNumber, activationNames } from './engine/neuron';
 import { TIMELINE, LAST_STEP } from './engine/timeline';
 import { useLab } from './store/lab';
-import { NeuronScene } from './visuals/NeuronScene';
+const NeuronScene=lazy(()=>import('./visuals/NeuronScene').then(m=>({default:m.NeuronScene})));
+const LearningDashboard=lazy(()=>import('./lessons/LearningDashboard').then(m=>({default:m.LearningDashboard})));
+const PythonWorkshop=lazy(()=>import('./lessons/PythonWorkshop').then(m=>({default:m.PythonWorkshop})));
+const MathWorkshop=lazy(()=>import('./lessons/MathWorkshop').then(m=>({default:m.MathWorkshop})));
 import { NeuronDiagram } from './visuals/NeuronDiagram';
 import { ActivationPlot } from './visuals/ActivationPlot';
 import { ParameterSlider } from './components/ParameterSlider';
 import { curriculum } from './content/curriculum';
-import { FoundationsLab } from './lessons/FoundationsLab';
-import { ActivationExplorer } from './lessons/ActivationExplorer';
-import { ForwardLab } from './lessons/ForwardLab';
-import { TensorLab } from './lessons/TensorLab';
-import { PerceptronLab } from './lessons/PerceptronLab';
-import { LossGradientLab } from './lessons/LossGradientLab';
-import { BackpropLab } from './lessons/BackpropLab';
-import { GradientDepthLab } from './lessons/GradientDepthLab';
+const FoundationsLab=lazy(()=>import('./lessons/FoundationsLab').then(m=>({default:m.FoundationsLab})));
+const ActivationExplorer=lazy(()=>import('./lessons/ActivationExplorer').then(m=>({default:m.ActivationExplorer})));
+const ForwardLab=lazy(()=>import('./lessons/ForwardLab').then(m=>({default:m.ForwardLab})));
+const TensorLab=lazy(()=>import('./lessons/TensorLab').then(m=>({default:m.TensorLab})));
+const PerceptronLab=lazy(()=>import('./lessons/PerceptronLab').then(m=>({default:m.PerceptronLab})));
+const LossGradientLab=lazy(()=>import('./lessons/LossGradientLab').then(m=>({default:m.LossGradientLab})));
+const BackpropLab=lazy(()=>import('./lessons/BackpropLab').then(m=>({default:m.BackpropLab})));
+const GradientDepthLab=lazy(()=>import('./lessons/GradientDepthLab').then(m=>({default:m.GradientDepthLab})));
 
 const TrainingProject = lazy(()=>import('./lessons/TrainingProject').then(m=>({default:m.TrainingProject})));
 const BeginnerCourse = lazy(()=>import('./lessons/BeginnerCourse').then(m=>({default:m.BeginnerCourse})));
 const CurriculumLibrary = lazy(()=>import('./lessons/CurriculumLibrary').then(m=>({default:m.CurriculumLibrary}))); 
-import { PythonFlowLab } from './lessons/PythonFlowLab';
-import { PythonBasicsLab } from './lessons/PythonBasicsLab';
-import { PythonTraceLab } from './lessons/PythonTraceLab';
+const PythonFlowLab=lazy(()=>import('./lessons/PythonFlowLab').then(m=>({default:m.PythonFlowLab})));
+const PythonBasicsLab=lazy(()=>import('./lessons/PythonBasicsLab').then(m=>({default:m.PythonBasicsLab})));
+const PythonTraceLab=lazy(()=>import('./lessons/PythonTraceLab').then(m=>({default:m.PythonTraceLab})));
 
+type ActiveLesson='intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'|'library'|'python'|'python-basics'|'python-flow'|'beginner'|'training-project'|'dashboard'|'python-workshop'|'math-workshop';
 type View='3d'|'2d';
 type InspectorTab='math'|'code'|'challenge';
 function canUseWebGL(){try{const c=document.createElement('canvas');return !!(c.getContext('webgl2')||c.getContext('webgl'));}catch{return false;}}
@@ -55,18 +59,20 @@ export default function App(){
   const {inputs,weights,bias,activation,step,playing,speed,setInput,setWeight,setBias,setActivation,setStep,setSpeed,play,pause,advance,reset}=useLab();
   const trace=useMemo(()=>computeNeuron({inputs,weights,bias,activation}),[inputs,weights,bias,activation]);
   const [supported]=useState(canUseWebGL);
-  const [view,setView]=useState<View>(supported?'3d':'2d');
+  const [view,setView]=useState<View>(supported&&window.innerWidth>=650&&!matchMedia('(prefers-reduced-motion: reduce)').matches?'3d':'2d');
   const [tab,setTab]=useState<InspectorTab>('math');
-  const [activeLesson,setActiveLesson]=useState<'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'|'library'|'python'|'python-basics'|'python-flow'|'beginner'|'training-project'>('neuron');
-  const [beginnerStart,setBeginnerStart]=useState('dl-00-001');
+  const [activeLesson,setActiveLesson]=useState<ActiveLesson>(()=>{try{const id=localStorage.getItem('neurallab.workspace');return ['intro','neuron','activation','propagation','tensor','perceptron','loss','backprop','gradient-depth','library','python','python-basics','python-flow','beginner','training-project','dashboard','python-workshop','math-workshop'].includes(id||'')?id as ActiveLesson:'neuron';}catch{return 'neuron';}});
+  const [beginnerStart,setBeginnerStart]=useState<string|undefined>(undefined);
   const [sidebarOpen,setSidebarOpen]=useState(false);
   useEffect(()=>{if(!playing)return;const handle=window.setInterval(()=>{const {step:s,advance:a,pause:p}=useLab.getState();if(s>=LAST_STEP)p();else a();},Math.max(250,1250/speed));return()=>window.clearInterval(handle);},[playing,speed]);
-  useEffect(()=>{const mq=window.matchMedia('(prefers-reduced-motion: reduce)');if(mq.matches&&playing)pause();},[playing,pause]);
+  useEffect(()=>{const mq=window.matchMedia('(prefers-reduced-motion: reduce)');const stop=()=>{if(mq.matches)pause();};if(playing)stop();mq.addEventListener('change',stop);return()=>mq.removeEventListener('change',stop);},[playing,pause]);
+  useEffect(()=>{try{localStorage.setItem('neurallab.workspace',activeLesson);}catch{}const main=document.getElementById('lab');main?.focus({preventScroll:true});main?.scrollIntoView({block:'start',behavior:'instant'});},[activeLesson]);
+  useEffect(()=>{const stop=()=>{if(document.hidden)pause();};document.addEventListener('visibilitychange',stop);return()=>document.removeEventListener('visibilitychange',stop);},[pause]);
   const resetAll=()=>{reset();setTab('math');};
   return <div className="app-shell">
     <a className="skip-link" href="#lab">Skip to learning workspace</a><header className="top-bar"><a className="brand" href="#top"><BrainCircuit size={28} strokeWidth={2.4}/><span>Neural<span>Lab</span></span></a>
       <nav className="global-nav" aria-label="Main navigation"><a className="active" href="#lab" onClick={()=>{setActiveLesson('neuron');pause();}}>Learn</a><a href="#curriculum" onClick={()=>{setActiveLesson('library');pause();}}>Curriculum</a></nav>
-      <span className="header-label">VISUAL DEEP LEARNING <span className="status-dot"/></span>
+      <button className="dashboard-link" onClick={()=>{setActiveLesson('dashboard');pause();}}>My learning</button><span className="header-label">VISUAL DEEP LEARNING <span className="status-dot"/></span>
       <button className="mobile-toggle" onClick={()=>setSidebarOpen(v=>!v)} aria-expanded={sidebarOpen} aria-label="Toggle lesson navigation"><BookOpen size={20}/></button>
     </header>
     <div className="app-grid" id="top">
@@ -77,14 +83,14 @@ export default function App(){
             ? <button key={lesson.id} type="button" className={'lesson-item lesson-ready '+(activeLesson===lesson.id?'current':'')} aria-current={activeLesson===lesson.id?'page':undefined} onClick={()=>{if(lesson.id==='optimizers'){setBeginnerStart('dl-05-005');setActiveLesson('beginner');}else setActiveLesson(lesson.id as 'intro'|'neuron'|'activation'|'propagation'|'tensor'|'perceptron'|'loss'|'backprop'|'gradient-depth'|'python-basics'|'python-flow'|'beginner'|'training-project');setSidebarOpen(false);pause();}}>{inner}</button>
             : <div key={lesson.id} className="lesson-item planned">{inner}</div>;
         })}</nav>
-        <button className="library-button" onClick={()=>{setBeginnerStart('dl-00-001');setActiveLesson('beginner');setSidebarOpen(false);pause();}}>Start beginner course</button><button className="library-button" onClick={()=>{setActiveLesson('library');setSidebarOpen(false);pause();}}>Browse full curriculum</button><button className="library-button" onClick={()=>{setActiveLesson('training-project');setSidebarOpen(false);pause();}}>Beginner training project</button><button className="library-button" onClick={()=>{setActiveLesson('python');setSidebarOpen(false);pause();}}>Python execution lab</button><div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>{curriculum.filter(l=>l.status==='ready').length} interactive lessons available</span></div>
+        <button className="library-button" onClick={()=>{setBeginnerStart(undefined);setActiveLesson('beginner');setSidebarOpen(false);pause();}}>Start beginner course</button><button className="library-button" onClick={()=>{setActiveLesson('library');setSidebarOpen(false);pause();}}>Browse full curriculum</button><button className="library-button" onClick={()=>{setActiveLesson('training-project');setSidebarOpen(false);pause();}}>Beginner training project</button><button className="library-button" onClick={()=>{setActiveLesson('python');setSidebarOpen(false);pause();}}>Python execution lab</button><button className="library-button" onClick={()=>{setActiveLesson('python-workshop');setSidebarOpen(false);pause();}}>Editable Python workshop</button><button className="library-button" onClick={()=>{setActiveLesson('math-workshop');setSidebarOpen(false);pause();}}>Matrix and loss workshop</button><div className="sidebar-note"><Compass size={20}/><strong>Built to explore</strong><p>Each completed lesson will let you test the mathematics for yourself.</p><span>{curriculum.filter(l=>l.status==='ready').length} interactive lessons available</span></div>
       </aside>
-      <main id="lab" className="workspace"><Suspense fallback={<p role="status">Loading learning workspace…</p>}> {activeLesson==='training-project'?<TrainingProject/>:activeLesson==='beginner'?<BeginnerCourse key={beginnerStart} initialLesson={beginnerStart} onOpen={id=>setActiveLesson(id as typeof activeLesson)}/>:activeLesson==='python-flow'?<PythonFlowLab/>:activeLesson==='python-basics'?<PythonBasicsLab/>:activeLesson==='library'?<CurriculumLibrary/>:activeLesson==='python'?<PythonTraceLab/>:activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:activeLesson==='gradient-depth'?<GradientDepthLab/>:<>
+      <main id="lab" className="workspace" tabIndex={-1}><Suspense fallback={<p role="status">Loading learning workspace…</p>}> {activeLesson==='dashboard'?<LearningDashboard onLesson={id=>{setBeginnerStart(id);setActiveLesson('beginner');}}/>:activeLesson==='python-workshop'?<PythonWorkshop/>:activeLesson==='math-workshop'?<MathWorkshop/>:activeLesson==='training-project'?<TrainingProject/>:activeLesson==='beginner'?<BeginnerCourse key={beginnerStart} initialLesson={beginnerStart} onOpen={id=>setActiveLesson(id as ActiveLesson)}/>:activeLesson==='python-flow'?<PythonFlowLab/>:activeLesson==='python-basics'?<PythonBasicsLab/>:activeLesson==='library'?<CurriculumLibrary/>:activeLesson==='python'?<PythonTraceLab/>:activeLesson==='intro'?<FoundationsLab/>:activeLesson==='activation'?<ActivationExplorer/>:activeLesson==='propagation'?<ForwardLab/>:activeLesson==='tensor'?<TensorLab/>:activeLesson==='perceptron'?<PerceptronLab/>:activeLesson==='loss'?<LossGradientLab/>:activeLesson==='backprop'?<BackpropLab/>:activeLesson==='gradient-depth'?<GradientDepthLab/>:<>
         <div className="heading"><div><div className="crumb"><span>MODULE 02</span><ChevronRight size={15}/> <span>ARTIFICIAL NEURONS</span></div><h1>Inside a Neuron<span className="dot">.</span></h1><p className="subtitle">Move the numbers. Follow the signals. Understand the result.</p></div><div className="module-chip"><span className="status-dot"/> LIVE SIMULATION</div></div>
         <div className="workbench">
           <section className="scene-card" aria-label="Neuron visualization"><div className="scene-bar"><div className="scene-label"><Eye size={17}/> LIVE COMPUTATION <span className="badge-muted">STEP {step+1} / 6</span></div><div className="view-switch" role="group" aria-label="Visualization mode"><button className={view==='2d'?'on':''} onClick={()=>setView('2d')} aria-pressed={view==='2d'}>2D</button><button className={view==='3d'?'on':''} onClick={()=>setView('3d')} disabled={!supported} aria-pressed={view==='3d'}>3D</button></div></div>
-            <div className="canvas-area">{view==='3d'&&supported?<NeuronScene inputs={inputs} weights={weights} trace={trace} step={step}/>:<NeuronDiagram inputs={inputs} weights={weights} trace={trace} step={step}/>}<div className="scene-hint"><ZoomIn size={14}/>{view==='3d'?'Drag to rotate · Scroll to zoom':'2D mathematical flow'}</div></div>
-            <div className="playback"><div className="play-top"><div><span className="eyebrow">COMPUTATION TIMELINE</span><h3>{TIMELINE[step].label}</h3><p>{TIMELINE[step].explanation}</p></div><div className="transport"><button onClick={resetAll} title="Reset simulation" aria-label="Reset simulation"><RotateCcw size={18}/></button><button className="play-button" onClick={playing?pause:play} aria-label={playing?'Pause':'Play'} aria-pressed={playing}>{playing?<Pause size={19} fill="currentColor"/>:<Play size={19} fill="currentColor"/>}</button><button onClick={advance} disabled={step>=LAST_STEP} title="Next calculation step" aria-label="Next step"><SkipForward size={19}/></button></div></div>
+            <div className="canvas-area">{view==='3d'&&supported?<NeuronScene inputs={inputs} weights={weights} trace={trace} step={step}/>:<NeuronDiagram inputs={inputs} weights={weights} trace={trace} step={step}/>}<div className="scene-hint"><ZoomIn size={14}/>{view==='3d'?'Drag to rotate · Scroll to zoom · Right drag to pan':'2D mathematical flow'}</div></div>
+            <div className="playback"><div className="play-top"><div><span className="eyebrow">COMPUTATION TIMELINE</span><h3>{TIMELINE[step].label}</h3><p>{TIMELINE[step].explanation}</p></div><div className="transport"><button onClick={resetAll} title="Reset simulation" aria-label="Reset simulation"><RotateCcw size={18}/></button><button className="play-button" onClick={playing?pause:play} aria-label={playing?'Pause':'Play'} aria-pressed={playing}>{playing?<Pause size={19} fill="currentColor"/>:<Play size={19} fill="currentColor"/>}</button><button aria-label="Previous step" disabled={step===0} onClick={()=>{pause();setStep(step-1);}}>←</button><button onClick={advance} disabled={step>=LAST_STEP} title="Next calculation step" aria-label="Next step"><SkipForward size={19}/></button></div></div>
               <div className="timeline" role="group" aria-label="Calculation stages">{TIMELINE.map((item,index)=><button title={item.label} aria-label={`Go to ${item.label}`} aria-current={step===index?'step':undefined} key={item.short} className={index<=step?'past':''} onClick={()=>setStep(index)}><span/>{item.short}</button>)}</div>
               <div className="speed"><label htmlFor="speed-select">Playback speed</label><select id="speed-select" value={speed} onChange={e=>setSpeed(Number(e.target.value))}><option value={.5}>0.5×</option><option value={1}>1×</option><option value={2}>2×</option></select></div></div>
           </section>

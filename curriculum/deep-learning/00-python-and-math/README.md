@@ -24,3 +24,7 @@ For each topic, predict both worked and transfer calculations, inspect all opera
 ## Execution
 
 Authored Python programs execute course answers through Pyodide. Browser code draws the visual explanations. The capstone performs real Python training and evaluation. No browser PyTorch/TensorFlow training is claimed. See each lesson for sources and explicit assumptions.
+
+## Mathematical notation and practical inspection
+
+[From symbols to executable Python](lessons/math-workshop.md) connects rendered equations, matrix-cell inspection and a two-parameter loss surface. Open the Matrix and loss workshop from the lesson navigation to test the same values.

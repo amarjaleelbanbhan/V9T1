@@ -1,3 +1,6 @@
+import {StagePlayer} from '../components/StagePlayer';
+import {lazy,Suspense} from 'react';
+const NetworkScene=lazy(()=>import('../visuals/NetworkScene').then(m=>({default:m.NetworkScene})));
 import {PythonProgram} from '../components/PythonProgram';
 import {forwardPython} from '../python/programs';
 import { useMemo, useState } from 'react';
@@ -50,6 +53,7 @@ function NetworkDiagram({trace,layers,step,edge,onSelect}:{trace:ReturnType<type
   </svg>;
 }
 export function ForwardLab(){
+ const [view3d,setView3d]=useState(false);
   const [inputs,setInputs]=useState<number[]>([...DEFAULT_FORWARD_INPUT]);
   const [layers,setLayers]=useState<DenseLayer[]>(()=>DEFAULT_FORWARD_LAYERS.map(l=>({weights:l.weights.map(r=>[...r]),biases:[...l.biases],activation:l.activation})));
   const [selected,setSelected]=useState<Edge>(initialEdge);
@@ -71,7 +75,7 @@ export function ForwardLab(){
       <div className="foundation-panel-heading"><div><p className="eyebrow">INPUT → HIDDEN → OUTPUT</p><h2>What happens between layers?</h2></div><GitBranch size={21}/></div>
       <div className="forward-grid">
         <div className="foundation-chart-card">
-          <NetworkDiagram trace={trace} layers={layers} step={step} edge={selected} onSelect={setSelected}/>
+          <button aria-pressed={view3d} onClick={()=>setView3d(v=>!v)}>{view3d?"Use 2D network":"Explore 3D network"}</button>{view3d?<Suspense fallback={<p>Loading network…</p>}><NetworkScene trace={trace} selected={selected} step={step} onSelect={setSelected}/></Suspense>:<NetworkDiagram trace={trace} layers={layers} step={step} edge={selected} onSelect={setSelected}/>}
           <div className="forward-edge-list" role="group" aria-label="Select a weighted connection">
             {layers.flatMap((layer,l)=>layer.weights.flatMap((row,n)=>row.map((_weight,s)=>{
               const label=l===0?'Input '+(s+1)+' to Hidden '+(n+1):'Hidden '+(s+1)+' to Output 1';
@@ -79,7 +83,7 @@ export function ForwardLab(){
               return <button type="button" key={l+'-'+n+'-'+s} aria-pressed={active} className={active?'picked':''} onClick={()=>setSelected({layer:l,neuron:n,source:s})} aria-label={'Inspect '+label}>{label}</button>;
             })))}
           </div>
-          <div className="forward-stages" role="group" aria-label="Forward computation stages">{steps.map((label,i)=><button key={label} type="button" className={step===i?'picked':''} aria-pressed={step===i} onClick={()=>setStep(i)}>{i+1}. {label}</button>)}</div>
+          <StagePlayer step={step} count={steps.length} onStep={setStep} label="Forward playback"/><div className="forward-stages" role="group" aria-label="Forward computation stages">{steps.map((label,i)=><button key={label} type="button" className={step===i?'picked':''} aria-pressed={step===i} onClick={()=>setStep(i)}>{i+1}. {label}</button>)}</div>
         </div>
         <div className="foundation-parameter-card">
           <div className="foundation-parameter-header"><h3>Change the network</h3><button type="button" onClick={reset} aria-label="Reset forward pass"><RotateCcw size={15}/> Reset</button></div>
