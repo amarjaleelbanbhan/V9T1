@@ -40,6 +40,29 @@ export interface PackRule {
 }
 
 export const diagnosticPacks: Record<string, PackRule[]> = {
+  // -------------------------------------------------------------------
+  // Issue #20: chapter 06. Uncomment and implement at least two.
+  // First run, for each model you target:
+  //   node --experimental-strip-types scripts/trace-stages.mjs chain 6 10
+  // Anything the tool reports as [intermediate] is already handled.
+  //
+  // chain: [          // dl-06-002, y = (s*x)^2, dy/dx = 2*s^2*x
+  //   {
+  //     id: "chain-added-not-multiplied",
+  //     certain: false,
+  //     match: ({ guess, values, close }) => {
+  //       const [x, s] = values;
+  //       if (![x, s].every(Number.isFinite)) return null;
+  //       // Local derivatives along one path multiply; adding them is the slip.
+  //       return close(guess, 2 * s * x + s) ? "…" : null;
+  //     },
+  //   },
+  // ],
+  // depth: [          // dl-06-007, factor^depth
+  //   // Slip to target: factor multiplied by depth instead of raised to it.
+  // ],
+  // -------------------------------------------------------------------
+
   // Worked example. dl-05-001 and friends use `gd`: w - rate * 2w.
   gd: [
     {
